@@ -8,7 +8,7 @@ use Starkerxp\StructureBundle\Entity\Entity;
 /**
  * {{ nomEntity }}
  *
- * @ORM\Table(name="{{ nomEntity }}")
+ * @ORM\Table(name="{{ nomEntity|lower }}")
  * @ORM\Entity(repositoryClass="{{ namespace }}\Repository\{{ nomEntity }}Repository")
  */
 class {{ nomEntity }} extends Entity
