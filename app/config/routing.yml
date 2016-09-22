@@ -1,0 +1,12 @@
+starkerxp_campagne:
+    resource: "@StarkerxpCampagneBundle/Resources/config/routing.yml"
+    prefix:   /
+
+starkerxp_utilisateur:
+    resource: "@StarkerxpUtilisateurBundle/Resources/config/routing.yml"
+    prefix:   /utilisateurs
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation

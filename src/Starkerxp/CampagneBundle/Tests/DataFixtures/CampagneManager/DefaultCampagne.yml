@@ -1,0 +1,8 @@
+Starkerxp\CampagneBundle\Entity\Campagne:
+    campagne1:
+        name: <name()>
+        type: transationnal
+        isReady: 1
+        isError: 0
+        isDeleted: 0
+        created_at: <dateTimeBetween("2016-08-05 12:12:12", "2016-08-05 12:12:12")>

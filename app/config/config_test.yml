@@ -1,0 +1,29 @@
+imports:
+    - { resource: config_dev.yml }
+
+framework:
+    test: ~
+    session:
+        storage_id: session.storage.mock_file
+    profiler:
+        collect: false
+
+web_profiler:
+    toolbar: false
+    intercept_redirects: false
+
+swiftmailer:
+    disable_delivery: true
+
+hautelook_alice:
+    db_drivers:
+        orm: true          # Enable Doctrine ORM if is registered
+    locale: fr_FR       # Locale to used for faker; must be a valid Faker locale otherwise will fallback to en_EN
+    seed: 1             # A seed to make sure faker generates data consistently across runs, set to null to disable
+    persist_once: false # Only persist objects once if multiple files are passed
+    loading_limit: 5    # Maximum number of time the loader will try to load the files passed
+
+liip_functional_test: ~
+
+parameters:
+    database_name: mademoisellefantasia_test

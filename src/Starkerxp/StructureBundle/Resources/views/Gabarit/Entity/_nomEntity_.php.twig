@@ -1,0 +1,25 @@
+<?php
+
+namespace {{ namespace }}\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Starkerxp\StructureBundle\Entity\Entity;
+
+/**
+ * {{ nomEntity }}
+ *
+ * @ORM\Table(name="{{ nomEntity }}")
+ * @ORM\Entity(repositoryClass="{{ namespace }}\Repository\{{ nomEntity }}Repository")
+ */
+class {{ nomEntity }} extends Entity
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+}

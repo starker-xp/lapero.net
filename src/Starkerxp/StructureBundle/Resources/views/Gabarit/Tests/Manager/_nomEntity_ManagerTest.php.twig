@@ -1,0 +1,46 @@
+<?php
+
+namespace {{ namespace }}\Tests\Manager;
+
+use {{ namespace }}\Manager\{{ nomEntity }}Manager;
+
+class {{nomEntity}}ManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
+{
+
+    /** @var  {{ nomEntity }}Manager */
+    protected $manager;
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->manager = $this->getContainer()->get('starkerxp_campagne.manager.{{ nomEntity|lower }}');
+    }
+
+    /**
+     * @group {{ nomEntity |lower}}
+     * @group manager
+     */
+    public function testFindAll()
+    {
+        
+    }
+
+    /**
+     * @group {{ nomEntity |lower}}
+     * @group manager
+     */
+    public function testInsertNewCampagne()
+    {
+        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/{{ nomEntity }}Manager/Default{{ nomEntity }}.yml',]);
+    }
+
+    /**
+     * @group {{ nomEntity |lower}}
+     * @group manager
+     */
+    public function testUpdateCampagne()
+    {
+        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/{{ nomEntity }}Manager/Default{{ nomEntity }}.yml',]);
+    }
+
+}

@@ -1,0 +1,6 @@
+Starkerxp\CampagneBundle\Entity\ModuleTemplate:
+    module1:
+        code: "[@bonjourPrenom]"
+        contenuHtml: "<strong>{%if prenom is not empty%}Bonjour {{prenom|capitalize}}{%endif%}</strong>"
+        contenuTxt: "{%if prenom is not empty%}Bonjour {{prenom|capitalize}}{%endif%}"
+        created_at: <dateTimeBetween("2016-08-05 12:12:12", "2016-08-05 12:12:12")>
