@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: DIEU
- * Date: 22/09/2016
- * Time: 01:31
- */
 
 namespace Starkerxp\StructureBundle\Command;
 
@@ -28,16 +22,11 @@ class AjouterEntiteCommand extends ContainerAwareCommand
     {
         $entite = explode(':', $input->getArgument('entite'));
         $kernel = $this->getContainer()->get('kernel');
-        $bundle = $kernel->getBundle($entite[0]);
         $generator = new EntiteGenerator();
         $generator->setSkeletonDirs(
             $kernel->getBundle("StarkerxpStructureBundle")->getPath().'/Resources/views/Gabarit'
         );
-        $generator->generate(
-            $bundle->getNamespace(),
-            $bundle->getPath(),
-            ucfirst($entite[1])
-        );
+        $generator->generate($kernel->getBundle($entite[0]), ucfirst($entite[1]));
 
     }
 
