@@ -3,8 +3,6 @@
 namespace Starkerxp\CampagneBundle\Render;
 
 
-use Starkerxp\CampagneBundle\Render\Exception\RenderNotExistException;
-
 class RenderManager extends AbstractRender
 {
 
@@ -35,6 +33,8 @@ class RenderManager extends AbstractRender
 
             return $renderService->render($api, $version);
         }
+
+        return $contenu;
     }
 
     public function getRender($api, $version)
@@ -44,7 +44,6 @@ class RenderManager extends AbstractRender
                 return $service;
             }
         }
-        throw new RenderNotExistException();
     }
 
     /**
