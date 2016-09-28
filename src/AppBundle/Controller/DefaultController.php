@@ -3,7 +3,9 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Starkerxp\CampagneBundle\Services\Render\RenderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
@@ -13,9 +15,19 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
-        ]);
+        /** @var RenderInterface $renderManager */
+        $renderManager = $this->get('starkerxp_campagne.manager.render');
+        $renderManager->setData(['prenom' => "guillaume"]);
+        $monTexte = "Ceci est mon texte {{prenom|capitalize}} ! Tu ne pourras rien y faire démonïtus.";
+        $renderManager->setContenu($monTexte);
+        $retour = $renderManager->render("buzzexpert", "txt");
+
+        return new JsonResponse(
+            [
+                "nombreService" => count($renderManager->getRenderService()),
+                "textInitial"   => $monTexte,
+                "text"          => $retour,
+            ]
+        );
     }
 }

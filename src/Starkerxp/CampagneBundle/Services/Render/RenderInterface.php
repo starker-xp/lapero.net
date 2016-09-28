@@ -13,5 +13,8 @@ interface RenderInterface
 
     public function getData();
 
-    public function render();
+    public function render($api, $version);
+
+    public function getRender($api, $version);
+
 }

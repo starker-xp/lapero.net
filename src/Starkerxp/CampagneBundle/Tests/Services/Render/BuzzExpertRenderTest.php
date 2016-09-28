@@ -19,13 +19,13 @@ class BuzzExpertRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
     public function dataProvider()
     {
         return [
-                ["Ceci est un texte valide. Et validé", "Ceci est un texte valide. Et validé"],
-                ["CÂ va être€ convertie!ç", "CA va etreE convertie!c"],
-                ["ÂâÁáÃãᾹᾱÇçČčĆćÊêËëĖėïÎîÍíńÔôÓóÕõŒœŌōŚśŠšÛûŪūӰӱ€", "AaAaAaAaCcCcCcEeEeEeiIiIinOoOoOooeoeOoSsSsUuUuYyE"],
-                ['$', "USD"],
-                ['£', "GBP"],
-                ['‘`', ""],
-                ['"', ' '],
+            ["Ceci est un texte valide. Et validé", "Ceci est un texte valide. Et validé"],
+            ["CÂ va être€ convertie!ç", "CA va etreE convertie!c"],
+            ["ÂâÁáÃãᾹᾱÇçČčĆćÊêËëĖėïÎîÍíńÔôÓóÕõŒœŌōŚśŠšÛûŪūӰӱ€", "AaAaAaAaCcCcCcEeEeEeiIiIinOoOoOooeoeOoSsSsUuUuYyE"],
+            ['$', "USD"],
+            ['£', "GBP"],
+            ['‘`', ""],
+            ['"', ' '],
         ];
     }
 
@@ -39,7 +39,7 @@ class BuzzExpertRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
     public function testRender($message, $expected)
     {
         $this->renderService->setContenu($message);
-        $actual = $this->renderService->render();
+        $actual = $this->renderService->render("buzzexpert", "txt");
         $this->assertEquals($expected, $actual);
     }
 

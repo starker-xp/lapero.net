@@ -19,7 +19,7 @@ class TwigRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
     public function dataProvider()
     {
         return [
-                ["Bonjour {{prenom|capitalize}} {{nom |upper}}.", ["nom" => "CAOUIsSIN", "prenom" => "guillaume"], "Bonjour Guillaume CAOUISSIN."],
+            ["Bonjour {{prenom|capitalize}} {{nom |upper}}.", ["nom" => "CAOUIsSIN", "prenom" => "guillaume"], "Bonjour Guillaume CAOUISSIN."],
         ];
     }
 
@@ -34,7 +34,7 @@ class TwigRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
     {
         $this->renderService->setContenu($message);
         $this->renderService->setData($data);
-        $actual = $this->renderService->render();
+        $actual = $this->renderService->render("twig", "txt");
         $this->assertEquals($expected, $actual);
     }
 
