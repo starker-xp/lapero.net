@@ -6,7 +6,7 @@
  * Time: 00:55
  */
 
-namespace Starkerxp\CampagneBundle\Services\Render;
+namespace Starkerxp\CampagneBundle\Render;
 
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

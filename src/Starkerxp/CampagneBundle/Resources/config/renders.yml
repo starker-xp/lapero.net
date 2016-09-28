@@ -3,22 +3,22 @@ services:
 #        class: Starkerxp\CampagneBundle\Example
 #        arguments: ["@service_id", "plain_value", %parameter%]
     starkerxp_campagne.render.buzzexpert:
-        class: Starkerxp\CampagneBundle\Services\Render\BuzzExpertRender
+        class: Starkerxp\CampagneBundle\Render\BuzzExpertRender
         tags:
           - { name: starkerxp_campagne.render }
 
     starkerxp_campagne.render.twig:
-        class: Starkerxp\CampagneBundle\Services\Render\TwigRender
+        class: Starkerxp\CampagneBundle\Render\TwigRender
         arguments: ["@twig"]
         tags:
           - { name: starkerxp_campagne.render }
 
     starkerxp_campagne.render.octosend_html:
-        class: Starkerxp\CampagneBundle\Services\Render\OctosendHtmlRender
+        class: Starkerxp\CampagneBundle\Render\OctosendHtmlRender
         tags:
           - { name: starkerxp_campagne.render }
 
     starkerxp_campagne.render.octosend_txt:
-        class: Starkerxp\CampagneBundle\Services\Render\OctosendTxtRender
+        class: Starkerxp\CampagneBundle\Render\OctosendTxtRender
         tags:
           - { name: starkerxp_campagne.render }

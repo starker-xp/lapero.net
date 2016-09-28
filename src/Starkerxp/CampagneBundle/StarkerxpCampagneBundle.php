@@ -2,7 +2,7 @@
 
 namespace Starkerxp\CampagneBundle;
 
-use Starkerxp\CampagneBundle\Services\Render\RenderPass;
+use Starkerxp\CampagneBundle\Render\RenderPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

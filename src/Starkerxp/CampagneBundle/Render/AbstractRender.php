@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace Starkerxp\CampagneBundle\Services\Render;
+namespace Starkerxp\CampagneBundle\Render;
 
 /**
  * Description of AbstractRender
@@ -32,12 +32,14 @@ abstract class AbstractRender implements RenderInterface
     public function setContenu($contenu)
     {
         $this->contenu = $contenu;
+
         return $this;
     }
 
     public function setData(array $data)
     {
         $this->data = $data;
+
         return $this;
     }
 

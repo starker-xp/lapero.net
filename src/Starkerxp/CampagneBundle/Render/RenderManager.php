@@ -1,9 +1,9 @@
 <?php
 
-namespace Starkerxp\CampagneBundle\Services\Render;
+namespace Starkerxp\CampagneBundle\Render;
 
 
-use Starkerxp\CampagneBundle\Services\Render\Exception\RenderNotExistException;
+use Starkerxp\CampagneBundle\Render\Exception\RenderNotExistException;
 
 class RenderManager extends AbstractRender
 {

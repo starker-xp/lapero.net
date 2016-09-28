@@ -6,9 +6,5 @@ services:
         class: Starkerxp\CampagneBundle\Manager\CampagneManager
         arguments: ["@doctrine.orm.entity_manager", "Starkerxp\\CampagneBundle\\Entity\\Campagne"]
 
-    starkerxp_campagne.manager.module_template:
-        class: Starkerxp\CampagneBundle\Manager\ModuleTemplateManager
-        arguments: ["@doctrine.orm.entity_manager", "Starkerxp\\CampagneBundle\\Entity\\ModuleTemplate"]
-
     starkerxp_campagne.manager.render:
-            class: Starkerxp\CampagneBundle\Services\Render\RenderManager
+            class: Starkerxp\CampagneBundle\Render\RenderManager

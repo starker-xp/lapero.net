@@ -1,6 +1,6 @@
 <?php
 
-namespace Starkerxp\CampagneBundle\Services\Render;
+namespace Starkerxp\CampagneBundle\Render;
 
 use Twig_Environment;
 
