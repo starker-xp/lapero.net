@@ -2,7 +2,6 @@
 namespace Starkerxp\StructureBundle\Generator;
 
 use Sensio\Bundle\GeneratorBundle\Generator\Generator;
-use Sensio\Bundle\GeneratorBundle\Manipulator\ConfigurationManipulator;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\Yaml\Yaml;
 

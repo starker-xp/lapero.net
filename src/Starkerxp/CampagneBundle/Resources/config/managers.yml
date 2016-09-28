@@ -9,3 +9,6 @@ services:
     starkerxp_campagne.manager.module_template:
         class: Starkerxp\CampagneBundle\Manager\ModuleTemplateManager
         arguments: ["@doctrine.orm.entity_manager", "Starkerxp\\CampagneBundle\\Entity\\ModuleTemplate"]
+
+    starkerxp_campagne.manager.render:
+            class: Starkerxp\CampagneBundle\Services\Render\RenderManager

@@ -4,10 +4,21 @@ services:
 #        arguments: ["@service_id", "plain_value", %parameter%]
     starkerxp_campagne.render.buzzexpert:
         class: Starkerxp\CampagneBundle\Services\Render\BuzzExpertRender
+        tags:
+          - { name: starkerxp_campagne.render }
+
     starkerxp_campagne.render.twig:
         class: Starkerxp\CampagneBundle\Services\Render\TwigRender
         arguments: ["@twig"]
+        tags:
+          - { name: starkerxp_campagne.render }
+
     starkerxp_campagne.render.octosend_html:
         class: Starkerxp\CampagneBundle\Services\Render\OctosendHtmlRender
+        tags:
+          - { name: starkerxp_campagne.render }
+
     starkerxp_campagne.render.octosend_txt:
         class: Starkerxp\CampagneBundle\Services\Render\OctosendTxtRender
+        tags:
+          - { name: starkerxp_campagne.render }

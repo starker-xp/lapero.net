@@ -5,9 +5,10 @@ namespace Starkerxp\CampagneBundle\Services\Render;
 class BuzzExpertRender extends AbstractRender
 {
 
-    public function render()
+    public function render($api, $version)
     {
-        $contenu = $this->remplacerLesCaracteresSpeciaux($this->contenu);
+        $contenu = $this->remplacerLesCaracteresSpeciaux(mb_convert_encoding($this->contenu, "UTF-8"));
+
         return $contenu;
     }
 
@@ -32,7 +33,14 @@ class BuzzExpertRender extends AbstractRender
             $elementVide = empty($element) ? $element : iconv('UTF-8', 'ASCII//TRANSLIT', $element);
             $contenu = str_replace($element, $elementVide, $contenu);
         }
+
         return $contenu;
     }
+
+    public function getRender($api, $version)
+    {
+        return strtolower($api) == "buzzexpert";
+    }
+
 
 }

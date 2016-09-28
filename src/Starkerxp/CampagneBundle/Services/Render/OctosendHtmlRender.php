@@ -5,7 +5,7 @@ namespace Starkerxp\CampagneBundle\Services\Render;
 class OctosendHtmlRender extends AbstractRender
 {
 
-    public function render()
+    public function render($api, $version)
     {
         // Gestion des liens mirror
         $contenu = $this->renderMirror($this->contenu);
@@ -16,18 +16,21 @@ class OctosendHtmlRender extends AbstractRender
         // Gestion des liens click:http://
         $contenu = $this->renderClick($contenu);
         $contenu = str_replace("  ", " ", str_replace("  ", " ", $contenu));
+
         return $contenu;
     }
 
     protected function renderMirror($contenu)
     {
         $contenuReplace = preg_replace('/\[\{\@mirror\}\]/', "{{mirror}}", $contenu);
+
         return $contenuReplace;
     }
 
     protected function renderPixel($contenu)
     {
         $contenuReplace = preg_replace('/\[\{\@pixel\}\]/', "{{pixel}}", $contenu);
+
         return $contenuReplace;
     }
 
@@ -39,9 +42,10 @@ class OctosendHtmlRender extends AbstractRender
             return $contenu;
         }
         foreach ($arrayContenu[0] as $key => $chaineARemplacer) {
-            $chaineOctoSend = "<a href='{{unsubscribe:" . $arrayContenu[1][$key] . "}}' style='" . $arrayContenu[2][$key] . "' title='Désinscription'>" . $arrayContenu[3][$key] . "</a>";
+            $chaineOctoSend = "<a href='{{unsubscribe:".$arrayContenu[1][$key]."}}' style='".$arrayContenu[2][$key]."' title='Désinscription'>".$arrayContenu[3][$key]."</a>";
             $contenu = str_replace($chaineARemplacer, $chaineOctoSend, $contenu);
         }
+
         return $contenu;
     }
 
@@ -53,10 +57,16 @@ class OctosendHtmlRender extends AbstractRender
             return $contenu;
         }
         foreach ($arrayContenu[0] as $key => $chaineARemplacer) {
-            $chaineOctoSend = "<a href='{{click:" . $arrayContenu[1][$key] . "}}' style='" . $arrayContenu[2][$key] . "'>" . $arrayContenu[3][$key] . "</a>";
+            $chaineOctoSend = "<a href='{{click:".$arrayContenu[1][$key]."}}' style='".$arrayContenu[2][$key]."'>".$arrayContenu[3][$key]."</a>";
             $contenu = str_replace($chaineARemplacer, $chaineOctoSend, $contenu);
         }
+
         return $contenu;
+    }
+
+    public function getRender($api, $version)
+    {
+        return strtolower($api) == "octosend" && $version == "html";
     }
 
 }
