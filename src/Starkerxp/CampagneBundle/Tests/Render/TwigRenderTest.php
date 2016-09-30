@@ -1,8 +1,8 @@
 <?php
 
-namespace Starkerxp\CampagneBundle\Tests\Services\Render;
+namespace Starkerxp\CampagneBundle\Tests\Render;
 
-use Starkerxp\CampagneBundle\Services\Render\TwigRender;
+use Starkerxp\CampagneBundle\Render\TwigRender;
 
 class TwigRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
 {

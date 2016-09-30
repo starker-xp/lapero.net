@@ -2,4 +2,3 @@ services:
     starkerxp_campagne.api.sendwithus:
         class: sendwithus\API
         arguments: ["test_bef8120067a4969ec58f24f7ebbf4e885dce806a"]
-

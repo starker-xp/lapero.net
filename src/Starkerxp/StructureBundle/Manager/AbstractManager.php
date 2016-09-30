@@ -10,7 +10,7 @@ use Starkerxp\StructureBundle\Entity\Entity;
 abstract class AbstractManager
 {
 
-    /** @var EntityManager  */
+    /** @var EntityManager */
     protected $entityManager;
 
     /** @var EntityRepository */
@@ -26,18 +26,20 @@ abstract class AbstractManager
         $this->repository = $this->entityManager->getRepository($entity);
     }
 
-    public function insert($object)
+    public function insert(Entity $object)
     {
         $object->setCreatedAt(new DateTime());
         $this->entityManager->persist($object);
         $this->entityManager->flush();
+
         return $object;
     }
 
-    public function update($object)
+    public function update(Entity $object)
     {
         $object->setUpdatedAt(new DateTime());
         $this->entityManager->flush();
+
         return $object;
     }
 
@@ -61,7 +63,7 @@ abstract class AbstractManager
         return $this->repository->findAll();
     }
 
-    public function getRepository(): EntityRepository
+    public function getRepository()
     {
         return $this->repository;
     }

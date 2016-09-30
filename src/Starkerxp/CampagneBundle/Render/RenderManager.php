@@ -17,24 +17,23 @@ class RenderManager extends AbstractRender
     public function render($api, $version)
     {
 
-        $contenu = $this->getContenu();
+        $content = $this->getContenu();
 
         if ($renderServiceTwig = $this->getRender("twig", $version)) {
             $renderServiceTwig->setData($this->getData());
-            $renderServiceTwig->setContenu($contenu);
-            $contenu = $renderServiceTwig->render("twig", $version);
+            $renderServiceTwig->setContenu($content);
+            $content = $renderServiceTwig->render("twig", $version);
             if (strtolower($api) == "twig") {
-                return $contenu;
+                return $content;
             }
         }
         if ($renderService = $this->getRender($api, $version)) {
             $renderService->setData($this->getData());
-            $renderService->setContenu($contenu);
+            $renderService->setContenu($content);
 
             return $renderService->render($api, $version);
         }
-
-        return $contenu;
+        return $content;
     }
 
     public function getRender($api, $version)

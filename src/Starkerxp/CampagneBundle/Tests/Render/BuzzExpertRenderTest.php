@@ -1,8 +1,8 @@
 <?php
 
-namespace Starkerxp\CampagneBundle\Tests\Services\Render;
+namespace Starkerxp\CampagneBundle\Tests\Render;
 
-use Starkerxp\CampagneBundle\Services\Render\BuzzExpertRender;
+use Starkerxp\CampagneBundle\Render\BuzzExpertRender;
 
 class BuzzExpertRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
 {
@@ -19,6 +19,7 @@ class BuzzExpertRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
     public function dataProvider()
     {
         return [
+            ["Bonjouré ï {{prenom|capitalize}} {{nom |upper}}.", ["nom" => "CAOUIsSIN", "prenom" => "guillaume"], "Bonjouré i Guillaume CAOUISSIN."],
             ["Ceci est un texte valide. Et validé", "Ceci est un texte valide. Et validé"],
             ["CÂ va être€ convertie!ç", "CA va etreE convertie!c"],
             ["ÂâÁáÃãᾹᾱÇçČčĆćÊêËëĖėïÎîÍíńÔôÓóÕõŒœŌōŚśŠšÛûŪūӰӱ€", "AaAaAaAaCcCcCcEeEeEeiIiIinOoOoOooeoeOoSsSsUuUuYyE"],

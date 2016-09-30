@@ -1,8 +1,8 @@
 <?php
 
-namespace Starkerxp\CampagneBundle\Tests\Services\Render;
+namespace Starkerxp\CampagneBundle\Tests\Render;
 
-use Starkerxp\CampagneBundle\Services\Render\OctosendHtmlRender;
+use Starkerxp\CampagneBundle\Render\OctosendHtmlRender;
 
 class OctosendHtmlRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
 {
