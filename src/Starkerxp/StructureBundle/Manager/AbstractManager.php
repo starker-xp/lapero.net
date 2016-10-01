@@ -9,7 +9,6 @@ use Starkerxp\StructureBundle\Entity\Entity;
 
 abstract class AbstractManager
 {
-
     /** @var EntityManager */
     protected $entityManager;
 

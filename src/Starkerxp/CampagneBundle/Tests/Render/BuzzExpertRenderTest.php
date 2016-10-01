@@ -6,7 +6,6 @@ use Starkerxp\CampagneBundle\Render\BuzzExpertRender;
 
 class BuzzExpertRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
 {
-
     /** @var BuzzExpertRender */
     protected $renderService;
 
@@ -19,13 +18,13 @@ class BuzzExpertRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
     public function dataProvider()
     {
         return [
-            ["Bonjouré ï {{prenom|capitalize}} {{nom |upper}}.", ["nom" => "CAOUIsSIN", "prenom" => "guillaume"], "Bonjouré i Guillaume CAOUISSIN."],
-            ["Ceci est un texte valide. Et validé", "Ceci est un texte valide. Et validé"],
-            ["CÂ va être€ convertie!ç", "CA va etreE convertie!c"],
-            ["ÂâÁáÃãᾹᾱÇçČčĆćÊêËëĖėïÎîÍíńÔôÓóÕõŒœŌōŚśŠšÛûŪūӰӱ€", "AaAaAaAaCcCcCcEeEeEeiIiIinOoOoOooeoeOoSsSsUuUuYyE"],
-            ['$', "USD"],
-            ['£', "GBP"],
-            ['‘`', ""],
+            ['Bonjouré ï {{prenom|capitalize}} {{nom |upper}}.', ['nom' => 'CAOUIsSIN', 'prenom' => 'guillaume'], 'Bonjouré i Guillaume CAOUISSIN.'],
+            ['Ceci est un texte valide. Et validé', 'Ceci est un texte valide. Et validé'],
+            ['CÂ va être€ convertie!ç', 'CA va etreE convertie!c'],
+            ['ÂâÁáÃãᾹᾱÇçČčĆćÊêËëĖėïÎîÍíńÔôÓóÕõŒœŌōŚśŠšÛûŪūӰӱ€', 'AaAaAaAaCcCcCcEeEeEeiIiIinOoOoOooeoeOoSsSsUuUuYyE'],
+            ['$', 'USD'],
+            ['£', 'GBP'],
+            ['‘`', ''],
             ['"', ' '],
         ];
     }
@@ -40,7 +39,7 @@ class BuzzExpertRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
     public function testRender($message, $expected)
     {
         $this->renderService->setContenu($message);
-        $actual = $this->renderService->render("buzzexpert", "txt");
+        $actual = $this->renderService->render('buzzexpert', 'txt');
         $this->assertEquals($expected, $actual);
     }
 }

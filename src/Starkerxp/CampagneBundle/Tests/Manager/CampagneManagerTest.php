@@ -6,8 +6,7 @@ use Starkerxp\CampagneBundle\Manager\CampagneManager;
 
 class CampagneManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
 {
-
-    /** @var  CampagneManager */
+    /** @var CampagneManager */
     protected $manager;
 
     public function setUp()
@@ -22,7 +21,7 @@ class CampagneManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
      */
     public function testFindAll()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/CampagneManager.yml',]);
+        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/CampagneManager.yml']);
         $this->assertCount(10, $this->manager->findAll());
     }
 
@@ -32,10 +31,10 @@ class CampagneManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
      */
     public function testInsertNewCampagne()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/DefaultCampagne.yml',]);
+        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/DefaultCampagne.yml']);
         $campagne = new \Starkerxp\CampagneBundle\Entity\Campagne();
-        $campagne->setName("Ma super campagne");
-        $campagne->setType("marketing");
+        $campagne->setName('Ma super campagne');
+        $campagne->setType('marketing');
         $campagne->setIsReady(false);
         $campagne->setIsError(false);
         $campagne->setIsDeleted(false);
@@ -49,8 +48,8 @@ class CampagneManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
      */
     public function testUpdateCampagne()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/DefaultCampagne.yml',]);
-        $criteria = ['createdAt' => new \DateTime("2016-08-05 12:12:12")];
+        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/DefaultCampagne.yml']);
+        $criteria = ['createdAt' => new \DateTime('2016-08-05 12:12:12')];
         $campagne = $this->manager->findOneBy($criteria);
         $campagne->setIsError(1);
         $this->manager->update($campagne);

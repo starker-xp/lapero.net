@@ -9,9 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 abstract class Entity
 {
-
     /**
-     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     protected $createdAt;
@@ -34,12 +32,14 @@ abstract class Entity
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 }

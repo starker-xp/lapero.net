@@ -9,7 +9,7 @@
 namespace Starkerxp\CampagneBundle\Render;
 
 /**
- * Description of AbstractRender
+ * Description of AbstractRender.
  *
  * @author DIEU
  */

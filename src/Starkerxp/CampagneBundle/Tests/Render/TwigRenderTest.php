@@ -6,7 +6,6 @@ use Starkerxp\CampagneBundle\Render\TwigRender;
 
 class TwigRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
 {
-
     /** @var TwigRender */
     protected $renderService;
 
@@ -19,7 +18,7 @@ class TwigRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
     public function dataProvider()
     {
         return [
-            ["Bonjour {{prenom|capitalize}} {{nom |upper}}.", ["nom" => "CAOUIsSIN", "prenom" => "guillaume"], "Bonjour Guillaume CAOUISSIN."],
+            ['Bonjour {{prenom|capitalize}} {{nom |upper}}.', ['nom' => 'CAOUIsSIN', 'prenom' => 'guillaume'], 'Bonjour Guillaume CAOUISSIN.'],
         ];
     }
 
@@ -34,7 +33,7 @@ class TwigRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
     {
         $this->renderService->setContenu($message);
         $this->renderService->setData($data);
-        $actual = $this->renderService->render("twig", "txt");
+        $actual = $this->renderService->render('twig', 'txt');
         $this->assertEquals($expected, $actual);
     }
 }

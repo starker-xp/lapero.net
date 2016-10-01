@@ -17,16 +17,16 @@ class DefaultController extends Controller
     {
         /** @var RenderInterface $renderManager */
         $renderManager = $this->get('starkerxp_campagne.manager.render');
-        $renderManager->setData(['prenom' => "guillaume"]);
-        $monTexte = "Ceci est mon texte {{prenom|capitalize}} ! Tu ne pourras rien y faire démonïtus.";
+        $renderManager->setData(['prenom' => 'guillaume']);
+        $monTexte = 'Ceci est mon texte {{prenom|capitalize}} ! Tu ne pourras rien y faire démonïtus.';
         $renderManager->setContenu($monTexte);
-        $retour = $renderManager->render("buzzexpert", "txt");
+        $retour = $renderManager->render('buzzexpert', 'txt');
 
         return new JsonResponse(
             [
-                "nombreService" => count($renderManager->getRenderService()),
-                "textInitial"   => $monTexte,
-                "text"          => $retour,
+                'nombreService' => count($renderManager->getRenderService()),
+                'textInitial' => $monTexte,
+                'text' => $retour,
             ]
         );
     }

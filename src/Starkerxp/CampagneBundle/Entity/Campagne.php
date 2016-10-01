@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Starkerxp\StructureBundle\Entity\Entity;
 
 /**
- * Campagne
+ * Campagne.
  *
  * @ORM\Table(name="campagne", indexes={
  *  @ORM\Index(columns={"type"}),
@@ -18,7 +18,6 @@ use Starkerxp\StructureBundle\Entity\Entity;
  */
 class Campagne extends Entity
 {
-
     /**
      * @var int
      *
@@ -43,28 +42,28 @@ class Campagne extends Entity
     protected $type;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="ready", type="boolean", nullable=true)
      */
     protected $isReady = false;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="error", type="boolean", nullable=true)
      */
     protected $isError = false;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="deleted", type="boolean", nullable=true)
      */
     protected $isDeleted = false;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -74,7 +73,7 @@ class Campagne extends Entity
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -84,7 +83,7 @@ class Campagne extends Entity
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -98,9 +97,9 @@ class Campagne extends Entity
     }
 
     /**
-     * Get isReady
+     * Get isReady.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsReady()
     {
@@ -108,9 +107,9 @@ class Campagne extends Entity
     }
 
     /**
-     * Set isReady
+     * Set isReady.
      *
-     * @param boolean $isReady
+     * @param bool $isReady
      *
      * @return Campagne
      */
@@ -122,9 +121,9 @@ class Campagne extends Entity
     }
 
     /**
-     * Get isError
+     * Get isError.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsError()
     {
@@ -132,9 +131,9 @@ class Campagne extends Entity
     }
 
     /**
-     * Set isError
+     * Set isError.
      *
-     * @param boolean $isError
+     * @param bool $isError
      *
      * @return Campagne
      */
@@ -146,9 +145,9 @@ class Campagne extends Entity
     }
 
     /**
-     * Get isDeleted
+     * Get isDeleted.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsDeleted()
     {
@@ -156,9 +155,9 @@ class Campagne extends Entity
     }
 
     /**
-     * Set isDeleted
+     * Set isDeleted.
      *
-     * @param boolean $isDeleted
+     * @param bool $isDeleted
      *
      * @return Campagne
      */

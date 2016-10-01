@@ -14,7 +14,6 @@ use Symfony\Component\DependencyInjection\Loader;
  */
 class StarkerxpCampagneExtension extends Extension
 {
-
     /**
      * {@inheritdoc}
      */

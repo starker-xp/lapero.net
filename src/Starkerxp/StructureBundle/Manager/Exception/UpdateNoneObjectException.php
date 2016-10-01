@@ -2,6 +2,6 @@
 
 namespace Starkerxp\StructureBundle\Manager\Exception;
 
-class InsertNonObjectException extends \Exception
+class UpdateNoneObjectException extends \Exception
 {
 }

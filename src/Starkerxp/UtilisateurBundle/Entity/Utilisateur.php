@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Utilisateur extends BaseUser
 {
-
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")

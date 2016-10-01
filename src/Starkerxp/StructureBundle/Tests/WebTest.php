@@ -6,7 +6,6 @@ use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 abstract class WebTest extends WebTestCase
 {
-
     /**
      * Erase all database data.
      */

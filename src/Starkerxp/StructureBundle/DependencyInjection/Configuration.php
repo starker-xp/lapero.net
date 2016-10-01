@@ -20,7 +20,6 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $treeBuilder->root('starkerxp_structure');
 
-
         return $treeBuilder;
     }
 }

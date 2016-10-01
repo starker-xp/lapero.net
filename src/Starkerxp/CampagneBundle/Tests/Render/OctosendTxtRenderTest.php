@@ -6,7 +6,6 @@ use Starkerxp\CampagneBundle\Render\OctosendTxtRender;
 
 class OctosendTxtRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
 {
-
     /** @var OctosendTxtRender */
     protected $renderService;
 
@@ -19,15 +18,15 @@ class OctosendTxtRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
     public function dataProvider()
     {
         $export = [
-            "lien mirroir"        => ["[{@mirror}]", "{{mirror}}"],
-            "pixel"               => ["[{@pixel}]", "{{pixel}}"],
-            "lien desinscription" => [
-                "<a data-id=\"unsub\" target=\"__blank\" href=\"http://google.fr\" style=\"color:black;\">Mon lien</a>",
-                "[Mon lien] {{unsubscribe:http://google.fr}}",
+            'lien mirroir' => ['[{@mirror}]', '{{mirror}}'],
+            'pixel' => ['[{@pixel}]', '{{pixel}}'],
+            'lien desinscription' => [
+                '<a data-id="unsub" target="__blank" href="http://google.fr" style="color:black;">Mon lien</a>',
+                '[Mon lien] {{unsubscribe:http://google.fr}}',
             ],
-            "lien clickable"      => [
-                "<a data-id=\"click\" target=\"__blank\" href=\"http://google.fr\" style=\"color:black;\">Mon lien</a>",
-                "[Mon lien] {{click:http://google.fr}}",
+            'lien clickable' => [
+                '<a data-id="click" target="__blank" href="http://google.fr" style="color:black;">Mon lien</a>',
+                '[Mon lien] {{click:http://google.fr}}',
             ],
         ];
 
@@ -44,7 +43,7 @@ class OctosendTxtRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
     public function testRender($message, $expected)
     {
         $this->renderService->setContenu($message);
-        $actual = $this->renderService->render("octosend", "txt");
+        $actual = $this->renderService->render('octosend', 'txt');
         $this->assertEquals($expected, $actual);
     }
 }

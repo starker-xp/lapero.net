@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: DIEU
  * Date: 28/09/2016
- * Time: 00:55
+ * Time: 00:55.
  */
 
 namespace Starkerxp\CampagneBundle\Render;

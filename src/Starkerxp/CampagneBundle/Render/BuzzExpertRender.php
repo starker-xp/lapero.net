@@ -6,7 +6,7 @@ class BuzzExpertRender extends AbstractRender
 {
     public function render($api, $version)
     {
-        $contenu = $this->remplacerLesCaracteresSpeciaux(mb_convert_encoding($this->contenu, "UTF-8"));
+        $contenu = $this->remplacerLesCaracteresSpeciaux(mb_convert_encoding($this->contenu, 'UTF-8'));
 
         return $contenu;
     }
@@ -112,10 +112,10 @@ class BuzzExpertRender extends AbstractRender
         );
         $contenu = str_replace($findAccent, $replaceAccent, $contenu);
         // Gestion des autres caractères.
-        $find = array("€", "‘", "$", "£", "`", '"', "#");
-        $replace = array("E", "", "USD", "GBP", "", ' ', "");
+        $find = array('€', '‘', '$', '£', '`', '"', '#');
+        $replace = array('E', '', 'USD', 'GBP', '', ' ', '');
         $contenu = str_replace($find, $replace, $contenu);
-        $contenu = str_replace(["  ", "   "], " ", $contenu);
+        $contenu = str_replace(['  ', '   '], ' ', $contenu);
         $out = [];
         preg_match_all("#[^0-9a-zA-Zéèà\,\!\?\'\(\)\_\%\/\+\=\:\.\-\@\;\<\>\*\ ]#u", $contenu, $out); // Suppresion du caractère \&
         $outTmp = array_filter($out[0]);
@@ -132,6 +132,6 @@ class BuzzExpertRender extends AbstractRender
 
     public function getRender($api, $version)
     {
-        return strtolower($api) == "buzzexpert";
+        return strtolower($api) == 'buzzexpert';
     }
 }

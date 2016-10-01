@@ -6,7 +6,6 @@ use Twig_Environment;
 
 class TwigRender extends AbstractRender
 {
-
     /** @var Twig_Environment */
     protected $service;
 
@@ -20,13 +19,13 @@ class TwigRender extends AbstractRender
     {
         $twigRender = $this->service->createTemplate($this->contenu);
         $renderedTmp = $twigRender->render($this->data);
-        $rendered = str_replace("  ", " ", str_replace("  ", " ", str_replace(" , ", ", ", $renderedTmp)));
+        $rendered = str_replace('  ', ' ', str_replace('  ', ' ', str_replace(' , ', ', ', $renderedTmp)));
 
         return $rendered;
     }
 
     public function getRender($api, $version)
     {
-        return strtolower($api) == "twig" || $api === "";
+        return strtolower($api) == 'twig' || $api === '';
     }
 }
