@@ -8,7 +8,6 @@
 
 namespace Starkerxp\CampagneBundle\Event;
 
-
 class APIEvents
 {
     const EVENT_OPEN = 'open';

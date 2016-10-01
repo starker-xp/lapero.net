@@ -4,7 +4,6 @@ namespace Starkerxp\CampagneBundle\Render;
 
 interface RenderInterface
 {
-
     public function setContenu($contenu);
 
     public function getContenu();
@@ -16,5 +15,4 @@ interface RenderInterface
     public function render($api, $version);
 
     public function getRender($api, $version);
-
 }

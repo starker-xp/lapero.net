@@ -67,5 +67,4 @@ abstract class AbstractManager
     {
         return $this->repository;
     }
-
 }

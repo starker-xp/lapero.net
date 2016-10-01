@@ -42,5 +42,4 @@ abstract class Entity
         $this->updatedAt = $updatedAt;
         return $this;
     }
-
 }

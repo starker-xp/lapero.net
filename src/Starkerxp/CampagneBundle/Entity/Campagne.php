@@ -168,5 +168,4 @@ class Campagne extends Entity
 
         return $this;
     }
-
 }

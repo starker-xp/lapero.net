@@ -15,7 +15,6 @@ namespace Starkerxp\CampagneBundle\Render;
  */
 abstract class AbstractRender implements RenderInterface
 {
-
     protected $contenu;
     protected $data;
 
@@ -42,5 +41,4 @@ abstract class AbstractRender implements RenderInterface
 
         return $this;
     }
-
 }

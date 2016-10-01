@@ -58,5 +58,4 @@ class CampagneManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
         $this->assertEquals(1, $campagnePostUpdate->getIsError());
         $this->assertNotEmpty($campagnePostUpdate->getUpdatedAt());
     }
-
 }

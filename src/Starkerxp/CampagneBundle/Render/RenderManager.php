@@ -2,7 +2,6 @@
 
 namespace Starkerxp\CampagneBundle\Render;
 
-
 class RenderManager extends AbstractRender
 {
 
@@ -16,7 +15,6 @@ class RenderManager extends AbstractRender
      */
     public function render($api, $version)
     {
-
         $content = $this->getContenu();
 
         if ($renderServiceTwig = $this->getRender("twig", $version)) {
@@ -64,6 +62,4 @@ class RenderManager extends AbstractRender
     {
         return $this->renderService;
     }
-
-
 }

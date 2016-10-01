@@ -8,7 +8,6 @@ use Starkerxp\StructureBundle\Manager\Exception\ObjectClassNotAllowedException;
 
 class CampagneManager extends AbstractManager
 {
-
     public function insert($object)
     {
         if (!$object instanceof Campagne) {
@@ -24,5 +23,4 @@ class CampagneManager extends AbstractManager
         }
         parent::update($object);
     }
-
 }

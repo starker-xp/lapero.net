@@ -43,5 +43,4 @@ class BuzzExpertRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
         $actual = $this->renderService->render("buzzexpert", "txt");
         $this->assertEquals($expected, $actual);
     }
-
 }

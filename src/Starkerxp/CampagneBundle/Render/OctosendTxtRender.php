@@ -4,7 +4,6 @@ namespace Starkerxp\CampagneBundle\Render;
 
 class OctosendTxtRender extends OctosendHtmlRender
 {
-
     protected function renderDesinscription($contenu)
     {
         $arrayContenu = array();

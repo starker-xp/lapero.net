@@ -2,7 +2,6 @@
 
 namespace Starkerxp\StructureBundle\Command;
 
-
 use Starkerxp\StructureBundle\Generator\EntiteGenerator;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -27,8 +26,5 @@ class AjouterEntiteCommand extends ContainerAwareCommand
             $kernel->getBundle("StarkerxpStructureBundle")->getPath().'/Resources/views/Gabarit'
         );
         $generator->generate($kernel->getBundle($entite[0]), ucfirst($entite[1]));
-
     }
-
-
 }

@@ -47,5 +47,4 @@ class OctosendHtmlRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
         $actual = $this->renderService->render("octosend", "html");
         $this->assertEquals($expected, $actual);
     }
-
 }

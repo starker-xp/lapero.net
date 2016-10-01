@@ -37,5 +37,4 @@ class TwigRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
         $actual = $this->renderService->render("twig", "txt");
         $this->assertEquals($expected, $actual);
     }
-
 }

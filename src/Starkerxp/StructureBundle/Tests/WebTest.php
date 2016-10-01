@@ -14,5 +14,4 @@ abstract class WebTest extends WebTestCase
     {
         $this->loadFixtureFiles([]);
     }
-
 }

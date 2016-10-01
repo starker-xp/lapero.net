@@ -28,5 +28,4 @@ class StarkerxpCampagneExtension extends Extension
         $loader->load('managers.yml');
         $loader->load('renders.yml');
     }
-
 }
