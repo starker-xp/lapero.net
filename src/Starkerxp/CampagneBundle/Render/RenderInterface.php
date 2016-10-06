@@ -14,5 +14,5 @@ interface RenderInterface
 
     public function render($api, $version);
 
-    public function getRender($api, $version);
+    public function getSupport($api, $version);
 }

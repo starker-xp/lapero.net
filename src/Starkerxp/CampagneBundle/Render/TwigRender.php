@@ -24,7 +24,7 @@ class TwigRender extends AbstractRender
         return $rendered;
     }
 
-    public function getRender($api, $version)
+    public function getSupport($api, $version)
     {
         return strtolower($api) == 'twig' || $api === '';
     }

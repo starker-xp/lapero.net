@@ -1,7 +1,4 @@
 services:
-#    starkerxp_campagne.example:
-#        class: Starkerxp\CampagneBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
     starkerxp_campagne.manager.campagne:
         class: Starkerxp\CampagneBundle\Manager\CampagneManager
         arguments: ["@doctrine.orm.entity_manager", "Starkerxp\\CampagneBundle\\Entity\\Campagne"]

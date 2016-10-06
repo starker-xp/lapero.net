@@ -130,7 +130,7 @@ class BuzzExpertRender extends AbstractRender
         return $contenu;
     }
 
-    public function getRender($api, $version)
+    public function getSupport($api, $version)
     {
         return strtolower($api) == 'buzzexpert';
     }

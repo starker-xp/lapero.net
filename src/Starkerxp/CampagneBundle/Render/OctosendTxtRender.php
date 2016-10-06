@@ -35,7 +35,7 @@ class OctosendTxtRender extends OctosendHtmlRender
         return $contenu;
     }
 
-    public function getRender($api, $version)
+    public function getSupport($api, $version)
     {
         return strtolower($api) == 'octosend' && $version == 'txt';
     }

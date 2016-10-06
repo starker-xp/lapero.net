@@ -34,7 +34,7 @@ class RenderManager extends AbstractRender
         return $content;
     }
 
-    public function getRender($api, $version)
+    public function getSupport($api, $version)
     {
         foreach ($this->renderService as $service) {
             if ($service instanceof RenderInterface && $service->getRender($api, $version)) {
