@@ -1,0 +1,4 @@
+services:
+#    starkerxp_rabbitmq.example:
+#        class: Starkerxp\RabbitmqBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
