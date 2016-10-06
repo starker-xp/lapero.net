@@ -2,22 +2,21 @@
 
 namespace Starkerxp\RabbitmqBundle\Command;
 
-
 use Starkerxp\RabbitmqBundle\Command\Exception\NomChannelNonDefinitException;
 use Starkerxp\RabbitmqBundle\Command\Exception\NomServiceNonDefinitException;
 use Symfony\Component\Console\Input\InputOption;
 
-abstract class RabbitReceiverLockCommand extends LockCommand
+abstract class ReceiverLockCommand extends LockCommand
 {
     public function nomLocker()
     {
-        return parent::nomLocker()."_".$this->input->getOption("numeroScript");
+        return parent::nomLocker().'_'.$this->input->getOption('numeroScript');
     }
 
     protected function configure()
     {
         parent::configure();
-        $this->addOption('numeroScript', 'n', InputOption::VALUE_OPTIONAL, "Numéro de script", '1');
+        $this->addOption('numeroScript', 'n', InputOption::VALUE_OPTIONAL, 'Numéro de script', '1');
     }
 
     public function traitement()
@@ -30,7 +29,7 @@ abstract class RabbitReceiverLockCommand extends LockCommand
         if (empty($nomChannel)) {
             throw new NomChannelNonDefinitException();
         }
-        $connection = $this->getContainer()->get("app.service.rabbitmq");
+        $connection = $this->getContainer()->get('app.service.rabbitmq');
         $channel = $connection->channel();
         $channel->queue_declare($nomChannel, false, true, false, false);
         $callback = $this->getCallback();
@@ -41,21 +40,18 @@ abstract class RabbitReceiverLockCommand extends LockCommand
         }
         $channel->close();
         $connection->close();
-        $this->output->writeln("<info>Execution terminé.</info>");
+        $this->output->writeln('<info>Execution terminé.</info>');
     }
 
+    /**
+     * @return string
+     */
+    abstract public function getNomChannel();
 
     /**
      * @return string
      */
-    public abstract function getNomChannel();
+    abstract public function getNomService();
 
-    /**
-     * @return string
-     */
-    public abstract function getNomService();
-
-    public abstract function getCallback();
-
-
+    abstract public function getCallback();
 }
