@@ -4,7 +4,9 @@ namespace Starkerxp\RabbitmqBundle\Command;
 
 use Starkerxp\RabbitmqBundle\Command\Exception\NomChannelNonDefinitException;
 use Starkerxp\RabbitmqBundle\Command\Exception\NomServiceNonDefinitException;
+use Starkerxp\StructureBundle\Command\LockCommand;
 use Symfony\Component\Console\Input\InputOption;
+use PhpAmqpLib\Exception\AMQPTimeoutException;
 
 abstract class ReceiverLockCommand extends LockCommand
 {
@@ -16,7 +18,8 @@ abstract class ReceiverLockCommand extends LockCommand
     protected function configure()
     {
         parent::configure();
-        $this->addOption('numeroScript', 'n', InputOption::VALUE_OPTIONAL, 'Numéro de script', '1');
+        $this->addOption('numeroScript', 'n', InputOption::VALUE_OPTIONAL, 'Numéro de script', 1);
+        $this->addOption('timeout', 't', InputOption::VALUE_OPTIONAL, "Timeout callback queue", 0);
     }
 
     public function traitement()
@@ -35,8 +38,11 @@ abstract class ReceiverLockCommand extends LockCommand
         $callback = $this->getCallback();
         $channel->basic_qos(null, 1, null);
         $channel->basic_consume($nomChannel, '', false, false, false, false, $callback);
-        while (count($channel->callbacks)) {
-            $channel->wait();
+        try {
+            while (count($channel->callbacks)) {
+                $channel->wait(null, false, $this->input->getOption("timeout"));
+            }
+        } catch (AMQPTimeoutException $e) {
         }
         $channel->close();
         $connection->close();
