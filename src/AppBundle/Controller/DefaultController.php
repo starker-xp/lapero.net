@@ -30,4 +30,14 @@ class DefaultController extends Controller
             ]
         );
     }
+
+    public function contactAction(Request $request){
+
+    }
+
+    public function mentionsLegalesAction(Request $request){
+
+    }
+
+
 }
