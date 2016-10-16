@@ -1,3 +1,0 @@
-starkerxp_utilisateur_index:
-    path:     /
-    defaults: { _controller: StarkerxpUtilisateurBundle:Commande:post }

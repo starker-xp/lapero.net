@@ -12,7 +12,7 @@ interface RenderInterface
 
     public function getData();
 
-    public function render($api, $version);
+    public function render();
 
     public function getSupport($api, $version);
 }

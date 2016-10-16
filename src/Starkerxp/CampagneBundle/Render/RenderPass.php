@@ -18,7 +18,6 @@ class RenderPass implements CompilerPassInterface
     {
         $definition = $container->findDefinition('starkerxp_campagne.manager.render');
         foreach (array_keys($container->findTaggedServiceIds('starkerxp_campagne.render')) as $id) {
-            // ... add it as a call to addLocator of the msb.places.chained_locator service definition
             $definition->addMethodCall('addRenderService', [new Reference($id)]);
         }
     }

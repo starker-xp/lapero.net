@@ -10,14 +10,18 @@ use Starkerxp\StructureBundle\Entity\Entity;
  *
  * @ORM\Table(name="campagne", indexes={
  *  @ORM\Index(columns={"type"}),
- *  @ORM\Index(columns={"ready"}),
- *  @ORM\Index(columns={"error"}),
- *  @ORM\Index(columns={"deleted"})
+ *  @ORM\Index(columns={"deleted"}),
+ *  @ORM\Index(columns={"status"})
  * })
  * @ORM\Entity(repositoryClass="Starkerxp\CampagneBundle\Repository\CampagneRepository")
  */
 class Campagne extends Entity
 {
+
+    const STATUS_PENDING = "pending";
+    const STATUS_SENT = "send";
+    const STATUS_CANCEL = "cancel";
+
     /**
      * @var int
      *
@@ -44,23 +48,21 @@ class Campagne extends Entity
     /**
      * @var bool
      *
-     * @ORM\Column(name="ready", type="boolean", nullable=true)
-     */
-    protected $isReady = false;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="error", type="boolean", nullable=true)
-     */
-    protected $isError = false;
-
-    /**
-     * @var bool
-     *
      * @ORM\Column(name="deleted", type="boolean", nullable=true)
      */
     protected $isDeleted = false;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=255)
+     */
+    protected $status;
+
+    /**
+     * @ORM\Column(name="send_at", type="datetime", nullable=true)
+     */
+    protected $sendAt;
 
     /**
      * Get id.
@@ -97,54 +99,6 @@ class Campagne extends Entity
     }
 
     /**
-     * Get isReady.
-     *
-     * @return bool
-     */
-    public function getIsReady()
-    {
-        return $this->isReady;
-    }
-
-    /**
-     * Set isReady.
-     *
-     * @param bool $isReady
-     *
-     * @return Campagne
-     */
-    public function setIsReady($isReady)
-    {
-        $this->isReady = $isReady;
-
-        return $this;
-    }
-
-    /**
-     * Get isError.
-     *
-     * @return bool
-     */
-    public function getIsError()
-    {
-        return $this->isError;
-    }
-
-    /**
-     * Set isError.
-     *
-     * @param bool $isError
-     *
-     * @return Campagne
-     */
-    public function setIsError($isError)
-    {
-        $this->isError = $isError;
-
-        return $this;
-    }
-
-    /**
      * Get isDeleted.
      *
      * @return bool
@@ -166,5 +120,77 @@ class Campagne extends Entity
         $this->isDeleted = $isDeleted;
 
         return $this;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Campagne
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     *
+     * @return Campagne
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set sendAt
+     *
+     * @param \DateTime $sendAt
+     *
+     * @return Campagne
+     */
+    public function setSendAt($sendAt)
+    {
+        $this->sendAt = $sendAt;
+
+        return $this;
+    }
+
+    /**
+     * Get sendAt
+     *
+     * @return \DateTime
+     */
+    public function getSendAt()
+    {
+        return $this->sendAt;
     }
 }

@@ -2,6 +2,9 @@
 
 namespace Starkerxp\CampagneBundle\Render;
 
+use Starkerxp\CampagneBundle\Render\Exception\ApiNotDefinedException;
+use Starkerxp\CampagneBundle\Render\Exception\VersionNotDefinedException;
+
 class RenderManager extends AbstractRender
 {
     /**
@@ -10,25 +13,45 @@ class RenderManager extends AbstractRender
     private $renderService = [];
 
     /**
-     * @return mixed
+     * @var string
      */
-    public function render($api, $version)
+    private $api;
+
+    /**
+     * @var string
+     */
+    private $version;
+
+    /**
+     *
+     * @throws ApiNotDefinedException
+     * @throws VersionNotDefinedException
+     *
+     * @return string
+     */
+    public function render()
     {
+        if (empty($this->api)) {
+            throw new ApiNotDefinedException();
+        }
+        if (empty($this->version)) {
+            throw new VersionNotDefinedException();
+        }
         $content = $this->getContenu();
 
-        if ($renderServiceTwig = $this->getRender('twig', $version)) {
+        if ($renderServiceTwig = $this->getSupport('twig', $this->version)) {
             $renderServiceTwig->setData($this->getData());
             $renderServiceTwig->setContenu($content);
-            $content = $renderServiceTwig->render('twig', $version);
-            if (strtolower($api) == 'twig') {
+            $content = $renderServiceTwig->render();
+            if ($this->api == 'twig') {
                 return $content;
             }
         }
-        if ($renderService = $this->getRender($api, $version)) {
+        if ($renderService = $this->getSupport($this->api, $this->version)) {
             $renderService->setData($this->getData());
             $renderService->setContenu($content);
 
-            return $renderService->render($api, $version);
+            return $renderService->render();
         }
 
         return $content;
@@ -37,7 +60,7 @@ class RenderManager extends AbstractRender
     public function getSupport($api, $version)
     {
         foreach ($this->renderService as $service) {
-            if ($service instanceof RenderInterface && $service->getRender($api, $version)) {
+            if ($service instanceof RenderInterface && $service->getSupport($api, $version)) {
                 return $service;
             }
         }
@@ -62,4 +85,43 @@ class RenderManager extends AbstractRender
     {
         return $this->renderService;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getApi()
+    {
+        return $this->api;
+    }
+
+    /**
+     * @param mixed $api
+     * @return RenderManager
+     */
+    public function setApi($api)
+    {
+        $this->api = strtolower($api);
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    /**
+     * @param mixed $version
+     * @return RenderManager
+     */
+    public function setVersion($version)
+    {
+        $this->version = strtolower($version);
+
+        return $this;
+    }
+
 }

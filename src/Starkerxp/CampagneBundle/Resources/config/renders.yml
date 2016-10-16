@@ -20,5 +20,12 @@ services:
 
     starkerxp_campagne.render.octosend_txt:
         class: Starkerxp\CampagneBundle\Render\OctosendTxtRender
+        arguments: ["@starkerxp_campagne.render.html_to_txt"]
+        tags:
+          - { name: starkerxp_campagne.render }
+
+    starkerxp_campagne.render.html_to_txt:
+        class: Starkerxp\CampagneBundle\Render\HtmlToTxtRender
+        arguments: ["@exercise_html_purifier.default"]
         tags:
           - { name: starkerxp_campagne.render }

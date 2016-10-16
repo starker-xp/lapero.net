@@ -15,7 +15,7 @@ class TwigRender extends AbstractRender
         $this->service->disableStrictVariables();
     }
 
-    public function render($api, $version)
+    public function render()
     {
         $twigRender = $this->service->createTemplate($this->contenu);
         $renderedTmp = $twigRender->render($this->data);

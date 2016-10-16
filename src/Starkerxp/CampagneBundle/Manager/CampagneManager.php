@@ -3,24 +3,16 @@
 namespace Starkerxp\CampagneBundle\Manager;
 
 use Starkerxp\CampagneBundle\Entity\Campagne;
+use Starkerxp\StructureBundle\Entity\Entity;
 use Starkerxp\StructureBundle\Manager\AbstractManager;
-use Starkerxp\StructureBundle\Manager\Exception\ObjectClassNotAllowedException;
+
 
 class CampagneManager extends AbstractManager
 {
-    public function insert($object)
+
+    public function getSupport(Entity $object)
     {
-        if (!$object instanceof Campagne) {
-            throw new ObjectClassNotAllowedException();
-        }
-        parent::insert($object);
+        return $object instanceof Campagne;
     }
 
-    public function update($object)
-    {
-        if (!$object instanceof Campagne) {
-            throw new ObjectClassNotAllowedException();
-        }
-        parent::update($object);
-    }
 }

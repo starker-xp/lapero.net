@@ -32,7 +32,9 @@
     "incenteev/composer-parameter-handler": "^2.0",
     "guzzlehttp/guzzle": "~6.0",
     "friendsofsymfony/user-bundle": "~2.0@dev",
-    "sendwithus/api": "^2.14"
+    "sendwithus/api": "^2.14",
+    "ezyang/htmlpurifier": "^4.8",
+    "exercise/htmlpurifier-bundle": "^0.2.3"
   },
   "require-dev": {
     "sensio/generator-bundle": "^3.0",

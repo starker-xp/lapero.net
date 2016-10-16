@@ -4,7 +4,7 @@ namespace Starkerxp\CampagneBundle\Render;
 
 class BuzzExpertRender extends AbstractRender
 {
-    public function render($api, $version)
+    public function render()
     {
         $contenu = $this->remplacerLesCaracteresSpeciaux(mb_convert_encoding($this->contenu, 'UTF-8'));
 

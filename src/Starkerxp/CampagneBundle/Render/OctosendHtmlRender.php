@@ -4,7 +4,7 @@ namespace Starkerxp\CampagneBundle\Render;
 
 class OctosendHtmlRender extends AbstractRender
 {
-    public function render($api, $version)
+    public function render()
     {
         // Gestion des liens mirror
         $contenu = $this->renderMirror($this->contenu);

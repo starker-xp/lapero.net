@@ -4,6 +4,42 @@ namespace Starkerxp\CampagneBundle\Render;
 
 class OctosendTxtRender extends OctosendHtmlRender
 {
+
+    /**
+     * @var AbstractRender
+     */
+    private $htmlToTxtService;
+
+    /**
+     * OctosendTxtRender constructor.
+     * @param AbstractRender $htmlToTxtService
+     */
+    public function __construct(AbstractRender $htmlToTxtService)
+    {
+        $this->htmlToTxtService = $htmlToTxtService;
+    }
+
+    public function render()
+    {
+        // Gestion des liens de desinscriptions.
+        $contenu = $this->renderDesinscription($this->getContenu());
+        // Gestion des liens click:http://
+        $contenu = $this->renderClick($contenu);
+
+        $this->htmlToTxtService->setContenu($contenu);
+        $contenu = $this->htmlToTxtService->render();
+
+        // Gestion des liens mirror
+        $contenu = $this->renderMirror($contenu);
+        // Gestion des liens pixels
+        $contenu = $this->renderPixel($contenu);
+
+        $contenu = str_replace('  ', ' ', str_replace('  ', ' ', $contenu));
+
+        return $contenu;
+    }
+
+
     protected function renderDesinscription($contenu)
     {
         $arrayContenu = array();
@@ -39,4 +75,8 @@ class OctosendTxtRender extends OctosendHtmlRender
     {
         return strtolower($api) == 'octosend' && $version == 'txt';
     }
+
+
+
+
 }

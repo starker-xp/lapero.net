@@ -6,8 +6,9 @@ use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Starkerxp\StructureBundle\Entity\Entity;
+use Starkerxp\StructureBundle\Manager\Exception\ObjectClassNotAllowedException;
 
-abstract class AbstractManager
+abstract class AbstractManager implements ManagerInterface
 {
     /** @var EntityManager */
     protected $entityManager;
@@ -27,6 +28,9 @@ abstract class AbstractManager
 
     public function insert(Entity $object)
     {
+        if (!$this->getSupport($object)) {
+            throw new ObjectClassNotAllowedException();
+        }
         $object->setCreatedAt(new DateTime());
         $this->entityManager->persist($object);
         $this->entityManager->flush();
@@ -36,6 +40,9 @@ abstract class AbstractManager
 
     public function update(Entity $object)
     {
+        if (!$this->getSupport($object)) {
+            throw new ObjectClassNotAllowedException();
+        }
         $object->setUpdatedAt(new DateTime());
         $this->entityManager->flush();
 
@@ -52,9 +59,9 @@ abstract class AbstractManager
         return $this->repository->findOneBy($criteria);
     }
 
-    public function findBy($criteria = [])
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
-        return $this->repository->find($criteria);
+        return $this->repository->find($criteria, $orderBy, $limit, $offset);
     }
 
     public function findAll()

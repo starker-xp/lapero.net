@@ -13,7 +13,7 @@ class UtilisateurController extends Controller
     /**
      * @Route("/inscription", name="inscription")
      */
-    public function indexAction(Request $request)
+    public function inscriptionAction(Request $request)
     {
         return new JsonResponse();
     }
@@ -36,9 +36,49 @@ class UtilisateurController extends Controller
     }
 
     /**
-     * @Route("/mon-compte/modifier", name="modifierMonCompte")
+     * @Route("/mon-compte/modifier-mon-profil", name="modifierMonCompte")
      */
     public function modifierMonProfilAction(Resquest $request)
+    {
+
+    }
+
+    public function ajouterAuPanierAction(Request $request)
+    {
+
+    }
+
+    public function retirerDuPanierAction(Request $request)
+    {
+
+    }
+
+    public function voirMonPanierAction(Request $request)
+    {
+
+    }
+
+    public function viderMonPanierAction(Request $request)
+    {
+
+    }
+
+    public function passerCommandeAction(Request $request)
+    {
+
+    }
+
+    public function payerLaCommandeAction(Request $request)
+    {
+
+    }
+
+    public function paiementAEteValideAction(Request $request)
+    {
+
+    }
+
+    public function paiementAEteRefuseAction(Request $request)
     {
 
     }
