@@ -8,34 +8,25 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UtilisateurController extends CoreController
 {
-    /**
-     * @Route("/inscription", name="inscription")
-     */
+
     public function inscriptionAction(Request $request)
     {
-        return new JsonResponse();
+
     }
 
 
-    /**
-     * @Route("/mon-compte/alertes-et-newsletter", name="alerte-newsletter")
-     */
     public function gererMesOptinsAction(Request $request)
     {
 
     }
 
-    /**
-     * @Route("/mon-compte/supprimer-mon-compte", name="supprimerMonCompte")
-     */
+
     public function supprimerMonCompteAction(Request $request)
     {
 
     }
 
-    /**
-     * @Route("/mon-compte/modifier-mon-profil", name="modifierMonCompte")
-     */
+
     public function modifierMonProfilAction(Request $request)
     {
 

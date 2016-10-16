@@ -50,7 +50,7 @@ class Campagne extends Entity
      *
      * @ORM\Column(name="deleted", type="boolean", nullable=true)
      */
-    protected $isDeleted = false;
+    protected $deleted = false;
 
     /**
      * @var string
@@ -98,29 +98,7 @@ class Campagne extends Entity
         return $this;
     }
 
-    /**
-     * Get isDeleted.
-     *
-     * @return bool
-     */
-    public function getIsDeleted()
-    {
-        return $this->isDeleted;
-    }
 
-    /**
-     * Set isDeleted.
-     *
-     * @param bool $isDeleted
-     *
-     * @return Campagne
-     */
-    public function setIsDeleted($isDeleted)
-    {
-        $this->isDeleted = $isDeleted;
-
-        return $this;
-    }
 
     /**
      * Set type
@@ -192,5 +170,29 @@ class Campagne extends Entity
     public function getSendAt()
     {
         return $this->sendAt;
+    }
+
+    /**
+     * Set deleted
+     *
+     * @param boolean $deleted
+     *
+     * @return Campagne
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return boolean
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
     }
 }

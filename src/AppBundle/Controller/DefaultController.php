@@ -16,8 +16,6 @@ class DefaultController extends CoreController
         $html = <<<EOF
 <html><style>background-color:black;</style><body><div style="text-align:center;">{{prenom|capitalize}}</div>Ceci[@e] est mon <span class="bold">contenu</span>. <p class="text-faded">Design and code an email that <strong>works on every device</strong> and client is a huge and <strong>demanding work</strong> also for professionals.<br>Mosaico allows you to realize <strong>a beautiful and effective template</strong>,<br> without a <strong>team of professionals</strong> and hours of testing to let it works everywhere.</p> Vous pouvez le télécharger <a href="http://google.com/test.php">ici</a></body></html>
 EOF;
-
-
         /** @var \Starkerxp\CampagneBundle\Render\RenderManager $renderManager */
         $renderManager = $this->get('starkerxp_campagne.manager.render');
         $renderManager->setData(['prenom' => 'guillaume']);
