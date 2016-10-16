@@ -85,3 +85,4 @@ class EntityManager extends AbstractManager
         return $managerService;
     }
 }
+

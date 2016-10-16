@@ -74,3 +74,4 @@ abstract class AbstractManager implements ManagerInterface
         return $this->repository;
     }
 }
+

@@ -58,7 +58,6 @@ class OctosendTxtRender extends OctosendHtmlRender
     protected function renderClick($contenu)
     {
         $arrayContenu = array();
-        //preg_match_all("#\[(.*?)\] ((?:http|https):(?:.*?))([. :!?;])#", $contenu, $arrayContenu);
         preg_match_all("#\<a data\-id\=\"click\" target=\"__blank\" href\=\"(.*?)\"\ style\=\"(.*?)\"\>(.*?)\<\/a\>#", $contenu, $arrayContenu);
         if (empty($arrayContenu[0])) {
             return $contenu;
@@ -75,8 +74,6 @@ class OctosendTxtRender extends OctosendHtmlRender
     {
         return strtolower($api) == 'octosend' && $version == 'txt';
     }
-
-
 
 
 }

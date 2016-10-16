@@ -1,0 +1,30 @@
+{{ nomService }}.controller.{{ nomControllerCamelize|lower }}.cget:
+    path:     /
+    defaults: { _controller: "{{namespace}}:{{ nomController }}:cget" }
+    methods:  [GET]
+
+{{ nomService }}.controller.{{ nomControllerCamelize|lower }}.get:
+    path:     /{id}
+    defaults: { _controller: "{{namespace}}:{{ nomController }}:get" }
+    methods:  [GET]
+	requirements:
+        page: '\d+'
+
+{{ nomService }}.controller.{{ nomControllerCamelize|lower }}.post:
+    path:     /
+    defaults: { _controller: "{{namespace}}:{{ nomController }}:post" }
+    methods:  [POST]
+
+{{ nomService }}.controller.{{ nomControllerCamelize|lower }}.put:
+    path:     /{id}
+    defaults: { _controller: "{{namespace}}:{{ nomController }}:put" }
+    methods:  [PUT]
+	requirements:
+        page: '\d+'
+
+{{ nomService }}.controller.{{ nomControllerCamelize|lower }}.delete:
+    path:     /{id}
+    defaults: { _controller: "{{namespace}}:{{ nomController }}:delete" }
+    methods:  [DELETE]
+	requirements:
+        page: '\d+'

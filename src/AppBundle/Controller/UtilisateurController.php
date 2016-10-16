@@ -2,13 +2,11 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Starkerxp\CampagneBundle\Services\Render\RenderInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Starkerxp\StructureBundle\Controller\CoreController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class UtilisateurController extends Controller
+class UtilisateurController extends CoreController
 {
     /**
      * @Route("/inscription", name="inscription")
@@ -38,7 +36,7 @@ class UtilisateurController extends Controller
     /**
      * @Route("/mon-compte/modifier-mon-profil", name="modifierMonCompte")
      */
-    public function modifierMonProfilAction(Resquest $request)
+    public function modifierMonProfilAction(Request $request)
     {
 
     }

@@ -1,0 +1,36 @@
+<?php
+
+namespace {{ namespace }}\Controller;
+
+use Starkerxp\StructureBundle\Controller\CoreController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+
+class {{ nomController }}Controller extends CoreController
+{
+	public function cgetAction(Request $request)
+    {
+        return new JsonResponse(["error" => false, "collection" => []]);
+    }
+
+    public function getAction(Request $request)
+    {
+        return new JsonResponse(["error" => false, "data" => []]);
+    }
+
+    public function postAction(Request $request)
+    {
+        return new JsonResponse(["error" => false, "msg" => ""]);
+    }
+
+    public function putAction(Request $request)
+    {
+        return new JsonResponse(["error" => false, "msg" => ""]);
+    }
+
+    public function deleteAction(Request $request)
+    {
+        return new JsonResponse(["error" => false, "msg" => ""]);
+    }
+
+}

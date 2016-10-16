@@ -1,4 +1,4 @@
-.
-=
-
-A Symfony project created on September 16, 2016, 11:03 pm.
+###Fonctionnalitées:
+- Génération de controller rest + tests unitaire
+- Génération d'entité + tests unitaire
+- Utilisation d'un manager unique dans le projet

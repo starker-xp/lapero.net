@@ -2,13 +2,11 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Starkerxp\CampagneBundle\Services\Render\RenderInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Starkerxp\StructureBundle\Controller\CoreController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+class DefaultController extends CoreController
 {
     /**
      * @Route("/", name="homepage")
@@ -23,7 +21,6 @@ EOF;
         /** @var \Starkerxp\CampagneBundle\Render\RenderManager $renderManager */
         $renderManager = $this->get('starkerxp_campagne.manager.render');
         $renderManager->setData(['prenom' => 'guillaume']);
-        //$monTexte = 'Ceci est mon texte {{prenom|capitalize}} ! Tu ne pourras rien y faire démonïtus.';
         $renderManager->setContenu($html);
         $renderManager->setApi("octosend");
         $renderManager->setVersion("txt");
