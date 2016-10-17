@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use Starkerxp\StructureBundle\Controller\CoreController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class UtilisateurController extends CoreController
