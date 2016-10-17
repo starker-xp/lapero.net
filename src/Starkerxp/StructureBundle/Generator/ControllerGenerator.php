@@ -6,15 +6,14 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class ControllerGenerator extends AbstractGenerator
 {
-
     public function getParamaters(Bundle $bundle, $libelle)
     {
         return array(
-            'nomController'         => $libelle,
+            'nomController' => $libelle,
             'nomControllerCamelize' => preg_replace('#\B([A-Z])#', '_\1', $libelle),
-            'namespace'             => $bundle->getNamespace(),
-            'namespaceBundle'       => '@'.$bundle->getName(),
-            'namespaceFQC'          => str_replace('\\', '\\\\', $bundle->getNamespace()),
+            'namespace' => $bundle->getNamespace(),
+            'namespaceBundle' => '@'.$bundle->getName(),
+            'namespaceFQC' => str_replace('\\', '\\\\', $bundle->getNamespace()),
         );
     }
 

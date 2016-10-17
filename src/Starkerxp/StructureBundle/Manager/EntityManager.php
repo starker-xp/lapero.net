@@ -36,7 +36,6 @@ class EntityManager extends AbstractManager
         return false;
     }
 
-
     /**
      * @param Entity $object
      *
@@ -85,4 +84,3 @@ class EntityManager extends AbstractManager
         return $managerService;
     }
 }
-

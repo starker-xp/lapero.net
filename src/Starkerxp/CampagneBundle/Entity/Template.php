@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Starkerxp\StructureBundle\Entity\Entity;
 
 /**
- * Template
+ * Template.
  *
  * @ORM\Table(name="template")
  * @ORM\Entity(repositoryClass="Starkerxp\CampagneBundle\Repository\TemplateRepository")
@@ -58,9 +58,9 @@ class Template extends Entity
     protected $message;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -68,7 +68,7 @@ class Template extends Entity
     }
 
     /**
-     * Set uuid
+     * Set uuid.
      *
      * @param guid $uuid
      *
@@ -82,7 +82,7 @@ class Template extends Entity
     }
 
     /**
-     * Get uuid
+     * Get uuid.
      *
      * @return guid
      */
@@ -92,7 +92,7 @@ class Template extends Entity
     }
 
     /**
-     * Set nom
+     * Set nom.
      *
      * @param string $nom
      *
@@ -106,7 +106,7 @@ class Template extends Entity
     }
 
     /**
-     * Get nom
+     * Get nom.
      *
      * @return string
      */
@@ -116,7 +116,7 @@ class Template extends Entity
     }
 
     /**
-     * Set type
+     * Set type.
      *
      * @param string $type
      *
@@ -130,7 +130,7 @@ class Template extends Entity
     }
 
     /**
-     * Get type
+     * Get type.
      *
      * @return string
      */
@@ -140,7 +140,7 @@ class Template extends Entity
     }
 
     /**
-     * Set sujet
+     * Set sujet.
      *
      * @param string $sujet
      *
@@ -154,7 +154,7 @@ class Template extends Entity
     }
 
     /**
-     * Get sujet
+     * Get sujet.
      *
      * @return string
      */
@@ -163,9 +163,8 @@ class Template extends Entity
         return $this->sujet;
     }
 
-
     /**
-     * Set message
+     * Set message.
      *
      * @param string $message
      *
@@ -179,7 +178,7 @@ class Template extends Entity
     }
 
     /**
-     * Get message
+     * Get message.
      *
      * @return string
      */

@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: DIEU
  * Date: 16/10/2016
- * Time: 16:38
+ * Time: 16:38.
  */
 
 namespace Starkerxp\CampagneBundle\Render;
-
 
 class HtmlToTxtRender extends AbstractRender
 {
@@ -18,6 +17,7 @@ class HtmlToTxtRender extends AbstractRender
 
     /**
      * HtmlToTxtRender constructor.
+     *
      * @param \HTMLPurifier $htmlPurifierService
      */
     public function __construct(\HTMLPurifier $htmlPurifierService)
@@ -33,7 +33,7 @@ class HtmlToTxtRender extends AbstractRender
         $monTexte = $this->htmlPurifierService->purify(
             $monTexte,
             [
-                "AutoFormat.DisplayLinkURI" => true,
+                'AutoFormat.DisplayLinkURI' => true,
             ]
         );
         $monTexte = strip_tags($monTexte);
@@ -52,8 +52,6 @@ class HtmlToTxtRender extends AbstractRender
 
     public function getSupport($api, $version)
     {
-        return empty($api) && $version == "txt";
+        return empty($api) && $version == 'txt';
     }
-
-
 }

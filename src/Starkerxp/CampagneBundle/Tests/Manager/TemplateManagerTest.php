@@ -6,8 +6,7 @@ use Starkerxp\CampagneBundle\Manager\TemplateManager;
 
 class TemplateManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
 {
-
-    /** @var  TemplateManager */
+    /** @var TemplateManager */
     protected $manager;
 
     public function setUp()
@@ -22,7 +21,6 @@ class TemplateManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
      */
     public function testFindAll()
     {
-        
     }
 
     /**
@@ -31,7 +29,7 @@ class TemplateManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
      */
     public function testInsertNewCampagne()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/TemplateManager/DefaultTemplate.yml',]);
+        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/TemplateManager/DefaultTemplate.yml']);
     }
 
     /**
@@ -40,7 +38,6 @@ class TemplateManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
      */
     public function testUpdateCampagne()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/TemplateManager/DefaultTemplate.yml',]);
+        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/TemplateManager/DefaultTemplate.yml']);
     }
-
 }

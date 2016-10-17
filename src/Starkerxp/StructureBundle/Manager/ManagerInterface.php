@@ -2,7 +2,6 @@
 
 namespace Starkerxp\StructureBundle\Manager;
 
-
 use Starkerxp\StructureBundle\Entity\Entity;
 
 interface ManagerInterface

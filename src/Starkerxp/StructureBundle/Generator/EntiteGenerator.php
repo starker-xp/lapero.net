@@ -6,14 +6,13 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class EntiteGenerator extends AbstractGenerator
 {
-
     public function getParamaters(Bundle $bundle, $libelle)
     {
         return array(
-            'nomEntity'       => $libelle,
-            'namespace'       => $bundle->getNamespace(),
+            'nomEntity' => $libelle,
+            'namespace' => $bundle->getNamespace(),
             'namespaceBundle' => '@'.$bundle->getName(),
-            'namespaceFQC'    => str_replace('\\', '\\\\', $bundle->getNamespace()),
+            'namespaceFQC' => str_replace('\\', '\\\\', $bundle->getNamespace()),
         );
     }
 

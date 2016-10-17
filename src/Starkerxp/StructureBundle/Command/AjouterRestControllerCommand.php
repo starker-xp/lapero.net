@@ -13,7 +13,7 @@ class AjouterRestControllerCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('starkerxp:generate:rest-controller')
-            ->addArgument('controller', InputArgument::REQUIRED, "Le controller à ajouter")
+            ->addArgument('controller', InputArgument::REQUIRED, 'Le controller à ajouter')
             ->setDescription('Génère le gabarit pour travailler avec les controller');
     }
 

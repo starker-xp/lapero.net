@@ -7,7 +7,6 @@ use Symfony\Component\Yaml\Yaml;
 
 abstract class AbstractGenerator extends Generator
 {
-
     public function generate(Bundle $bundle, $libelle)
     {
         $parameters = $this->getParamaters($bundle, $libelle);

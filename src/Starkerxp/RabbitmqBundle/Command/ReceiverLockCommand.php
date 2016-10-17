@@ -19,7 +19,7 @@ abstract class ReceiverLockCommand extends LockCommand
     {
         parent::configure();
         $this->addOption('numeroScript', 'n', InputOption::VALUE_OPTIONAL, 'Numéro de script', 1);
-        $this->addOption('timeout', 't', InputOption::VALUE_OPTIONAL, "Timeout callback queue", 0);
+        $this->addOption('timeout', 't', InputOption::VALUE_OPTIONAL, 'Timeout callback queue', 0);
     }
 
     public function traitement()
@@ -40,7 +40,7 @@ abstract class ReceiverLockCommand extends LockCommand
         $channel->basic_consume($nomChannel, '', false, false, false, false, $callback);
         try {
             while (count($channel->callbacks)) {
-                $channel->wait(null, false, $this->input->getOption("timeout"));
+                $channel->wait(null, false, $this->input->getOption('timeout'));
             }
         } catch (AMQPTimeoutException $e) {
         }

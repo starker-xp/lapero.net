@@ -17,10 +17,9 @@ use Starkerxp\StructureBundle\Entity\Entity;
  */
 class Campagne extends Entity
 {
-
-    const STATUS_PENDING = "pending";
-    const STATUS_SENT = "send";
-    const STATUS_CANCEL = "cancel";
+    const STATUS_PENDING = 'pending';
+    const STATUS_SENT = 'send';
+    const STATUS_CANCEL = 'cancel';
 
     /**
      * @var int
@@ -98,10 +97,8 @@ class Campagne extends Entity
         return $this;
     }
 
-
-
     /**
-     * Set type
+     * Set type.
      *
      * @param string $type
      *
@@ -115,7 +112,7 @@ class Campagne extends Entity
     }
 
     /**
-     * Get type
+     * Get type.
      *
      * @return string
      */
@@ -125,7 +122,7 @@ class Campagne extends Entity
     }
 
     /**
-     * Set status
+     * Set status.
      *
      * @param string $status
      *
@@ -139,7 +136,7 @@ class Campagne extends Entity
     }
 
     /**
-     * Get status
+     * Get status.
      *
      * @return string
      */
@@ -149,7 +146,7 @@ class Campagne extends Entity
     }
 
     /**
-     * Set sendAt
+     * Set sendAt.
      *
      * @param \DateTime $sendAt
      *
@@ -163,7 +160,7 @@ class Campagne extends Entity
     }
 
     /**
-     * Get sendAt
+     * Get sendAt.
      *
      * @return \DateTime
      */
@@ -173,9 +170,9 @@ class Campagne extends Entity
     }
 
     /**
-     * Set deleted
+     * Set deleted.
      *
-     * @param boolean $deleted
+     * @param bool $deleted
      *
      * @return Campagne
      */
@@ -187,9 +184,9 @@ class Campagne extends Entity
     }
 
     /**
-     * Get deleted
+     * Get deleted.
      *
-     * @return boolean
+     * @return bool
      */
     public function getDeleted()
     {

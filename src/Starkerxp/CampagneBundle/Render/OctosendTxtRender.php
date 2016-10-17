@@ -4,7 +4,6 @@ namespace Starkerxp\CampagneBundle\Render;
 
 class OctosendTxtRender extends OctosendHtmlRender
 {
-
     /**
      * @var AbstractRender
      */
@@ -12,6 +11,7 @@ class OctosendTxtRender extends OctosendHtmlRender
 
     /**
      * OctosendTxtRender constructor.
+     *
      * @param AbstractRender $htmlToTxtService
      */
     public function __construct(AbstractRender $htmlToTxtService)
@@ -38,7 +38,6 @@ class OctosendTxtRender extends OctosendHtmlRender
 
         return $contenu;
     }
-
 
     protected function renderDesinscription($contenu)
     {
@@ -74,6 +73,4 @@ class OctosendTxtRender extends OctosendHtmlRender
     {
         return strtolower($api) == 'octosend' && $version == 'txt';
     }
-
-
 }

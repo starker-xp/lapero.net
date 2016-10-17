@@ -23,7 +23,6 @@ class RenderManager extends AbstractRender
     private $version;
 
     /**
-     *
      * @throws ApiNotDefinedException
      * @throws VersionNotDefinedException
      *
@@ -96,6 +95,7 @@ class RenderManager extends AbstractRender
 
     /**
      * @param mixed $api
+     *
      * @return RenderManager
      */
     public function setApi($api)
@@ -115,6 +115,7 @@ class RenderManager extends AbstractRender
 
     /**
      * @param mixed $version
+     *
      * @return RenderManager
      */
     public function setVersion($version)
@@ -123,5 +124,4 @@ class RenderManager extends AbstractRender
 
         return $this;
     }
-
 }

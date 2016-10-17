@@ -15,5 +15,4 @@ class CoreController extends Controller
     {
         return $this->getDoctrine()->getManager();
     }
-
 }
