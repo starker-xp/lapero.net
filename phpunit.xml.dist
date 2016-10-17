@@ -8,8 +8,8 @@
          bootstrap="app/autoload.php"
 >
     <php>
-        <ini name="error_reporting" value="-1" />
-        <server name="KERNEL_DIR" value="app/" />
+        <ini name="error_reporting" value="-1"/>
+        <server name="KERNEL_DIR" value="app/"/>
     </php>
 
     <testsuites>
@@ -31,4 +31,10 @@
             </exclude>
         </whitelist>
     </filter>
+
+    <logging>
+        <log type="coverage-html" target="build/coverage" title="L'Apero.net" charset="UTF-8" yui="true" highlight="true" lowUpperBound="35" highLowerBound="70"/>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+        <log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false"/>
+    </logging>
 </phpunit>
