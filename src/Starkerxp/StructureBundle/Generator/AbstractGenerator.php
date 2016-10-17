@@ -3,6 +3,7 @@
 namespace Starkerxp\StructureBundle\Generator;
 
 use Sensio\Bundle\GeneratorBundle\Generator\Generator;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\Yaml\Yaml;
 
 abstract class AbstractGenerator extends Generator
