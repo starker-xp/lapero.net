@@ -14,8 +14,8 @@ php:
     - 7.1
 
 before_install:
-	- 'echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini'
-	- 'echo "extension = amqp.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini'
+    - 'echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini'
+    - 'echo "extension = amqp.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini'
 
 install:
     - travis_retry composer require satooshi/php-coveralls '~1.0'
@@ -28,13 +28,13 @@ before_script:
     - php bin/console doctrine:schema:create -e test
 
 script:
-  - php vendor/bin/phpunit -c phpunit.xml.dist
+    - php vendor/bin/phpunit -c phpunit.xml.dist
 
 after_script:
-  - travis_retry php vendor/bin/coveralls -v
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - travis_retry  php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
-  - bash <(curl -s https://codecov.io/bash)
+    - travis_retry php vendor/bin/coveralls -v
+    - wget https://scrutinizer-ci.com/ocular.phar
+    - travis_retry  php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
+    - bash <(curl -s https://codecov.io/bash)
 
 notifications:
   email:
