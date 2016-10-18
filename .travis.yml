@@ -27,13 +27,10 @@ before_script:
     - php bin/console doctrine:schema:create -e test
 
 script:
-    - php vendor/bin/phpunit -c phpunit.xml.dist
+    - php vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover build/logs/clover.xml
 
 after_script:
     - travis_retry php vendor/bin/coveralls -v
-    - wget https://scrutinizer-ci.com/ocular.phar
-    - travis_retry  php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
-    - bash <(curl -s https://codecov.io/bash)
 
 notifications:
   email:
