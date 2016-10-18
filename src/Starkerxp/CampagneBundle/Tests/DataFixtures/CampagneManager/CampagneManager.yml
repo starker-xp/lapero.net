@@ -1,8 +1,24 @@
 Starkerxp\CampagneBundle\Entity\Campagne:
-    campagne_{1..10}:
+    campagne_{1..5}:
         name: <name()>
         type: transationnal
-        isReady: 1
-        isError: 0
-        isDeleted: 0
+        status: pending
+        deleted: 0
+        sendAt: <datetime()>
+        created_at: <datetime()>
+#
+    campagne_{6..8}:
+        name: <name()>
+        type: marketing
+        status: draft
+        deleted: 0
+        sendAt: null
+        created_at: <datetime()>
+
+    campagne_{9..10}:
+        name: <name()>
+        type: transationnal
+        status: cancel
+        deleted: 1
+        sendAt: null
         created_at: <datetime()>

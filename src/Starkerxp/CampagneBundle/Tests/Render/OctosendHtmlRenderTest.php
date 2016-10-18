@@ -18,14 +18,24 @@ class OctosendHtmlRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
     public function dataProvider()
     {
         $export = [
-            'lien mirroir' => ['[{@mirror}]', '{{mirror}}'],
-            'pixel' => ['[{@pixel}]', '{{pixel}}'],
+            'lien mirroir'        => [
+                '[{@mirror}]',
+                [],
+                '{{mirror}}',
+            ],
+            'pixel'               => [
+                '[{@pixel}]',
+                [],
+                '{{pixel}}',
+            ],
             'lien desinscription' => [
                 '<a data-id="unsub" target="__blank" href="http://google.fr" style="color:black;">Mon lien</a>',
+                [],
                 "<a href='{{unsubscribe:http://google.fr}}' style='color:black;' title='Désinscription'>Mon lien</a>",
             ],
-            'lien clickable' => [
+            'lien clickable'      => [
                 '<a data-id="click" target="__blank" href="http://google.fr" style="color:black;">Mon lien</a>',
+                [],
                 "<a href='{{click:http://google.fr}}' style='color:black;'>Mon lien</a>",
             ],
         ];
@@ -40,10 +50,11 @@ class OctosendHtmlRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
      *
      * @dataProvider dataProvider
      */
-    public function testRender($message, $expected)
+    public function testRender($message, $params, $expected)
     {
         $this->renderService->setContenu($message);
-        $actual = $this->renderService->render('octosend', 'html');
+        $this->renderService->setData($params);
+        $actual = $this->renderService->render();
         $this->assertEquals($expected, $actual);
     }
 }

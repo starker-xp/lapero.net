@@ -17,9 +17,11 @@ use Starkerxp\StructureBundle\Entity\Entity;
  */
 class Campagne extends Entity
 {
+    const STATUS_DRAFT = 'draft';
     const STATUS_PENDING = 'pending';
     const STATUS_SENT = 'send';
     const STATUS_CANCEL = 'cancel';
+    const STATUS_ERROR = 'error';
 
     /**
      * @var int

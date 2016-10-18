@@ -29,11 +29,11 @@ class TwigRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
      *
      * @dataProvider dataProvider
      */
-    public function testRender($message, $data, $expected)
+    public function testRender($message, $params, $expected)
     {
         $this->renderService->setContenu($message);
-        $this->renderService->setData($data);
-        $actual = $this->renderService->render('twig', 'txt');
+        $this->renderService->setData($params);
+        $actual = $this->renderService->render();
         $this->assertEquals($expected, $actual);
     }
 }
