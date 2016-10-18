@@ -22,6 +22,7 @@ class AjouterEntiteCommand extends ContainerAwareCommand
         $entite = explode(':', $input->getArgument('entite'));
         $kernel = $this->getContainer()->get('kernel');
         $generator = new EntiteGenerator();
+        $generator->setKernel($kernel);
         $generator->setSkeletonDirs(
             $kernel->getBundle('StarkerxpStructureBundle')->getPath().'/Resources/views/Gabarit'
         );

@@ -4,10 +4,16 @@ namespace Starkerxp\StructureBundle\Generator;
 
 use Sensio\Bundle\GeneratorBundle\Generator\Generator;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Yaml\Yaml;
 
 abstract class AbstractGenerator extends Generator
 {
+    /**
+     * @var KernelInterface
+     */
+    protected $kernel;
+
     public function generate(Bundle $bundle, $libelle)
     {
         $parameters = $this->getParamaters($bundle, $libelle);
@@ -15,9 +21,10 @@ abstract class AbstractGenerator extends Generator
             str_replace(['_Bundle', '@'], '', preg_replace('#\B([A-Z])#', '_\1', $parameters['namespaceBundle']))
         );
         foreach ($this->getFichiers() as $fichier) {
-            $realPathFichier = realpath(__DIR__.'/../Resources/views/Gabarit').$fichier.'.twig';
-            if (!file_exists($realPathFichier)) {
-                throw new \Exception("Il manque un fichier de template => $realPathFichier");
+            try {
+                $this->kernel->locateResource("@StarkerxpStructureBundle/Resources/views/Gabarit/".$fichier.".twig");
+            } catch (\InvalidArgumentException $e) {
+                throw new \InvalidArgumentException('Il manque un fichier de template');
             }
             $target = $bundle->getPath().str_replace($this->getClef(), [$libelle, lcfirst($libelle)], $fichier);
             $this->traiterLeFichier($fichier, $target, $parameters);
@@ -50,4 +57,17 @@ abstract class AbstractGenerator extends Generator
         }
         $this->renderFile($fichier.'.twig', $target, $parameters);
     }
+
+    /**
+     * @param KernelInterface $kernel
+     * @return AbstractGenerator
+     */
+    public function setKernel(KernelInterface $kernel)
+    {
+        $this->kernel = $kernel;
+
+        return $this;
+    }
+
+
 }

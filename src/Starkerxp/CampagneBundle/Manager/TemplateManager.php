@@ -1,6 +1,6 @@
 <?php
 
-namespace Starkerxp\CampagneBundle\Repository;
+namespace Starkerxp\CampagneBundle\Manager;
 
 use Starkerxp\CampagneBundle\Entity\Template;
 use Starkerxp\StructureBundle\Entity\Entity;
