@@ -22,9 +22,9 @@ class OctosendTxtRender extends OctosendHtmlRender
     public function render()
     {
         // Gestion des liens de desinscriptions.
-        $contenu = $this->renderDesinscription($this->getContenu());
+        $contenu = $this->renderLien("unsub", $this->contenu);
         // Gestion des liens click:http://
-        $contenu = $this->renderClick($contenu);
+        $contenu = $this->renderLien("click", $contenu);
 
         $this->htmlToTxtService->setContenu($contenu);
         $contenu = $this->htmlToTxtService->render();
@@ -39,38 +39,18 @@ class OctosendTxtRender extends OctosendHtmlRender
         return $contenu;
     }
 
-    protected function renderDesinscription($contenu)
+    public function getSupport($api, $version)
     {
-        $arrayContenu = array();
-        preg_match_all("#\<a data\-id\=\"unsub\" target=\"__blank\" href\=\"(.*?)\" style\=\"(.*?)\"\>(.*?)\<\/a\>#", $contenu, $arrayContenu);
-        if (empty($arrayContenu[0])) {
-            return $contenu;
-        }
-        foreach ($arrayContenu[0] as $key => $chaineARemplacer) {
-            $chaineOctoSend = '['.$arrayContenu[3][$key].'] {{unsubscribe'.(!empty($arrayContenu[1][$key]) ? ':'.$arrayContenu[1][$key] : '').'}}';
-            $contenu = str_replace($chaineARemplacer, $chaineOctoSend, $contenu);
-        }
-
-        return $contenu;
+        return strtolower($api) == 'octosend' && $version == 'txt';
     }
 
-    protected function renderClick($contenu)
+    protected function renderClick($contenu, $arrayContenu)
     {
-        $arrayContenu = array();
-        preg_match_all("#\<a data\-id\=\"click\" target=\"__blank\" href\=\"(.*?)\"\ style\=\"(.*?)\"\>(.*?)\<\/a\>#", $contenu, $arrayContenu);
-        if (empty($arrayContenu[0])) {
-            return $contenu;
-        }
         foreach ($arrayContenu[0] as $key => $chaineARemplacer) {
             $chaineOctoSend = (!empty($arrayContenu[3][$key]) && $arrayContenu[3][$key] != 'Lien' ? '['.$arrayContenu[3][$key].']' : '').' {{click:'.$arrayContenu[1][$key].'}}';
             $contenu = str_replace($chaineARemplacer, $chaineOctoSend, $contenu);
         }
 
         return $contenu;
-    }
-
-    public function getSupport($api, $version)
-    {
-        return strtolower($api) == 'octosend' && $version == 'txt';
     }
 }
