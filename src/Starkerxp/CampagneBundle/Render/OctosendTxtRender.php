@@ -21,20 +21,12 @@ class OctosendTxtRender extends OctosendHtmlRender
 
     public function render()
     {
-        // Gestion des liens de desinscriptions.
-        $contenu = $this->renderLien("unsub", $this->contenu);
-        // Gestion des liens click:http://
-        $contenu = $this->renderLien("click", $contenu);
 
+        $contenu = parent::render();
+
+        // On finit la conversion en convertissant le reste des élements html en txt
         $this->htmlToTxtService->setContenu($contenu);
         $contenu = $this->htmlToTxtService->render();
-
-        // Gestion des liens mirror
-        $contenu = $this->renderMirror($contenu);
-        // Gestion des liens pixels
-        $contenu = $this->renderPixel($contenu);
-
-        $contenu = str_replace('  ', ' ', str_replace('  ', ' ', $contenu));
 
         return $contenu;
     }
