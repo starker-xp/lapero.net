@@ -8,30 +8,16 @@ use Starkerxp\StructureBundle\Manager\AbstractManager;
 
 class TemplateManager extends AbstractManager
 {
-    public function insert(Entity $object)
-    {
-        /** @var Template $object */
-        if ($object->getType() == 'email' && empty($object->getMessage())) {
-            throw new \InvalidArgumentException();
-        }
-        parent::insert($object);
-
-        return $object;
-    }
-
-    public function update(Entity $object)
-    {
-        /** @var Template $object */
-        if ($object->getType() == 'email' && empty($object->getMessage())) {
-            throw new \InvalidArgumentException();
-        }
-        parent::update($object);
-
-        return $object;
-    }
 
     public function getSupport(Entity $object)
     {
+        if (!$object instanceof Template) {
+            return false;
+        }
+        if ($object->getType() == 'email' && empty($object->getMessage())) {
+            throw new \InvalidArgumentException();
+        }
+
         return $object instanceof Template;
     }
 }
