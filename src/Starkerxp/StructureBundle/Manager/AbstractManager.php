@@ -26,10 +26,18 @@ abstract class AbstractManager implements ManagerInterface
         $this->repository = $this->entityManager->getRepository($entity);
     }
 
+    /**
+     * @param Entity $object
+     *
+     * @return Entity|boolean
+     *
+     * @throws ObjectClassNotAllowedException
+     */
     public function insert(Entity $object)
     {
         if (!$this->getSupport($object)) {
             throw new ObjectClassNotAllowedException();
+
         }
         $object->setCreatedAt(new DateTime());
         $this->entityManager->persist($object);
@@ -38,6 +46,13 @@ abstract class AbstractManager implements ManagerInterface
         return $object;
     }
 
+    /**
+     * @param Entity $object
+     *
+     * @return Entity|boolean
+     *
+     * @throws ObjectClassNotAllowedException
+     */
     public function update(Entity $object)
     {
         if (!$this->getSupport($object)) {
@@ -49,19 +64,19 @@ abstract class AbstractManager implements ManagerInterface
         return $object;
     }
 
-    public function find($id)
+    public function find($id, $lockMode = null, $lockVersion = null)
     {
-        $this->repository->find($id);
+        return $this->repository->find($id, $lockMode, $lockVersion);
     }
 
-    public function findOneBy($criteria = [])
+    public function findOneBy(array $criteria, array $orderBy = null)
     {
-        return $this->repository->findOneBy($criteria);
+        return $this->repository->findOneBy($criteria, $orderBy);
     }
 
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
-        return $this->repository->find($criteria, $orderBy, $limit, $offset);
+        return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
     }
 
     public function findAll()

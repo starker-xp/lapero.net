@@ -34,7 +34,8 @@
     "friendsofsymfony/user-bundle": "~2.0@dev",
     "sendwithus/api": "^2.14",
     "ezyang/htmlpurifier": "^4.8",
-    "exercise/htmlpurifier-bundle": "^0.2.3"
+    "exercise/htmlpurifier-bundle": "^0.2.3",
+    "php-amqplib/php-amqplib": "2.5.*"
   },
   "require-dev": {
     "sensio/generator-bundle": "^3.0",
