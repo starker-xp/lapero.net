@@ -28,8 +28,8 @@
                 <directory>src/*Bundle/Resources</directory>
                 <directory>src/*/*Bundle/Resources</directory>
                 <directory>src/*/Bundle/*Bundle/Resources</directory>
-                <directory>./vendor</directory>
-                <directory>./tests</directory>
+                <directory>vendor</directory>
+                <directory>tests</directory>
             </exclude>
         </whitelist>
     </filter>
