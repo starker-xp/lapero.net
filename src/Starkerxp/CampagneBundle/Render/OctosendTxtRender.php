@@ -44,13 +44,14 @@ class OctosendTxtRender extends OctosendHtmlRender
         return strtolower($api) == 'octosend' && $version == 'txt';
     }
 
-    protected function renderClick($contenu, $arrayContenu)
+    protected function retournerLaChaine($type, $lien, $texte, $style = null)
     {
-        foreach ($arrayContenu[0] as $key => $chaineARemplacer) {
-            $chaineOctoSend = (!empty($arrayContenu[3][$key]) && $arrayContenu[3][$key] != 'Lien' ? '['.$arrayContenu[3][$key].']' : '').' {{click:'.$arrayContenu[1][$key].'}}';
-            $contenu = str_replace($chaineARemplacer, $chaineOctoSend, $contenu);
+        if ($type == "unsub") {
+            return "<a href='{{unsubscribe:".$lien."}}' style='".$style."' title='Désinscription'>".$texte.'</a>';
         }
 
-        return $contenu;
+        return (!empty($texte) && $texte != 'Lien' ? '['.$texte.']' : '').' {{click:'.$lien.'}}';
     }
+
+
 }

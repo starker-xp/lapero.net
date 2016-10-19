@@ -33,47 +33,38 @@ class OctosendHtmlRender extends AbstractRender
         return $contenuReplace;
     }
 
-    protected function renderLien($key, $contenu)
+    protected function renderLien($type, $contenu)
     {
-        if (!in_array($key, ["unsub", "click"])) {
+        if (!in_array($type, ["unsub", "click"])) {
             throw new \InvalidArgumentException();
         }
         $arrayContenu = [];
-        preg_match_all("#<a data-id=\"".$key."\" target=\"__blank\" href=\"(.*?)\" style=\"(.*?)\">(.*?)</a>#", $contenu, $arrayContenu);
+        preg_match_all("#<a data-id=\"".$type."\" target=\"__blank\" href=\"(.*?)\" style=\"(.*?)\">(.*?)</a>#", $contenu, $arrayContenu);
         if (empty($arrayContenu[0])) {
             return $contenu;
         }
-        if ($key == "unsub") {
-            return $this->renderDesinscription($contenu, $arrayContenu);
-        }
-
-        return $this->renderClick($contenu, $arrayContenu);
-
-    }
-
-    protected function renderDesinscription($contenu, $arrayContenu)
-    {
         foreach ($arrayContenu[0] as $key => $chaineARemplacer) {
-            $chaineOctoSend = "<a href='{{unsubscribe:".$arrayContenu[1][$key]."}}' style='".$arrayContenu[2][$key]."' title='Désinscription'>".$arrayContenu[3][$key].'</a>';
+            $chaineOctoSend = $this->retournerLaChaine($type, $arrayContenu[1][$key], $arrayContenu[3][$key], $arrayContenu[2][$key]);
             $contenu = str_replace($chaineARemplacer, $chaineOctoSend, $contenu);
         }
 
         return $contenu;
+
     }
 
-    protected function renderClick($contenu, $arrayContenu)
+    protected function retournerLaChaine($type, $lien, $texte, $style = null)
     {
-        foreach ($arrayContenu[0] as $key => $chaineARemplacer) {
-            $chaineOctoSend = "<a href='{{click:".$arrayContenu[1][$key]."}}' style='".$arrayContenu[2][$key]."'>".$arrayContenu[3][$key].'</a>';
-            $contenu = str_replace($chaineARemplacer, $chaineOctoSend, $contenu);
+        if ($type == "unsub") {
+            return "<a href='{{unsubscribe:".$lien."}}' style='".$style."' title='Désinscription'>".$texte.'</a>';
         }
 
-        return $contenu;
+        return "<a href='{{click:".$lien."}}' style='".$style."'>".$texte.'</a>';;
     }
 
     public function getSupport($api, $version)
     {
         return strtolower($api) == 'octosend' && $version == 'html';
     }
+
 
 }
