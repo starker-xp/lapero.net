@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Starkerxp\StructureBundle\Controller\CoreController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class DefaultController extends CoreController
 {
@@ -27,8 +28,8 @@ EOF;
         return new JsonResponse(
             [
                 'nombreService' => count($renderManager->getRenderService()),
-                'textInitial' => $html,
-                'text' => $retour,
+                'textInitial'   => $html,
+                'text'          => $retour,
             ]
         );
     }
