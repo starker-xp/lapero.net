@@ -2,10 +2,10 @@
 
 namespace AppBundle\Controller;
 
-use Starkerxp\StructureBundle\Controller\CoreController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class UtilisateurController extends CoreController
+class UtilisateurController extends Controller
 {
     public function inscriptionAction(Request $request)
     {
