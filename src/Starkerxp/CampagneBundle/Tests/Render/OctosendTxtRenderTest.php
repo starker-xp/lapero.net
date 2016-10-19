@@ -23,7 +23,7 @@ class OctosendTxtRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
             'lien desinscription' => [
                 '<a data-id="unsub" target="__blank" href="http://google.fr" style="color:black;">Mon lien</a>',
                 [],
-                '[Mon lien] {{unsubscribe:http://google.fr}}',
+                '[Désinscription] {{unsubscribe:http://google.fr}}',
             ],
             'lien clickable'      => [
                 '<a data-id="click" target="__blank" href="http://google.fr" style="color:black;">Mon lien</a>',

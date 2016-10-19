@@ -39,7 +39,7 @@ class OctosendTxtRender extends OctosendHtmlRender
     protected function retournerLaChaine($type, $lien, $texte, $style = null)
     {
         if ($type == "unsub") {
-            return "<a href='{{unsubscribe:".$lien."}}' style='".$style."' title='Désinscription'>".$texte.'</a>';
+            return "[Désinscription]  {{unsubscribe:".$lien."}}";
         }
 
         return (!empty($texte) && $texte != 'Lien' ? '['.$texte.']' : '').' {{click:'.$lien.'}}';
