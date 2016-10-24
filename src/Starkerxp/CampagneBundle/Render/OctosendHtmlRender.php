@@ -58,7 +58,7 @@ class OctosendHtmlRender extends AbstractRender
             return "<a href='{{unsubscribe:".$lien."}}' style='".$style."' title='Désinscription'>".$texte.'</a>';
         }
 
-        return "<a href='{{click:".$lien."}}' style='".$style."'>".$texte.'</a>';;
+        return "<a href='{{click:".$lien."}}' style='".$style."'>".$texte.'</a>'; ;
     }
 
     public function getSupport($api, $version)

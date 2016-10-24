@@ -32,7 +32,7 @@ class {{nomEntity}}ManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
      */
     public function testInsertNew{{ nomEntity }}()
     {
-		$this->loadFixtureFiles(['{{namespaceBundle}}/Tests/DataFixtures/{{ nomEntity }}Manager/Default{{ nomEntity }}.yml',]);
+        $this->loadFixtureFiles(['{{namespaceBundle}}/Tests/DataFixtures/{{ nomEntity }}Manager/Default{{ nomEntity }}.yml',]);
         ${{ nomEntity|lower }} = new \{{namespace}}\Entity\{{ nomEntity }}();
         $this->manager->insert(${{ nomEntity|lower }});
         $this->assertCount(2, $this->manager->findAll());
@@ -45,7 +45,7 @@ class {{nomEntity}}ManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
     public function testUpdate{{ nomEntity }}()
     {
         $this->loadFixtureFiles(['{{namespaceBundle}}/Tests/DataFixtures/{{ nomEntity }}Manager/Default{{ nomEntity }}.yml',]);
-		$criteria = ['createdAt' => new \DateTime("2016-08-05 12:12:12")];
+        $criteria = ['createdAt' => new \DateTime("2016-08-05 12:12:12")];
         ${{ nomEntity|lower }} = $this->manager->findOneBy($criteria);
        
         $this->manager->update(${{ nomEntity|lower }});

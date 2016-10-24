@@ -48,6 +48,10 @@ class RenderManager extends AbstractRender
         return $content;
     }
 
+    /**
+     * @param string $api
+     * @param string $version
+     */
     public function getSupport($api, $version)
     {
         foreach ($this->renderService as $service) {
@@ -78,7 +82,7 @@ class RenderManager extends AbstractRender
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getApi()
     {
@@ -86,7 +90,7 @@ class RenderManager extends AbstractRender
     }
 
     /**
-     * @param mixed $api
+     * @param string $api
      *
      * @return RenderManager
      */
@@ -98,7 +102,7 @@ class RenderManager extends AbstractRender
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getVersion()
     {
@@ -106,7 +110,7 @@ class RenderManager extends AbstractRender
     }
 
     /**
-     * @param mixed $version
+     * @param string $version
      *
      * @return RenderManager
      */
