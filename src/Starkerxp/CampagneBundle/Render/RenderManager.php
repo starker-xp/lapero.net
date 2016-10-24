@@ -30,10 +30,10 @@ class RenderManager extends AbstractRender
      */
     public function render()
     {
-        if (empty($this->api)) {
+        if (!isset($this->api)) {
             throw new ApiNotDefinedException();
         }
-        if (empty($this->version)) {
+        if (!isset($this->version)) {
             throw new VersionNotDefinedException();
         }
         $content = $this->getContenu();
@@ -42,9 +42,6 @@ class RenderManager extends AbstractRender
             $renderServiceTwig->setData($this->getData());
             $renderServiceTwig->setContenu($content);
             $content = $renderServiceTwig->render();
-            if ($this->api == 'twig') {
-                return $content;
-            }
         }
         if ($renderService = $this->getSupport($this->api, $this->version)) {
             $renderService->setData($this->getData());

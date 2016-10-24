@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: DIEU
- * Date: 16/10/2016
- * Time: 16:38.
- */
+
 
 namespace Starkerxp\CampagneBundle\Render;
 
@@ -46,6 +41,7 @@ class HtmlToTxtRender extends AbstractRender
                 explode("\n", $monTexte)
             )
         );
+        $monTexte = str_replace(["[{@mirror}]", "[{@pixel}]"], "", $monTexte);
 
         return $monTexte;
     }
