@@ -37,17 +37,12 @@ class RenderManager extends AbstractRender
             throw new VersionNotDefinedException();
         }
         $content = $this->getContenu();
-
-        if ($renderServiceTwig = $this->getSupport('twig', $this->version)) {
-            $renderServiceTwig->setData($this->getData());
-            $renderServiceTwig->setContenu($content);
-            $content = $renderServiceTwig->render();
-        }
-        if ($renderService = $this->getSupport($this->api, $this->version)) {
-            $renderService->setData($this->getData());
-            $renderService->setContenu($content);
-
-            return $renderService->render();
+        foreach (['twig', $this->api] as $api) {
+            if ($renderService = $this->getSupport($api, $this->version)) {
+                $renderService->setData($this->getData());
+                $renderService->setContenu($content);
+                $content = $renderService->render();
+            }
         }
 
         return $content;
