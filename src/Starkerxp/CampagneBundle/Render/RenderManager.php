@@ -37,7 +37,8 @@ class RenderManager extends AbstractRender
             throw new VersionNotDefinedException();
         }
         $content = $this->getContenu();
-        foreach (['twig', $this->api] as $api) {
+        $listesApi = array_unique(array_merge([], !is_array($this->api) ? [$this->api] : $this->api));
+        foreach ($listesApi as $api) {
             if ($renderService = $this->getSupport($api, $this->version)) {
                 $renderService->setData($this->getData());
                 $renderService->setContenu($content);
