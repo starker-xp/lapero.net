@@ -9,10 +9,12 @@ class UtilisateurController extends Controller
 {
     public function inscriptionAction(Request $request)
     {
+
     }
 
     public function gererMesOptinsAction(Request $request)
     {
+
     }
 
     public function supprimerMonCompteAction(Request $request)
@@ -22,6 +24,7 @@ class UtilisateurController extends Controller
 
     public function modifierMonProfilAction(Request $request)
     {
+
     }
 
 }

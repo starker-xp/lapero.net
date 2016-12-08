@@ -35,7 +35,7 @@
     "sendwithus/api": "^2.14",
     "ezyang/htmlpurifier": "^4.8",
     "exercise/htmlpurifier-bundle": "^0.2.3",
-    "php-amqplib/php-amqplib": "2.5.*"
+    "php-amqplib/php-amqplib": "2.6.*"
   },
   "require-dev": {
     "sensio/generator-bundle": "^3.0",

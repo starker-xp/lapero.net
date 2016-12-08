@@ -17,3 +17,8 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ISh0uldPr0bablyChangeTh1s
+
+    rabbitmq.host:     rabbitmq_master
+    rabbitmq.port:     5672
+    rabbitmq.login:    guest
+    rabbitmq.password: guest

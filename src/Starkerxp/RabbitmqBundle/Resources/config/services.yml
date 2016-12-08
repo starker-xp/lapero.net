@@ -2,3 +2,7 @@ services:
 #    starkerxp_rabbitmq.example:
 #        class: Starkerxp\RabbitmqBundle\Example
 #        arguments: ["@service_id", "plain_value", %parameter%]
+    starkerxp_rabbitmq.service.rabbitmq:
+        class: PhpAmqpLib\Connection\AMQPStreamConnection
+        arguments: ["%starkerxp_rabbitmq.host%", "%starkerxp_rabbitmq.port%", "%starkerxp_rabbitmq.login%", "%starkerxp_rabbitmq.password%"]
+        shared: false
