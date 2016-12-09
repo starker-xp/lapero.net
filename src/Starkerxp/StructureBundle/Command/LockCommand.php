@@ -18,11 +18,13 @@ abstract class LockCommand extends ContainerAwareCommand
      */
     protected $input;
 
-    public function nomLocker()
-    {
-        return $this->getName();
-    }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     *
+     * @return bool
+     */
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $this->input = $input;
@@ -33,7 +35,17 @@ abstract class LockCommand extends ContainerAwareCommand
 
             return false;
         }
-        $this->executeWithLocker($input, $output);
+        $this->traitement();
+
+        return true;
+    }
+
+    /**
+     * @return string
+     */
+    public function nomLocker()
+    {
+        return $this->getName();
     }
 
     abstract public function traitement();

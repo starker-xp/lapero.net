@@ -32,7 +32,7 @@ class Template extends Entity
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
     protected $nom;
 
@@ -46,7 +46,7 @@ class Template extends Entity
     /**
      * @var string
      *
-     * @ORM\Column(name="sujet", type="string", length=255)
+     * @ORM\Column(name="object", type="string", length=255)
      */
     protected $sujet;
 

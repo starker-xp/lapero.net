@@ -1,0 +1,30 @@
+starkerxp_campagne.controller.template.cget:
+    path:     /templates
+    defaults: { _controller: "StarkerxpCampagneBundle:Template:cget" }
+    methods:  [GET]
+
+starkerxp_campagne.controller.template.get:
+    path:     /templates/{id}
+    defaults: { _controller: "StarkerxpCampagneBundle:Template:get" }
+    methods:  [GET]
+    requirements:
+        page: '\d+'
+
+starkerxp_campagne.controller.template.post:
+    path:     /templates
+    defaults: { _controller: "StarkerxpCampagneBundle:Template:post" }
+    methods:  [POST]
+
+starkerxp_campagne.controller.template.put:
+    path:     /templates/{id}
+    defaults: { _controller: "StarkerxpCampagneBundle:Template:put" }
+    methods:  [PUT]
+    requirements:
+        page: '\d+'
+
+starkerxp_campagne.controller.template.delete:
+    path:     /templates/{id}
+    defaults: { _controller: "StarkerxpCampagneBundle:Template:delete" }
+    methods:  [DELETE]
+    requirements:
+        page: '\d+'

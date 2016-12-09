@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Starkerxp\StructureBundle\Entity\Entity;
 use Starkerxp\StructureBundle\Manager\Exception\ObjectClassNotAllowedException;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractManager implements ManagerInterface
 {
@@ -124,5 +125,18 @@ abstract class AbstractManager implements ManagerInterface
     public function getRepository()
     {
         return $this->repository;
+    }
+
+
+    public function getPutOptionResolver(OptionsResolver $resolver = null)
+    {
+        $resolver = $this->getPostOptionResolver($resolver);
+        $resolver->setRequired(
+            [
+                'id',
+            ]
+        );
+
+        return $resolver;
     }
 }
