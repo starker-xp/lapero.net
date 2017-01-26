@@ -7,7 +7,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Starkerxp\StructureBundle\Entity\Entity;
 use Starkerxp\StructureBundle\Manager\Exception\ObjectClassNotAllowedException;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractManager implements ManagerInterface
 {
@@ -38,7 +37,6 @@ abstract class AbstractManager implements ManagerInterface
     {
         if (!$this->getSupport($object)) {
             throw new ObjectClassNotAllowedException();
-
         }
         $object->setCreatedAt(new DateTime());
         $this->entityManager->persist($object);
@@ -63,6 +61,19 @@ abstract class AbstractManager implements ManagerInterface
         $this->entityManager->flush();
 
         return $object;
+    }
+
+    /**
+     * @param Entity $object
+     * @throws ObjectClassNotAllowedException
+     */
+    public function delete(Entity $object)
+    {
+        if (!$this->getSupport($object)) {
+            throw new ObjectClassNotAllowedException();
+        }
+        $this->entityManager->remove($object);
+        $this->entityManager->flush();
     }
 
     /**
@@ -128,15 +139,4 @@ abstract class AbstractManager implements ManagerInterface
     }
 
 
-    public function getPutOptionResolver(OptionsResolver $resolver = null)
-    {
-        $resolver = $this->getPostOptionResolver($resolver);
-        $resolver->setRequired(
-            [
-                'id',
-            ]
-        );
-
-        return $resolver;
-    }
 }

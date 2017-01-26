@@ -5,38 +5,31 @@ namespace Starkerxp\CampagneBundle\Manager;
 use Starkerxp\CampagneBundle\Entity\Template;
 use Starkerxp\StructureBundle\Entity\Entity;
 use Starkerxp\StructureBundle\Manager\AbstractManager;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TemplateManager extends AbstractManager
 {
 
     public function getSupport(Entity $object)
     {
-        if (!$object instanceof Template) {
-            return false;
-        }
-        if ($object->getType() == 'email' && empty($object->getMessage())) {
-            throw new \InvalidArgumentException();
-        }
-
-        return $object instanceof Template;
+        return is_object($object) && $object instanceof Template;
     }
 
-    public function getPostOptionResolver(OptionsResolver $resolver = null)
+    public function toArray(Template $object, $fields = [])
     {
-        if (empty($resolver)) {
-            $resolver = new OptionsResolver();
+        $array = [
+            "id"      => $object->getId(),
+            "nom"     => $object->getNom(),
+            "type"    => $object->getType(),
+            "sujet"   => $object->getSujet(),
+            "message" => $object->getMessage(),
+        ];
+        if(empty($fields)){
+            return $array;
         }
-        $resolver->setRequired(
-            [
-                'name',
-                'type',
-                'object',
-                'message',
-            ]
-        );
-
-        return $resolver;
+        $export = [];
+        foreach($fields as $row){
+            $export[$row] = $array[$row];
+        }
+        return $export;
     }
-
 }

@@ -2,9 +2,10 @@
 
 namespace Starkerxp\StructureBundle\Manager;
 
+use Doctrine\ORM\EntityRepository;
 use Starkerxp\StructureBundle\Entity\Entity;
 
-class EntityManager extends AbstractManager
+class EntityManager implements ManagerInterface
 {
     /**
      * @var array
@@ -29,6 +30,18 @@ class EntityManager extends AbstractManager
     {
         if ($managerService = $this->getSupport($object)) {
             $managerService->update($object);
+
+            return $object;
+        }
+
+        return false;
+    }
+
+
+    public function delete(Entity $object)
+    {
+        if ($managerService = $this->getSupport($object)) {
+            $managerService->delete($object);
 
             return $object;
         }
@@ -82,5 +95,17 @@ class EntityManager extends AbstractManager
         $managerService = $this->getSupport($object);
 
         return $managerService;
+    }
+
+    /**
+     * @param Entity $object
+     *
+     * @return bool|EntityRepository
+     */
+    public function getRepository(Entity $object){
+        if(!$manager = $this->getManager( $object)){
+            return false;
+        }
+        return $manager->getRepository();
     }
 }

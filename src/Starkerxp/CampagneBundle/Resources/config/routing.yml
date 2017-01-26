@@ -8,7 +8,7 @@ starkerxp_campagne.controller.template.get:
     defaults: { _controller: "StarkerxpCampagneBundle:Template:get" }
     methods:  [GET]
     requirements:
-        page: '\d+'
+        id: '\d+'
 
 starkerxp_campagne.controller.template.post:
     path:     /templates
@@ -20,11 +20,11 @@ starkerxp_campagne.controller.template.put:
     defaults: { _controller: "StarkerxpCampagneBundle:Template:put" }
     methods:  [PUT]
     requirements:
-        page: '\d+'
+        id: '\d+'
 
 starkerxp_campagne.controller.template.delete:
     path:     /templates/{id}
     defaults: { _controller: "StarkerxpCampagneBundle:Template:delete" }
     methods:  [DELETE]
     requirements:
-        page: '\d+'
+        id: '\d+'

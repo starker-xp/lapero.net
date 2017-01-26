@@ -2,14 +2,15 @@
 
 namespace Starkerxp\CampagneBundle\Controller;
 
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Starkerxp\CampagneBundle\Entity\Template;
+use Starkerxp\CampagneBundle\Form\Type\TemplateType;
+use Starkerxp\StructureBundle\Controller\StructureController;
+use Starkerxp\StructureBundle\Manager\Exception\ObjectClassNotAllowedException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
-class TemplateController extends Controller
+class TemplateController extends StructureController
 {
 
     public function cgetAction(Request $request)
@@ -17,57 +18,74 @@ class TemplateController extends Controller
         $manager = $this->get("starkerxp_campagne.manager.template");
         try {
             $options = $this->resolveParams()->resolve($request->query->all());
-
-            $orderBy = !empty($options['sort']) ? array_map(
-                function ($r) {
-                    return [substr($r, 1) => substr($r, 0, 1) == '+' ? 'ASC' : 'DESC'];
-                },
-                explode(',', $options['sort'])
-            ) : [];
-
-            $manager->findBy([], $orderBy, $options['limit'], $options['offset']);
+            $orderBy = $this->getOrderBy($options['sort']);
+            $resultSets = $manager->findBy([], $orderBy, $options['limit'], $options['offset']);
         } catch (\Exception $e) {
-            return new JsonResponse(["payload" => $e->getMessage()], 400); //400
+            return new JsonResponse(["payload" => $e->getMessage()], 400);//400
         }
-
-        return new JsonResponse(["payload" => $options]); //400
-    }
-
-    public function resolveParams()
-    {
-        $resolver = new OptionsResolver();
-        $resolver->setDefaults(
-            [
-                'offset' => 0,
-                'limit'  => 15,
-                //'fields' => "*",
-                'sort'   => "",
-                //'filter' => "",
-            ]
+        if (empty($resultSets)) {
+            return new JsonResponse([]);
+        }
+        $retour = array_map(
+            function ($element) use ($manager, $options) {
+                return $manager->toArray($element, $this->getFields($options['fields']));
+            },
+            $resultSets
         );
 
-        return $resolver;
+        return new JsonResponse($retour); //400
     }
 
     public function getAction(Request $request)
     {
         $manager = $this->get("starkerxp_campagne.manager.template");
+        try {
+            $options = $this->resolveParams()->resolve($request->query->all());
+            $template = $manager->findOneBy(['id' => $request->get('id')]);
+        } catch (\Exception $e) {
+            return new JsonResponse(["payload" => $e->getMessage()], 400);//400
+        }
+        if (!$template instanceof Template) {
+            return new JsonResponse([], 404);
+        }
+        $retour = $manager->toArray($template, $this->getFields($options['fields']));
 
-        return new JsonResponse(["payload" => []]);//400
+        return new JsonResponse($retour);//400, 404
     }
 
     public function postAction(Request $request)
     {
         $manager = $this->get("starkerxp_campagne.manager.template");
-        $options = $manager->getPostOptionResolver()->resolve($request->request->all());
+        try {
+            $template = new Template();
+            $form = $this->createForm(TemplateType::class, $template);
+            $form->submit($request->request->all());
+            if ($form->isValid()) {
+                $template = $form->getData();
+                $template->setUuid((\Ramsey\Uuid\Uuid::uuid4())->toString());
+                $manager->insert($template);
 
-        return new JsonResponse(["payload" => ""], 201);//400
+                return new JsonResponse([], 201);//400
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(["payload" => $e->getMessage()], 400);
+        }
+
+        return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
     }
 
     public function putAction(Request $request)
     {
         $manager = $this->get("starkerxp_campagne.manager.template");
-        $options = $manager->getPutOptionResolver()->resolve($request->request->all());
+        $template = $manager->find($request->get('id'));
+        if (empty($template)) {
+            return new JsonResponse(["payload" => ""], 404);
+        }
+        try {
+            $options = $manager->getPutOptionResolver()->resolve($request->request->all());
+        } catch (\Exception $e) {
+            return new JsonResponse(["payload" => $e->getMessage()], 400);
+        }
 
         return new JsonResponse(["payload" => ""], 303); //400
     }
@@ -75,8 +93,17 @@ class TemplateController extends Controller
     public function deleteAction(Request $request)
     {
         $manager = $this->get("starkerxp_campagne.manager.template");
+        $template = $manager->find($request->get('id'));
+        if (empty($template)) {
+            return new JsonResponse([], 404);
+        }
+        try {
+            $manager->delete($template);
+        } catch (ObjectClassNotAllowedException $e) {
+            return new JsonResponse([], 400);
+        }
 
-        return new JsonResponse(["payload" => ""], 204); //404 /400
+        return new JsonResponse([], 204); //404 /400
     }
 
 }
