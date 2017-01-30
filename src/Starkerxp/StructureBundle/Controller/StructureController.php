@@ -88,4 +88,13 @@ class StructureController extends Controller
         $errors = $this->get("starkerxp_structure.services.form_errors")->getFormErrors($form);
         return $errors;
     }
+
+    /**
+     * Retourne un uuid.
+     *
+     * @return string
+     */
+    protected function getUuid(){
+        return (\Ramsey\Uuid\Uuid::uuid4())->toString();
+    }
 }

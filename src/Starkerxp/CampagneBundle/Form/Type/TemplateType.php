@@ -12,7 +12,7 @@ class TemplateType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->setMethod('POST')
+        $builder
             ->add(
                 'nom',
                 Type\TextType::class,

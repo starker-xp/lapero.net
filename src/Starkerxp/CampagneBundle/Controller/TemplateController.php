@@ -21,7 +21,7 @@ class TemplateController extends StructureController
             $orderBy = $this->getOrderBy($options['sort']);
             $resultSets = $manager->findBy([], $orderBy, $options['limit'], $options['offset']);
         } catch (\Exception $e) {
-            return new JsonResponse(["payload" => $e->getMessage()], 400);//400
+            return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
         if (empty($resultSets)) {
             return new JsonResponse([]);
@@ -32,8 +32,7 @@ class TemplateController extends StructureController
             },
             $resultSets
         );
-
-        return new JsonResponse($retour); //400
+        return new JsonResponse($retour);
     }
 
     public function getAction(Request $request)
@@ -43,14 +42,13 @@ class TemplateController extends StructureController
             $options = $this->resolveParams()->resolve($request->query->all());
             $template = $manager->findOneBy(['id' => $request->get('id')]);
         } catch (\Exception $e) {
-            return new JsonResponse(["payload" => $e->getMessage()], 400);//400
+            return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
         if (!$template instanceof Template) {
             return new JsonResponse([], 404);
         }
         $retour = $manager->toArray($template, $this->getFields($options['fields']));
-
-        return new JsonResponse($retour);//400, 404
+        return new JsonResponse($retour);
     }
 
     public function postAction(Request $request)
@@ -58,19 +56,17 @@ class TemplateController extends StructureController
         $manager = $this->get("starkerxp_campagne.manager.template");
         try {
             $template = new Template();
-            $form = $this->createForm(TemplateType::class, $template);
-            $form->submit($request->request->all());
+            $form = $this->createForm(TemplateType::class, $template, ['method' => 'POST']);
+            $form->submit(json_decode($request->getContent(), true));
             if ($form->isValid()) {
                 $template = $form->getData();
-                $template->setUuid((\Ramsey\Uuid\Uuid::uuid4())->toString());
+                $template->setUuid($this->getUuid());
                 $manager->insert($template);
-
-                return new JsonResponse([], 201);//400
+                return new JsonResponse([], 201);
             }
         } catch (\Exception $e) {
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
-
         return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
     }
 
@@ -79,15 +75,20 @@ class TemplateController extends StructureController
         $manager = $this->get("starkerxp_campagne.manager.template");
         $template = $manager->find($request->get('id'));
         if (empty($template)) {
-            return new JsonResponse(["payload" => ""], 404);
+            return new JsonResponse(["payload" => "Le template n'existe pas."], 404);
         }
         try {
-            $options = $manager->getPutOptionResolver()->resolve($request->request->all());
+            $form = $this->createForm(TemplateType::class, $template, ['method' => 'PUT']);
+            $form->submit(json_decode($request->getContent(), true));
+            if ($form->isValid()) {
+                $template = $form->getData();
+                $manager->update($template);
+                return new JsonResponse(["payload" => "Le template a bien été mis à jours."], 204);
+            }
         } catch (\Exception $e) {
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
-
-        return new JsonResponse(["payload" => ""], 303); //400
+        return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
     }
 
     public function deleteAction(Request $request)
@@ -102,8 +103,7 @@ class TemplateController extends StructureController
         } catch (ObjectClassNotAllowedException $e) {
             return new JsonResponse([], 400);
         }
-
-        return new JsonResponse([], 204); //404 /400
+        return new JsonResponse([], 204);
     }
 
 }
