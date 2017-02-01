@@ -32,6 +32,7 @@ class TemplateController extends StructureController
             },
             $resultSets
         );
+
         return new JsonResponse($retour);
     }
 
@@ -48,6 +49,7 @@ class TemplateController extends StructureController
             return new JsonResponse([], 404);
         }
         $retour = $manager->toArray($template, $this->getFields($options['fields']));
+
         return new JsonResponse($retour);
     }
 
@@ -57,16 +59,22 @@ class TemplateController extends StructureController
         try {
             $template = new Template();
             $form = $this->createForm(TemplateType::class, $template, ['method' => 'POST']);
-            $form->submit(json_decode($request->getContent(), true));
+            $data = json_decode($request->getContent(), true);
+            if (empty($data)) {
+                $data = $request->request->all();
+            }
+            $form->submit($data);
             if ($form->isValid()) {
                 $template = $form->getData();
                 $template->setUuid($this->getUuid());
                 $manager->insert($template);
+
                 return new JsonResponse([], 201);
             }
         } catch (\Exception $e) {
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
+
         return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
     }
 
@@ -79,15 +87,21 @@ class TemplateController extends StructureController
         }
         try {
             $form = $this->createForm(TemplateType::class, $template, ['method' => 'PUT']);
-            $form->submit(json_decode($request->getContent(), true));
+            $data = json_decode($request->getContent(), true);
+            if (empty($data)) {
+                $data = $request->request->all();
+            }
+            $form->submit($data);
             if ($form->isValid()) {
                 $template = $form->getData();
                 $manager->update($template);
+
                 return new JsonResponse(["payload" => "Le template a bien été mis à jours."], 204);
             }
         } catch (\Exception $e) {
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
+
         return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
     }
 
@@ -103,6 +117,7 @@ class TemplateController extends StructureController
         } catch (ObjectClassNotAllowedException $e) {
             return new JsonResponse([], 400);
         }
+
         return new JsonResponse([], 204);
     }
 
