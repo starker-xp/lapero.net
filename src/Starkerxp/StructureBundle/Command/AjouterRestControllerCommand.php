@@ -23,9 +23,9 @@ class AjouterRestControllerCommand extends ContainerAwareCommand
         $kernel = $this->getContainer()->get('kernel');
         $generator = new ControllerGenerator();
         $generator->setKernel($kernel);
-        $generator->setSkeletonDirs(
-            $kernel->getBundle('StarkerxpStructureBundle')->getPath().'/Resources/views/Gabarit'
-        );
+        $generator->setSkeletonDirs([
+            $kernel->getBundle('StarkerxpStructureBundle')->getPath().'/Resources/views/Gabarit',
+        ]);
         $generator->generate($kernel->getBundle($controller[0]), ucfirst($controller[1]));
     }
 }

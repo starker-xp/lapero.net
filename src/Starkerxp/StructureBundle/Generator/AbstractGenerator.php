@@ -31,6 +31,10 @@ abstract class AbstractGenerator extends Generator
         }
     }
 
+    public abstract function getFichiers();
+    public abstract function getClef();
+    public abstract function getParamaters(Bundle $bundle, $libelle);
+
     public function traiterLeFichier($fichier, $target, $parameters)
     {
         if (file_exists($target) && explode('.', basename($target))[1] == 'yml') {
