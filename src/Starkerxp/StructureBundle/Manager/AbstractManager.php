@@ -138,5 +138,9 @@ abstract class AbstractManager implements ManagerInterface
         return $this->repository;
     }
 
+    public function clear(){
+        $this->entityManager->clear();
+    }
+
 
 }

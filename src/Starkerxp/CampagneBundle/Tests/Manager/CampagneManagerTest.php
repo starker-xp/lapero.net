@@ -26,7 +26,7 @@ class CampagneManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
         $this->assertCount(10, $this->manager->findAll());
     }
 
-    /*/**
+    /**
      * @group campagne
      * @group manager
      */

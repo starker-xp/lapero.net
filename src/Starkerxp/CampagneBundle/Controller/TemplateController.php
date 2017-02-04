@@ -5,7 +5,6 @@ namespace Starkerxp\CampagneBundle\Controller;
 use Starkerxp\CampagneBundle\Entity\Template;
 use Starkerxp\CampagneBundle\Form\Type\TemplateType;
 use Starkerxp\StructureBundle\Controller\StructureController;
-use Starkerxp\StructureBundle\Manager\Exception\ObjectClassNotAllowedException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -46,7 +45,7 @@ class TemplateController extends StructureController
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
         if (!$template instanceof Template) {
-            return new JsonResponse([], 404);
+            return new JsonResponse(["payload" => "Le template n'existe pas."], 404);
         }
         $retour = $manager->toArray($template, $this->getFields($options['fields']));
 
@@ -56,23 +55,20 @@ class TemplateController extends StructureController
     public function postAction(Request $request)
     {
         $manager = $this->get("starkerxp_campagne.manager.template");
-        try {
-            $template = new Template();
-            $form = $this->createForm(TemplateType::class, $template, ['method' => 'POST']);
-            $data = json_decode($request->getContent(), true);
-            if (empty($data)) {
-                $data = $request->request->all();
-            }
-            $form->submit($data);
-            if ($form->isValid()) {
-                $template = $form->getData();
-                $template->setUuid($this->getUuid());
-                $manager->insert($template);
 
-                return new JsonResponse([], 201);
-            }
-        } catch (\Exception $e) {
-            return new JsonResponse(["payload" => $e->getMessage()], 400);
+        $template = new Template();
+        $form = $this->createForm(TemplateType::class, $template, ['method' => 'POST']);
+        $data = json_decode($request->getContent(), true);
+        if (empty($data)) {
+            $data = $request->request->all();
+        }
+        $form->submit($data);
+        if ($form->isValid()) {
+            $template = $form->getData();
+            $template->setUuid($this->getUuid());
+            $manager->insert($template);
+
+            return new JsonResponse([], 201);
         }
 
         return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
@@ -82,24 +78,21 @@ class TemplateController extends StructureController
     {
         $manager = $this->get("starkerxp_campagne.manager.template");
         $template = $manager->find($request->get('id'));
-        if (empty($template)) {
+        if (!$template instanceof Template) {
             return new JsonResponse(["payload" => "Le template n'existe pas."], 404);
         }
-        try {
-            $form = $this->createForm(TemplateType::class, $template, ['method' => 'PUT']);
-            $data = json_decode($request->getContent(), true);
-            if (empty($data)) {
-                $data = $request->request->all();
-            }
-            $form->submit($data);
-            if ($form->isValid()) {
-                $template = $form->getData();
-                $manager->update($template);
 
-                return new JsonResponse(["payload" => "Le template a bien été mis à jours."], 204);
-            }
-        } catch (\Exception $e) {
-            return new JsonResponse(["payload" => $e->getMessage()], 400);
+        $form = $this->createForm(TemplateType::class, $template, ['method' => 'PUT']);
+        $data = json_decode($request->getContent(), true);
+        if (empty($data)) {
+            $data = $request->request->all();
+        }
+        $form->submit($data);
+        if ($form->isValid()) {
+            $template = $form->getData();
+            $manager->update($template);
+
+            return new JsonResponse(["payload" => "Le template a bien été mis à jours."], 204);
         }
 
         return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
@@ -109,16 +102,12 @@ class TemplateController extends StructureController
     {
         $manager = $this->get("starkerxp_campagne.manager.template");
         $template = $manager->find($request->get('id'));
-        if (empty($template)) {
-            return new JsonResponse([], 404);
+        if (!$template instanceof Template) {
+            return new JsonResponse(["payload" => "Le template n'existe pas."], 404);
         }
-        try {
-            $manager->delete($template);
-        } catch (ObjectClassNotAllowedException $e) {
-            return new JsonResponse([], 400);
-        }
+        $manager->delete($template);
 
-        return new JsonResponse([], 204);
+        return new JsonResponse(["payload" => "Le template a bien été supprimé."], 204);
     }
 
 }

@@ -51,7 +51,6 @@ class TemplateType extends AbstractType
                         "email",
                         "sms",
                     ],
-
                 ]
             );
     }
