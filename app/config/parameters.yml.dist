@@ -22,3 +22,5 @@ parameters:
     rabbitmq.port:     5672
     rabbitmq.login:    guest
     rabbitmq.password: guest
+
+    locale: fr

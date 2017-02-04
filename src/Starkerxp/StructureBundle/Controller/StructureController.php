@@ -3,6 +3,7 @@
 namespace Starkerxp\StructureBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
@@ -31,6 +32,7 @@ class StructureController extends Controller
 
     /**
      * Génère un tableau d'orderBy afin d'afficher les résultats comme voulu.
+     *
      * @param $sort
      *
      * @return array
@@ -96,5 +98,33 @@ class StructureController extends Controller
      */
     protected function getUuid(){
         return (\Ramsey\Uuid\Uuid::uuid4())->toString();
+    }
+
+    /**
+     * Permet de traduire un message.
+     *
+     * @param $id
+     * @param null $domain
+     * @param array $parameters
+     *
+     * @return string
+     */
+    protected function translate($id, $domain = null, array $parameters = []){
+       return $this->get('translator')->trans($id, $parameters, $domain);
+    }
+
+    /**
+     * Retourne des données envoyer en json ou POST/PUT.
+     *
+     * @param Request $request
+     *
+     * @return array|mixed
+     */
+    protected function getRequestData(Request $request){
+        $data = json_decode($request->getContent(), true);
+        if (empty($data)) {
+            $data = $request->request->all();
+        }
+        return $data;
     }
 }

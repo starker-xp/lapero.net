@@ -16,6 +16,8 @@ abstract class AbstractManager implements ManagerInterface
     /** @var EntityRepository */
     protected $repository;
 
+    private $modeTransactionnal = false;
+
     /**
      * @param EntityManager $entityManager
      * @param $entity
@@ -40,7 +42,7 @@ abstract class AbstractManager implements ManagerInterface
         }
         $object->setCreatedAt(new DateTime());
         $this->entityManager->persist($object);
-        $this->entityManager->flush();
+        $this->flush();
 
         return $object;
     }
@@ -58,7 +60,7 @@ abstract class AbstractManager implements ManagerInterface
             throw new ObjectClassNotAllowedException();
         }
         $object->setUpdatedAt(new DateTime());
-        $this->entityManager->flush();
+        $this->flush();
 
         return $object;
     }
@@ -73,7 +75,7 @@ abstract class AbstractManager implements ManagerInterface
             throw new ObjectClassNotAllowedException();
         }
         $this->entityManager->remove($object);
-        $this->entityManager->flush();
+        $this->flush();
     }
 
     /**
@@ -138,8 +140,38 @@ abstract class AbstractManager implements ManagerInterface
         return $this->repository;
     }
 
+    /**
+     * Vide l'UnitOfWork de l'entity manager.
+     */
     public function clear(){
         $this->entityManager->clear();
+    }
+
+    /**
+     * Permet de passer en gestion des transations manuelles. (Conseillé par SensioLabs).
+     */
+    public function beginTransaction(){
+        $this->modeTransactionnal = true;
+        $this->entityManager->beginTransaction();
+    }
+
+    /**
+     * Dans le cas d'une gestion des transactions manuelles en cas d'échec on rollback le tout.
+     */
+    public function rollback(){
+        $this->entityManager->rollback();
+        $this->entityManager->close();
+        $this->modeTransactionnal = false;
+    }
+
+    /**
+     * Permet de gérer un flush en mode transactions manuelles.
+     */
+    private function flush(){
+        if($this->modeTransactionnal){
+            $this->entityManager->commit();
+        }
+        $this->entityManager->flush();
     }
 
 
