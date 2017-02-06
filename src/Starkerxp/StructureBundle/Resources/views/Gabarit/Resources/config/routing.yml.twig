@@ -7,7 +7,7 @@
     path:     /{id}
     defaults: { _controller: "{{namespace}}:{{ nomController }}:get" }
     methods:  [GET]
-	requirements:
+    requirements:
         page: '\d+'
 
 {{ nomService }}.controller.{{ nomControllerCamelize|lower }}.post:
@@ -19,12 +19,12 @@
     path:     /{id}
     defaults: { _controller: "{{namespace}}:{{ nomController }}:put" }
     methods:  [PUT]
-	requirements:
+    requirements:
         page: '\d+'
 
 {{ nomService }}.controller.{{ nomControllerCamelize|lower }}.delete:
     path:     /{id}
     defaults: { _controller: "{{namespace}}:{{ nomController }}:delete" }
     methods:  [DELETE]
-	requirements:
+    requirements:
         page: '\d+'

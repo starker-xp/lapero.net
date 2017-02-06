@@ -2,5 +2,5 @@ services:
     {{ nomService }}.manager.{{ nomEntity|lower }}:
         class: {{ namespace}}\Manager\{{ nomEntity }}Manager
         arguments: ["@doctrine.orm.entity_manager", "{{namespaceFQC}}\\Entity\\{{ nomEntity }}"]
-		tags:
+        tags:
             - { name: starkerxp.manager.entity }
