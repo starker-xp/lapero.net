@@ -2,35 +2,114 @@
 
 namespace {{ namespace }}\Controller;
 
-use Starkerxp\StructureBundle\Controller\CoreController;
+use {{ namespace }}\Entity\{{nomEntity}};
+use {{ namespace }}\Form\Type\{{nomController}}Type;
+use Starkerxp\StructureBundle\Controller\StructureController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class {{ nomController }}Controller extends CoreController
+
+class {{ nomController }}Controller extends StructureController
 {
-	public function cgetAction(Request $request)
+	
+    public function cgetAction(Request $request)
     {
-        return new JsonResponse(["error" => false, "collection" => []]);
+        $manager = $this->get("{{nomService}}.manager.{{ nomController|lower }}");
+        try {
+            $options = $this->resolveParams()->resolve($request->query->all());
+            $orderBy = $this->getOrderBy($options['sort']);
+            $resultSets = $manager->findBy([], $orderBy, $options['limit'], $options['offset']);
+        } catch (\Exception $e) {
+            return new JsonResponse(["payload" => $e->getMessage()], 400);
+        }
+        if (empty($resultSets)) {
+            return new JsonResponse([]);
+        }
+        $retour = array_map(
+            function ($element) use ($manager, $options) {
+                return $manager->toArray($element, $this->getFields($options['fields']));
+            },
+            $resultSets
+        );
+        return new JsonResponse($retour);
     }
 
     public function getAction(Request $request)
     {
-        return new JsonResponse(["error" => false, "data" => []]);
+        $manager = $this->get("{{nomService}}.manager.{{ nomController|lower }}");
+        try {
+            $options = $this->resolveParams()->resolve($request->query->all());
+            ${{ nomController|lower }} = $manager->findOneBy(['id' => $request->get('id')]);
+        } catch (\Exception $e) {
+            return new JsonResponse(["payload" => $e->getMessage()], 400);
+        }
+        if (!${{ nomController|lower }} instanceof {{ nomEntity }}) {
+            return new JsonResponse(["payload" => $this->translate("{{ nomEntity|lower }}.entity.not_found", "{{ nomController|lower }}")], 404);
+        }
+        $retour = $manager->toArray(${{ nomController|lower }}, $this->getFields($options['fields']));
+
+        return new JsonResponse($retour);
     }
 
     public function postAction(Request $request)
     {
-        return new JsonResponse(["error" => false, "msg" => ""]);
+        $manager = $this->get("{{nomService}}.manager.{{ nomController|lower }}");
+        try {
+            ${{ nomController|lower }} = new {{ nomController }}();
+            $form = $this->createForm({{ nomController }}Type::class, ${{ nomController|lower }}, ['method' => 'POST']);
+            $form->submit($this->getRequestData($request));
+            if ($form->isValid()) {
+                ${{ nomController|lower }} = $form->getData();
+                ${{ nomController|lower }}->setUuid($this->getUuid());
+                $manager->insert(${{ nomController|lower }});
+                return new JsonResponse(["payload" => $this->translate("{{ nomEntity|lower }}.entity.created", "{{ nomController|lower }}")], 201);
+            }
+        } catch (\Exception $e) {
+            $manager->rollback();
+            return new JsonResponse(["payload" => $e->getMessage()], 400);
+        }
+
+        return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
     }
 
     public function putAction(Request $request)
     {
-        return new JsonResponse(["error" => false, "msg" => ""]);
+        $manager = $this->get("{{nomService}}.manager.{{ nomController|lower }}");
+        ${{ nomController|lower }} = $manager->find($request->get('id'));
+        if (!${{ nomController|lower }} instanceof {{ nomEntity }}) {
+            return new JsonResponse(["payload" => $this->translate("{{ nomEntity|lower }}.entity.not_found", "{{ nomController|lower }}")], 404);
+        }
+        $manager->beginTransaction();
+        try {
+            $form = $this->createForm({{ nomController }}Type::class, ${{ nomController|lower }}, ['method' => 'PUT']);
+            $form->submit($this->getRequestData($request));
+            if ($form->isValid()) {
+                ${{ nomController|lower }} = $form->getData();
+                $manager->update(${{ nomController|lower }});
+                return new JsonResponse(["payload" => $this->translate("{{ nomEntity|lower }}.entity.updated", "{{ nomController|lower }}")], 204);
+            }
+        } catch (\Exception $e) {
+            $manager->rollback();
+            return new JsonResponse(["payload" => $e->getMessage()], 400);
+        }
+        return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
     }
 
     public function deleteAction(Request $request)
     {
-        return new JsonResponse(["error" => false, "msg" => ""]);
+        $manager = $this->get("{{nomService}}.manager.{{ nomController|lower }}");
+        ${{ nomController|lower }} = $manager->find($request->get('id'));
+        if (!${{ nomController|lower }} instanceof {{ nomEntity }}) {
+            return new JsonResponse(["payload" => $this->translate("{{ nomEntity|lower }}.entity.not_found", "{{ nomController|lower }}")], 404);
+        }
+        try {
+            $manager->delete(${{ nomController|lower }});
+        } catch (\Exception $e) {
+            $manager->rollback();
+            return new JsonResponse(["payload" => $e->getMessage()], 400);
+        }
+        return new JsonResponse(["payload" => $this->translate("{{ nomEntity|lower }}.entity.deleted", "{{ nomController|lower }}")], 204);
     }
+
 
 } 

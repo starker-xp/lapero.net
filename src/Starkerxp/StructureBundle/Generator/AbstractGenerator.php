@@ -14,23 +14,6 @@ abstract class AbstractGenerator extends Generator
      */
     protected $kernel;
 
-    public function generate(Bundle $bundle, $libelle)
-    {
-        $parameters = $this->getParamaters($bundle, $libelle);
-        $parameters['nomService'] = strtolower(
-            str_replace(['_Bundle', '@'], '', preg_replace('#\B([A-Z])#', '_\1', $parameters['namespaceBundle']))
-        );
-        foreach ($this->getFichiers() as $fichier) {
-            try {
-                $this->kernel->locateResource("@StarkerxpStructureBundle/Resources/views/Gabarit/".$fichier.".twig");
-            } catch (\InvalidArgumentException $e) {
-                throw new \InvalidArgumentException('Il manque un fichier de template');
-            }
-            $target = $bundle->getPath().str_replace($this->getClef(), [$libelle, lcfirst($libelle)], $fichier);
-            $this->traiterLeFichier($fichier, $target, $parameters);
-        }
-    }
-
     public abstract function getFichiers();
     public abstract function getClef();
     public abstract function getParamaters(Bundle $bundle, $libelle);
