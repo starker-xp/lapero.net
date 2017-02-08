@@ -2,41 +2,33 @@
 
 namespace Starkerxp\StructureBundle\Generator;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class EntiteGenerator extends AbstractGenerator
 {
-    public function generate(Bundle $bundle, $libelle)
+    public function generate($entite)
     {
-        $parameters = $this->getParamaters($bundle, $libelle);
-        $parameters['nomService'] = strtolower(
-            str_replace(['_Bundle', '@'], '', preg_replace('#\B([A-Z])#', '_\1', $parameters['namespaceBundle']))
-        );
-        foreach ($this->getFichiers() as $fichier) {
+        $entite = explode(':', $entite);
+        $bundle = $this->kernel->getBundle($entite[0]);
+        $libelle = ucfirst($entite[1]);
+
+        $parameters = [
+            'nomEntity'       => $libelle,
+            'namespace'       => $bundle->getNamespace(),
+            'namespaceBundle' => '@'.$bundle->getName(),
+            'namespaceFQC'    => str_replace('\\', '\\\\', $bundle->getNamespace()),
+        ];
+        $parameters['nomService'] = strtolower(str_replace(['_Bundle', '@'], '', preg_replace('#\B([A-Z])#', '_\1', $parameters['namespaceBundle'])));
+
+        foreach ($this->getFichiers() as $template) {
             try {
-                $this->kernel->locateResource("@StarkerxpStructureBundle/Resources/views/Gabarit/".$fichier.".twig");
+                $this->kernel->locateResource("@StarkerxpStructureBundle/Resources/views/Gabarit/".$template.".twig");
             } catch (\InvalidArgumentException $e) {
                 throw new \InvalidArgumentException('Il manque un fichier de template');
             }
-            $target = $bundle->getPath().str_replace($this->getClef(), [$libelle, lcfirst($libelle)], $fichier);
-            $this->traiterLeFichier($fichier, $target, $parameters);
+            // On génère le nom de fichier qui va être modifié ou généré.
+            $fichierACreerModifier = $bundle->getPath().str_replace("_nomEntity_", $libelle, $template);
+            $this->traiterLeFichier($template, $fichierACreerModifier, $parameters);
         }
-    }
-
-
-    public function getParamaters(Bundle $bundle, $libelle)
-    {
-        return array(
-            'nomEntity' => $libelle,
-            'namespace' => $bundle->getNamespace(),
-            'namespaceBundle' => '@'.$bundle->getName(),
-            'namespaceFQC' => str_replace('\\', '\\\\', $bundle->getNamespace()),
-        );
-    }
-
-    public function getClef()
-    {
-        return ['_nomEntity_', '_lnomEntity_'];
     }
 
     public function getFichiers()
@@ -51,4 +43,5 @@ class EntiteGenerator extends AbstractGenerator
             '/Tests/DataFixtures/_nomEntity_Manager/Default_nomEntity_.yml',
         ];
     }
+
 }

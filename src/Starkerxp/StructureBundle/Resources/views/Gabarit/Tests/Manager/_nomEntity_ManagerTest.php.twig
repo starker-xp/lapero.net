@@ -2,9 +2,11 @@
 
 namespace {{ namespace }}\Tests\Manager;
 
+use {{namespace}}\Entity\{{ nomEntity }};
 use {{ namespace }}\Manager\{{ nomEntity }}Manager;
+use \Starkerxp\StructureBundle\Tests\WebTest;
 
-class {{nomEntity}}ManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
+class {{nomEntity}}ManagerTest extends WebTest
 {
 
     /** @var  {{ nomEntity }}Manager */
@@ -33,7 +35,7 @@ class {{nomEntity}}ManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
     public function testInsertNew{{ nomEntity }}()
     {
         $this->loadFixtureFiles(['{{namespaceBundle}}/Tests/DataFixtures/{{ nomEntity }}Manager/Default{{ nomEntity }}.yml',]);
-        ${{ nomEntity|lower }} = new \{{namespace}}\Entity\{{ nomEntity }}();
+        ${{ nomEntity|lower }} = new {{ nomEntity }}();
         $this->manager->insert(${{ nomEntity|lower }});
         $this->assertCount(2, $this->manager->findAll());
     }

@@ -14,26 +14,38 @@ abstract class AbstractGenerator extends Generator
      */
     protected $kernel;
 
+    /**
+     * AbstractGenerator constructor.
+     * @param KernelInterface $kernel
+     */
+    public function __construct(KernelInterface $kernel)
+    {
+        $this->kernel = $kernel;
+    }
+
     public abstract function getFichiers();
-    public abstract function getClef();
-    public abstract function getParamaters(Bundle $bundle, $libelle);
 
     public function traiterLeFichier($fichier, $target, $parameters)
     {
         if (file_exists($target) && explode('.', basename($target))[1] == 'yml') {
             $currentServices = Yaml::parse(file_get_contents($target));
             $newServices = Yaml::parse($this->render($fichier.'.twig', $parameters));
-            if (empty($newServices['services'])) {
-                return;
+            $listeDesParametres = !empty($currentServices['parameters'])?array_keys($currentServices['parameters']):[];
+            $listeDesServices = !empty($currentServices['services'])?array_keys($currentServices['services']):[];
+            $listeDesNouveauxParametres = !empty($newServices['parameters'])?array_keys($newServices['parameters']):[];
+            $listeDesNouveauxServices = !empty($newServices['services'])?array_keys($newServices['services']):[];
+            $diffServices = array_diff($listeDesNouveauxServices, $listeDesServices);
+            $diffParametres = array_diff($listeDesNouveauxParametres, $listeDesParametres);
+            if(empty($diffServices) && empty($diffParametres) ){
+                return false;
             }
-            $listeNewServices = array_keys($newServices['services']);
-            foreach ($listeNewServices as $servicePotentiel) {
-                if (!empty($currentServices['services'][$servicePotentiel])) {
-                    continue;
-                }
-                $currentServices['services'][$servicePotentiel] = $newServices['services'][$servicePotentiel];
+            foreach ($diffServices as $libelle){
+                $currentServices['services'][$libelle] = $newServices['services'][$libelle];
             }
-            $content = Yaml::dump($currentServices, 8, 4);
+            foreach ($diffParametres as $libelle){
+                $currentServices['parameters'][$libelle] = $newServices['parameters'][$libelle];
+            }
+            $content = Yaml::dump($currentServices, 3, 4);
             $flink = fopen($target, 'w');
             if ($flink) {
                 $write = fwrite($flink, $content);
@@ -41,8 +53,14 @@ abstract class AbstractGenerator extends Generator
                     fclose($flink);
                 }
             }
+            return true;
+        }
+        // On ne modifie pas un fichier existant.
+        if(file_exists($target)){
+            return false;
         }
         $this->renderFile($fichier.'.twig', $target, $parameters);
+        return true;
     }
 
     /**

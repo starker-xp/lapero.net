@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class AjouterEntiteCommand extends ContainerAwareCommand
+class GeneratorEntiteCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
@@ -19,13 +19,7 @@ class AjouterEntiteCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $entite = explode(':', $input->getArgument('entite'));
-        $kernel = $this->getContainer()->get('kernel');
-        $generator = new EntiteGenerator();
-        $generator->setKernel($kernel);
-        $generator->setSkeletonDirs([
-            $kernel->getBundle('StarkerxpStructureBundle')->getPath().'/Resources/views/Gabarit',
-        ]);
-        $generator->generate($kernel->getBundle($entite[0]), ucfirst($entite[1]));
+        $generator = $this->getContainer()->get("starkerxp_structure.generator.entite_generator");
+        $generator->generate($input->getArgument('entite'));
     }
 }

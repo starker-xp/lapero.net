@@ -21,7 +21,7 @@ class {{nomController}}ControllerTest extends WebTest
         $client->request('POST', '/{{nomController|lower}}s', $data);
         $response = $client->getResponse();
         $this->assertEquals(201, $response->getStatusCode());
-        $manager = $this->getContainer()->get('{{nomService}}.manager.{{nomController|lower}}');
+        $manager = $this->getContainer()->get('{{nomService}}.manager.{{nomEntity|lower}}');
         $templates = $manager->findAll();
         $this->assertCount(1, $templates);
     }
@@ -50,7 +50,7 @@ class {{nomController}}ControllerTest extends WebTest
     public function testPutValide()
     {
         $this->loadFixtureFiles(['{{namespaceBundle}}/Tests/DataFixtures/{{nomEntity}}Manager/Default{{ nomEntity }}.yml']);
-        $manager = $this->getContainer()->get('{{nomService}}.manager.{{nomController|lower}}');
+        $manager = $this->getContainer()->get('{{nomService}}.manager.{{nomEntity|lower}}');
         $liste{{nomController}}s = $manager->getRepository()->findAll();
         $this->assertCount(1, $liste{{nomController}}s);
         $templateDepart = $manager->toArray($liste{{nomController}}s[0], [/*'nom'*/]);// Exemple
@@ -77,7 +77,7 @@ class {{nomController}}ControllerTest extends WebTest
     public function testPutInvalide()
     {
         $this->loadFixtureFiles(['{{namespaceBundle}}/Tests/DataFixtures/{{nomEntity}}Manager/Default{{ nomEntity }}.yml']);
-        $manager = $this->getContainer()->get('{{nomService}}.manager.{{nomController|lower}}');
+        $manager = $this->getContainer()->get('{{nomService}}.manager.{{nomEntity|lower}}');
         $liste{{nomController}}s = $manager->getRepository()->findAll();
         $this->assertCount(1, $liste{{nomController}}s);
         $client = static::createClient();
@@ -163,7 +163,7 @@ class {{nomController}}ControllerTest extends WebTest
     public function testGetValideAvecResultats()
     {
         $this->loadFixtureFiles(['{{namespaceBundle}}/Tests/DataFixtures/{{nomEntity}}Manager/{{nomController}}Manager.yml']);
-        $manager = $this->getContainer()->get('{{nomService}}.manager.{{nomController|lower}}');
+        $manager = $this->getContainer()->get('{{nomService}}.manager.{{nomEntity|lower}}');
         $liste{{nomController}}s = $manager->getRepository()->findAll();
         $this->assertCount(10, $liste{{nomController}}s);
         $client = static::createClient();
@@ -211,7 +211,7 @@ class {{nomController}}ControllerTest extends WebTest
     public function testDeleteValide()
     {
         $this->loadFixtureFiles(['{{namespaceBundle}}/Tests/DataFixtures/{{nomEntity}}Manager/Default{{ nomEntity }}.yml']);
-        $manager = $this->getContainer()->get('{{nomService}}.manager.{{nomController|lower}}');
+        $manager = $this->getContainer()->get('{{nomService}}.manager.{{nomEntity|lower}}');
         $liste{{nomController}}s = $manager->getRepository()->findAll();
         $this->assertCount(1, $liste{{nomController}}s);
         $client = static::createClient();

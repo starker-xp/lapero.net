@@ -2,42 +2,53 @@
 
 namespace Starkerxp\StructureBundle\Generator;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+
+use Doctrine\ORM\EntityManager;
 
 class ControllerGenerator extends AbstractGenerator
 {
+    /**
+     * @var EntityManager
+     */
+    protected $entityManager;
 
-    public function generate(Bundle $bundle, $libelle, Bundle $bundleEntite, $libelleEntite)
+    public function generate($controller, $entite)
     {
-        $parameters = $this->getParamaters($bundle, $libelle);
+        // On vérifie que l'entite existe sinon une exception est levé
+        $this->entityManager->getClassMetadata($entite);
+
+        $controller = explode(':', $controller);
+        $bundle = $this->kernel->getBundle($controller[0]);
+        $libelle = ucfirst($controller[1]);
+
+        $entite = explode(':', $entite);
+        $bundleEntite = $this->kernel->getBundle($entite[0]);
+        $libelleEntite = ucfirst($entite[1]);
+        $parameters = [
+            'nomController'             => $libelle,
+            'nomControllerCamelize'     => preg_replace('#\B([A-Z])#', '_\1', $libelle),
+            'namespaceController'       => $bundle->getNamespace(),
+            'namespaceControllerBundle' => '@'.$bundle->getName(),
+            'namespaceControllerFQC'    => str_replace('\\', '\\\\', $bundle->getNamespace()),
+
+            'nomEntity'             => $libelleEntite,
+            'namespaceEntity'       => $bundleEntite->getNamespace(),
+            'namespaceEntityBundle' => '@'.$bundleEntite->getName(),
+            'namespaceEntityFQC'    => str_replace('\\', '\\\\', $bundleEntite->getNamespace()),
+        ];
+
         $parameters['nomService'] = strtolower(
             str_replace(['_Bundle', '@'], '', preg_replace('#\B([A-Z])#', '_\1', $parameters['namespaceBundle']))
         );
-        foreach ($this->getFichiers() as $fichier) {
+        foreach ($this->getFichiers() as $template) {
             try {
-                $this->kernel->locateResource("@StarkerxpStructureBundle/Resources/views/Gabarit/".$fichier.".twig");
+                $this->kernel->locateResource("@StarkerxpStructureBundle/Resources/views/Gabarit/".$template.".twig");
             } catch (\InvalidArgumentException $e) {
                 throw new \InvalidArgumentException('Il manque un fichier de template');
             }
-            $target = $bundle->getPath().str_replace($this->getClef(), [$libelle, lcfirst($libelle)], $fichier);
-            $this->traiterLeFichier($fichier, $target, $parameters);
+            $fichierACreerModifier = $bundle->getPath().str_replace("_nomController_", $libelle, $template);
+            $this->traiterLeFichier($template, $fichierACreerModifier, $parameters);
         }
-    }
-
-    public function getParamaters(Bundle $bundle, $libelle)
-    {
-        return array(
-            'nomController' => $libelle,
-            'nomControllerCamelize' => preg_replace('#\B([A-Z])#', '_\1', $libelle),
-            'namespace' => $bundle->getNamespace(),
-            'namespaceBundle' => '@'.$bundle->getName(),
-            'namespaceFQC' => str_replace('\\', '\\\\', $bundle->getNamespace()),
-        );
-    }
-
-    public function getClef()
-    {
-        return ['_nomController_', '_lnomController_'];
     }
 
     public function getFichiers()
@@ -49,5 +60,13 @@ class ControllerGenerator extends AbstractGenerator
             '/Resources/config/routing.yml',  // Il faut récupérer la locale par défaut afin de générer le bon fichier.
             //'/Resources/translations/_lnomController_._defaultLocale_.yml',  // Il faut récupérer la locale par défaut afin de générer le bon fichier.
         ];
+    }
+
+    /**
+     * @param EntityManager $entityManager
+     */
+    public function setEntityManager($entityManager)
+    {
+        $this->entityManager = $entityManager;
     }
 }

@@ -4,3 +4,14 @@ services:
     starkerxp_structure.services.form_errors:
         class: Starkerxp\StructureBundle\Services\FormErrorsService
         arguments: ['@translator.default']
+    starkerxp_structure.generator.entite_generator:
+        class: Starkerxp\StructureBundle\Generator\EntiteGenerator
+        arguments: ['@kernel']
+        calls:
+            - [setSkeletonDirs, ["@=service('kernel').getBundle('StarkerxpStructureBundle').getPath()~'/'~ 'Resources'~'/'~'views'~'/'~'Gabarit'"]]
+    starkerxp_structure.generator.controller_generator:
+        class: Starkerxp\StructureBundle\Generator\ControllerGenerator
+        arguments: ['@kernel']
+        calls:
+            - [setSkeletonDirs, ["@=service('kernel').getBundle('StarkerxpStructureBundle').getPath()~'/'~ 'Resources'~'/'~'views'~'/'~'Gabarit'"]]
+            - [setEntityManager, ['@doctrine.orm.entity_manager']]
