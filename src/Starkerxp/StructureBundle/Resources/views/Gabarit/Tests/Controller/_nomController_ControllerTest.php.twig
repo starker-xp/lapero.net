@@ -49,7 +49,7 @@ class {{nomController}}ControllerTest extends WebTest
      */
     public function testPutValide()
     {
-        $this->loadFixtureFiles(['{{namespaceBundle}}/Tests/DataFixtures/{{nomController}}Manager/DefaultTemplate.yml']);
+        $this->loadFixtureFiles(['{{namespaceBundle}}/Tests/DataFixtures/{{nomEntity}}Manager/Default{{ nomEntity }}.yml']);
         $manager = $this->getContainer()->get('{{nomService}}.manager.{{nomController|lower}}');
         $liste{{nomController}}s = $manager->getRepository()->findAll();
         $this->assertCount(1, $liste{{nomController}}s);
@@ -76,7 +76,7 @@ class {{nomController}}ControllerTest extends WebTest
      */
     public function testPutInvalide()
     {
-        $this->loadFixtureFiles(['{{namespaceBundle}}/Tests/DataFixtures/{{nomEntity}}Manager/DefaultTemplate.yml']);
+        $this->loadFixtureFiles(['{{namespaceBundle}}/Tests/DataFixtures/{{nomEntity}}Manager/Default{{ nomEntity }}.yml']);
         $manager = $this->getContainer()->get('{{nomService}}.manager.{{nomController|lower}}');
         $liste{{nomController}}s = $manager->getRepository()->findAll();
         $this->assertCount(1, $liste{{nomController}}s);
@@ -210,7 +210,7 @@ class {{nomController}}ControllerTest extends WebTest
      */
     public function testDeleteValide()
     {
-        $this->loadFixtureFiles(['{{namespaceBundle}}/Tests/DataFixtures/{{nomEntity}}Manager/DefaultTemplate.yml']);
+        $this->loadFixtureFiles(['{{namespaceBundle}}/Tests/DataFixtures/{{nomEntity}}Manager/Default{{ nomEntity }}.yml']);
         $manager = $this->getContainer()->get('{{nomService}}.manager.{{nomController|lower}}');
         $liste{{nomController}}s = $manager->getRepository()->findAll();
         $this->assertCount(1, $liste{{nomController}}s);
