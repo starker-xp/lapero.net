@@ -1,6 +1,6 @@
 services:
-    {{ nomService }}.manager.{{ nomEntity|lower }}:
-        class: {{ namespace}}\Manager\{{ nomEntity }}Manager
-        arguments: ["@doctrine.orm.entity_manager", "{{namespaceFQC}}\\Entity\\{{ nomEntity }}"]
+    {{ nomServiceEntity }}.manager.{{ nomEntity|lower }}:
+        class: {{ namespaceEntity}}\Manager\{{ nomEntity }}Manager
+        arguments: ["@doctrine.orm.entity_manager", "{{namespaceEntityFQC}}\\Entity\\{{ nomEntity }}"]
         tags:
             - { name: starkerxp.manager.entity }

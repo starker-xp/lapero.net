@@ -77,8 +77,6 @@ class Template extends Entity
     public function setUuid($uuid)
     {
         $this->uuid = $uuid;
-
-        return $this;
     }
 
     /**
@@ -101,8 +99,6 @@ class Template extends Entity
     public function setNom($nom)
     {
         $this->nom = $nom;
-
-        return $this;
     }
 
     /**
@@ -125,8 +121,6 @@ class Template extends Entity
     public function setType($type)
     {
         $this->type = $type;
-
-        return $this;
     }
 
     /**
@@ -149,8 +143,6 @@ class Template extends Entity
     public function setSujet($sujet)
     {
         $this->sujet = $sujet;
-
-        return $this;
     }
 
     /**
@@ -173,8 +165,6 @@ class Template extends Entity
     public function setMessage($message)
     {
         $this->message = $message;
-
-        return $this;
     }
 
     /**

@@ -47,7 +47,6 @@ class TemplateController extends StructureController
             return new JsonResponse(["payload" => $this->translate("template.entity.not_found", "template")], 404);
         }
         $retour = $manager->toArray($template, $this->getFields($options['fields']));
-
         return new JsonResponse($retour);
     }
 

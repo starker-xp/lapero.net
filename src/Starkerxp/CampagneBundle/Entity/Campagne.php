@@ -96,7 +96,6 @@ class Campagne extends Entity
     {
         $this->name = $name;
 
-        return $this;
     }
 
     /**
@@ -109,8 +108,6 @@ class Campagne extends Entity
     public function setType($type)
     {
         $this->type = $type;
-
-        return $this;
     }
 
     /**
@@ -133,8 +130,6 @@ class Campagne extends Entity
     public function setStatus($status)
     {
         $this->status = $status;
-
-        return $this;
     }
 
     /**
@@ -157,8 +152,6 @@ class Campagne extends Entity
     public function setSendAt($sendAt)
     {
         $this->sendAt = $sendAt;
-
-        return $this;
     }
 
     /**
@@ -181,8 +174,6 @@ class Campagne extends Entity
     public function setDeleted($deleted)
     {
         $this->deleted = $deleted;
-
-        return $this;
     }
 
     /**

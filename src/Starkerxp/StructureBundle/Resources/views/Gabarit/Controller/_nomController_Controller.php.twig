@@ -1,9 +1,9 @@
 <?php
 
-namespace {{ namespace }}\Controller;
+namespace {{ namespaceController }}\Controller;
 
-use {{ namespace }}\Entity\{{nomEntity}};
-use {{ namespace }}\Form\Type\{{nomController}}Type;
+use {{ namespaceEntity }}\Entity\{{nomEntity}};
+use {{ namespaceController }}\Form\Type\{{nomController}}Type;
 use Starkerxp\StructureBundle\Controller\StructureController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +14,7 @@ class {{ nomController }}Controller extends StructureController
 	
     public function cgetAction(Request $request)
     {
-        $manager = $this->get("{{nomService}}.manager.{{ nomController|lower }}");
+        $manager = $this->get("{{nomServiceEntity}}.manager.{{ nomController|lower }}");
         try {
             $options = $this->resolveParams()->resolve($request->query->all());
             $orderBy = $this->getOrderBy($options['sort']);
@@ -36,7 +36,7 @@ class {{ nomController }}Controller extends StructureController
 
     public function getAction(Request $request)
     {
-        $manager = $this->get("{{nomService}}.manager.{{ nomController|lower }}");
+        $manager = $this->get("{{nomServiceEntity}}.manager.{{ nomController|lower }}");
         try {
             $options = $this->resolveParams()->resolve($request->query->all());
             ${{ nomController|lower }} = $manager->findOneBy(['id' => $request->get('id')]);
@@ -53,7 +53,7 @@ class {{ nomController }}Controller extends StructureController
 
     public function postAction(Request $request)
     {
-        $manager = $this->get("{{nomService}}.manager.{{ nomController|lower }}");
+        $manager = $this->get("{{nomServiceEntity}}.manager.{{ nomController|lower }}");
         try {
             ${{ nomController|lower }} = new {{ nomController }}();
             $form = $this->createForm({{ nomController }}Type::class, ${{ nomController|lower }}, ['method' => 'POST']);
@@ -74,7 +74,7 @@ class {{ nomController }}Controller extends StructureController
 
     public function putAction(Request $request)
     {
-        $manager = $this->get("{{nomService}}.manager.{{ nomController|lower }}");
+        $manager = $this->get("{{nomServiceEntity}}.manager.{{ nomController|lower }}");
         ${{ nomController|lower }} = $manager->find($request->get('id'));
         if (!${{ nomController|lower }} instanceof {{ nomEntity }}) {
             return new JsonResponse(["payload" => $this->translate("{{ nomEntity|lower }}.entity.not_found", "{{ nomController|lower }}")], 404);
@@ -97,7 +97,7 @@ class {{ nomController }}Controller extends StructureController
 
     public function deleteAction(Request $request)
     {
-        $manager = $this->get("{{nomService}}.manager.{{ nomController|lower }}");
+        $manager = $this->get("{{nomServiceEntity}}.manager.{{ nomController|lower }}");
         ${{ nomController|lower }} = $manager->find($request->get('id'));
         if (!${{ nomController|lower }} instanceof {{ nomEntity }}) {
             return new JsonResponse(["payload" => $this->translate("{{ nomEntity|lower }}.entity.not_found", "{{ nomController|lower }}")], 404);

@@ -1,9 +1,9 @@
 <?php
 
-namespace {{ namespace }}\Tests\Manager;
+namespace {{ namespaceEntity }}\Tests\Manager;
 
-use {{namespace}}\Entity\{{ nomEntity }};
-use {{ namespace }}\Manager\{{ nomEntity }}Manager;
+use {{namespaceEntity}}\Entity\{{ nomEntity }};
+use {{namespaceEntity}}\Manager\{{ nomEntity }}Manager;
 use \Starkerxp\StructureBundle\Tests\WebTest;
 
 class {{nomEntity}}ManagerTest extends WebTest
@@ -15,7 +15,7 @@ class {{nomEntity}}ManagerTest extends WebTest
     public function setUp()
     {
         parent::setUp();
-        $this->manager = $this->getContainer()->get('{{nomService}}.manager.{{ nomEntity|lower }}');
+        $this->manager = $this->getContainer()->get('{{nomServiceEntity}}.manager.{{ nomEntity|lower }}');
     }
 
     /**
@@ -24,7 +24,7 @@ class {{nomEntity}}ManagerTest extends WebTest
      */
     public function testFindAll()
     {
-        $this->loadFixtureFiles(['{{namespaceBundle}}/Tests/DataFixtures/{{ nomEntity }}Manager/{{ nomEntity }}Manager.yml',]);
+        $this->loadFixtureFiles(['{{namespaceEntityBundle}}/Tests/DataFixtures/{{ nomEntity }}Manager/{{ nomEntity }}Manager.yml',]);
         $this->assertCount(10, $this->manager->findAll());
     }
 
@@ -34,7 +34,7 @@ class {{nomEntity}}ManagerTest extends WebTest
      */
     public function testInsertNew{{ nomEntity }}()
     {
-        $this->loadFixtureFiles(['{{namespaceBundle}}/Tests/DataFixtures/{{ nomEntity }}Manager/Default{{ nomEntity }}.yml',]);
+        $this->loadFixtureFiles(['{{namespaceEntityBundle}}/Tests/DataFixtures/{{ nomEntity }}Manager/Default{{ nomEntity }}.yml',]);
         ${{ nomEntity|lower }} = new {{ nomEntity }}();
         $this->manager->insert(${{ nomEntity|lower }});
         $this->assertCount(2, $this->manager->findAll());
@@ -46,10 +46,9 @@ class {{nomEntity}}ManagerTest extends WebTest
      */
     public function testUpdate{{ nomEntity }}()
     {
-        $this->loadFixtureFiles(['{{namespaceBundle}}/Tests/DataFixtures/{{ nomEntity }}Manager/Default{{ nomEntity }}.yml',]);
+        $this->loadFixtureFiles(['{{namespaceEntityBundle}}/Tests/DataFixtures/{{ nomEntity }}Manager/Default{{ nomEntity }}.yml',]);
         $criteria = ['createdAt' => new \DateTime("2016-08-05 12:12:12")];
         ${{ nomEntity|lower }} = $this->manager->findOneBy($criteria);
-       
         $this->manager->update(${{ nomEntity|lower }});
         ${{ nomEntity|lower }}PostUpdate = $this->manager->findOneBy($criteria);
         $this->assertEquals(1, ${{ nomEntity|lower }}PostUpdate->getIsError());

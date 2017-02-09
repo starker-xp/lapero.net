@@ -36,7 +36,6 @@ abstract class LockCommand extends ContainerAwareCommand
             return false;
         }
         $this->traitement();
-
         return true;
     }
 
