@@ -30,13 +30,18 @@ abstract class AbstractGenerator extends Generator
         if (file_exists($target) && explode('.', basename($target))[1] == 'yml') {
             $currentServices = Yaml::parse(file_get_contents($target));
             $newServices = Yaml::parse($this->render($fichier.'.twig', $parameters));
+            // gestion de fichiers sans services ni parameters => routing
             $listeDesParametres = !empty($currentServices['parameters'])?array_keys($currentServices['parameters']):[];
             $listeDesServices = !empty($currentServices['services'])?array_keys($currentServices['services']):[];
+            $listeDesDeclarations = !empty($currentServices)?array_keys($currentServices):[];
             $listeDesNouveauxParametres = !empty($newServices['parameters'])?array_keys($newServices['parameters']):[];
             $listeDesNouveauxServices = !empty($newServices['services'])?array_keys($newServices['services']):[];
+            $listeDesNouvellesDeclarations = !empty($newServices)?array_keys($newServices):[];
+
             $diffServices = array_diff($listeDesNouveauxServices, $listeDesServices);
             $diffParametres = array_diff($listeDesNouveauxParametres, $listeDesParametres);
-            if(empty($diffServices) && empty($diffParametres) ){
+            $diffDeclarations = array_diff($listeDesNouvellesDeclarations, $listeDesDeclarations);
+            if(empty($diffServices) && empty($diffParametres)  && empty($diffDeclarations) ){
                 return false;
             }
             foreach ($diffServices as $libelle){
@@ -44,6 +49,9 @@ abstract class AbstractGenerator extends Generator
             }
             foreach ($diffParametres as $libelle){
                 $currentServices['parameters'][$libelle] = $newServices['parameters'][$libelle];
+            }
+            foreach ($diffDeclarations as $libelle){
+                $currentServices[$libelle] = $newServices[$libelle];
             }
             $content = Yaml::dump($currentServices, 3, 4);
             $flink = fopen($target, 'w');

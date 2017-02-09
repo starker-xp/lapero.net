@@ -13,11 +13,11 @@ class EntiteGenerator extends AbstractGenerator
 
         $parameters = [
             'nomEntity'       => $libelle,
-            'namespace'       => $bundle->getNamespace(),
-            'namespaceBundle' => '@'.$bundle->getName(),
-            'namespaceFQC'    => str_replace('\\', '\\\\', $bundle->getNamespace()),
+            'namespaceEntity'       => $bundle->getNamespace(),
+            'namespaceEntityBundle' => '@'.$bundle->getName(),
+            'namespaceEntityFQC'    => str_replace('\\', '\\\\', $bundle->getNamespace()),
         ];
-        $parameters['nomService'] = strtolower(str_replace(['_Bundle', '@'], '', preg_replace('#\B([A-Z])#', '_\1', $parameters['namespaceBundle'])));
+        $parameters['nomServiceEntity'] = strtolower(str_replace(['_Bundle', '@'], '', preg_replace('#\B([A-Z])#', '_\1', $parameters['namespaceEntityBundle'])));
 
         foreach ($this->getFichiers() as $template) {
             try {

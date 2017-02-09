@@ -37,8 +37,11 @@ class ControllerGenerator extends AbstractGenerator
             'namespaceEntityFQC'    => str_replace('\\', '\\\\', $bundleEntite->getNamespace()),
         ];
 
-        $parameters['nomService'] = strtolower(
-            str_replace(['_Bundle', '@'], '', preg_replace('#\B([A-Z])#', '_\1', $parameters['namespaceBundle']))
+        $parameters['nomServiceController'] = strtolower(
+            str_replace(['_Bundle', '@'], '', preg_replace('#\B([A-Z])#', '_\1', $parameters['namespaceControllerBundle']))
+        );
+        $parameters['nomServiceEntity'] = strtolower(
+            str_replace(['_Bundle', '@'], '', preg_replace('#\B([A-Z])#', '_\1', $parameters['namespaceEntityBundle']))
         );
         foreach ($this->getFichiers() as $template) {
             try {
