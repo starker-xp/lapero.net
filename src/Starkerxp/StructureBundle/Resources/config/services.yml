@@ -15,3 +15,4 @@ services:
         calls:
             - [setSkeletonDirs, ["@=service('kernel').getBundle('StarkerxpStructureBundle').getPath()~'/'~ 'Resources'~'/'~'views'~'/'~'Gabarit'"]]
             - [setEntityManager, ['@doctrine.orm.entity_manager']]
+            - [setLocale, ['%locale%']]
