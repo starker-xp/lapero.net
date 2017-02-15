@@ -33,11 +33,8 @@ class OctosendHtmlRender extends AbstractRender
         return $contenuReplace;
     }
 
-    protected function renderLien($type, $contenu)
+    private function renderLien($type, $contenu)
     {
-        if (!in_array($type, ["unsub", "click"])) {
-            throw new \InvalidArgumentException();
-        }
         $arrayContenu = [];
         preg_match_all("#<a data-id=\"".$type."\" target=\"__blank\" href=\"(.*?)\" style=\"(.*?)\">(.*?)</a>#", $contenu, $arrayContenu);
         if (empty($arrayContenu[0])) {
