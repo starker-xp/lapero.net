@@ -4,3 +4,6 @@ starkerxp_campagne:
 app:
     resource: "@AppBundle/Resources/config/routing.yml"
     prefix:   /
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /doc

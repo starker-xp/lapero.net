@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Starkerxp\RabbitmqBundle\StarkerxpRabbitmqBundle(),
             new Starkerxp\CampagneBundle\StarkerxpCampagneBundle(),
             new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

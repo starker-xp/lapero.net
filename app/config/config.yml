@@ -65,3 +65,8 @@ swiftmailer:
 exercise_html_purifier:
     default:
         Cache.SerializerPath: '%kernel.cache_dir%/htmlpurifier'
+
+nelmio_api_doc:
+      sandbox:
+          request_format:
+              method: accept_header

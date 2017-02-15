@@ -90,7 +90,6 @@ class Campagne extends Entity
      *
      * @param string $name
      *
-     * @return Campagne
      */
     public function setName($name)
     {
@@ -103,7 +102,6 @@ class Campagne extends Entity
      *
      * @param string $type
      *
-     * @return Campagne
      */
     public function setType($type)
     {
@@ -125,7 +123,6 @@ class Campagne extends Entity
      *
      * @param string $status
      *
-     * @return Campagne
      */
     public function setStatus($status)
     {
@@ -147,7 +144,7 @@ class Campagne extends Entity
      *
      * @param \DateTime $sendAt
      *
-     * @return Campagne
+
      */
     public function setSendAt($sendAt)
     {
@@ -169,7 +166,6 @@ class Campagne extends Entity
      *
      * @param bool $deleted
      *
-     * @return Campagne
      */
     public function setDeleted($deleted)
     {

@@ -68,18 +68,6 @@ class Template extends Entity
     }
 
     /**
-     * Set uuid.
-     *
-     * @param guid $uuid
-     *
-     * @return Template
-     */
-    public function setUuid($uuid)
-    {
-        $this->uuid = $uuid;
-    }
-
-    /**
      * Get uuid.
      *
      * @return guid
@@ -90,15 +78,14 @@ class Template extends Entity
     }
 
     /**
-     * Set nom.
+     * Set uuid.
      *
-     * @param string $nom
+     * @param guid $uuid
      *
-     * @return Template
      */
-    public function setNom($nom)
+    public function setUuid($uuid)
     {
-        $this->nom = $nom;
+        $this->uuid = $uuid;
     }
 
     /**
@@ -112,15 +99,14 @@ class Template extends Entity
     }
 
     /**
-     * Set type.
+     * Set nom.
      *
-     * @param string $type
+     * @param string $nom
      *
-     * @return Template
      */
-    public function setType($type)
+    public function setNom($nom)
     {
-        $this->type = $type;
+        $this->nom = $nom;
     }
 
     /**
@@ -134,15 +120,14 @@ class Template extends Entity
     }
 
     /**
-     * Set sujet.
+     * Set type.
      *
-     * @param string $sujet
+     * @param string $type
      *
-     * @return Template
      */
-    public function setSujet($sujet)
+    public function setType($type)
     {
-        $this->sujet = $sujet;
+        $this->type = $type;
     }
 
     /**
@@ -156,15 +141,14 @@ class Template extends Entity
     }
 
     /**
-     * Set message.
+     * Set sujet.
      *
-     * @param string $message
+     * @param string $sujet
      *
-     * @return Template
      */
-    public function setMessage($message)
+    public function setSujet($sujet)
     {
-        $this->message = $message;
+        $this->sujet = $sujet;
     }
 
     /**
@@ -175,5 +159,16 @@ class Template extends Entity
     public function getMessage()
     {
         return $this->message;
+    }
+
+    /**
+     * Set message.
+     *
+     * @param string $message
+     *
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
     }
 }

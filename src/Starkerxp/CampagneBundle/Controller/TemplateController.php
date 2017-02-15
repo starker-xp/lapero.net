@@ -2,6 +2,7 @@
 
 namespace Starkerxp\CampagneBundle\Controller;
 
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Starkerxp\CampagneBundle\Entity\Template;
 use Starkerxp\CampagneBundle\Form\Type\TemplateType;
 use Starkerxp\StructureBundle\Controller\StructureController;
@@ -12,6 +13,43 @@ use Symfony\Component\HttpFoundation\Request;
 class TemplateController extends StructureController
 {
 
+    /**
+     * @ApiDoc(
+     *      resource=true,
+     *      description="Liste les templates.",
+     *      section="Template",
+     *      parameters={
+     *          {
+     *              "name"="offset",
+     *              "dataType"="integer",
+     *              "requirement"="\d+",
+     *              "description"="Permet d'afficher à partir de l'élément",
+     *              "required"="false"
+     *          },
+     *          {
+     *              "name"="limit",
+     *              "dataType"="integer",
+     *              "requirement"="\d+",
+     *              "description"="Permet de limiter le nombre de résultats.",
+     *              "required"="false"
+     *          },
+     *          {
+     *              "name"="fields",
+     *              "dataType"="string",
+     *              "requirement"="\w+",
+     *              "description"="Liste l'ensemble des informations à retourner séparé par une virgule.",
+     *              "required"="false"
+     *          },
+     *          {
+     *              "name"="sort",
+     *              "dataType"="string",
+     *              "requirement"="\w+",
+     *              "description"="Permet de déterminer l'ordre d'affichage des résultats séparé par une virgule. Exemple : -created_at,+sujet",
+     *              "required"="false"
+     *          }
+     *      }
+     * )
+     */
     public function cgetAction(Request $request)
     {
         $manager = $this->get("starkerxp_campagne.manager.template");
@@ -31,9 +69,35 @@ class TemplateController extends StructureController
             },
             $resultSets
         );
+
         return new JsonResponse($retour);
     }
 
+    /**
+     * @ApiDoc(
+     *      resource=true,
+     *      description="Affiche un template.",
+     *      section="Template",
+     *      requirements={
+     *          {
+     *              "name"="id",
+     *              "dataType"="integer",
+     *              "requirement"="\d+",
+     *              "description"="Permet d'afficher l'élément choisis",
+     *              "required"="true"
+     *          }
+     *      },
+     *      parameters={
+     *          {
+     *              "name"="fields",
+     *              "dataType"="string",
+     *              "requirement"="\w+",
+     *              "description"="Liste l'ensemble des informations à retourner séparé par une virgule.",
+     *              "required"="false"
+     *          }
+     *      }
+     * )
+     */
     public function getAction(Request $request)
     {
         $manager = $this->get("starkerxp_campagne.manager.template");
@@ -47,9 +111,17 @@ class TemplateController extends StructureController
             return new JsonResponse(["payload" => $this->translate("template.entity.not_found", "template")], 404);
         }
         $retour = $manager->toArray($template, $this->getFields($options['fields']));
+
         return new JsonResponse($retour);
     }
 
+    /**
+     * @ApiDoc(
+     *      resource=true,
+     *      description="Ajoute un template.",
+     *      section="Template"
+     * )
+     */
     public function postAction(Request $request)
     {
         $manager = $this->get("starkerxp_campagne.manager.template");
@@ -61,16 +133,34 @@ class TemplateController extends StructureController
                 $template = $form->getData();
                 $template->setUuid($this->getUuid());
                 $manager->insert($template);
+
                 return new JsonResponse(["payload" => $this->translate("template.entity.created", "template")], 201);
             }
         } catch (\Exception $e) {
             $manager->rollback();
+
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
 
         return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
     }
 
+    /**
+     * @ApiDoc(
+     *      resource=true,
+     *      description="Modifie un template.",
+     *      section="Template",
+     *      requirements={
+     *          {
+     *              "name"="id",
+     *              "dataType"="integer",
+     *              "requirement"="\d+",
+     *              "description"="Permet de modifier l'élément choisi.",
+     *              "required"="true"
+     *          }
+     *      }
+     * )
+     */
     public function putAction(Request $request)
     {
         $manager = $this->get("starkerxp_campagne.manager.template");
@@ -85,15 +175,34 @@ class TemplateController extends StructureController
             if ($form->isValid()) {
                 $template = $form->getData();
                 $manager->update($template);
+
                 return new JsonResponse(["payload" => $this->translate("template.entity.updated", "template")], 204);
             }
         } catch (\Exception $e) {
             $manager->rollback();
+
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
+
         return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
     }
 
+    /**
+     * @ApiDoc(
+     *      resource=true,
+     *      description="Supprime un template.",
+     *      section="Template",
+     *      requirements={
+     *          {
+     *              "name"="id",
+     *              "dataType"="integer",
+     *              "requirement"="\d+",
+     *              "description"="Permet de supprimer l'élément choisi.",
+     *              "required"="true"
+     *          }
+     *      }
+     * )
+     */
     public function deleteAction(Request $request)
     {
         $manager = $this->get("starkerxp_campagne.manager.template");
@@ -105,8 +214,10 @@ class TemplateController extends StructureController
             $manager->delete($template);
         } catch (\Exception $e) {
             $manager->rollback();
+
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
+
         return new JsonResponse(["payload" => $this->translate("template.entity.deleted", "template")], 204);
     }
 
