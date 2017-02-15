@@ -159,9 +159,11 @@ abstract class AbstractManager implements ManagerInterface
      * Dans le cas d'une gestion des transactions manuelles en cas d'échec on rollback le tout.
      */
     public function rollback(){
-        $this->entityManager->rollback();
-        $this->entityManager->close();
-        $this->modeTransactionnal = false;
+        if($this->modeTransactionnal) {
+            $this->entityManager->rollback();
+            $this->entityManager->close();
+            $this->modeTransactionnal = false;
+        }
     }
 
     /**
