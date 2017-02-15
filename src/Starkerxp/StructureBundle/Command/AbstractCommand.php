@@ -2,12 +2,12 @@
 
 namespace Starkerxp\StructureBundle\Command;
 
+
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Filesystem\LockHandler;
 
-abstract class LockCommand extends AbstractCommand
+abstract class AbstractCommand extends ContainerAwareCommand
 {
     /**
      * @var OutputInterface
@@ -29,22 +29,25 @@ abstract class LockCommand extends AbstractCommand
     {
         $this->input = $input;
         $this->output = $output;
-        $lockHandler = new LockHandler($this->nomLocker());
-        if (!$lockHandler->lock()) {
-            $this->output->writeln('<error>Commande déjà lancée !</error>');
-
-            return false;
-        }
         $this->traitement();
+
         return true;
     }
 
-    /**
-     * @return string
-     */
-    public function nomLocker()
+    abstract public function traitement();
+
+    protected function getRepository($entityFqdn)
     {
-        return $this->getName();
+        return $this->getEntityManager()->getRepository($entityFqdn);
     }
 
+    protected function getEntityManager()
+    {
+        return $this->getContainer()->get("doctrine")->getManager();
+    }
+
+    protected function getConnection()
+    {
+        return $this->getContainer()->get("doctrine")->getConnection();
+    }
 }
