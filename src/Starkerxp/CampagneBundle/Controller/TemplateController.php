@@ -23,28 +23,28 @@ class TemplateController extends StructureController
      *              "name"="offset",
      *              "dataType"="integer",
      *              "requirement"="\d+",
-     *              "description"="Permet d'afficher à partir de l'élément",
+     *              "description"="starkerxp_structure.doc.offset.result",
      *              "required"="false"
      *          },
      *          {
      *              "name"="limit",
      *              "dataType"="integer",
      *              "requirement"="\d+",
-     *              "description"="Permet de limiter le nombre de résultats.",
+     *              "description"="starkerxp_structure.doc.limit.result",
      *              "required"="false"
      *          },
      *          {
      *              "name"="fields",
      *              "dataType"="string",
      *              "requirement"="\w+",
-     *              "description"="Liste l'ensemble des informations à retourner séparé par une virgule.",
+     *              "description"="starkerxp_structure.doc.list_field.entity",
      *              "required"="false"
      *          },
      *          {
      *              "name"="sort",
      *              "dataType"="string",
      *              "requirement"="\w+",
-     *              "description"="Permet de déterminer l'ordre d'affichage des résultats séparé par une virgule. Exemple : -created_at,+sujet",
+     *              "description"="starkerxp_structure.doc.sort.result",
      *              "required"="false"
      *          }
      *      }
@@ -92,7 +92,7 @@ class TemplateController extends StructureController
      *              "name"="fields",
      *              "dataType"="string",
      *              "requirement"="\w+",
-     *              "description"="Liste l'ensemble des informations à retourner séparé par une virgule.",
+     *              "description"="starkerxp_structure.doc.list_field.entity",
      *              "required"="false"
      *          }
      *      }

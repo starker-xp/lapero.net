@@ -1,0 +1,5 @@
+starkerxp_structure.doc:
+    list_field.entity: "Liste l'ensemble des informations à retourner séparé par une virgule."
+    limit.result: "Permet de limiter le nombre de résultats."
+    offset.result: "Permet d'afficher à partir de l'élément"
+    sort.result: "Permet de déterminer l'ordre d'affichage des résultats séparé par une virgule. Exemple : -created_at,+sujet"
