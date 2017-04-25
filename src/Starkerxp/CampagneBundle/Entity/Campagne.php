@@ -9,7 +9,7 @@ use Starkerxp\StructureBundle\Entity\Entity;
  * Campagne.
  *
  * @ORM\Table(name="campagne", indexes={
- *  @ORM\Index(columns={"type"}),
+ *  @ORM\Index(columns={"name"}),
  *  @ORM\Index(columns={"deleted"}),
  *  @ORM\Index(columns={"status"})
  * })
@@ -17,11 +17,11 @@ use Starkerxp\StructureBundle\Entity\Entity;
  */
 class Campagne extends Entity
 {
-    const STATUS_DRAFT = 'draft';
-    const STATUS_PENDING = 'pending';
-    const STATUS_SENT = 'send';
-    const STATUS_CANCEL = 'cancel';
-    const STATUS_ERROR = 'error';
+    const DRAFT = 'draft';
+    const PENDING = 'pending';
+    const SENT = 'send';
+    const CANCEL = 'cancel';
+    const ERROR = 'error';
 
     /**
      * @var int
@@ -40,13 +40,6 @@ class Campagne extends Entity
     protected $name;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=255)
-     */
-    protected $type;
-
-    /**
      * @var bool
      *
      * @ORM\Column(name="deleted", type="boolean", nullable=true)
@@ -59,11 +52,6 @@ class Campagne extends Entity
      * @ORM\Column(name="status", type="string", length=255)
      */
     protected $status;
-
-    /**
-     * @ORM\Column(name="send_at", type="datetime", nullable=true)
-     */
-    protected $sendAt;
 
     /**
      * Get id.
@@ -98,27 +86,6 @@ class Campagne extends Entity
     }
 
     /**
-     * Set type.
-     *
-     * @param string $type
-     *
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-
-    /**
-     * Get type.
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
      * Set status.
      *
      * @param string $status
@@ -137,28 +104,6 @@ class Campagne extends Entity
     public function getStatus()
     {
         return $this->status;
-    }
-
-    /**
-     * Set sendAt.
-     *
-     * @param \DateTime $sendAt
-     *
-
-     */
-    public function setSendAt($sendAt)
-    {
-        $this->sendAt = $sendAt;
-    }
-
-    /**
-     * Get sendAt.
-     *
-     * @return \DateTime
-     */
-    public function getSendAt()
-    {
-        return $this->sendAt;
     }
 
     /**

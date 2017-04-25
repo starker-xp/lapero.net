@@ -13,5 +13,15 @@ class CampagneManager extends AbstractManager
         return $object instanceof Campagne;
     }
 
+    public function toArray(Campagne $object, $fields = [])
+    {
+        $array = [
+            "id"     => $object->getId(),
+            "name"   => $object->getName(),
+            "status" => $object->getStatus(),
+        ];
+
+        return $this->exportFields($array, $fields);
+    }
 
 }

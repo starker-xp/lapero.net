@@ -23,3 +23,10 @@ services:
 ```
 * Créer dans le dossier `src\Starkerxp\CampagneBundle\Tests\Render` le test unitaire de votre nouveau render
 
+
+# Lancer les tests unitaires
+
+```
+php /usr/local/phpunit src/Starkerxp/TemplateBundle/Tests/
+php /usr/local/phpunit src/Starkerxp/CampagneBundle/Tests/
+```

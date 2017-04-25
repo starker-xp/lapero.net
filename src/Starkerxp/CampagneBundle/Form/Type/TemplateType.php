@@ -14,6 +14,16 @@ class TemplateType extends AbstractType
     {
         $builder
             ->add(
+                'type',
+                Type\ChoiceType::class,
+                [
+                    "choices"     => [
+                        "email",
+                        "sms",
+                    ],
+                ]
+            )
+            ->add(
                 'nom',
                 Type\TextType::class,
                 [
@@ -43,16 +53,7 @@ class TemplateType extends AbstractType
                     ],
                 ]
             )
-            ->add(
-                'type',
-                Type\ChoiceType::class,
-                [
-                    "choices"     => [
-                        "email",
-                        "sms",
-                    ],
-                ]
-            );
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -23,13 +23,8 @@ class TemplateManager extends AbstractManager
             "sujet"   => $object->getSujet(),
             "message" => $object->getMessage(),
         ];
-        if(empty($fields)){
-            return $array;
-        }
-        $export = [];
-        foreach($fields as $row){
-            $export[$row] = $array[$row];
-        }
-        return $export;
+
+        return $this->exportFields($array, $fields);
+
     }
 }

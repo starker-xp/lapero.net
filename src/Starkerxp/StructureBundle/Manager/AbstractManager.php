@@ -48,6 +48,17 @@ abstract class AbstractManager implements ManagerInterface
     }
 
     /**
+     * Permet de gérer un flush en mode transactions manuelles.
+     */
+    private function flush()
+    {
+        if ($this->modeTransactionnal) {
+            $this->entityManager->commit();
+        }
+        $this->entityManager->flush();
+    }
+
+    /**
      * @param Entity $object
      *
      * @return Entity|boolean
@@ -143,14 +154,16 @@ abstract class AbstractManager implements ManagerInterface
     /**
      * Vide l'UnitOfWork de l'entity manager.
      */
-    public function clear(){
+    public function clear()
+    {
         $this->entityManager->clear();
     }
 
     /**
      * Permet de passer en gestion des transations manuelles. (Conseillé par SensioLabs).
      */
-    public function beginTransaction(){
+    public function beginTransaction()
+    {
         $this->modeTransactionnal = true;
         $this->entityManager->beginTransaction();
     }
@@ -158,23 +171,26 @@ abstract class AbstractManager implements ManagerInterface
     /**
      * Dans le cas d'une gestion des transactions manuelles en cas d'échec on rollback le tout.
      */
-    public function rollback(){
-        if($this->modeTransactionnal) {
+    public function rollback()
+    {
+        if ($this->modeTransactionnal) {
             $this->entityManager->rollback();
             $this->entityManager->close();
             $this->modeTransactionnal = false;
         }
     }
 
-    /**
-     * Permet de gérer un flush en mode transactions manuelles.
-     */
-    private function flush(){
-        if($this->modeTransactionnal){
-            $this->entityManager->commit();
-        }
-        $this->entityManager->flush();
-    }
 
+    protected function exportFields(array $array, array $fields = [])
+    {
+        if (empty($fields)) {
+            return $array;
+        }
+        $export = [];
+        foreach ($fields as $row) {
+            $export[$row] = $array[$row];
+        }
+        return $export;
+    }
 
 }
