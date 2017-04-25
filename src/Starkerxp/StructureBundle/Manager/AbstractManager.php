@@ -179,8 +179,15 @@ abstract class AbstractManager implements ManagerInterface
             $this->modeTransactionnal = false;
         }
     }
-
-
+    
+    /**
+     * Permet d'extraire uniquement les champs désirés.
+     *
+     * @param array $array
+     * @param array $fields
+     *
+     * @return array
+     */
     protected function exportFields(array $array, array $fields = [])
     {
         if (empty($fields)) {
