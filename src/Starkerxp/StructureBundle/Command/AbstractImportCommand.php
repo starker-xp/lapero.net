@@ -130,7 +130,7 @@ abstract class AbstractImportCommand extends LockCommand
                 } else {
                     $this->output->writeln("<error>Une erreur est survenue</error>");
                     $this->output->writeln($retour);
-                    exit;
+                    return false;
                 }
             }
             $this->nombreElementsDejaEnvoye += count($donnees);

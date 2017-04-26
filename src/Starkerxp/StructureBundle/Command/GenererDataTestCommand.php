@@ -74,8 +74,11 @@ class GenererDataTestCommand extends AbstractCommand
             $nomTable = $data['nomTable'];
             $where = (!empty($data['discriminatorValue']) ? $data['discriminatorColumn']."='".$data['discriminatorValue']."'" : "1=1");
 
-            $query = $this->getEntityManager()->createQuery("SELECT :champs FROM ".$nomTable." WHERE ".$where);
+            $query = $this->getEntityManager()->createQuery("SELECT :champs FROM :nomTable WHERE :where");
             $query->setParameter("champs", implode(",", array_keys($listeDesChamps)));
+            $query->setParameter("nomTable", $nomTable);
+            $query->setParameter("where", $where);
+
             $resultats = $query->getResult();
             if (empty($resultats)) {
                 continue;
