@@ -2,7 +2,6 @@
 
 namespace Starkerxp\StructureBundle\Command;
 
-
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -41,6 +40,11 @@ abstract class AbstractCommand extends ContainerAwareCommand
         return $this->getEntityManager()->getRepository($entityFqdn);
     }
 
+    /**
+     * Récupère l'entity manager.
+     *
+     * @return \Doctrine\ORM\EntityManager
+     */
     protected function getEntityManager()
     {
         return $this->getContainer()->get("doctrine")->getManager();
