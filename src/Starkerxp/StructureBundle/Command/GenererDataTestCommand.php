@@ -19,7 +19,7 @@ class GenererDataTestCommand extends AbstractCommand
     {
         if ($this->getContainer()->get('kernel')->getEnvironment() == 'prod') {
             $this->output->writeln("<error>Cette commande ne peut être lancé en environnement de production</error>");
-            exit;
+            return false;
         }
         $meta = $this->getEntityManager()->getMetadataFactory()->getAllMetadata();
         // On récupère la liste des entites en fonction des nom de tables supposés.
@@ -34,7 +34,6 @@ class GenererDataTestCommand extends AbstractCommand
                 ];
                 continue;
             }
-            //echo "\n\nOn format\n";
             $listeDesColonnes = array_flip($m->columnNames);
             $listeDesChamps = [];
             foreach ($listeDesColonnes as $column => $field) {
@@ -73,7 +72,8 @@ class GenererDataTestCommand extends AbstractCommand
             $listeDesChamps = $data['listeDesChamps'];
             $nomTable = $data['nomTable'];
             $where = (!empty($data['discriminatorValue']) ? $data['discriminatorColumn']."='".$data['discriminatorValue']."'" : "1=1");
-            $resultats = $this->getConnection()->fetchAll("SELECT ".implode(",", array_keys($listeDesChamps))." FROM ".$nomTable." WHERE ".$where);
+            $sql = "SELECT ".implode(",", array_keys($listeDesChamps))." FROM ".$nomTable." WHERE ".$where;
+            $resultats = $this->getConnection()->fetchAll($sql);
             if (empty($resultats)) {
                 continue;
             }

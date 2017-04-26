@@ -2,7 +2,6 @@
 
 namespace Starkerxp\StructureBundle\Command;
 
-use Starkerxp\StructureBundle\Generator\EntiteGenerator;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
