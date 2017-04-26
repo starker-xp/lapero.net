@@ -19,6 +19,7 @@ class GenererDataTestCommand extends AbstractCommand
     {
         if ($this->getContainer()->get('kernel')->getEnvironment() == 'prod') {
             $this->output->writeln("<error>Cette commande ne peut être lancé en environnement de production</error>");
+
             return false;
         }
         $meta = $this->getEntityManager()->getMetadataFactory()->getAllMetadata();
@@ -72,8 +73,9 @@ class GenererDataTestCommand extends AbstractCommand
             $listeDesChamps = $data['listeDesChamps'];
             $nomTable = $data['nomTable'];
             $where = (!empty($data['discriminatorValue']) ? $data['discriminatorColumn']."='".$data['discriminatorValue']."'" : "1=1");
-            $strChamp = implode(",", array_keys($listeDesChamps));
-            $query = $this->getEntityManager()->createQuery("SELECT ".$strChamp." FROM ".$nomTable." WHERE ".$where);
+
+            $query = $this->getEntityManager()->createQuery("SELECT :champs FROM ".$nomTable." WHERE ".$where);
+            $query->setParameter("champs", implode(",", array_keys($listeDesChamps)));
             $resultats = $query->getResult();
             if (empty($resultats)) {
                 continue;
