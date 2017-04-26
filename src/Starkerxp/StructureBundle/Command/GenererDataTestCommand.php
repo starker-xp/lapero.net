@@ -72,7 +72,8 @@ class GenererDataTestCommand extends AbstractCommand
             $listeDesChamps = $data['listeDesChamps'];
             $nomTable = $data['nomTable'];
             $where = (!empty($data['discriminatorValue']) ? $data['discriminatorColumn']."='".$data['discriminatorValue']."'" : "1=1");
-            $sql = "SELECT ".implode(",", array_keys($listeDesChamps))." FROM ".$nomTable." WHERE ".$where;
+            $strChamp = implode(",", array_keys($listeDesChamps));
+            $sql = "SELECT ".$strChamp." FROM ".$nomTable." WHERE ".$where;
             $resultats = $this->getConnection()->fetchAll($sql);
             if (empty($resultats)) {
                 continue;
