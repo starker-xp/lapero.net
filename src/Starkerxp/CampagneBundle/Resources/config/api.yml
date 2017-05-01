@@ -1,0 +1,3 @@
+services:
+    starkerxp_campagne.api.manager:
+        class: Starkerxp\CampagneBundle\Api\ApiManager
