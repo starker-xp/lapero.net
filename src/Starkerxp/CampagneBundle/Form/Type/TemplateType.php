@@ -20,6 +20,7 @@ class TemplateType extends AbstractType
                     "choices"     => [
                         "email",
                         "sms",
+                        "courrier",
                     ],
                 ]
             )
