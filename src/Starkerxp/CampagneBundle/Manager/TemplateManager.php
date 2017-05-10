@@ -25,6 +25,5 @@ class TemplateManager extends AbstractManager
         ];
 
         return $this->exportFields($array, $fields);
-
     }
 }

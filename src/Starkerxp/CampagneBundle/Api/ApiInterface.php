@@ -15,9 +15,7 @@ interface ApiInterface
 
     public function setConfig(array $config);
 
-    public function setDestinataire($destinataire);
-
-    public function envoyer(array $content, array $options);
+    public function envoyer($destinataire, array $content, array $options);
 
     public function getRetour();
 }

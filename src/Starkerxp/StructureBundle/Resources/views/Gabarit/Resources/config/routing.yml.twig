@@ -1,30 +1,30 @@
 {{ nomServiceController }}.controller.{{ nomControllerCamelize|lower }}.cget:
     path:     /{{ nomController|lower }}s
-    defaults: { _controller: "{{namespaceControllerBundle}}:{{ nomController }}:cget" }
+    defaults: { _controller: "{{namespaceController}}:{{ nomController }}:cget" }
     methods:  [GET]
 
 {{ nomServiceController }}.controller.{{ nomControllerCamelize|lower }}.get:
     path:     /{{ nomController|lower }}s/{id}
-    defaults: { _controller: "{{namespaceControllerBundle}}:{{ nomController }}:get" }
+    defaults: { _controller: "{{namespaceController}}:{{ nomController }}:get" }
     methods:  [GET]
     requirements:
-        page: '\d+'
+        {{ nomController|lower }}_id: '\d+'
 
 {{ nomServiceController }}.controller.{{ nomControllerCamelize|lower }}.post:
     path:     /{{ nomController|lower }}s
-    defaults: { _controller: "{{namespaceControllerBundle}}:{{ nomController }}:post" }
+    defaults: { _controller: "{{namespaceController}}:{{ nomController }}:post" }
     methods:  [POST]
 
 {{ nomServiceController }}.controller.{{ nomControllerCamelize|lower }}.put:
     path:     /{{ nomController|lower }}s/{id}
-    defaults: { _controller: "{{namespaceControllerBundle}}:{{ nomController }}:put" }
+    defaults: { _controller: "{{namespaceController}}:{{ nomController }}:put" }
     methods:  [PUT]
     requirements:
-        page: '\d+'
+        {{ nomController|lower }}_id: '\d+'
 
 {{ nomServiceController }}.controller.{{ nomControllerCamelize|lower }}.delete:
     path:     /{{ nomController|lower }}s/{id}
-    defaults: { _controller: "{{namespaceControllerBundle}}:{{ nomController }}:delete" }
+    defaults: { _controller: "{{namespaceController}}:{{ nomController }}:delete" }
     methods:  [DELETE]
     requirements:
-        page: '\d+'
+        {{ nomController|lower }}_id: '\d+'

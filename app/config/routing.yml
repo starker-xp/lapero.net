@@ -1,3 +1,7 @@
+starkerxp_utilisateur:
+    resource: "@StarkerxpUtilisateurBundle/Resources/config/routing.yml"
+    prefix:   /
+
 starkerxp_campagne:
     resource: "@StarkerxpCampagneBundle/Resources/config/routing.yml"
     prefix:   /

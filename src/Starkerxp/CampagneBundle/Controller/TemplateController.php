@@ -17,7 +17,7 @@ class TemplateController extends StructureController
      * @ApiDoc(
      *      resource=true,
      *      description="Liste les templates.",
-     *      section="Template",
+     *      section="Campagne",
      *      parameters={
      *          {
      *              "name"="offset",
@@ -77,7 +77,7 @@ class TemplateController extends StructureController
      * @ApiDoc(
      *      resource=true,
      *      description="Affiche un template.",
-     *      section="Template",
+     *      section="Campagne",
      *      requirements={
      *          {
      *              "name"="id",
@@ -119,7 +119,7 @@ class TemplateController extends StructureController
      * @ApiDoc(
      *      resource=true,
      *      description="Ajoute un template.",
-     *      section="Template"
+     *      section="Campagne"
      * )
      */
     public function postAction(Request $request)
@@ -149,7 +149,7 @@ class TemplateController extends StructureController
      * @ApiDoc(
      *      resource=true,
      *      description="Modifie un template.",
-     *      section="Template",
+     *      section="Campagne",
      *      requirements={
      *          {
      *              "name"="id",
@@ -191,7 +191,7 @@ class TemplateController extends StructureController
      * @ApiDoc(
      *      resource=true,
      *      description="Supprime un template.",
-     *      section="Template",
+     *      section="Campagne",
      *      requirements={
      *          {
      *              "name"="id",

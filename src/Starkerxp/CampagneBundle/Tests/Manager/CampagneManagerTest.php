@@ -35,10 +35,8 @@ class CampagneManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
         $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/DefaultCampagne.yml']);
         $campagne = new \Starkerxp\CampagneBundle\Entity\Campagne();
         $campagne->setName('Ma super campagne');
-        $campagne->setType('marketing');
         $campagne->setDeleted(false);
-        $campagne->setStatus(Campagne::STATUS_DRAFT);
-        $campagne->setSendAt(null);
+        $campagne->setStatus(Campagne::DRAFT);
         $this->manager->insert($campagne);
         $this->assertCount(2, $this->manager->findAll());
     }
@@ -52,10 +50,10 @@ class CampagneManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
         $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/DefaultCampagne.yml']);
         $criteria = ['createdAt' => new \DateTime('2016-08-05 12:12:12')];
         $campagne = $this->manager->findOneBy($criteria);
-        $campagne->setStatus(Campagne::STATUS_ERROR);
+        $campagne->setStatus(Campagne::ERROR);
         $this->manager->update($campagne);
         $campagnePostUpdate = $this->manager->findOneBy($criteria);
-        $this->assertEquals(Campagne::STATUS_ERROR, $campagnePostUpdate->getStatus());
+        $this->assertEquals(Campagne::ERROR, $campagnePostUpdate->getStatus());
         $this->assertNotEmpty($campagnePostUpdate->getUpdatedAt());
     }
 }

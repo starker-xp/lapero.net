@@ -7,35 +7,42 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\MappedSuperclass
  */
-abstract class Entity
+abstract class Entity extends TimestampEntity
 {
-    /**
-     * @ORM\Column(name="created_at", type="datetime")
-     */
-    protected $createdAt;
+
+    use \Starkerxp\StructureBundle\Entity\UuidTrait;
 
     /**
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @var \Starkerxp\StructureBundle\Entity\UtilisateurInterface
+     *
+     * @ORM\ManyToOne(targetEntity="\Starkerxp\StructureBundle\Entity\UtilisateurInterface", cascade="persist")
+     * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id", nullable=false)
      */
-    protected $updatedAt;
+    protected $utilisateur;
 
-    public function getCreatedAt()
+
+
+    /**
+     * Get utilisateur
+     *
+     * @return \Starkerxp\StructureBundle\Entity\UtilisateurInterface
+     */
+    public function getUtilisateur()
     {
-        return $this->createdAt;
+        return $this->utilisateur;
     }
 
-    public function getUpdatedAt()
+    /**
+     * Set UtilisateurInterface
+     *
+     * @param \Starkerxp\StructureBundle\Entity\UtilisateurInterface $utilisateur
+     *
+     */
+    public function setUtilisateur(\Starkerxp\StructureBundle\Entity\UtilisateurInterface $utilisateur)
     {
-        return $this->updatedAt;
+        $this->utilisateur = $utilisateur;
     }
 
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
 
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
+
 }

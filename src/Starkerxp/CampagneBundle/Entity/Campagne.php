@@ -54,6 +54,22 @@ class Campagne extends Entity
     protected $status;
 
     /**
+     * @ORM\OneToMany(
+     *      targetEntity="Event",
+     *      mappedBy="campagne"
+     * )
+     */
+    protected $events;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id.
      *
      * @return int
@@ -86,6 +102,16 @@ class Campagne extends Entity
     }
 
     /**
+     * Get status.
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
      * Set status.
      *
      * @param string $status
@@ -97,13 +123,13 @@ class Campagne extends Entity
     }
 
     /**
-     * Get status.
+     * Get deleted.
      *
-     * @return string
+     * @return bool
      */
-    public function getStatus()
+    public function getDeleted()
     {
-        return $this->status;
+        return $this->deleted;
     }
 
     /**
@@ -118,12 +144,36 @@ class Campagne extends Entity
     }
 
     /**
-     * Get deleted.
+     * Add event
      *
-     * @return bool
+     * @param \Starkerxp\CampagneBundle\Entity\Event $event
+     *
+     * @return Campagne
      */
-    public function getDeleted()
+    public function addEvent(\Starkerxp\CampagneBundle\Entity\Event $event)
     {
-        return $this->deleted;
+        $this->events[] = $event;
+
+        return $this;
+    }
+
+    /**
+     * Remove event
+     *
+     * @param \Starkerxp\CampagneBundle\Entity\Event $event
+     */
+    public function removeEvent(\Starkerxp\CampagneBundle\Entity\Event $event)
+    {
+        $this->events->removeElement($event);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 }

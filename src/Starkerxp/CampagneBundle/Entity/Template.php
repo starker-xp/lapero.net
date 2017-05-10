@@ -23,13 +23,6 @@ class Template extends Entity
     protected $id;
 
     /**
-     * @var guid
-     *
-     * @ORM\Column(name="uuid", type="guid")
-     */
-    protected $uuid;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -67,26 +60,7 @@ class Template extends Entity
         return $this->id;
     }
 
-    /**
-     * Get uuid.
-     *
-     * @return guid
-     */
-    public function getUuid()
-    {
-        return $this->uuid;
-    }
 
-    /**
-     * Set uuid.
-     *
-     * @param guid $uuid
-     *
-     */
-    public function setUuid($uuid)
-    {
-        $this->uuid = $uuid;
-    }
 
     /**
      * Get nom.

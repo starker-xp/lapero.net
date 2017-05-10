@@ -11,7 +11,6 @@ namespace Starkerxp\CampagneBundle\Api;
 abstract class AbstractApi implements ApiInterface
 {
     protected $config;
-    protected $destinataire;
     protected $api;
     protected $retour;
 

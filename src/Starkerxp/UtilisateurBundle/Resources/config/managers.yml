@@ -1,0 +1,6 @@
+services:
+    starkerxp_utilisateur.manager.utilisateur:
+        class: Starkerxp\UtilisateurBundle\Manager\UtilisateurManager
+        arguments: ["@doctrine.orm.entity_manager", "Starkerxp\\UtilisateurBundle\\Entity\\Utilisateur"]
+        tags:
+            - { name: starkerxp.manager.entity }

@@ -1,20 +1,19 @@
 services:
     starkerxp_campagne.manager.render:
         class: Starkerxp\CampagneBundle\Render\RenderManager
-
     starkerxp_campagne.manager.campagne:
         class: Starkerxp\CampagneBundle\Manager\CampagneManager
-        arguments:
-            - '@doctrine.orm.entity_manager'
-            - Starkerxp\CampagneBundle\Entity\Campagne
-        tags:
-            - { name: starkerxp.manager.entity }
-
+        arguments: ['@doctrine.orm.entity_manager', Starkerxp\CampagneBundle\Entity\Campagne]
+        tags: [{ name: starkerxp.manager.entity }]
     starkerxp_campagne.manager.template:
         class: Starkerxp\CampagneBundle\Manager\TemplateManager
-        arguments:
-            - '@doctrine.orm.entity_manager'
-            - Starkerxp\CampagneBundle\Entity\Template
-        tags:
-            - { name: starkerxp.manager.entity }
-
+        arguments: ['@doctrine.orm.entity_manager', Starkerxp\CampagneBundle\Entity\Template]
+        tags: [{ name: starkerxp.manager.entity }]
+    starkerxp_campagne.manager.event:
+        class: Starkerxp\CampagneBundle\Manager\EventManager
+        arguments: ['@doctrine.orm.entity_manager', Starkerxp\CampagneBundle\Entity\Event]
+        tags: [{ name: starkerxp.manager.entity }]
+    starkerxp_campagne.manager.cible:
+        class: Starkerxp\CampagneBundle\Manager\CibleManager
+        arguments: ['@doctrine.orm.entity_manager', Starkerxp\CampagneBundle\Entity\Cible]
+        tags: [{ name: starkerxp.manager.entity }]

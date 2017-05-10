@@ -16,33 +16,38 @@ class {{ nomController }}Controller extends StructureController
      * @ApiDoc(
      *      resource=true,
      *      description="Liste les {{ nomController|lower }}s.",
-     *      section="{{ nomController|lower }}",
+     *      section="{{ namespaceController|title }}",
      *      parameters={
      *          {
      *              "name"="offset",
      *              "dataType"="integer",
      *              "requirement"="\d+",
-     *              "description"="Permet d'afficher à partir de l'élément"
+     *              "description"="starkerxp_structure.doc.offset.result",
+     *              "required"="false"
      *          },
      *          {
      *              "name"="limit",
      *              "dataType"="integer",
      *              "requirement"="\d+",
-     *              "description"="Permet de limiter le nombre de résultats."
+     *              "description"="starkerxp_structure.doc.limit.result",
+     *              "required"="false"
      *          },
      *          {
      *              "name"="fields",
      *              "dataType"="string",
      *              "requirement"="\w+",
-     *              "description"="Liste l'ensemble des informations à retourner séparé par une virgule."
+     *              "description"="starkerxp_structure.doc.list_field.entity",
+     *              "required"="false"
      *          },
      *          {
      *              "name"="sort",
      *              "dataType"="string",
      *              "requirement"="\w+",
-     *              "description"="Permet de déterminer l'ordre d'affichage des résultats séparé par une virgule. Exemple : -created_at,+sujet"
+     *              "description"="starkerxp_structure.doc.sort.result",
+     *              "required"="false"
      *          }
      *      }
+     * )
      * )
      */
     public function cgetAction(Request $request)
@@ -72,10 +77,10 @@ class {{ nomController }}Controller extends StructureController
      * @ApiDoc(
      *      resource=true,
      *      description="Affiche un {{ nomController|lower }}.",
-     *      section="{{ nomController|lower }}",
+     *      section="{{ namespaceController|title }}",
 	 *      requirements={
      *          {
-     *              "name"="id",
+     *              "name"="{{ nomController|lower }}_id",
      *              "dataType"="integer",
      *              "requirement"="\d+",
      *              "description"="Permet d'afficher l'élément choisis"
@@ -86,7 +91,8 @@ class {{ nomController }}Controller extends StructureController
      *              "name"="fields",
      *              "dataType"="string",
      *              "requirement"="\w+",
-     *              "description"="Liste l'ensemble des informations à retourner séparé par une virgule."
+     *              "description"="starkerxp_structure.doc.list_field.entity",
+     *              "required"="false"
      *          }
      *      }
      * )
@@ -96,7 +102,7 @@ class {{ nomController }}Controller extends StructureController
         $manager = $this->get("{{nomServiceEntity}}.manager.{{ nomController|lower }}");
         try {
             $options = $this->resolveParams()->resolve($request->query->all());
-            ${{ nomController|lower }} = $manager->findOneBy(['id' => $request->get('id')]);
+            ${{ nomController|lower }} = $manager->findOneBy(['id' => $request->get('{{ nomController|lower }}_id')]);
         } catch (\Exception $e) {
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
@@ -112,7 +118,7 @@ class {{ nomController }}Controller extends StructureController
      * @ApiDoc(
      *      resource=true,
      *      description="Ajoute un {{ nomController|lower }}.",
-     *      section="{{ nomController|lower }}"
+     *      section="{{ namespaceController|title }}"
      * )
      */
     public function postAction(Request $request)
@@ -140,10 +146,10 @@ class {{ nomController }}Controller extends StructureController
      * @ApiDoc(
      *      resource=true,
      *      description="Modifie un {{ nomController|lower }}.",
-     *      section="{{ nomController|lower }}",
+     *      section="{{ namespaceController|title }}",
 	 *      requirements={
      *          {
-     *              "name"="id",
+     *              "name"="{{ nomController|lower }}_id",
      *              "dataType"="integer",
      *              "requirement"="\d+",
      *              "description"="Permet de modifier l'élément choisi."
@@ -154,7 +160,7 @@ class {{ nomController }}Controller extends StructureController
     public function putAction(Request $request)
     {
         $manager = $this->get("{{nomServiceEntity}}.manager.{{ nomController|lower }}");
-        ${{ nomController|lower }} = $manager->find($request->get('id'));
+        ${{ nomController|lower }} = $manager->find($request->get('{{ nomController|lower }}_id'));
         if (!${{ nomController|lower }} instanceof {{ nomEntity }}) {
             return new JsonResponse(["payload" => $this->translate("{{ nomEntity|lower }}.entity.not_found", "{{ nomController|lower }}")], 404);
         }
@@ -178,10 +184,10 @@ class {{ nomController }}Controller extends StructureController
      * @ApiDoc(
      *      resource=true,
      *      description="Supprime un {{ nomController|lower }}.",
-     *      section="{{ nomController|lower }}",
+     *      section="{{ namespaceController|title }}",
 	 *      requirements={
      *          {
-     *              "name"="id",
+     *              "name"="{{ nomController|lower }}_id",
      *              "dataType"="integer",
      *              "requirement"="\d+",
      *              "description"="Permet de supprimer l'élément choisi."
@@ -192,7 +198,7 @@ class {{ nomController }}Controller extends StructureController
     public function deleteAction(Request $request)
     {
         $manager = $this->get("{{nomServiceEntity}}.manager.{{ nomController|lower }}");
-        ${{ nomController|lower }} = $manager->find($request->get('id'));
+        ${{ nomController|lower }} = $manager->find($request->get('{{ nomController|lower }}_id'));
         if (!${{ nomController|lower }} instanceof {{ nomEntity }}) {
             return new JsonResponse(["payload" => $this->translate("{{ nomEntity|lower }}.entity.not_found", "{{ nomController|lower }}")], 404);
         }

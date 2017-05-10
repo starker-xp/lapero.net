@@ -53,6 +53,8 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        resolve_target_entities:
+            Starkerxp\StructureBundle\Entity\UtilisateurInterface: Starkerxp\UtilisateurBundle\Entity\Utilisateur
 
 # Swiftmailer Configuration
 swiftmailer:

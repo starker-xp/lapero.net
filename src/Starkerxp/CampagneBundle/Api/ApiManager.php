@@ -14,17 +14,20 @@ class ApiManager extends AbstractApi
      * @var array
      */
     private $apiService = [];
+
     /**
+     * @param $destinataire
      * @param array $content
+     * @param array $options
      * @return bool
      */
-    public function envoyer(array $content, array $options = [])
+    public function envoyer($destinataire, array $content, array $options = [])
     {
         if (empty($content)) {
             return false;
         }
         if ($apiService = $this->getSupport()) {
-            $apiService->envoyer($content, $options);
+            $apiService->envoyer($destinataire, $content, $options);
         }
         return true;
     }
@@ -36,11 +39,8 @@ class ApiManager extends AbstractApi
         if (empty($this->config)) {
             return false;
         }
-        if (empty($this->destinataire)) {
-            return false;
-        }
+
         foreach ($this->apiService as $service) {
-            $service->setDestinataire($this->destinataire);
             $service->setConfig($this->config);
             if ($service instanceof ApiInterface && $service->getSupport()) {
                 return $service;
@@ -65,8 +65,5 @@ class ApiManager extends AbstractApi
     {
         return $this->apiService;
     }
-    public function setDestinataire($destinataire)
-    {
-        $this->destinataire = $destinataire;
-    }
+
 }
