@@ -47,14 +47,14 @@ class Cible extends Entity
     /**
      * @var bool
      *
-     * @ORM\Column(name="manually_removed", type="boolean")
+     * @ORM\Column(name="manually_removed", type="boolean", options={"default": false})
      */
     protected $manuallyRemoved = false;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="manually_added", type="boolean")
+     * @ORM\Column(name="manually_added", type="boolean", options={"default": false})
      */
     protected $manuallyAdded = false;
 

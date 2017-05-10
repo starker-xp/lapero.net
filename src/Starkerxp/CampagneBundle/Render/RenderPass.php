@@ -16,7 +16,11 @@ class RenderPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        $definition = $container->findDefinition('starkerxp_campagne.manager.render');
+        $definitionId = 'starkerxp_campagne.manager.render';
+        if (!($container->has($definitionId))) {
+            return false;
+        }
+        $definition = $container->findDefinition($definitionId);
         foreach (array_keys($container->findTaggedServiceIds('starkerxp_campagne.render')) as $id) {
             $definition->addMethodCall('addRenderService', [new Reference($id)]);
         }

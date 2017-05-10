@@ -8,15 +8,19 @@
 
 namespace Starkerxp\StructureBundle\Manager;
 
-use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 class ManagerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        $definition = $container->findDefinition('starkerxp_structure.manager.entity');
+        $definitionId = 'starkerxp_campagne.manager.entity';
+        if (!($container->has($definitionId))) {
+            return false;
+        }
+        $definition = $container->findDefinition($definitionId);
         foreach (array_keys($container->findTaggedServiceIds('starkerxp.manager.entity')) as $id) {
             $definition->addMethodCall('addService', [new Reference($id)]);
         }

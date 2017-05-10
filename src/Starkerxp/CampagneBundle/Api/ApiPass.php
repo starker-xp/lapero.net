@@ -10,7 +10,11 @@ class ApiPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        $definition = $container->findDefinition('starkerxp_campagne.api.manager');
+        $definitionId = 'starkerxp_campagne.api.manager';
+        if (!($container->has($definitionId))) {
+            return false;
+        }
+        $definition = $container->findDefinition($definitionId);
         foreach (array_keys($container->findTaggedServiceIds('starkerxp_campagne.api')) as $id) {
             $definition->addMethodCall('addApiService', [new Reference($id)]);
         }
