@@ -3,7 +3,7 @@
 namespace Starkerxp\CampagneBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Starkerxp\StructureBundle\Entity\Entity;
+use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
 
 /**
  * Campagne.
@@ -15,7 +15,7 @@ use Starkerxp\StructureBundle\Entity\Entity;
  * })
  * @ORM\Entity(repositoryClass="Starkerxp\CampagneBundle\Repository\CampagneRepository")
  */
-class Campagne extends Entity
+class Campagne extends UtilisateurEntity
 {
     const DRAFT = 'draft';
     const PENDING = 'pending';
@@ -42,9 +42,9 @@ class Campagne extends Entity
     /**
      * @var bool
      *
-     * @ORM\Column(name="deleted", type="boolean", nullable=true)
+     * @ORM\Column(name="deleted", type="boolean", options={"default": false})
      */
-    protected $deleted = false;
+    protected $deleted;
 
     /**
      * @var string
@@ -62,11 +62,21 @@ class Campagne extends Entity
     protected $events;
 
     /**
+     * @ORM\OneToMany(
+     *      targetEntity="Cible",
+     *      mappedBy="campagne"
+     * )
+     */
+    protected $clients;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->clients = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->status = self::DRAFT;
     }
 
     /**

@@ -13,36 +13,21 @@ abstract class Entity extends TimestampEntity
     use \Starkerxp\StructureBundle\Entity\UuidTrait;
 
     /**
-     * @var \Starkerxp\StructureBundle\Entity\UtilisateurInterface
+     * @var int
      *
-     * @ORM\ManyToOne(targetEntity="\Starkerxp\StructureBundle\Entity\UtilisateurInterface", cascade="persist")
-     * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id", nullable=false)
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $utilisateur;
-
-
+    protected $id;
 
     /**
-     * Get utilisateur
-     *
-     * @return \Starkerxp\StructureBundle\Entity\UtilisateurInterface
+     * @return int
      */
-    public function getUtilisateur()
+    public function getId()
     {
-        return $this->utilisateur;
+        return $this->id;
     }
-
-    /**
-     * Set UtilisateurInterface
-     *
-     * @param \Starkerxp\StructureBundle\Entity\UtilisateurInterface $utilisateur
-     *
-     */
-    public function setUtilisateur(\Starkerxp\StructureBundle\Entity\UtilisateurInterface $utilisateur)
-    {
-        $this->utilisateur = $utilisateur;
-    }
-
 
 
 }

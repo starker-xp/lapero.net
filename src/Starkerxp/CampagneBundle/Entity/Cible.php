@@ -3,7 +3,7 @@
 namespace Starkerxp\CampagneBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Starkerxp\StructureBundle\Entity\Entity;
+use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
 
 /**
  * Cible
@@ -11,7 +11,7 @@ use Starkerxp\StructureBundle\Entity\Entity;
  * @ORM\Table(name="campagne_cible")
  * @ORM\Entity(repositoryClass="Starkerxp\CampagneBundle\Repository\CibleRepository")
  */
-class Cible extends Entity
+class Cible extends UtilisateurEntity
 {
     /**
      * @var int
@@ -32,7 +32,7 @@ class Cible extends Entity
     /**
      * @var Campagne
      *
-     * @ORM\ManyToOne(targetEntity="Campagne", cascade="persist")
+     * @ORM\ManyToOne(targetEntity="Campagne", cascade="persist", inversedBy="clients")
      * @ORM\JoinColumn(name="campagne_id", referencedColumnName="id", nullable=false)
      */
     protected $campagne;

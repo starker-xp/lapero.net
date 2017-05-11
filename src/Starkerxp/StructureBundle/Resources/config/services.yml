@@ -16,3 +16,8 @@ services:
             - [setSkeletonDirs, ["@=service('kernel').getBundle('StarkerxpStructureBundle').getPath()~'/'~ 'Resources'~'/'~'views'~'/'~'Gabarit'"]]
             - [setEntityManager, ['@doctrine.orm.entity_manager']]
             - [setLocale, ['%locale%']]
+    starkerxp_structure.listener.entity_subscriber:
+            class: Starkerxp\StructureBundle\Listener\EntitySubscriber
+            arguments: ["@=service('security.token_storage').getToken()"]
+            tags:
+                - {name: doctrine.event_subscriber, connection: default}

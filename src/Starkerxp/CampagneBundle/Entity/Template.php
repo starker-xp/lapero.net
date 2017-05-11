@@ -3,7 +3,7 @@
 namespace Starkerxp\CampagneBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Starkerxp\StructureBundle\Entity\Entity;
+use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
 
 /**
  * Template.
@@ -11,7 +11,7 @@ use Starkerxp\StructureBundle\Entity\Entity;
  * @ORM\Table(name="template")
  * @ORM\Entity(repositoryClass="Starkerxp\CampagneBundle\Repository\TemplateRepository")
  */
-class Template extends Entity
+class Template extends UtilisateurEntity
 {
     /**
      * @var int

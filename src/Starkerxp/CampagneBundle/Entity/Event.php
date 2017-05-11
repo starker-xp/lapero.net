@@ -3,7 +3,7 @@
 namespace Starkerxp\CampagneBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Starkerxp\StructureBundle\Entity\Entity;
+use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
 
 /**
  * Event
@@ -11,7 +11,7 @@ use Starkerxp\StructureBundle\Entity\Entity;
  * @ORM\Table(name="campagne_event")
  * @ORM\Entity(repositoryClass="Starkerxp\CampagneBundle\Repository\EventRepository")
  */
-class Event extends Entity
+class Event extends UtilisateurEntity
 {
     /**
      * @var int
@@ -25,7 +25,7 @@ class Event extends Entity
     /**
      * @var Campagne
      *
-     * @ORM\ManyToOne(targetEntity="Campagne", cascade="persist")
+     * @ORM\ManyToOne(targetEntity="Campagne", cascade="persist", inversedBy="events")
      * @ORM\JoinColumn(name="campagne_id", referencedColumnName="id", nullable=false)
      */
     protected $campagne;
