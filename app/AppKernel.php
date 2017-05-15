@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new Starkerxp\UtilisateurBundle\StarkerxpUtilisateurBundle(),
+            new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

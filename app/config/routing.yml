@@ -1,13 +1,14 @@
-starkerxp_utilisateur:
-    resource: "@StarkerxpUtilisateurBundle/Resources/config/routing.yml"
-    prefix:   /
-
-starkerxp_campagne:
-    resource: "@StarkerxpCampagneBundle/Resources/config/routing.yml"
-    prefix:   /
 app:
     resource: "@AppBundle/Resources/config/routing.yml"
     prefix:   /
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /doc
+
+starkerxp_utilisateur:
+    resource: "@StarkerxpUtilisateurBundle/Resources/config/routing.yml"
+    prefix:   /api/
+
+starkerxp_campagne:
+    resource: "@StarkerxpCampagneBundle/Resources/config/routing.yml"
+    prefix:   /api/

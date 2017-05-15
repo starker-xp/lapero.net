@@ -16,7 +16,7 @@ trait UuidTrait
     /**
      * @var guid
      *
-     * @ORM\Column(name="uuid", type="guid", nullable=false)
+     * @ORM\Column(name="uuid", type="guid", nullable=false, unique=true)
      */
     protected $uuid;
 

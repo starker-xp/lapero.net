@@ -8,6 +8,8 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Ramsey\Uuid\Uuid;
 use Starkerxp\StructureBundle\Entity\Entity;
+use Starkerxp\StructureBundle\Entity\TimestampEntity;
+use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
 use Starkerxp\StructureBundle\Entity\UtilisateurInterface;
 
 //
@@ -36,38 +38,41 @@ class EntitySubscriber implements EventSubscriber
     {
         $entity = $args->getEntity();
 
-        if (!$entity instanceof Entity) {
-            return false;
-        }
-
-        $this->traitement($entity);
-
-        if (empty($entity->getCreatedAt())) {
+        if ($entity instanceof TimestampEntity && empty($entity->getCreatedAt())) {
             $entity->setCreatedAt(new DateTime());
         }
-    }
-
-    private function traitement(Entity $entity)
-    {
-        if (empty($entity->getUuid())) {
-            $uid = Uuid::uuid4();
-            $entity->setUuid($uid);
+        if ($entity instanceof Entity && empty($entity->getUuid())) {
+            $uuid = Uuid::uuid4();
+            $entity->setUuid($uuid);
+        }
+        if (!$entity instanceof UtilisateurEntity) {
+            return false;
         }
         if (empty($entity->getUtilisateur())) {
             $entity->setUtilisateur($this->utilisateur);
         }
     }
 
+
     public function onFlush(OnFlushEventArgs $event)
     {
         $entityManager = $event->getEntityManager();
         $uow = $entityManager->getUnitOfWork();
         foreach ($uow->getScheduledEntityUpdates() as $entity) {
-            if (!$entity instanceof Entity) {
+            if ($entity instanceof TimestampEntity) {
+                $entity->setUpdatedAt(new DateTime());
+            }
+            if ($entity instanceof Entity && empty($entity->getUuid())) {
+                $uuid = Uuid::uuid4();
+                $entity->setUuid($uuid);
+            }
+            if (!$entity instanceof UtilisateurEntity) {
                 continue;
             }
-            $this->traitement($entity);
-            $entity->setUpdatedAt(new DateTime());
+            if (empty($entity->getUtilisateur())) {
+                $entity->setUtilisateur($this->utilisateur);
+            }
+
         }
     }
 }
