@@ -54,6 +54,7 @@ class Utilisateur extends Entity implements JWTUserInterface, UtilisateurInterfa
     public function __construct($email, $roles)
     {
         $this->email = $email;
+        $this->setRoles($roles);
     }
 
     public static function createFromPayload($username, array $payload)
@@ -64,7 +65,6 @@ class Utilisateur extends Entity implements JWTUserInterface, UtilisateurInterfa
         );
     }
 
-
     public function getRoles()
     {
         /** @var \Starkerxp\UtilisateurBundle\Entity\RoleUtilisateur $roles */
@@ -73,6 +73,23 @@ class Utilisateur extends Entity implements JWTUserInterface, UtilisateurInterfa
         }
 
         return $this->roles->getRoles();
+    }
+
+    /**
+     * @param array $roles
+     *
+     * @return bool
+     */
+    public function setRoles(array $roles)
+    {
+        if (empty($this->roles)) {
+            $this->roles = new RoleUtilisateur($roles);
+
+            return true;
+        }
+        $this->roles->setRoles($roles);
+
+        return true;
     }
 
     public function getPassword()
@@ -101,7 +118,6 @@ class Utilisateur extends Entity implements JWTUserInterface, UtilisateurInterfa
     public function eraseCredentials()
     {
     }
-
 
 
     /**

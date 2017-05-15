@@ -3,7 +3,7 @@
 namespace Starkerxp\UtilisateurBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
+use Starkerxp\StructureBundle\Entity\Entity;
 
 /**
  * RoleUtilisateur
@@ -11,7 +11,7 @@ use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
  * @ORM\Table(name="utilisateur_role")
  * @ORM\Entity()
  */
-class RoleUtilisateur extends UtilisateurEntity
+class RoleUtilisateur extends Entity
 {
 
     /**
@@ -20,6 +20,15 @@ class RoleUtilisateur extends UtilisateurEntity
      * @ORM\Column(name="roles", type="json_array", nullable=false)
      */
     protected $roles;
+
+    /**
+     * RoleUtilisateur constructor.
+     * @param array $roles
+     */
+    public function __construct(array $roles = [])
+    {
+        $this->roles = $roles;
+    }
 
     /**
      * @return array
@@ -36,6 +45,7 @@ class RoleUtilisateur extends UtilisateurEntity
     {
         $this->roles = $roles;
     }
+
 
 
 }

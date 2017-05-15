@@ -9,7 +9,6 @@ use Starkerxp\StructureBundle\Controller\StructureController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-
 class TemplateController extends StructureController
 {
 
