@@ -4,6 +4,7 @@ namespace Starkerxp\UtilisateurBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\User\JWTUserInterface;
+use Ramsey\Uuid\Uuid;
 use Starkerxp\StructureBundle\Entity\Entity;
 use Starkerxp\StructureBundle\Entity\UtilisateurInterface;
 
@@ -55,6 +56,8 @@ class Utilisateur extends Entity implements JWTUserInterface, UtilisateurInterfa
     {
         $this->email = $email;
         $this->setRoles($roles);
+        $uuid = Uuid::uuid4();
+        $this->salt = $uuid->toString();
     }
 
     public static function createFromPayload($username, array $payload)

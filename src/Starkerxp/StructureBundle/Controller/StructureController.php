@@ -3,6 +3,7 @@
 namespace Starkerxp\StructureBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -86,8 +87,10 @@ class StructureController extends Controller
      *
      * @return array
      */
-    protected function getFormErrors($form){
+    protected function getFormErrors($form)
+    {
         $errors = $this->get("starkerxp_structure.services.form_errors")->getFormErrors($form);
+
         return $errors;
     }
 
@@ -96,7 +99,8 @@ class StructureController extends Controller
      *
      * @return string
      */
-    protected function getUuid(){
+    protected function getUuid()
+    {
         return (\Ramsey\Uuid\Uuid::uuid4())->toString();
     }
 
@@ -109,8 +113,9 @@ class StructureController extends Controller
      *
      * @return string
      */
-    protected function translate($id, $domain = null, array $parameters = []){
-       return $this->get('translator')->trans($id, $parameters, $domain);
+    protected function translate($id, $domain = null, array $parameters = [])
+    {
+        return $this->get('translator')->trans($id, $parameters, $domain);
     }
 
     /**
@@ -120,11 +125,23 @@ class StructureController extends Controller
      *
      * @return array|mixed
      */
-    protected function getRequestData(Request $request){
+    protected function getRequestData(Request $request)
+    {
         $data = json_decode($request->getContent(), true);
         if (empty($data)) {
             $data = $request->request->all();
         }
+
         return $data;
     }
+
+    /**
+     * @return ContainerInterface|null
+     */
+    protected function getContainer()
+    {
+        return $this->getContainer();
+    }
+
+
 }
