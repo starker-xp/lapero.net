@@ -25,5 +25,10 @@ hautelook_alice:
 
 liip_functional_test: ~
 
+lexik_jwt_authentication:
+    private_key_path:   "%kernel.root_dir%/../var/jwt/private-test.pem"
+    public_key_path:    "%kernel.root_dir%/../var/jwt/public-test.pem"
+    pass_phrase:  'azerty'
+
 parameters:
     database_name: mademoisellefantasia_test

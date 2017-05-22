@@ -18,6 +18,6 @@ services:
             - [setLocale, ['%locale%']]
     starkerxp_structure.listener.entity_subscriber:
             class: Starkerxp\StructureBundle\Listener\EntitySubscriber
-            arguments: ["@=service('security.token_storage').getToken()"]
+            arguments: ["@security.token_storage"]
             tags:
                 - {name: doctrine.event_subscriber, connection: default}

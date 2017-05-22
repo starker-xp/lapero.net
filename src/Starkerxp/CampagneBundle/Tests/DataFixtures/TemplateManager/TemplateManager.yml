@@ -6,6 +6,7 @@ Starkerxp\CampagneBundle\Entity\Template:
                 sujet: "L'avenir sera radieux {{prenom |capitalize}}"
                 message: "Aujourd'hui une offre exceptionnelle vous attends."
                 created_at: <dateTimeBetween("2016-08-05 12:12:12", "2016-08-05 12:12:12")>
+                utilisateur: "@utilisateur_1"
     template_{5..10}:
                 uuid: "5e6e63e6-1d74-4c4c-b19a-2741ed<numberBetween(100, 999)><numberBetween(100, 999)>"
                 nom: <name()>
@@ -13,3 +14,4 @@ Starkerxp\CampagneBundle\Entity\Template:
                 sujet: "L'avenir sera radieux {{prenom |capitalize}}"
                 message: "Aujourd'hui une offre exceptionnelle vous attends."
                 created_at: <dateTimeBetween("2016-08-05 12:12:12", "2016-08-05 12:12:12")>
+                utilisateur: "@utilisateur_1"

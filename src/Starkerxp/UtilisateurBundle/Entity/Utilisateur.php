@@ -83,11 +83,10 @@ class Utilisateur extends Entity implements JWTUserInterface, UtilisateurInterfa
      *
      * @return bool
      */
-    public function setRoles(array $roles)
+    public function setRoles($roles)
     {
-        if (empty($this->roles)) {
+        if($roles instanceof RoleUtilisateur || empty($this->roles) ){
             $this->roles = new RoleUtilisateur($roles);
-
             return true;
         }
         $this->roles->setRoles($roles);

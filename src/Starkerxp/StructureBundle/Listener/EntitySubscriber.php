@@ -24,6 +24,7 @@ class EntitySubscriber implements EventSubscriber
     public function __construct($utilisateur)
     {
         $this->utilisateur = $utilisateur;
+
     }
 
     public function getSubscribedEvents()
@@ -49,7 +50,7 @@ class EntitySubscriber implements EventSubscriber
             return false;
         }
         if (empty($entity->getUtilisateur())) {
-            $entity->setUtilisateur($this->utilisateur);
+            $entity->setUtilisateur($this->utilisateur->getToken()->getUser());
         }
     }
 
