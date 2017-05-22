@@ -23,12 +23,12 @@ abstract class WebTest extends WebTestCase
      *
      * @return \Doctrine\Common\Persistence\ObjectManager|object
      */
-    protected function getEntityManager()
+    public function getEntityManager()
     {
         return $this->getContainer()->get('doctrine')->getManager();
     }
 
-    protected function getAuthClient()
+    public function getAuthClient()
     {
         $client = static::createClient();
         $client->request(
