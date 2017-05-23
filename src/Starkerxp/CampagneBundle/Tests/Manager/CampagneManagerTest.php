@@ -22,7 +22,12 @@ class CampagneManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
      */
     public function testFindAll()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/CampagneManager.yml']);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/CampagneManager.yml',
+            ]
+        );
         $this->assertCount(10, $this->manager->findAll());
     }
 
@@ -32,7 +37,12 @@ class CampagneManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
      */
     public function testInsertNewCampagne()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/DefaultCampagne.yml']);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/DefaultCampagne.yml',
+            ]
+        );
         $campagne = new \Starkerxp\CampagneBundle\Entity\Campagne();
         $campagne->setName('Ma super campagne');
         $campagne->setDeleted(false);
@@ -47,7 +57,12 @@ class CampagneManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
      */
     public function testUpdateCampagne()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/DefaultCampagne.yml']);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/DefaultCampagne.yml',
+            ]
+        );
         $criteria = ['createdAt' => new \DateTime('2016-08-05 12:12:12')];
         $campagne = $this->manager->findOneBy($criteria);
         $campagne->setStatus(Campagne::ERROR);

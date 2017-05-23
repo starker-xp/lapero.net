@@ -24,7 +24,12 @@ class EventManagerTest extends WebTest
      */
     public function testFindAll()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/EventManager/EventManager.yml',]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/EventManager/EventManager.yml',
+            ]
+        );
         $this->assertCount(10, $this->manager->findAll());
     }
 
@@ -34,7 +39,12 @@ class EventManagerTest extends WebTest
      */
     public function testInsertNewEvent()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/EventManager/DefaultEvent.yml',]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/EventManager/DefaultEvent.yml',
+            ]
+        );
         $event = new Event();
         $this->manager->insert($event);
         $this->assertCount(2, $this->manager->findAll());
@@ -46,7 +56,12 @@ class EventManagerTest extends WebTest
      */
     public function testUpdateEvent()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/EventManager/DefaultEvent.yml',]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/EventManager/DefaultEvent.yml',
+            ]
+        );
         $criteria = ['createdAt' => new \DateTime("2016-08-05 12:12:12")];
         $event = $this->manager->findOneBy($criteria);
         $this->manager->update($event);

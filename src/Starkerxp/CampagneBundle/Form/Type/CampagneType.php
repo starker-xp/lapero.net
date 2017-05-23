@@ -12,11 +12,11 @@ class CampagneType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /*
+
 		// A titre d'exemple.
 		$builder
             ->add(
-                'nom',
+                'name',
                 Type\TextType::class,
                 [
                     'constraints' => [
@@ -25,7 +25,7 @@ class CampagneType extends AbstractType
                     ],
                 ]
             );
-		*/
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

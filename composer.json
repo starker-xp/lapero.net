@@ -34,7 +34,8 @@
     "friendsofsymfony/rest-bundle": "^2.1",
     "ramsey/uuid": "^3.1",
     "nelmio/api-doc-bundle": "^2.13",
-    "lexik/jwt-authentication-bundle": "^2.4"
+    "lexik/jwt-authentication-bundle": "^2.4",
+    "sentry/sentry-symfony": "^0.7.1"
   },
   "require-dev": {
     "sensio/generator-bundle": "^3.0",

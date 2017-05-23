@@ -24,7 +24,12 @@ class CibleManagerTest extends WebTest
      */
     public function testFindAll()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/CibleManager/CibleManager.yml',]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/CibleManager/CibleManager.yml',
+            ]
+        );
         $this->assertCount(10, $this->manager->findAll());
     }
 
@@ -34,7 +39,12 @@ class CibleManagerTest extends WebTest
      */
     public function testInsertNewCible()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/CibleManager/DefaultCible.yml',]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/CibleManager/DefaultCible.yml',
+            ]
+        );
         $cible = new Cible();
         $this->manager->insert($cible);
         $this->assertCount(2, $this->manager->findAll());
@@ -46,7 +56,12 @@ class CibleManagerTest extends WebTest
      */
     public function testUpdateCible()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/CibleManager/DefaultCible.yml',]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/CibleManager/DefaultCible.yml',
+            ]
+        );
         $criteria = ['createdAt' => new \DateTime("2016-08-05 12:12:12")];
         $cible = $this->manager->findOneBy($criteria);
         $this->manager->update($cible);

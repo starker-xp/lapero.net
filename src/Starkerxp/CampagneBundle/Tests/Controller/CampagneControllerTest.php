@@ -14,16 +14,17 @@ class CampagneControllerTest extends WebTest
      */
     public function testPostValide()
     {
+        $this->loadFixtureFiles(['@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',]);
         $data = [
-            //'nom'     => "Mon nom", //exemple
+            'name' => "Ma première campagne",
         ];
-        $client = static::createClient();
-        $client->request('POST', '/campagnes', $data);
+        $client = $this->getAuthClient();
+        $client->request('POST', '/api/campagnes', $data);
         $response = $client->getResponse();
         $this->assertEquals(201, $response->getStatusCode());
         $manager = $this->getContainer()->get('starkerxp_campagne.manager.campagne');
-        $Campagnes = $manager->findAll();
-        $this->assertCount(1, $Campagnes);
+        $campagnes = $manager->findAll();
+        $this->assertCount(1, $campagnes);
     }
 
     /**
@@ -33,8 +34,9 @@ class CampagneControllerTest extends WebTest
      */
     public function testPostInvalide()
     {
-        $client = static::createClient();
-        $client->request('POST', '/campagnes', []);
+        $this->loadFixtureFiles(['@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',]);
+        $client = $this->getAuthClient();
+        $client->request('POST', '/api/campagnes', []);
         $response = $client->getResponse();
         $this->assertEquals(400, $response->getStatusCode());
         $body = json_decode($response->getContent(), true)['payload'];
@@ -49,24 +51,29 @@ class CampagneControllerTest extends WebTest
      */
     public function testPutValide()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/DefaultCampagne.yml']);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/DefaultCampagne.yml',
+            ]
+        );
         $manager = $this->getContainer()->get('starkerxp_campagne.manager.campagne');
         $listeCampagnes = $manager->getRepository()->findAll();
         $this->assertCount(1, $listeCampagnes);
-        $CampagneDepart = $manager->toArray($listeCampagnes[0], [/*'nom'*/]);// Exemple
+        $campagneDepart = $manager->toArray($listeCampagnes[0], ['name']);// Exemple
         $data = [
-            //'nom'     => "Mon nom", //exemple
+            'name'     => "Mon nom", //exemple
         ];
-        $client = static::createClient();
-        $client->request('PUT', '/campagnes/'.$listeCampagnes[0]->getId(), $data);
+        $client = $this->getAuthClient();
+        $client->request('PUT', '/api/campagnes/'.$listeCampagnes[0]->getId(), $data);
         $response = $client->getResponse();
         $this->assertEquals(204, $response->getStatusCode());
         $manager->clear();
-        $Campagnes = $manager->findAll();
-        $this->assertCount(1, $Campagnes);
-        $CampagneFinal = $manager->toArray($Campagnes[0], [/*'nom'*/]);// Exemple
-        $this->assertNotEquals($CampagneDepart, $CampagneFinal);
-        $this->assertEquals($data, $CampagneFinal);
+        $campagnes = $manager->findAll();
+        $this->assertCount(1, $campagnes);
+        $campagneFinal = $manager->toArray($campagnes[0], ['name']);// Exemple
+        $this->assertNotEquals($campagneDepart, $campagneFinal);
+        $this->assertEquals($data, $campagneFinal);
     }
 
     /**
@@ -76,17 +83,22 @@ class CampagneControllerTest extends WebTest
      */
     public function testPutInvalide()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/DefaultCampagne.yml']);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/DefaultCampagne.yml',
+            ]
+        );
         $manager = $this->getContainer()->get('starkerxp_campagne.manager.campagne');
         $listeCampagnes = $manager->getRepository()->findAll();
         $this->assertCount(1, $listeCampagnes);
-        $client = static::createClient();
-        $client->request('PUT', '/campagnes/'.$listeCampagnes[0]->getId(), []);
+        $client = $this->getAuthClient();
+        $client->request('PUT', '/api/campagnes/'.$listeCampagnes[0]->getId(), []);
         $response = $client->getResponse();
         $this->assertEquals(400, $response->getStatusCode());
         $body = json_decode($response->getContent(), true)['payload'];
         //$this->assertArrayHasKey("nom", $body); // Exemple
-        
+
     }
 
     /**
@@ -96,11 +108,16 @@ class CampagneControllerTest extends WebTest
      */
     public function testPutSansResultat()
     {
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            ]
+        );
         $data = [
-            //'nom'     => "Mon nom", //exemple
+            'name'     => "Mon nom", //exemple
         ];
-        $client = static::createClient();
-        $client->request('PUT', '/campagnes/404', $data);
+        $client = $this->getAuthClient();
+        $client->request('PUT', '/api/campagnes/404', $data);
         $response = $client->getResponse();
         $this->assertEquals(404, $response->getStatusCode());
         $body = json_decode($response->getContent(), true);
@@ -115,9 +132,14 @@ class CampagneControllerTest extends WebTest
      */
     public function testCGetValideAvecResultats()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/CampagneManager.yml']);
-        $client = static::createClient();
-        $client->request('GET', '/campagnes', []);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/CampagneManager.yml',
+            ]
+        );
+        $client = $this->getAuthClient();
+        $client->request('GET', '/api/campagnes', []);
         $response = $client->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
         $body = json_decode($response->getContent(), true);
@@ -134,8 +156,13 @@ class CampagneControllerTest extends WebTest
      */
     public function testCGetValideSansResultat()
     {
-        $client = static::createClient();
-        $client->request('GET', '/campagnes', []);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            ]
+        );
+        $client = $this->getAuthClient();
+        $client->request('GET', '/api/campagnes', []);
         $response = $client->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
         $body = json_decode($response->getContent(), true);
@@ -149,8 +176,13 @@ class CampagneControllerTest extends WebTest
      */
     public function testCGetInvalide()
     {
-        $client = static::createClient();
-        $client->request('GET', '/campagnes', ["filter_erreur" => "+h"]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            ]
+        );
+        $client = $this->getAuthClient();
+        $client->request('GET', '/api/campagnes', ["filter_erreur" => "+h"]);
         $response = $client->getResponse();
         $this->assertEquals(400, $response->getStatusCode());
     }
@@ -162,17 +194,24 @@ class CampagneControllerTest extends WebTest
      */
     public function testGetValideAvecResultats()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/CampagneManager.yml']);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/CampagneManager.yml',
+            ]
+        );
         $manager = $this->getContainer()->get('starkerxp_campagne.manager.campagne');
         $listeCampagnes = $manager->getRepository()->findAll();
         $this->assertCount(10, $listeCampagnes);
-        $client = static::createClient();
-        $client->request('GET', '/campagnes/'.$listeCampagnes[0]->getId(), []);
+        $client = $this->getAuthClient();
+        $client->request('GET', '/api/campagnes/'.$listeCampagnes[0]->getId(), []);
         $response = $client->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
         $body = json_decode($response->getContent(), true);
-        $this->assertCount(5, $body);
-        //$this->assertArrayHasKey("nom", $body); // Exemple
+        $this->assertCount(3, $body);
+        $this->assertArrayHasKey("name", $body); // Exemple
+        $this->assertArrayHasKey("status", $body); // Exemple
+        $this->assertArrayHasKey("id", $body); // Exemple
     }
 
     /**
@@ -182,8 +221,13 @@ class CampagneControllerTest extends WebTest
      */
     public function testGetValideSansResultat()
     {
-        $client = static::createClient();
-        $client->request('GET', '/campagnes/404', []);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            ]
+        );
+        $client = $this->getAuthClient();
+        $client->request('GET', '/api/campagnes/404', []);
         $response = $client->getResponse();
         $this->assertEquals(404, $response->getStatusCode());
         $body = json_decode($response->getContent(), true);
@@ -197,8 +241,13 @@ class CampagneControllerTest extends WebTest
      */
     public function testGetInvalide()
     {
-        $client = static::createClient();
-        $client->request('GET', '/campagnes/500', ["filter_erreur" => "+h"]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            ]
+        );
+        $client = $this->getAuthClient();
+        $client->request('GET', '/api/campagnes/500', ["filter_erreur" => "+h"]);
         $response = $client->getResponse();
         $this->assertEquals(400, $response->getStatusCode());
     }
@@ -210,17 +259,22 @@ class CampagneControllerTest extends WebTest
      */
     public function testDeleteValide()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/DefaultCampagne.yml']);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/DefaultCampagne.yml',
+            ]
+        );
         $manager = $this->getContainer()->get('starkerxp_campagne.manager.campagne');
         $listeCampagnes = $manager->getRepository()->findAll();
         $this->assertCount(1, $listeCampagnes);
-        $client = static::createClient();
-        $client->request('DELETE', '/campagnes/'.$listeCampagnes[0]->getId());
+        $client = $this->getAuthClient();
+        $client->request('DELETE', '/api/campagnes/'.$listeCampagnes[0]->getId());
         $response = $client->getResponse();
         $this->assertEquals(204, $response->getStatusCode());
         $manager->clear();
-        $Campagnes = $manager->findAll();
-        $this->assertCount(0, $Campagnes);
+        $campagnes = $manager->findAll();
+        $this->assertCount(0, $campagnes);
     }
 
     /**
@@ -230,8 +284,13 @@ class CampagneControllerTest extends WebTest
      */
     public function testDeleteSansResultat()
     {
-        $client = static::createClient();
-        $client->request('DELETE', '/campagnes/404', []);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            ]
+        );
+        $client = $this->getAuthClient();
+        $client->request('DELETE', '/api/campagnes/404', []);
         $response = $client->getResponse();
         $this->assertEquals(404, $response->getStatusCode());
         $body = json_decode($response->getContent(), true);

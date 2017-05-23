@@ -77,6 +77,7 @@ class Campagne extends UtilisateurEntity
         $this->events = new \Doctrine\Common\Collections\ArrayCollection();
         $this->clients = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = self::DRAFT;
+        $this->deleted = false;
     }
 
     /**

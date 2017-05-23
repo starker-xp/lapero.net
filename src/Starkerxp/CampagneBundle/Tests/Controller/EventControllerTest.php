@@ -14,10 +14,15 @@ class EventControllerTest extends WebTest
      */
     public function testPostValide()
     {
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            ]
+        );
         $data = [
             //'nom'     => "Mon nom", //exemple
         ];
-        $client = static::createClient();
+        $client = $this->getAuthClient();
         $client->request('POST', '/campagnes/events', $data);
         $response = $client->getResponse();
         $this->assertEquals(201, $response->getStatusCode());
@@ -33,7 +38,12 @@ class EventControllerTest extends WebTest
      */
     public function testPostInvalide()
     {
-        $client = static::createClient();
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            ]
+        );
+        $client = $this->getAuthClient();
         $client->request('POST', '/campagnes/events', []);
         $response = $client->getResponse();
         $this->assertEquals(400, $response->getStatusCode());
@@ -49,7 +59,13 @@ class EventControllerTest extends WebTest
      */
     public function testPutValide()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/EventManager/DefaultEvent.yml']);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/EventManager/DefaultEvent.yml',
+            ]
+        );
+
         $manager = $this->getContainer()->get('starkerxp_campagne.manager.event');
         $listeEvents = $manager->getRepository()->findAll();
         $this->assertCount(1, $listeEvents);
@@ -57,7 +73,7 @@ class EventControllerTest extends WebTest
         $data = [
             //'nom'     => "Mon nom", //exemple
         ];
-        $client = static::createClient();
+        $client = $this->getAuthClient();
         $client->request('PUT', '/campagnes/events/'.$listeEvents[0]->getId(), $data);
         $response = $client->getResponse();
         $this->assertEquals(204, $response->getStatusCode());
@@ -76,17 +92,22 @@ class EventControllerTest extends WebTest
      */
     public function testPutInvalide()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/EventManager/DefaultEvent.yml']);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/EventManager/DefaultEvent.yml',
+            ]
+        );
         $manager = $this->getContainer()->get('starkerxp_campagne.manager.event');
         $listeEvents = $manager->getRepository()->findAll();
         $this->assertCount(1, $listeEvents);
-        $client = static::createClient();
+        $client = $this->getAuthClient();
         $client->request('PUT', '/campagnes/events/'.$listeEvents[0]->getId(), []);
         $response = $client->getResponse();
         $this->assertEquals(400, $response->getStatusCode());
         $body = json_decode($response->getContent(), true)['payload'];
         //$this->assertArrayHasKey("nom", $body); // Exemple
-        
+
     }
 
     /**
@@ -96,10 +117,15 @@ class EventControllerTest extends WebTest
      */
     public function testPutSansResultat()
     {
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            ]
+        );
         $data = [
             //'nom'     => "Mon nom", //exemple
         ];
-        $client = static::createClient();
+        $client = $this->getAuthClient();
         $client->request('PUT', '/campagnes/events/404', $data);
         $response = $client->getResponse();
         $this->assertEquals(404, $response->getStatusCode());
@@ -115,8 +141,13 @@ class EventControllerTest extends WebTest
      */
     public function testCGetValideAvecResultats()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/EventManager/EventManager.yml']);
-        $client = static::createClient();
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/EventManager/EventManager.yml',
+            ]
+        );
+        $client = $this->getAuthClient();
         $client->request('GET', '/campagnes/events', []);
         $response = $client->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
@@ -134,7 +165,12 @@ class EventControllerTest extends WebTest
      */
     public function testCGetValideSansResultat()
     {
-        $client = static::createClient();
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            ]
+        );
+        $client = $this->getAuthClient();
         $client->request('GET', '/campagnes/events', []);
         $response = $client->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
@@ -149,7 +185,12 @@ class EventControllerTest extends WebTest
      */
     public function testCGetInvalide()
     {
-        $client = static::createClient();
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            ]
+        );
+        $client = $this->getAuthClient();
         $client->request('GET', '/campagnes/events', ["filter_erreur" => "+h"]);
         $response = $client->getResponse();
         $this->assertEquals(400, $response->getStatusCode());
@@ -162,11 +203,16 @@ class EventControllerTest extends WebTest
      */
     public function testGetValideAvecResultats()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/EventManager/EventManager.yml']);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/EventManager/EventManager.yml',
+            ]
+        );
         $manager = $this->getContainer()->get('starkerxp_campagne.manager.event');
         $listeEvents = $manager->getRepository()->findAll();
         $this->assertCount(10, $listeEvents);
-        $client = static::createClient();
+        $client = $this->getAuthClient();
         $client->request('GET', '/campagnes/events/'.$listeEvents[0]->getId(), []);
         $response = $client->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
@@ -182,7 +228,12 @@ class EventControllerTest extends WebTest
      */
     public function testGetValideSansResultat()
     {
-        $client = static::createClient();
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            ]
+        );
+        $client = $this->getAuthClient();
         $client->request('GET', '/campagnes/events/404', []);
         $response = $client->getResponse();
         $this->assertEquals(404, $response->getStatusCode());
@@ -197,7 +248,12 @@ class EventControllerTest extends WebTest
      */
     public function testGetInvalide()
     {
-        $client = static::createClient();
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            ]
+        );
+        $client = $this->getAuthClient();
         $client->request('GET', '/campagnes/events/500', ["filter_erreur" => "+h"]);
         $response = $client->getResponse();
         $this->assertEquals(400, $response->getStatusCode());
@@ -210,11 +266,17 @@ class EventControllerTest extends WebTest
      */
     public function testDeleteValide()
     {
-        $this->loadFixtureFiles(['@StarkerxpCampagneBundle/Tests/DataFixtures/EventManager/DefaultEvent.yml']);
+
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/EventManager/DefaultEvent.yml',
+            ]
+        );
         $manager = $this->getContainer()->get('starkerxp_campagne.manager.event');
         $listeEvents = $manager->getRepository()->findAll();
         $this->assertCount(1, $listeEvents);
-        $client = static::createClient();
+        $client = $this->getAuthClient();
         $client->request('DELETE', '/campagnes/events/'.$listeEvents[0]->getId());
         $response = $client->getResponse();
         $this->assertEquals(204, $response->getStatusCode());
@@ -230,7 +292,12 @@ class EventControllerTest extends WebTest
      */
     public function testDeleteSansResultat()
     {
-        $client = static::createClient();
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            ]
+        );
+        $client = $this->getAuthClient();
         $client->request('DELETE', '/campagnes/events/404', []);
         $response = $client->getResponse();
         $this->assertEquals(404, $response->getStatusCode());
