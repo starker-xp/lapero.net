@@ -1,5 +1,5 @@
 Starkerxp\CampagneBundle\Entity\Template:
-    template1:
+    template_1:
         uuid: "5e6e63e6-1d74-4c4c-b19a-2741ed330836"
         nom: <name()>
         type: "email"

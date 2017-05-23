@@ -1,10 +1,10 @@
-starkerxp_campagne.controller.template.cget:
+starkerxp_campagne.template.cget:
     path: /templates
     defaults:
         _controller: 'StarkerxpCampagneBundle:Template:cget'
     methods:
         - GET
-starkerxp_campagne.controller.template.get:
+starkerxp_campagne.template.get:
     path: '/templates/{id}'
     defaults:
         _controller: 'StarkerxpCampagneBundle:Template:get'
@@ -12,13 +12,13 @@ starkerxp_campagne.controller.template.get:
         - GET
     requirements:
         id: \d+
-starkerxp_campagne.controller.template.post:
+starkerxp_campagne.template.post:
     path: /templates
     defaults:
         _controller: 'StarkerxpCampagneBundle:Template:post'
     methods:
         - POST
-starkerxp_campagne.controller.template.put:
+starkerxp_campagne.template.put:
     path: '/templates/{id}'
     defaults:
         _controller: 'StarkerxpCampagneBundle:Template:put'
@@ -26,7 +26,7 @@ starkerxp_campagne.controller.template.put:
         - PUT
     requirements:
         id: \d+
-starkerxp_campagne.controller.template.delete:
+starkerxp_campagne.template.delete:
     path: '/templates/{id}'
     defaults:
         _controller: 'StarkerxpCampagneBundle:Template:delete'
@@ -34,13 +34,13 @@ starkerxp_campagne.controller.template.delete:
         - DELETE
     requirements:
         id: \d+
-starkerxp_campagne.controller.campagne.cget:
+starkerxp_campagne.campagne.cget:
     path: /campagnes
     defaults:
         _controller: 'StarkerxpCampagneBundle:Campagne:cget'
     methods:
         - GET
-starkerxp_campagne.controller.campagne.get:
+starkerxp_campagne.campagne.get:
     path: '/campagnes/{campagne_id}'
     defaults:
         _controller: 'StarkerxpCampagneBundle:Campagne:get'
@@ -48,13 +48,13 @@ starkerxp_campagne.controller.campagne.get:
         - GET
     requirements:
         campagne_id: \d+
-starkerxp_campagne.controller.campagne.post:
+starkerxp_campagne.campagne.post:
     path: '/campagnes'
     defaults:
         _controller: 'StarkerxpCampagneBundle:Campagne:post'
     methods:
         - POST
-starkerxp_campagne.controller.campagne.put:
+starkerxp_campagne.campagne.put:
     path: '/campagnes/{campagne_id}'
     defaults:
         _controller: 'StarkerxpCampagneBundle:Campagne:put'
@@ -62,7 +62,7 @@ starkerxp_campagne.controller.campagne.put:
         - PUT
     requirements:
         campagne_id: \d+
-starkerxp_campagne.controller.campagne.delete:
+starkerxp_campagne.campagne.delete:
     path: '/campagnes/{campagne_id}'
     defaults:
         _controller: 'StarkerxpCampagneBundle:Campagne:delete'
@@ -70,7 +70,7 @@ starkerxp_campagne.controller.campagne.delete:
         - DELETE
     requirements:
         campagne_id: \d+
-starkerxp_campagne.controller.event.cget:
+starkerxp_campagne.event.cget:
     path: '/campagnes/{campagne_id}/events'
     defaults:
         _controller: 'StarkerxpCampagneBundle:Event:cget'
@@ -78,16 +78,16 @@ starkerxp_campagne.controller.event.cget:
         - GET
     requirements:
         campagne_id: \d+
-starkerxp_campagne.controller.event.get:
-    path: '/campagnes/{campagne_id}/events/{event_id}'
+starkerxp_campagne.event.get:
+    path: '/campagnes/{campagne_id}/events/{id}'
     defaults:
         _controller: 'StarkerxpCampagneBundle:Event:get'
     methods:
         - GET
     requirements:
         campagne_id: \d+
-        event_id: \d+
-starkerxp_campagne.controller.event.post:
+        id: \d+
+starkerxp_campagne.event.post:
     path: '/campagnes/{campagne_id}/events'
     defaults:
         _controller: 'StarkerxpCampagneBundle:Event:post'
@@ -95,21 +95,21 @@ starkerxp_campagne.controller.event.post:
         - POST
     requirements:
         campagne_id: \d+
-starkerxp_campagne.controller.event.put:
-    path: '/campagnes/{campagne_id}/events/{event_id}'
+starkerxp_campagne.event.put:
+    path: '/campagnes/{campagne_id}/events/{id}'
     defaults:
         _controller: 'StarkerxpCampagneBundle:Event:put'
     methods:
         - PUT
     requirements:
         campagne_id: \d+
-        event_id: \d+
-starkerxp_campagne.controller.event.delete:
-    path: '/campagnes/{campagne_id}/events/{event_id}'
+        id: \d+
+starkerxp_campagne.event.delete:
+    path: '/campagnes/{campagne_id}/events/{id}'
     defaults:
         _controller: 'StarkerxpCampagneBundle:Event:delete'
     methods:
         - DELETE
     requirements:
         campagne_id: \d+
-        event_id: \d+
+        id: \d+

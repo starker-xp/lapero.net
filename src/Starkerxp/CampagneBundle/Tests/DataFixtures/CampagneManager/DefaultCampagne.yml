@@ -1,5 +1,5 @@
 Starkerxp\CampagneBundle\Entity\Campagne:
-    campagne1:
+    campagne_1:
         name: <name()>
         status: draft
         deleted: 0

@@ -1,2 +1,2 @@
 Starkerxp\UtilisateurBundle\Entity\Utilisateur:
-    utilisateur_1: { __construct: ['test@yopmail.com', ["ROLE_SUPER_ADMIN"]], salt: 2e3425b5-2695-48bd-88ba-6c3aa5db0d0c, password: $2y$13$.HnmeNbTEnxPQtxVULejwOb4VShEk06oZM93NkHj1KuzLxfaeEFT6, email: test@yopmail.com, createdAt: '<(new \DateTime("2017-05-20 00:31:47"))>', updatedAt: null, uuid: 89b2994c-4acd-423f-b1cf-cc5d6f9ea68e}
+    utilisateur_1: { __construct: ['test@yopmail.com', ["ROLE_SUPER_ADMIN"]], salt: 2e3425b5-2695-48bd-88ba-6c3aa5db0d0c, password: $2y$13$.HnmeNbTEnxPQtxVULejwOb4VShEk06oZM93NkHj1KuzLxfaeEFT6, createdAt: '<(new \DateTime("2017-05-20 00:31:47"))>', updatedAt: null, uuid: 89b2994c-4acd-423f-b1cf-cc5d6f9ea68e}

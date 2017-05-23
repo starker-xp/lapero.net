@@ -41,6 +41,9 @@ abstract class AbstractManager implements ManagerInterface
             throw new ObjectClassNotAllowedException();
         }
         $object->setCreatedAt(new DateTime());
+        if (method_exists($this, "preInsert")) {
+            $this->preInsert($object);
+        }
         $this->entityManager->persist($object);
         $this->flush();
 
@@ -71,6 +74,9 @@ abstract class AbstractManager implements ManagerInterface
             throw new ObjectClassNotAllowedException();
         }
         $object->setUpdatedAt(new DateTime());
+        if (method_exists($this, "preUpdate")) {
+            $this->preUpdate($object);
+        }
         $this->flush();
 
         return $object;
@@ -84,6 +90,9 @@ abstract class AbstractManager implements ManagerInterface
     {
         if (!$this->getSupport($object)) {
             throw new ObjectClassNotAllowedException();
+        }
+        if (method_exists($this, "preDelete")) {
+            $this->preDelete($object);
         }
         $this->entityManager->remove($object);
         $this->flush();
@@ -179,7 +188,7 @@ abstract class AbstractManager implements ManagerInterface
             $this->modeTransactionnal = false;
         }
     }
-    
+
     /**
      * Permet d'extraire uniquement les champs désirés.
      *
@@ -197,6 +206,7 @@ abstract class AbstractManager implements ManagerInterface
         foreach ($fields as $row) {
             $export[$row] = $array[$row];
         }
+
         return $export;
     }
 

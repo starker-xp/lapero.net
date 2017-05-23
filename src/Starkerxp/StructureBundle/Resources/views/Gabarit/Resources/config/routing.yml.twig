@@ -1,28 +1,28 @@
-{{ nomServiceController }}.controller.{{ nomControllerCamelize|lower }}.cget:
+{{ nomServiceController }}.{{ nomControllerCamelize|lower }}.cget:
     path:     /{{ nomController|lower }}s
     defaults: { _controller: "{{namespaceController}}:{{ nomController }}:cget" }
     methods:  [GET]
 
-{{ nomServiceController }}.controller.{{ nomControllerCamelize|lower }}.get:
+{{ nomServiceController }}.{{ nomControllerCamelize|lower }}.get:
     path:     /{{ nomController|lower }}s/{id}
     defaults: { _controller: "{{namespaceController}}:{{ nomController }}:get" }
     methods:  [GET]
     requirements:
         {{ nomController|lower }}_id: '\d+'
 
-{{ nomServiceController }}.controller.{{ nomControllerCamelize|lower }}.post:
+{{ nomServiceController }}.{{ nomControllerCamelize|lower }}.post:
     path:     /{{ nomController|lower }}s
     defaults: { _controller: "{{namespaceController}}:{{ nomController }}:post" }
     methods:  [POST]
 
-{{ nomServiceController }}.controller.{{ nomControllerCamelize|lower }}.put:
+{{ nomServiceController }}.{{ nomControllerCamelize|lower }}.put:
     path:     /{{ nomController|lower }}s/{id}
     defaults: { _controller: "{{namespaceController}}:{{ nomController }}:put" }
     methods:  [PUT]
     requirements:
         {{ nomController|lower }}_id: '\d+'
 
-{{ nomServiceController }}.controller.{{ nomControllerCamelize|lower }}.delete:
+{{ nomServiceController }}.{{ nomControllerCamelize|lower }}.delete:
     path:     /{{ nomController|lower }}s/{id}
     defaults: { _controller: "{{namespaceController}}:{{ nomController }}:delete" }
     methods:  [DELETE]

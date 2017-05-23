@@ -4,6 +4,7 @@ namespace Starkerxp\StructureBundle\Tests;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 use Starkerxp\UtilisateurBundle\Entity\Utilisateur;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 abstract class WebTest extends WebTestCase
 {
@@ -44,5 +45,21 @@ abstract class WebTest extends WebTestCase
         $client = static::createClient();
         $client->setServerParameter('HTTP_Authorization', sprintf('Bearer %s', $dataHeader['token']));
         return $client;
+    }
+
+    /**
+     * Generates a URL from the given parameters.
+     *
+     * @param string $route         The name of the route
+     * @param mixed  $parameters    An array of parameters
+     * @param int    $referenceType The type of reference (one of the constants in UrlGeneratorInterface)
+     *
+     * @return string The generated URL
+     *
+     * @see UrlGeneratorInterface
+     */
+    protected function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
+    {
+        return $this->getContainer()->get('router')->generate($route, $parameters, $referenceType);
     }
 }
