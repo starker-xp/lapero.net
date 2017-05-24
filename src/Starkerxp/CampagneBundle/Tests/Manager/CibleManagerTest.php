@@ -66,7 +66,6 @@ class CibleManagerTest extends WebTest
         $cible = $this->manager->findOneBy($criteria);
         $this->manager->update($cible);
         $ciblePostUpdate = $this->manager->findOneBy($criteria);
-        $this->assertEquals(1, $ciblePostUpdate->getIsError());
         $this->assertNotEmpty($ciblePostUpdate->getUpdatedAt());
     }
 

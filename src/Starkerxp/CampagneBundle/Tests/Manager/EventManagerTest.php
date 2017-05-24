@@ -69,7 +69,6 @@ class EventManagerTest extends WebTest
         $event = $this->manager->findOneBy($criteria);
         $this->manager->update($event);
         $eventPostUpdate = $this->manager->findOneBy($criteria);
-        $this->assertEquals(1, $eventPostUpdate->getIsError());
         $this->assertNotEmpty($eventPostUpdate->getUpdatedAt());
     }
 

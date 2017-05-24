@@ -14,7 +14,7 @@ abstract class UtilisateurEntity extends Entity
      * @var \Starkerxp\StructureBundle\Entity\UtilisateurInterface
      *
      * @ORM\ManyToOne(targetEntity="\Starkerxp\StructureBundle\Entity\UtilisateurInterface", cascade="persist")
-     * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id", nullable=true)
      */
     protected $utilisateur;
 

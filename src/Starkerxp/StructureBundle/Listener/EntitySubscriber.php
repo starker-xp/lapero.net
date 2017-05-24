@@ -10,14 +10,14 @@ use Ramsey\Uuid\Uuid;
 use Starkerxp\StructureBundle\Entity\Entity;
 use Starkerxp\StructureBundle\Entity\TimestampEntity;
 use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
-use Starkerxp\StructureBundle\Entity\UtilisateurInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 //
 class EntitySubscriber implements EventSubscriber
 {
 
     /**
-     * @var UtilisateurInterface
+     * @var TokenStorage
      */
     protected $utilisateur;
 
@@ -49,11 +49,19 @@ class EntitySubscriber implements EventSubscriber
         if (!$entity instanceof UtilisateurEntity) {
             return false;
         }
-        if (empty($entity->getUtilisateur())) {
-            $entity->setUtilisateur($this->utilisateur->getToken()->getUser());
+        if (empty($entity->getUtilisateur()) && $utilisateur = $this->getUtilisateur()) {
+            $entity->setUtilisateur($utilisateur);
         }
     }
 
+    protected function getUtilisateur()
+    {
+        if (!$token = $this->utilisateur->getToken()) {
+            return null;
+        }
+
+        return $token->getUser();
+    }
 
     public function onFlush(OnFlushEventArgs $event)
     {
@@ -70,10 +78,9 @@ class EntitySubscriber implements EventSubscriber
             if (!$entity instanceof UtilisateurEntity) {
                 continue;
             }
-            if (empty($entity->getUtilisateur())) {
-                $entity->setUtilisateur($this->utilisateur);
+            if (empty($entity->getUtilisateur()) && $utilisateur = $this->getUtilisateur()) {
+                $entity->setUtilisateur($utilisateur);
             }
-
         }
     }
 }
