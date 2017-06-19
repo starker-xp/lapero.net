@@ -17,7 +17,11 @@ services:
             - [setEntityManager, ['@doctrine.orm.entity_manager']]
             - [setLocale, ['%locale%']]
     starkerxp_structure.listener.entity_subscriber:
-            class: Starkerxp\StructureBundle\Listener\EntitySubscriber
-            arguments: ["@security.token_storage"]
-            tags:
-                - {name: doctrine.event_subscriber, connection: default}
+        class: Starkerxp\StructureBundle\Listener\EntitySubscriber
+        arguments: ["@security.token_storage"]
+        tags:
+            - {name: doctrine.event_subscriber, connection: default}
+
+    starkerxp_structure.data_fixtures.uuid:
+        class: Starkerxp\StructureBundle\DataFixtures\UuidFixtures
+        tags: [ { name: nelmio_alice.faker.provider } ]
