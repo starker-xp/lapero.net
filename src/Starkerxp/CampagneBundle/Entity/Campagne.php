@@ -63,7 +63,7 @@ class Campagne extends UtilisateurEntity
 
     /**
      * @ORM\OneToMany(
-     *      targetEntity="Cible",
+     *      targetEntity="CampagneCible",
      *      mappedBy="campagne"
      * )
      */

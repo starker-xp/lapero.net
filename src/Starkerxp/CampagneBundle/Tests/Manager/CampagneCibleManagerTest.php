@@ -2,14 +2,14 @@
 
 namespace Starkerxp\CampagneBundle\Tests\Manager;
 
-use Starkerxp\CampagneBundle\Entity\Cible;
-use Starkerxp\CampagneBundle\Manager\CibleManager;
+use Starkerxp\CampagneBundle\Entity\CampagneCible;
+use Starkerxp\CampagneBundle\Manager\CampagneCibleManager;
 use Starkerxp\StructureBundle\Tests\WebTest;
 
-class CibleManagerTest extends WebTest
+class CampagneCibleManagerTest extends WebTest
 {
 
-    /** @var  CibleManager */
+    /** @var  CampagneCibleManager */
     protected $manager;
 
     public function setUp()
@@ -27,7 +27,7 @@ class CibleManagerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
-                '@StarkerxpCampagneBundle/Tests/DataFixtures/CibleManager/CibleManager.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneCibleManager/CampagneCibleManager.yml',
             ]
         );
         $this->assertCount(10, $this->manager->findAll());
@@ -37,15 +37,15 @@ class CibleManagerTest extends WebTest
      * @group cible
      * @group manager
      */
-    public function testInsertNewCible()
+    public function testInsertNewCampagneCible()
     {
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
-                '@StarkerxpCampagneBundle/Tests/DataFixtures/CibleManager/DefaultCible.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneCibleManager/DefaultCampagneCible.yml',
             ]
         );
-        $cible = new Cible();
+        $cible = new CampagneCible();
         $this->manager->insert($cible);
         $this->assertCount(2, $this->manager->findAll());
     }
@@ -54,12 +54,12 @@ class CibleManagerTest extends WebTest
      * @group cible
      * @group manager
      */
-    public function testUpdateCible()
+    public function testUpdateCampagneCible()
     {
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
-                '@StarkerxpCampagneBundle/Tests/DataFixtures/CibleManager/DefaultCible.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneCibleManager/DefaultCampagneCible.yml',
             ]
         );
         $criteria = ['createdAt' => new \DateTime("2016-08-05 12:12:12")];

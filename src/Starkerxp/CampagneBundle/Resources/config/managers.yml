@@ -14,6 +14,6 @@ services:
         arguments: ['@doctrine.orm.entity_manager', Starkerxp\CampagneBundle\Entity\Event]
         tags: [{ name: starkerxp.manager.entity }]
     starkerxp_campagne.manager.cible:
-        class: Starkerxp\CampagneBundle\Manager\CibleManager
-        arguments: ['@doctrine.orm.entity_manager', Starkerxp\CampagneBundle\Entity\Cible]
+        class: Starkerxp\CampagneBundle\Manager\CampagneCibleManager
+        arguments: ['@doctrine.orm.entity_manager', Starkerxp\CampagneBundle\Entity\CampagneCible]
         tags: [{ name: starkerxp.manager.entity }]

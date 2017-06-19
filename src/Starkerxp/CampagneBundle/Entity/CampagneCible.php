@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
 
 /**
- * Cible
+ * CampagneCible
  *
  * @ORM\Table(name="campagne_cible")
- * @ORM\Entity(repositoryClass="Starkerxp\CampagneBundle\Repository\CibleRepository")
+ * @ORM\Entity(repositoryClass="Starkerxp\CampagneBundle\Repository\CampagneCibleRepository")
  */
-class Cible extends UtilisateurEntity
+class CampagneCible extends UtilisateurEntity
 {
     /**
      * @var int
@@ -73,7 +73,7 @@ class Cible extends UtilisateurEntity
      *
      * @param \DateTime $dateLastExited
      *
-     * @return Cible
+     * @return CampagneCible
      */
     public function setDateLastExited($dateLastExited)
     {
@@ -97,7 +97,7 @@ class Cible extends UtilisateurEntity
      *
      * @param boolean $manuallyRemoved
      *
-     * @return Cible
+     * @return CampagneCible
      */
     public function setManuallyRemoved($manuallyRemoved)
     {
@@ -121,7 +121,7 @@ class Cible extends UtilisateurEntity
      *
      * @param boolean $manuallyAdded
      *
-     * @return Cible
+     * @return CampagneCible
      */
     public function setManuallyAdded($manuallyAdded)
     {
@@ -145,9 +145,9 @@ class Cible extends UtilisateurEntity
      *
      * @param integer $cible
      *
-     * @return Cible
+     * @return CampagneCible
      */
-    public function setCible($cible)
+    public function setCampagneCible($cible)
     {
         $this->cible = $cible;
 
@@ -159,7 +159,7 @@ class Cible extends UtilisateurEntity
      *
      * @return integer
      */
-    public function getCible()
+    public function getCampagneCible()
     {
         return $this->cible;
     }
@@ -169,7 +169,7 @@ class Cible extends UtilisateurEntity
      *
      * @param \Starkerxp\CampagneBundle\Entity\Campagne $campagne
      *
-     * @return Cible
+     * @return CampagneCible
      */
     public function setCampagne(\Starkerxp\CampagneBundle\Entity\Campagne $campagne)
     {
