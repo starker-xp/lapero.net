@@ -48,7 +48,7 @@ class TemplateManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
         $template->setNom("Ceci est mon nom");
         $template->setSujet("Ceci est mon sujet");
         $template->setMessage("Ceci est mon message");
-        $template->setUuid("5e6e63e6-1d74-4c4c-b19a-2741ed330836");
+        $template->setUuid("5e6e63e6-1d74-4c4c-b19a-2741ed330837");
         $this->manager->insert($template);
         $this->assertCount(2, $this->manager->findAll());
     }

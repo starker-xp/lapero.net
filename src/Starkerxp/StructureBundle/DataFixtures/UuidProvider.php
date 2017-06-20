@@ -4,9 +4,9 @@ namespace Starkerxp\StructureBundle\DataFixtures;
 
 use Ramsey\Uuid\Uuid;
 
-class UuidFixtures
+class UuidProvider
 {
-    public static function uuid()
+    public function uuid()
     {
         $uuid = Uuid::uuid4();
 

@@ -23,5 +23,6 @@ services:
             - {name: doctrine.event_subscriber, connection: default}
 
     starkerxp_structure.data_fixtures.uuid:
-        class: Starkerxp\StructureBundle\DataFixtures\UuidFixtures
-        tags: [ { name: nelmio_alice.faker.provider } ]
+        class: Starkerxp\StructureBundle\DataFixtures\UuidProvider
+        tags:
+         -  { name: nelmio_alice.faker.provider }

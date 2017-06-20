@@ -39,8 +39,6 @@ class TemplateControllerTest extends WebTest
     public function testPostInvalide()
     {
         $this->loadFixtureFiles(['@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml']);
-
-
         $client = $this->getAuthClient();
         $client->request('POST', '/api/templates', []);
         $response = $client->getResponse();

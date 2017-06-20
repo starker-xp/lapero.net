@@ -117,9 +117,9 @@ abstract class WebTest extends WebTestCase
         }
     }
 
-    public function loadFixtureFiles(array $paths = [], $append = false, $omName = null, $registryName = 'doctrine')
+    public function loadFixtureFiles(array $paths = [], $append = false, $omName = null, $registryName = 'doctrine', $purgeMode = null)
     {
-        $retour = parent::loadFixtureFiles($paths, $append, $omName, $registryName);
+        $retour = parent::loadFixtureFiles($paths, $append, $omName, $registryName, $purgeMode);
         $this->recoverIdGenerators();
         $this->getEntityManager()->clear();
 
