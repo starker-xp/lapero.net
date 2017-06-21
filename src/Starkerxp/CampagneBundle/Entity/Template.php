@@ -51,6 +51,14 @@ class Template extends UtilisateurEntity
     protected $message;
 
     /**
+     * @ORM\OneToMany(
+     *      targetEntity="Event",
+     *      mappedBy="template"
+     * )
+     */
+    protected $events;
+
+    /**
      * Get id.
      *
      * @return int
@@ -144,5 +152,47 @@ class Template extends UtilisateurEntity
     public function setMessage($message)
     {
         $this->message = $message;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add event
+     *
+     * @param \Starkerxp\CampagneBundle\Entity\Event $event
+     *
+     * @return Template
+     */
+    public function addEvent(\Starkerxp\CampagneBundle\Entity\Event $event)
+    {
+        $this->events[] = $event;
+
+        return $this;
+    }
+
+    /**
+     * Remove event
+     *
+     * @param \Starkerxp\CampagneBundle\Entity\Event $event
+     */
+    public function removeEvent(\Starkerxp\CampagneBundle\Entity\Event $event)
+    {
+        $this->events->removeElement($event);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 }

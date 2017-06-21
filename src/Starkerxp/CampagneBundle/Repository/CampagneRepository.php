@@ -10,4 +10,13 @@ namespace Starkerxp\CampagneBundle\Repository;
  */
 class CampagneRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getQueryListe()
+    {
+        $query = $this->createQueryBuilder('c');
+        $query->andWhere("c.deleted = 0");
+
+        return $query;
+    }
+
 }

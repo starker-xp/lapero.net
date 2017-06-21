@@ -2,3 +2,9 @@ services:
     starkerxp_campagne.api.sendwithus:
         class: sendwithus\API
         arguments: ["test_bef8120067a4969ec58f24f7ebbf4e885dce806a"]
+
+    starkerxp_campagne.form.event_type:
+        class: Starkerxp\CampagneBundle\Form\Type\EventType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type }

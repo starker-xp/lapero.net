@@ -27,6 +27,7 @@ class CampagneCibleManagerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/CampagneManager.yml',
                 '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneCibleManager/CampagneCibleManager.yml',
             ]
         );
@@ -42,10 +43,13 @@ class CampagneCibleManagerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/CampagneManager.yml',
                 '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneCibleManager/DefaultCampagneCible.yml',
             ]
         );
+        $campagnes = $this->getRepository("StarkerxpCampagneBundle:Campagne")->findBy([], ['id' => 'ASC']);
         $cible = new CampagneCible();
+        $cible->setCampagne($campagnes[1]);
         $this->manager->insert($cible);
         $this->assertCount(2, $this->manager->findAll());
     }
@@ -59,6 +63,7 @@ class CampagneCibleManagerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/CampagneManager.yml',
                 '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneCibleManager/DefaultCampagneCible.yml',
             ]
         );

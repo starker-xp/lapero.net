@@ -13,21 +13,20 @@ use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
  */
 class CampagneCible extends UtilisateurEntity
 {
+    //@todo remplacer cible par une gestion avec de 'lead' et 'leadAction'
     /**
-     * @var int
+     * @var bool
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="lead_id", type="integer", length=11, nullable=true)
      */
-    protected $id;
+    protected $lead;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="cible_id", type="integer", length=11, nullable=false)
+     * @ORM\Column(name="lead_action_id", type="integer", length=11, nullable=true)
      */
-    protected $cible;
+    protected $leadAction;
 
     /**
      * @var Campagne
@@ -57,16 +56,6 @@ class CampagneCible extends UtilisateurEntity
      * @ORM\Column(name="manually_added", type="boolean", options={"default": false})
      */
     protected $manuallyAdded = false;
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set dateLastExited
@@ -138,30 +127,6 @@ class CampagneCible extends UtilisateurEntity
     public function getManuallyAdded()
     {
         return $this->manuallyAdded;
-    }
-
-    /**
-     * Set cible
-     *
-     * @param integer $cible
-     *
-     * @return CampagneCible
-     */
-    public function setCampagneCible($cible)
-    {
-        $this->cible = $cible;
-
-        return $this;
-    }
-
-    /**
-     * Get cible
-     *
-     * @return integer
-     */
-    public function getCampagneCible()
-    {
-        return $this->cible;
     }
 
     /**

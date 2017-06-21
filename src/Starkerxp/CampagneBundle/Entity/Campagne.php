@@ -67,7 +67,7 @@ class Campagne extends UtilisateurEntity
      *      mappedBy="campagne"
      * )
      */
-    protected $clients;
+    protected $cibles;
 
     /**
      * Constructor
@@ -75,7 +75,7 @@ class Campagne extends UtilisateurEntity
     public function __construct()
     {
         $this->events = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->clients = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->cibles = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = self::DRAFT;
         $this->deleted = false;
     }
@@ -186,5 +186,39 @@ class Campagne extends UtilisateurEntity
     public function getEvents()
     {
         return $this->events;
+    }
+
+    /**
+     * Add cible
+     *
+     * @param \Starkerxp\CampagneBundle\Entity\CampagneCible $cible
+     *
+     * @return Campagne
+     */
+    public function addCible(\Starkerxp\CampagneBundle\Entity\CampagneCible $cible)
+    {
+        $this->cibles[] = $cible;
+
+        return $this;
+    }
+
+    /**
+     * Remove cible
+     *
+     * @param \Starkerxp\CampagneBundle\Entity\CampagneCible $cible
+     */
+    public function removeCible(\Starkerxp\CampagneBundle\Entity\CampagneCible $cible)
+    {
+        $this->cibles->removeElement($cible);
+    }
+
+    /**
+     * Get cibles
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCibles()
+    {
+        return $this->cibles;
     }
 }

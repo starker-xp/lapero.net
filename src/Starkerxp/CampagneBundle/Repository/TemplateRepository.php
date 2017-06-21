@@ -10,4 +10,11 @@ namespace Starkerxp\CampagneBundle\Repository;
  */
 class TemplateRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getQueryListe()
+    {
+        $query = $this->createQueryBuilder('t');
+        return $query;
+    }
+
 }

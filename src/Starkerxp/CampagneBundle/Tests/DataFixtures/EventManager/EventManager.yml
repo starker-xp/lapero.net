@@ -3,4 +3,5 @@ Starkerxp\CampagneBundle\Entity\Event:
         created_at: <datetime()>
         utilisateur: "@utilisateur_1"
         campagne: "@campagne_1"
+        template: "@template_1"
         uuid: <uuid()>

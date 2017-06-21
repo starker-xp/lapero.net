@@ -31,6 +31,14 @@ class Event extends UtilisateurEntity
     protected $campagne;
 
     /**
+     * @var Template
+     *
+     * @ORM\ManyToOne(targetEntity="Template", cascade="persist", inversedBy="events")
+     * @ORM\JoinColumn(name="template_id", referencedColumnName="id", nullable=false)
+     */
+    protected $template;
+
+    /**
      * Get id
      *
      * @return integer
@@ -41,20 +49,6 @@ class Event extends UtilisateurEntity
     }
 
     /**
-     * Set campagne
-     *
-     * @param \Starkerxp\CampagneBundle\Entity\Campagne $campagne
-     *
-     * @return Event
-     */
-    public function setCampagne(\Starkerxp\CampagneBundle\Entity\Campagne $campagne)
-    {
-        $this->campagne = $campagne;
-
-        return $this;
-    }
-
-    /**
      * Get campagne
      *
      * @return \Starkerxp\CampagneBundle\Entity\Campagne
@@ -62,5 +56,41 @@ class Event extends UtilisateurEntity
     public function getCampagne()
     {
         return $this->campagne;
+    }
+
+    /**
+     * Set campagne
+     *
+     * @param \Starkerxp\CampagneBundle\Entity\Campagne $campagne
+     *
+     */
+    public function setCampagne(\Starkerxp\CampagneBundle\Entity\Campagne $campagne)
+    {
+        $this->campagne = $campagne;
+
+    }
+
+    /**
+     * Set template
+     *
+     * @param \Starkerxp\CampagneBundle\Entity\Template $template
+     *
+     * @return Event
+     */
+    public function setTemplate(\Starkerxp\CampagneBundle\Entity\Template $template)
+    {
+        $this->template = $template;
+
+        return $this;
+    }
+
+    /**
+     * Get template
+     *
+     * @return \Starkerxp\CampagneBundle\Entity\Template
+     */
+    public function getTemplate()
+    {
+        return $this->template;
     }
 }

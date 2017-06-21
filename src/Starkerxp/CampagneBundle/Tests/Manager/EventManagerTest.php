@@ -28,6 +28,7 @@ class EventManagerTest extends WebTest
             [
                 '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
                 '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/DefaultCampagne.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/TemplateManager/TemplateManager.yml',
                 '@StarkerxpCampagneBundle/Tests/DataFixtures/EventManager/EventManager.yml',
             ]
         );
@@ -43,11 +44,16 @@ class EventManagerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
-                '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/DefaultCampagne.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/CampagneManager.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/TemplateManager/TemplateManager.yml',
                 '@StarkerxpCampagneBundle/Tests/DataFixtures/EventManager/DefaultEvent.yml',
             ]
         );
+        $campagnes = $this->getRepository("StarkerxpCampagneBundle:Campagne")->findBy([], ['id' => 'ASC']);
+        $templates = $this->getRepository("StarkerxpCampagneBundle:Template")->findBy([], ['id' => 'ASC']);
         $event = new Event();
+        $event->setCampagne($campagnes[1]);
+        $event->setTemplate($templates[1]);
         $this->manager->insert($event);
         $this->assertCount(2, $this->manager->findAll());
     }
@@ -62,6 +68,7 @@ class EventManagerTest extends WebTest
             [
                 '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
                 '@StarkerxpCampagneBundle/Tests/DataFixtures/CampagneManager/DefaultCampagne.yml',
+                '@StarkerxpCampagneBundle/Tests/DataFixtures/TemplateManager/TemplateManager.yml',
                 '@StarkerxpCampagneBundle/Tests/DataFixtures/EventManager/DefaultEvent.yml',
             ]
         );

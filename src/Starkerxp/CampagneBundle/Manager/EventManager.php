@@ -19,6 +19,7 @@ class EventManager extends AbstractManager
         $array = [
             "id"       => $object->getId(),
             "campagne_id" => $object->getCampagne()->getId(),
+            "template_id" => $object->getTemplate()->getId(),
         ];
         return $this->exportFields($array, $fields);
     }

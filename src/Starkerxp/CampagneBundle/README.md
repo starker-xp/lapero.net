@@ -27,6 +27,9 @@ services:
 # Lancer les tests unitaires
 
 ```
-php /usr/local/phpunit src/Starkerxp/TemplateBundle/Tests/
-php /usr/local/phpunit src/Starkerxp/CampagneBundle/Tests/
+php /usr/local/bin/phpunit src/Starkerxp/TemplateBundle/Tests/
+php /usr/local/bin/phpunit src/Starkerxp/CampagneBundle/Tests/
+
+# http://symfony.com/blog/how-to-solve-phpunit-issues-in-symfony-3-2-applications
+php ./vendor/bin/phpunit src/Starkerxp/CampagneBundle/Tests/
 ```
