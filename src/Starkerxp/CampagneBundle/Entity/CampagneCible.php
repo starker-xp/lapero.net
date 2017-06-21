@@ -31,7 +31,7 @@ class CampagneCible extends UtilisateurEntity
     /**
      * @var Campagne
      *
-     * @ORM\ManyToOne(targetEntity="Campagne", cascade="persist", inversedBy="clients")
+     * @ORM\ManyToOne(targetEntity="Campagne", cascade="persist", inversedBy="cibles")
      * @ORM\JoinColumn(name="campagne_id", referencedColumnName="id", nullable=false)
      */
     protected $campagne;
