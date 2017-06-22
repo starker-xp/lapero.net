@@ -46,7 +46,8 @@ class CampagneController extends StructureController
      *              "description"="starkerxp_structure.doc.sort.result",
      *              "required"="false"
      *          }
-     *      }
+     *      },
+     *      views = { "default"}
      * )
      */
     public function cgetAction(Request $request)
@@ -92,7 +93,8 @@ class CampagneController extends StructureController
      *              "description"="starkerxp_structure.doc.list_field.entity",
      *              "required"="false"
      *          }
-     *      }
+     *      },
+     *      views = { "default"}
      * )
      */
     public function getAction(Request $request)
@@ -116,7 +118,8 @@ class CampagneController extends StructureController
      * @ApiDoc(
      *      resource=true,
      *      description="Ajoute une campagne.",
-     *      section="Campagne"
+     *      section="Campagne",
+     *      views = { "default"}
      * )
      */
     public function postAction(Request $request)
@@ -152,7 +155,8 @@ class CampagneController extends StructureController
      *              "requirement"="\d+",
      *              "description"="Permet de modifier l'élément choisi."
      *          }
-     *      }
+     *      },
+     *      views = { "default"}
      * )
      */
     public function putAction(Request $request)
@@ -190,7 +194,8 @@ class CampagneController extends StructureController
      *              "requirement"="\d+",
      *              "description"="Permet de supprimer l'élément choisi."
      *          }
-     *      }
+     *      },
+     *      views = { "default"}
      * )
      */
     public function deleteAction(Request $request)

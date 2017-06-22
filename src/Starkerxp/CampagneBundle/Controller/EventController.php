@@ -46,7 +46,8 @@ class EventController extends StructureController
      *              "description"="starkerxp_structure.doc.sort.result",
      *              "required"="false"
      *          }
-     *      }
+     *      },
+     *      views = { "default"}
      * )
      */
     public function cgetAction(Request $request)
@@ -99,7 +100,8 @@ class EventController extends StructureController
      *              "description"="starkerxp_structure.doc.list_field.entity",
      *              "required"="false"
      *          }
-     *      }
+     *      },
+     *      views = { "default"}
      * )
      */
     public function getAction(Request $request)
@@ -123,7 +125,8 @@ class EventController extends StructureController
      * @ApiDoc(
      *      resource=true,
      *      description="Ajoute un event.",
-     *      section="Campagne"
+     *      section="Campagne",
+     *      views = { "default"}
      * )
      */
     public function postAction(Request $request)
@@ -165,7 +168,8 @@ class EventController extends StructureController
      *              "requirement"="\d+",
      *              "description"="Permet de modifier l'élément choisis"
      *          }
-     *      }
+     *      },
+     *      views = { "default"}
      * )
      */
     public function putAction(Request $request)
@@ -209,7 +213,8 @@ class EventController extends StructureController
      *              "requirement"="\d+",
      *              "description"="Permet de supprimer l'élément choisis"
      *          }
-     *      }
+     *      },
+     *      views = { "default"}
      * )
      */
     public function deleteAction(Request $request)
