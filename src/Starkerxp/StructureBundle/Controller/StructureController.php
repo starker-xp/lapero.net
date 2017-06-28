@@ -140,7 +140,7 @@ class StructureController extends Controller
      */
     protected function getContainer()
     {
-        return $this->getContainer();
+        return $this->container;
     }
 
 

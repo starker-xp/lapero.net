@@ -47,7 +47,7 @@ class EventController extends StructureController
      *              "required"="false"
      *          }
      *      },
-     *      views = { "default"}
+     *      views = { "default" }
      * )
      */
     public function cgetAction(Request $request)
@@ -101,7 +101,7 @@ class EventController extends StructureController
      *              "required"="false"
      *          }
      *      },
-     *      views = { "default"}
+     *      views = { "default" }
      * )
      */
     public function getAction(Request $request)
@@ -126,7 +126,7 @@ class EventController extends StructureController
      *      resource=true,
      *      description="Ajoute un event.",
      *      section="Campagne",
-     *      views = { "default"}
+     *      views = { "default" }
      * )
      */
     public function postAction(Request $request)
@@ -169,7 +169,7 @@ class EventController extends StructureController
      *              "description"="Permet de modifier l'élément choisis"
      *          }
      *      },
-     *      views = { "default"}
+     *      views = { "default" }
      * )
      */
     public function putAction(Request $request)
@@ -214,7 +214,7 @@ class EventController extends StructureController
      *              "description"="Permet de supprimer l'élément choisis"
      *          }
      *      },
-     *      views = { "default"}
+     *      views = { "default" }
      * )
      */
     public function deleteAction(Request $request)

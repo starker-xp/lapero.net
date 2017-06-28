@@ -2,10 +2,9 @@
 
 namespace Starkerxp\CampagneBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
+use Starkerxp\StructureBundle\Form\Type\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
 
 class TemplateType extends AbstractType
@@ -57,17 +56,4 @@ class TemplateType extends AbstractType
             ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(
-            [
-                'csrf_protection' => false,
-            ]
-        );
-    }
-
-    public function getName()
-    {
-        return '';
-    }
 }

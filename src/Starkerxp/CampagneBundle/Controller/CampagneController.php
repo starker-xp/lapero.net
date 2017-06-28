@@ -47,7 +47,7 @@ class CampagneController extends StructureController
      *              "required"="false"
      *          }
      *      },
-     *      views = { "default"}
+     *      views = { "default" }
      * )
      */
     public function cgetAction(Request $request)
@@ -71,7 +71,7 @@ class CampagneController extends StructureController
         );
         return new JsonResponse($retour);
     }
-	
+
 	/**
      * @ApiDoc(
      *      resource=true,
@@ -94,7 +94,7 @@ class CampagneController extends StructureController
      *              "required"="false"
      *          }
      *      },
-     *      views = { "default"}
+     *      views = { "default" }
      * )
      */
     public function getAction(Request $request)
@@ -119,7 +119,7 @@ class CampagneController extends StructureController
      *      resource=true,
      *      description="Ajoute une campagne.",
      *      section="Campagne",
-     *      views = { "default"}
+     *      views = {"default"}
      * )
      */
     public function postAction(Request $request)
@@ -156,7 +156,7 @@ class CampagneController extends StructureController
      *              "description"="Permet de modifier l'élément choisi."
      *          }
      *      },
-     *      views = { "default"}
+     *      views = { "default" }
      * )
      */
     public function putAction(Request $request)
@@ -195,7 +195,7 @@ class CampagneController extends StructureController
      *              "description"="Permet de supprimer l'élément choisi."
      *          }
      *      },
-     *      views = { "default"}
+     *      views = { "default" }
      * )
      */
     public function deleteAction(Request $request)

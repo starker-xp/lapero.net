@@ -9,9 +9,8 @@ use Starkerxp\CampagneBundle\Repository\CampagneRepository;
 use Starkerxp\CampagneBundle\Repository\TemplateRepository;
 use Starkerxp\StructureBundle\Services\EntityToIdObjectTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\AbstractType;
+use Starkerxp\StructureBundle\Form\Type\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints;
 
 class EventType extends AbstractType
@@ -63,17 +62,4 @@ class EventType extends AbstractType
         $builder->get('template')->addModelTransformer(new EntityToIdObjectTransformer($this->manager, "StarkerxpCampagneBundle:Template"));
     }
 
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(
-            [
-                'csrf_protection' => false,
-            ]
-        );
-    }
-
-    public function getName()
-    {
-        return '';
-    }
 }

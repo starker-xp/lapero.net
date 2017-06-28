@@ -47,7 +47,7 @@ class TemplateController extends StructureController
      *              "required"="false"
      *          }
      *      },
-     *      views = { "default"}
+     *      views = { "default" }
      * )
      */
     public function cgetAction(Request $request)
@@ -96,7 +96,7 @@ class TemplateController extends StructureController
      *              "required"="false"
      *          }
      *      },
-     *      views = { "default"}
+     *      views = { "default" }
      * )
      */
     public function getAction(Request $request)
@@ -121,7 +121,7 @@ class TemplateController extends StructureController
      *      resource=true,
      *      description="Ajoute un template.",
      *      section="Campagne",
-     *      views = { "default"}
+     *      views = { "default" }
      * )
      */
     public function postAction(Request $request)
@@ -161,7 +161,7 @@ class TemplateController extends StructureController
      *              "required"="true"
      *          }
      *      },
-     *      views = { "default"}
+     *      views = { "default" }
      * )
      */
     public function putAction(Request $request)
@@ -204,7 +204,7 @@ class TemplateController extends StructureController
      *              "required"="true"
      *          }
      *      },
-     *      views = { "default"}
+     *      views = { "default" }
      * )
      */
     public function deleteAction(Request $request)

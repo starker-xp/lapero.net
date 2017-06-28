@@ -4,7 +4,6 @@ namespace Starkerxp\UtilisateurBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Starkerxp\StructureBundle\Entity\Entity;
-use Symfony\Component\Security\Core\Role\RoleInterface;
 
 /**
  * RoleUtilisateur
@@ -12,7 +11,7 @@ use Symfony\Component\Security\Core\Role\RoleInterface;
  * @ORM\Table(name="utilisateur_role")
  * @ORM\Entity()
  */
-class RoleUtilisateur extends Entity implements RoleInterface
+class RoleUtilisateur extends Entity
 {
 
     /**
@@ -20,7 +19,7 @@ class RoleUtilisateur extends Entity implements RoleInterface
      *
      * @ORM\Column(name="roles", type="json_array", nullable=false)
      */
-    protected $roles;
+    protected $role;
 
     /**
      * RoleUtilisateur constructor.
@@ -28,29 +27,23 @@ class RoleUtilisateur extends Entity implements RoleInterface
      */
     public function __construct($roles)
     {
-        $this->roles = $roles;
+        $this->role = $roles;
     }
 
     /**
      * @return array
      */
-    public function getRoles()
+    public function getRole()
     {
-        return $this->roles;
+        return $this->role;
     }
 
     /**
-     * @param array $roles
+     * @param array $role
      */
-    public function setRoles($roles)
+    public function setRole($role)
     {
-        $this->roles = $roles;
+        $this->role = $role;
     }
-
-    public function getRole()
-    {
-        return $this->roles;
-    }
-
 
 }

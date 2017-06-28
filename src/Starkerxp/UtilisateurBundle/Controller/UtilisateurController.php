@@ -47,7 +47,7 @@ class UtilisateurController extends StructureController
      *              "required"="false"
      *          }
      *      },
-     *      views = { "default"}
+     *      views = { "default" }
      * )
      */
     public function cgetAction(Request $request)
