@@ -1,10 +1,10 @@
-starkerxp_utilisateur.controller.utilisateur.cget:
+starkerxp_utilisateur.utilisateur.cget:
     path: /utilisateurs
     defaults:
         _controller: "StarkerxpUtilisateurBundle:Utilisateur:cget"
     methods:
         - GET
-starkerxp_utilisateur.controller.utilisateur.get:
+starkerxp_utilisateur.utilisateur.get:
     path: '/utilisateurs/{utilisateur_id}'
     defaults:
         _controller: "StarkerxpUtilisateurBundle:Utilisateur:get"
@@ -12,13 +12,13 @@ starkerxp_utilisateur.controller.utilisateur.get:
         - GET
     requirements:
         utilisateur_id: \d+
-starkerxp_utilisateur.controller.utilisateur.post:
+starkerxp_utilisateur.utilisateur.post:
     path: /utilisateurs
     defaults:
         _controller: "StarkerxpUtilisateurBundle:Utilisateur:post"
     methods:
         - POST
-starkerxp_utilisateur.controller.utilisateur.put:
+starkerxp_utilisateur.utilisateur.put:
     path: '/utilisateurs/{utilisateur_id}'
     defaults:
         _controller: "StarkerxpUtilisateurBundle:Utilisateur:put"
@@ -26,7 +26,7 @@ starkerxp_utilisateur.controller.utilisateur.put:
         - PUT
     requirements:
         utilisateur_id: \d+
-starkerxp_utilisateur.controller.utilisateur.delete:
+starkerxp_utilisateur.utilisateur.delete:
     path: '/utilisateurs/{utilisateur_id}'
     defaults:
         _controller: "StarkerxpUtilisateurBundle:Utilisateur:delete"
