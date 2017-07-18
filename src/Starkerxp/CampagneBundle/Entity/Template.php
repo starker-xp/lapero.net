@@ -8,7 +8,10 @@ use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
 /**
  * Template.
  *
- * @ORM\Table(name="template")
+ * @ORM\Table(name="template", indexes={
+ *  @ORM\Index(columns={"created_at"}),
+ *  @ORM\Index(columns={"updated_at"})
+ * })
  * @ORM\Entity(repositoryClass="Starkerxp\CampagneBundle\Repository\TemplateRepository")
  */
 class Template extends UtilisateurEntity

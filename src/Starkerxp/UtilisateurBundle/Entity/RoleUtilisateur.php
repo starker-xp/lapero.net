@@ -8,7 +8,10 @@ use Starkerxp\StructureBundle\Entity\Entity;
 /**
  * RoleUtilisateur
  *
- * @ORM\Table(name="utilisateur_role")
+ * @ORM\Table(name="utilisateur_role", indexes={
+ *  @ORM\Index(columns={"created_at"}),
+ *  @ORM\Index(columns={"updated_at"})
+ * })
  * @ORM\Entity()
  */
 class RoleUtilisateur extends Entity

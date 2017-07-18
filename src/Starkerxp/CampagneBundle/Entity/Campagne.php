@@ -9,6 +9,8 @@ use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
  * Campagne.
  *
  * @ORM\Table(name="campagne", indexes={
+ *  @ORM\Index(columns={"created_at"}),
+ *  @ORM\Index(columns={"updated_at"}),
  *  @ORM\Index(columns={"name"}),
  *  @ORM\Index(columns={"deleted"}),
  *  @ORM\Index(columns={"status"})

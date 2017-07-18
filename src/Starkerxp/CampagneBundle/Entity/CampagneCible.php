@@ -8,7 +8,10 @@ use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
 /**
  * CampagneCible
  *
- * @ORM\Table(name="campagne_cible")
+ * @ORM\Table(name="campagne_cible", indexes={
+ *  @ORM\Index(columns={"created_at"}),
+ *  @ORM\Index(columns={"updated_at"})
+ * })
  * @ORM\Entity(repositoryClass="Starkerxp\CampagneBundle\Repository\CampagneCibleRepository")
  */
 class CampagneCible extends UtilisateurEntity

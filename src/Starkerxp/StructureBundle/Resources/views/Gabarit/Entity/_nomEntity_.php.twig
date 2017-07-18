@@ -3,15 +3,18 @@
 namespace {{ namespaceEntity }}\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Starkerxp\StructureBundle\Entity\Entity;
+use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
 
 /**
  * {{ nomEntity }}
  *
- * @ORM\Table(name="{{ nomEntity|lower }}")
+ * @ORM\Table(name="{{ nomEntity|lower }}", indexes={
+ *  @ORM\Index(columns={"created_at"}),
+ *  @ORM\Index(columns={"updated_at"})
+ * })
  * @ORM\Entity(repositoryClass="{{ namespaceEntity }}\Repository\{{ nomEntity }}Repository")
  */
-class {{ nomEntity }} extends Entity
+class {{ nomEntity }} extends UtilisateurEntity
 {
 
 }

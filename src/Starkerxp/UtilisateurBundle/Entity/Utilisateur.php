@@ -11,7 +11,10 @@ use Starkerxp\StructureBundle\Entity\UtilisateurInterface;
 /**
  * Utilisateur
  *
- * @ORM\Table(name="utilisateur")
+ * @ORM\Table(name="utilisateur", indexes={
+ *  @ORM\Index(columns={"created_at"}),
+ *  @ORM\Index(columns={"updated_at"})
+ * })
  * @ORM\Entity(repositoryClass="Starkerxp\UtilisateurBundle\Repository\UtilisateurRepository")
  */
 class Utilisateur extends Entity implements JWTUserInterface, UtilisateurInterface
@@ -75,7 +78,7 @@ class Utilisateur extends Entity implements JWTUserInterface, UtilisateurInterfa
             return null;
         }
 
-        return $this->roles->getRoles();
+        return $this->roles->getRole();
     }
 
     /**
