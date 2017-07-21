@@ -125,8 +125,8 @@ class CampagneController extends StructureController
     {
         $manager = $this->get("starkerxp_campagne.manager.campagne");
         try {
-            $campagne = new Campagne();
-            $form = $this->createForm(CampagneType::class, $campagne, ['method' => 'POST']);
+            $entite = new Campagne();
+            $form = $this->createForm(CampagneType::class, $entite, ['method' => 'POST']);
             $form->submit($this->getRequestData($request));
             if ($form->isValid()) {
                 $entite = $form->getData();

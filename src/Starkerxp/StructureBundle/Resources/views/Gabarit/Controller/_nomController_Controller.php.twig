@@ -4,8 +4,10 @@ namespace {{ namespaceController }}\Controller;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use {{ namespaceEntity }}\Entity\{{nomEntity}};
+use {{ namespaceEntity }}\Events;
 use {{ namespaceController }}\Form\Type\{{nomController}}Type;
 use Starkerxp\StructureBundle\Controller\StructureController;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -104,14 +106,14 @@ class {{ nomController }}Controller extends StructureController
         $manager = $this->get("{{nomServiceEntity}}.manager.{{ nomController|lower }}");
         try {
             $options = $this->resolveParams()->resolve($request->query->all());
-            ${{ nomController|lower }} = $manager->findOneBy(['id' => $request->get('{{ nomController|lower }}_id')]);
+			if (!$entite = $manager->findOneBy(['id' => $request->get('{{ nomController|lower }}_id')])) {
+                return new JsonResponse(["payload" => $this->translate("entity.not_found", "{{ nomController|lower }}")], 404);
+            }
         } catch (\Exception $e) {
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
-        if (!${{ nomController|lower }} instanceof {{ nomEntity }}) {
-            return new JsonResponse(["payload" => $this->translate("{{ nomEntity|lower }}.entity.not_found", "{{ nomController|lower }}")], 404);
-        }
-        $retour = $manager->toArray(${{ nomController|lower }}, $this->getFields($options['fields']));
+        
+        $retour = $manager->toArray($entite, $this->getFields($options['fields']));
 
         return new JsonResponse($retour);
     }
@@ -128,13 +130,14 @@ class {{ nomController }}Controller extends StructureController
     {
         $manager = $this->get("{{nomServiceEntity}}.manager.{{ nomController|lower }}");
         try {
-            ${{ nomController|lower }} = new {{ nomController }}();
-            $form = $this->createForm({{ nomController }}Type::class, ${{ nomController|lower }}, ['method' => 'POST']);
+            $entite = new {{ nomController }}();
+            $form = $this->createForm({{ nomController }}Type::class, $entite, ['method' => 'POST']);
             $form->submit($this->getRequestData($request));
             if ($form->isValid()) {
                 ${{ nomController|lower }} = $form->getData();
                 ${{ nomController|lower }}->setUuid($this->getUuid());
                 $manager->insert(${{ nomController|lower }});
+				$this->dispatch(Events::{{ nomController|upper }}_CREATED, new GenericEvent($entite));
                 return new JsonResponse(["payload" => $this->translate("{{ nomEntity|lower }}.entity.created", "{{ nomController|lower }}")], 201);
             }
         } catch (\Exception $e) {
@@ -164,17 +167,17 @@ class {{ nomController }}Controller extends StructureController
     public function putAction(Request $request)
     {
         $manager = $this->get("{{nomServiceEntity}}.manager.{{ nomController|lower }}");
-        ${{ nomController|lower }} = $manager->find($request->get('{{ nomController|lower }}_id'));
-        if (!${{ nomController|lower }} instanceof {{ nomEntity }}) {
-            return new JsonResponse(["payload" => $this->translate("{{ nomEntity|lower }}.entity.not_found", "{{ nomController|lower }}")], 404);
-        }
+		if (!$entite = $manager->findOneBy(['id' => $request->get('{{ nomController|lower }}_id')])) {
+			return new JsonResponse(["payload" => $this->translate("entity.not_found", "{{ nomController|lower }}")], 404);
+		}
         $manager->beginTransaction();
         try {
-            $form = $this->createForm({{ nomController }}Type::class, ${{ nomController|lower }}, ['method' => 'PUT']);
+            $form = $this->createForm({{ nomController }}Type::class, $entite, ['method' => 'PUT']);
             $form->submit($this->getRequestData($request));
             if ($form->isValid()) {
-                ${{ nomController|lower }} = $form->getData();
+                $entite = $form->getData();
                 $manager->update(${{ nomController|lower }});
+				$this->dispatch(Events::{{ nomController|upper }}_UPDATED, new GenericEvent($entite));
                 return new JsonResponse(["payload" => $this->translate("{{ nomEntity|lower }}.entity.updated", "{{ nomController|lower }}")], 204);
             }
         } catch (\Exception $e) {
@@ -203,16 +206,17 @@ class {{ nomController }}Controller extends StructureController
     public function deleteAction(Request $request)
     {
         $manager = $this->get("{{nomServiceEntity}}.manager.{{ nomController|lower }}");
-        ${{ nomController|lower }} = $manager->find($request->get('{{ nomController|lower }}_id'));
-        if (!${{ nomController|lower }} instanceof {{ nomEntity }}) {
-            return new JsonResponse(["payload" => $this->translate("{{ nomEntity|lower }}.entity.not_found", "{{ nomController|lower }}")], 404);
-        }
+        if (!$entite = $manager->findOneBy(['id' => $request->get('{{ nomController|lower }}_id')])) {
+			return new JsonResponse(["payload" => $this->translate("entity.not_found", "{{ nomController|lower }}")], 404);
+		}
         try {
-            $manager->delete(${{ nomController|lower }});
+            $manager->delete($entite);
         } catch (\Exception $e) {
             $manager->rollback();
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
+		$this->dispatch(Events::{{ nomController|upper }}_DELETED, new GenericEvent($request->get('{{ nomController|lower }}_id')));
+		
         return new JsonResponse(["payload" => $this->translate("{{ nomEntity|lower }}.entity.deleted", "{{ nomController|lower }}")], 204);
     }
 
