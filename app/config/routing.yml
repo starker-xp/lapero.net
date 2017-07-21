@@ -3,6 +3,7 @@ api_login_check:
 app:
     resource: "@AppBundle/Resources/config/routing.yml"
     prefix:   /
+
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /doc
@@ -13,4 +14,8 @@ starkerxp_utilisateur:
 
 starkerxp_campagne:
     resource: "@StarkerxpCampagneBundle/Resources/config/routing.yml"
+    prefix:   /api/
+
+starkerxp_lead:
+    resource: "@StarkerxpLeadBundle/Resources/config/routing.yml"
     prefix:   /api/
