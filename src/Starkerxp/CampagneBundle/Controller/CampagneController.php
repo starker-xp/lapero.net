@@ -4,8 +4,10 @@ namespace Starkerxp\CampagneBundle\Controller;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Starkerxp\CampagneBundle\Entity\Campagne;
+use Starkerxp\CampagneBundle\Events;
 use Starkerxp\CampagneBundle\Form\Type\CampagneType;
 use Starkerxp\StructureBundle\Controller\StructureController;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -60,24 +62,22 @@ class CampagneController extends StructureController
         } catch (\Exception $e) {
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
-        if (empty($resultSets)) {
-            return new JsonResponse([]);
-        }
         $retour = array_map(
             function ($element) use ($manager, $options) {
                 return $manager->toArray($element, $this->getFields($options['fields']));
             },
             $resultSets
         );
+
         return new JsonResponse($retour);
     }
 
-	/**
+    /**
      * @ApiDoc(
      *      resource=true,
      *      description="Affiche une campagne.",
      *      section="Campagne",
-	 *      requirements={
+     *      requirements={
      *          {
      *              "name"="campagne_id",
      *              "dataType"="integer",
@@ -102,19 +102,18 @@ class CampagneController extends StructureController
         $manager = $this->get("starkerxp_campagne.manager.campagne");
         try {
             $options = $this->resolveParams()->resolve($request->query->all());
-            $campagne = $manager->findOneBy(['id' => $request->get('campagne_id')]);
+            if (!$entite = $manager->findOneBy(['id' => $request->get('campagne_id')])) {
+                return new JsonResponse(["payload" => $this->translate("entity.not_found", "campagne")], 404);
+            }
         } catch (\Exception $e) {
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
-        if (!$campagne instanceof Campagne) {
-            return new JsonResponse(["payload" => $this->translate("campagne.entity.not_found", "campagne")], 404);
-        }
-        $retour = $manager->toArray($campagne, $this->getFields($options['fields']));
+        $retour = $manager->toArray($entite, $this->getFields($options['fields']));
 
         return new JsonResponse($retour);
     }
 
-	/**
+    /**
      * @ApiDoc(
      *      resource=true,
      *      description="Ajoute une campagne.",
@@ -130,25 +129,27 @@ class CampagneController extends StructureController
             $form = $this->createForm(CampagneType::class, $campagne, ['method' => 'POST']);
             $form->submit($this->getRequestData($request));
             if ($form->isValid()) {
-                $campagne = $form->getData();
-                $campagne->setUuid($this->getUuid());
-                $manager->insert($campagne);
-                return new JsonResponse(["payload" => $this->translate("campagne.entity.created", "campagne")], 201);
+                $entite = $form->getData();
+                $manager->insert($entite);
+                $this->dispatch(Events::CAMPAGNE_CREATED, new GenericEvent($entite));
+
+                return new JsonResponse(["payload" => $this->translate("entity.created", "campagne"), "token" => $entite->getId()], 201);
             }
         } catch (\Exception $e) {
             $manager->rollback();
+
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
 
         return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
     }
 
-	/**
+    /**
      * @ApiDoc(
      *      resource=true,
      *      description="Modifie une campagne.",
      *      section="Campagne",
-	 *      requirements={
+     *      requirements={
      *          {
      *              "name"="campagne_id",
      *              "dataType"="integer",
@@ -162,32 +163,35 @@ class CampagneController extends StructureController
     public function putAction(Request $request)
     {
         $manager = $this->get("starkerxp_campagne.manager.campagne");
-        $campagne = $manager->find($request->get('campagne_id'));
-        if (!$campagne instanceof Campagne) {
-            return new JsonResponse(["payload" => $this->translate("campagne.entity.not_found", "campagne")], 404);
+        if (!$entite = $manager->findOneBy(['id' => $request->get('campagne_id')])) {
+            return new JsonResponse(["payload" => $this->translate("entity.not_found", "campagne")], 404);
         }
         $manager->beginTransaction();
         try {
-            $form = $this->createForm(CampagneType::class, $campagne, ['method' => 'PUT']);
+            $form = $this->createForm(CampagneType::class, $entite, ['method' => 'PUT']);
             $form->submit($this->getRequestData($request));
             if ($form->isValid()) {
-                $campagne = $form->getData();
-                $manager->update($campagne);
-                return new JsonResponse(["payload" => $this->translate("campagne.entity.updated", "campagne")], 204);
+                $entite = $form->getData();
+                $manager->update($entite);
+                $this->dispatch(Events::CAMPAGNE_UPDATED, new GenericEvent($entite));
+
+                return new JsonResponse(["payload" => $this->translate("entity.updated", "campagne")], 204);
             }
         } catch (\Exception $e) {
             $manager->rollback();
+
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
+
         return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
     }
 
-	/**
+    /**
      * @ApiDoc(
      *      resource=true,
      *      description="Supprime une campagne.",
      *      section="Campagne",
-	 *      requirements={
+     *      requirements={
      *          {
      *              "name"="campagne_id",
      *              "dataType"="integer",
@@ -201,17 +205,19 @@ class CampagneController extends StructureController
     public function deleteAction(Request $request)
     {
         $manager = $this->get("starkerxp_campagne.manager.campagne");
-        $campagne = $manager->find($request->get('campagne_id'));
-        if (!$campagne instanceof Campagne) {
-            return new JsonResponse(["payload" => $this->translate("campagne.entity.not_found", "campagne")], 404);
+        if (!$entite = $manager->findOneBy(['id' => $request->get('campagne_id')])) {
+            return new JsonResponse(["payload" => $this->translate("entity.not_found", "campagne")], 404);
         }
         try {
-            $manager->delete($campagne);
+            $manager->delete($entite);
         } catch (\Exception $e) {
             $manager->rollback();
+
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
-        return new JsonResponse(["payload" => $this->translate("campagne.entity.deleted", "campagne")], 204);
+        $this->dispatch(Events::CAMPAGNE_DELETED, new GenericEvent($request->get('campagne_id')));
+
+        return new JsonResponse(["payload" => $this->translate("entity.deleted", "campagne")], 204);
     }
 
 } 

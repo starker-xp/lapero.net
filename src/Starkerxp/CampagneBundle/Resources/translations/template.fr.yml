@@ -1,5 +1,5 @@
-template.entity:
-        not_found: "Le template demandé n'existe pas."
-        created: "Le template a bien été créé."
-        updated: "Le template a bien été modifié."
-        deleted: "Le template a bien été supprimé."
+entity:
+    not_found: "Le template demandé n'existe pas."
+    created: "Le template a bien été créé."
+    updated: "Le template a bien été modifié."
+    deleted: "Le template a bien été supprimé."

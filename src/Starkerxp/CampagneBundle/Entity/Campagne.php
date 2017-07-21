@@ -56,6 +56,13 @@ class Campagne extends UtilisateurEntity
     protected $status;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_start", type="datetime", nullable=true)
+     */
+    protected $dateStart;
+
+    /**
      * @ORM\OneToMany(
      *      targetEntity="Event",
      *      mappedBy="campagne"

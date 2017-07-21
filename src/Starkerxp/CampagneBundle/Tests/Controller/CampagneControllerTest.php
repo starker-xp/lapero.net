@@ -22,6 +22,9 @@ class CampagneControllerTest extends WebTest
         $client->request('POST', '/api/campagnes', $data);
         $response = $client->getResponse();
         $this->assertEquals(201, $response->getStatusCode());
+        $body = json_decode($response->getContent(), true);
+        $this->assertEquals("La donnée a bien été créé.", $body['payload']);
+        $this->assertArrayHasKey("token", $body);
         $manager = $this->getContainer()->get('starkerxp_campagne.manager.campagne');
         $campagnes = $manager->findAll();
         $this->assertCount(1, $campagnes);
@@ -39,8 +42,6 @@ class CampagneControllerTest extends WebTest
         $client->request('POST', '/api/campagnes', []);
         $response = $client->getResponse();
         $this->assertEquals(400, $response->getStatusCode());
-        $body = json_decode($response->getContent(), true)['payload'];
-        //$this->assertArrayHasKey("nom", $body); // Exemple
     }
 
 
@@ -62,7 +63,7 @@ class CampagneControllerTest extends WebTest
         $this->assertCount(1, $listeCampagnes);
         $campagneDepart = $manager->toArray($listeCampagnes[0], ['name']);// Exemple
         $data = [
-            'name'     => "Mon nom", //exemple
+            'name' => "Mon nom", //exemple
         ];
         $client = $this->getAuthClient();
         $client->request('PUT', '/api/campagnes/'.$listeCampagnes[0]->getId(), $data);
@@ -114,14 +115,14 @@ class CampagneControllerTest extends WebTest
             ]
         );
         $data = [
-            'name'     => "Mon nom", //exemple
+            'name' => "Mon nom", //exemple
         ];
         $client = $this->getAuthClient();
         $client->request('PUT', '/api/campagnes/404', $data);
         $response = $client->getResponse();
         $this->assertEquals(404, $response->getStatusCode());
-        $body = json_decode($response->getContent(), true);
-        $this->assertNotEmpty($body);
+        $payload = json_decode($response->getContent(), true)['payload'];
+        $this->assertEquals("La donnée demandée n'existe pas.", $payload);
     }
 
 

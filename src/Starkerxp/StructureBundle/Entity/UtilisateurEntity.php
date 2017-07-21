@@ -39,5 +39,4 @@ abstract class UtilisateurEntity extends Entity
         $this->utilisateur = $utilisateur;
     }
 
-
 }
