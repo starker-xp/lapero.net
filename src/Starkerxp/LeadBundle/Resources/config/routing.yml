@@ -1,0 +1,36 @@
+starkerxp_lead.lead.cget:
+    path: /leads
+    defaults:
+        _controller: 'StarkerxpLeadBundle:Lead:cget'
+    methods:
+        - GET
+starkerxp_lead.lead.get:
+    path: '/leads/{lead_id}'
+    defaults:
+        _controller: 'StarkerxpLeadBundle:Lead:get'
+    methods:
+        - GET
+    requirements:
+        lead_id: \d+
+starkerxp_lead.lead.post:
+    path: /leads
+    defaults:
+        _controller: 'StarkerxpLeadBundle:Lead:post'
+    methods:
+        - POST
+starkerxp_lead.lead.put:
+    path: '/leads/{lead_id}'
+    defaults:
+        _controller: 'StarkerxpLeadBundle:Lead:put'
+    methods:
+        - PUT
+    requirements:
+        lead_id: \d+
+starkerxp_lead.lead.delete:
+    path: '/leads/{lead_id}'
+    defaults:
+        _controller: 'StarkerxpLeadBundle:Lead:delete'
+    methods:
+        - DELETE
+    requirements:
+        lead_id: \d+

@@ -1,0 +1,13 @@
+diff a/src/Starkerxp/LeadBundle/Resources/config/routing.yml b/src/Starkerxp/LeadBundle/Resources/config/routing.yml	(rejected hunks)
+@@ -0,3 +0,11 @@
+         _controller: 'StarkerxpLeadBundle:Lead:cget'
+     methods:
+         - GET
++starkerxp_lead.lead.get:
++    path: '/leads/{nomController|lower_id}'
++    defaults:
++        _controller: 'StarkerxpLeadBundle:Lead:get'
++    methods:
++        - GET
++    requirements:
++        lead_id: \d+

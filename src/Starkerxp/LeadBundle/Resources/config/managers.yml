@@ -1,0 +1,9 @@
+services:
+    starkerxp_lead.manager.lead:
+        class: Starkerxp\LeadBundle\Manager\LeadManager
+        arguments: ['@doctrine.orm.entity_manager', Starkerxp\LeadBundle\Entity\Lead]
+        tags: [{ name: starkerxp.manager.entity }]
+    starkerxp_lead.manager.leadaction:
+        class: Starkerxp\LeadBundle\Manager\LeadActionManager
+        arguments: ['@doctrine.orm.entity_manager', Starkerxp\LeadBundle\Entity\LeadAction]
+        tags: [{ name: starkerxp.manager.entity }]

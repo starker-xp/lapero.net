@@ -4,7 +4,7 @@
     methods:  [GET]
 
 {{ nomServiceController }}.{{ nomControllerCamelize|lower }}.get:
-    path:     /{{ nomController|lower }}s/{{{ nomController|lower }}_id}
+    path:     '/{{ nomController|lower }}s/{{ '{' ~ nomController|lower ~ '_id}' }}'
     defaults: { _controller: "{{namespaceControllerFQC|replace({'\\':''})}}:{{ nomController }}:get" }
     methods:  [GET]
     requirements:
@@ -16,14 +16,14 @@
     methods:  [POST]
 
 {{ nomServiceController }}.{{ nomControllerCamelize|lower }}.put:
-    path:     /{{ nomController|lower }}s/{{{ nomController|lower }}_id}
+    path:     '/{{ nomController|lower }}s/{{ '{' ~ nomController|lower ~ '_id}' }}'
     defaults: { _controller: "{{namespaceControllerFQC|replace({'\\':''})}}:{{ nomController }}:put" }
     methods:  [PUT]
     requirements:
         {{ nomController|lower }}_id: '\d+'
 
 {{ nomServiceController }}.{{ nomControllerCamelize|lower }}.delete:
-    path:     /{{ nomController|lower }}s/{{{ nomController|lower }}_id}
+    path:     '/{{ nomController|lower }}s/{{ '{' ~ nomController|lower ~ '_id}' }}'
     defaults: { _controller: "{{namespaceControllerFQC|replace({'\\':''})}}:{{ nomController }}:delete" }
     methods:  [DELETE]
     requirements:
