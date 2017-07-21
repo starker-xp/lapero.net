@@ -5,13 +5,13 @@ starkerxp_campagne.template.cget:
     methods:
         - GET
 starkerxp_campagne.template.get:
-    path: '/templates/{id}'
+    path: '/templates/{template_id}'
     defaults:
         _controller: 'StarkerxpCampagneBundle:Template:get'
     methods:
         - GET
     requirements:
-        id: \d+
+        template_id: \d+
 starkerxp_campagne.template.post:
     path: /templates
     defaults:
@@ -19,21 +19,21 @@ starkerxp_campagne.template.post:
     methods:
         - POST
 starkerxp_campagne.template.put:
-    path: '/templates/{id}'
+    path: '/templates/{template_id}'
     defaults:
         _controller: 'StarkerxpCampagneBundle:Template:put'
     methods:
         - PUT
     requirements:
-        id: \d+
+        template_id: \d+
 starkerxp_campagne.template.delete:
-    path: '/templates/{id}'
+    path: '/templates/{template_id}'
     defaults:
         _controller: 'StarkerxpCampagneBundle:Template:delete'
     methods:
         - DELETE
     requirements:
-        id: \d+
+        template_id: \d+
 starkerxp_campagne.campagne.cget:
     path: /campagnes
     defaults:

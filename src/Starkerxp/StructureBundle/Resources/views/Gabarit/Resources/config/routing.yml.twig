@@ -1,30 +1,30 @@
 {{ nomServiceController }}.{{ nomControllerCamelize|lower }}.cget:
     path:     /{{ nomController|lower }}s
-    defaults: { _controller: "{{namespaceController}}:{{ nomController }}:cget" }
+    defaults: { _controller: "{{namespaceControllerFQC|replace({'\\':''})}}:{{ nomController }}:cget" }
     methods:  [GET]
 
 {{ nomServiceController }}.{{ nomControllerCamelize|lower }}.get:
-    path:     /{{ nomController|lower }}s/{id}
-    defaults: { _controller: "{{namespaceController}}:{{ nomController }}:get" }
+    path:     /{{ nomController|lower }}s/{{{ nomController|lower }}_id}
+    defaults: { _controller: "{{namespaceControllerFQC|replace({'\\':''})}}:{{ nomController }}:get" }
     methods:  [GET]
     requirements:
         {{ nomController|lower }}_id: '\d+'
 
 {{ nomServiceController }}.{{ nomControllerCamelize|lower }}.post:
     path:     /{{ nomController|lower }}s
-    defaults: { _controller: "{{namespaceController}}:{{ nomController }}:post" }
+    defaults: { _controller: "{{namespaceControllerFQC|replace({'\\':''})}}:{{ nomController }}:post" }
     methods:  [POST]
 
 {{ nomServiceController }}.{{ nomControllerCamelize|lower }}.put:
-    path:     /{{ nomController|lower }}s/{id}
-    defaults: { _controller: "{{namespaceController}}:{{ nomController }}:put" }
+    path:     /{{ nomController|lower }}s/{{{ nomController|lower }}_id}
+    defaults: { _controller: "{{namespaceControllerFQC|replace({'\\':''})}}:{{ nomController }}:put" }
     methods:  [PUT]
     requirements:
         {{ nomController|lower }}_id: '\d+'
 
 {{ nomServiceController }}.{{ nomControllerCamelize|lower }}.delete:
-    path:     /{{ nomController|lower }}s/{id}
-    defaults: { _controller: "{{namespaceController}}:{{ nomController }}:delete" }
+    path:     /{{ nomController|lower }}s/{{{ nomController|lower }}_id}
+    defaults: { _controller: "{{namespaceControllerFQC|replace({'\\':''})}}:{{ nomController }}:delete" }
     methods:  [DELETE]
     requirements:
         {{ nomController|lower }}_id: '\d+'

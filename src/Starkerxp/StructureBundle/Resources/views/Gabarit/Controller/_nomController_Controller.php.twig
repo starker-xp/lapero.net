@@ -18,7 +18,7 @@ class {{ nomController }}Controller extends StructureController
      * @ApiDoc(
      *      resource=true,
      *      description="Liste les {{ nomController|lower }}s.",
-     *      section="{{ namespaceController|title }}",
+     *      section="{{ nomServiceController}}.{{ nomController|lower}}",
      *      parameters={
      *          {
      *              "name"="offset",
@@ -80,7 +80,7 @@ class {{ nomController }}Controller extends StructureController
      * @ApiDoc(
      *      resource=true,
      *      description="Affiche un {{ nomController|lower }}.",
-     *      section="{{ namespaceController|title }}",
+     *      section="{{ nomServiceController}}.{{ nomController|lower}}",
 	 *      requirements={
      *          {
      *              "name"="{{ nomController|lower }}_id",
@@ -122,7 +122,7 @@ class {{ nomController }}Controller extends StructureController
      * @ApiDoc(
      *      resource=true,
      *      description="Ajoute un {{ nomController|lower }}.",
-     *      section="{{ namespaceController|title }}",
+     *      section="{{ nomServiceController}}.{{ nomController|lower}}",
      *      views = { "default" }
      * )
      */
@@ -152,7 +152,7 @@ class {{ nomController }}Controller extends StructureController
      * @ApiDoc(
      *      resource=true,
      *      description="Modifie un {{ nomController|lower }}.",
-     *      section="{{ namespaceController|title }}",
+     *      section="{{ nomServiceController}}.{{ nomController|lower}}",
 	 *      requirements={
      *          {
      *              "name"="{{ nomController|lower }}_id",
@@ -191,7 +191,7 @@ class {{ nomController }}Controller extends StructureController
      * @ApiDoc(
      *      resource=true,
      *      description="Supprime un {{ nomController|lower }}.",
-     *      section="{{ namespaceController|title }}",
+     *      section="{{ nomServiceController}}.{{ nomController|lower}}",
 	 *      requirements={
      *          {
      *              "name"="{{ nomController|lower }}_id",
