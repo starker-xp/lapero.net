@@ -61,6 +61,7 @@ class EntitySubscriber implements EventSubscriber
         if (empty($entity->getUtilisateur()) && $utilisateur = $this->getUtilisateur()) {
             $entity->setUtilisateur($utilisateur);
         }
+        return true;
     }
 
     protected function getUtilisateur()

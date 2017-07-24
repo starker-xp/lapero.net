@@ -25,14 +25,6 @@ class Campagne extends UtilisateurEntity
     const CANCEL = 'cancel';
     const ERROR = 'error';
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
 
     /**
      * @var string
