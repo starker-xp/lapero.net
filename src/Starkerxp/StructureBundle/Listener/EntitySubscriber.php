@@ -10,6 +10,10 @@ use Ramsey\Uuid\Uuid;
 use Starkerxp\StructureBundle\Entity\Entity;
 use Starkerxp\StructureBundle\Entity\TimestampEntity;
 use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
+use Starkerxp\StructureBundle\Events;
+use Starkerxp\StructureBundle\Manager\EntityReadOnlyInterface;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 //
@@ -21,10 +25,15 @@ class EntitySubscriber implements EventSubscriber
      */
     protected $utilisateur;
 
-    public function __construct($utilisateur)
+    /**
+     * @var EventDispatcher
+     */
+    protected $eventDispatcher;
+
+    public function __construct($utilisateur, $eventDispatcher)
     {
         $this->utilisateur = $utilisateur;
-
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function getSubscribedEvents()
@@ -68,6 +77,11 @@ class EntitySubscriber implements EventSubscriber
         $entityManager = $event->getEntityManager();
         $uow = $entityManager->getUnitOfWork();
         foreach ($uow->getScheduledEntityUpdates() as $entity) {
+            if ($entity instanceof EntityReadOnlyInterface) {
+                $uow->detach($entity);
+                $this->eventDispatcher->dispatch(Events::ENTITY_READ_ONLY, new GenericEvent($entity));
+                continue;
+            }
             if ($entity instanceof TimestampEntity) {
                 $entity->setUpdatedAt(new DateTime());
             }

@@ -9,6 +9,7 @@ use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
  * Template.
  *
  * @ORM\Table(name="template", indexes={
+ *  @ORM\Index(columns={"type"}),
  *  @ORM\Index(columns={"created_at"}),
  *  @ORM\Index(columns={"updated_at"})
  * })

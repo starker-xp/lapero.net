@@ -1,5 +1,0 @@
-Starkerxp\LeadBundle\Entity\LeadAction:
-    leadaction_1:
-        created_at: <dateTimeBetween("2016-08-05 12:12:12", "2016-08-05 12:12:12")>
-        utilisateur: "@utilisateur_1"
-        uid: <uuid()>

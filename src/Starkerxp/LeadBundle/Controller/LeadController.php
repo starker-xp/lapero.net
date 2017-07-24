@@ -3,7 +3,7 @@
 namespace Starkerxp\LeadBundle\Controller;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Starkerxp\LeadBundle\Entity\LeadAction;
+use Starkerxp\LeadBundle\Entity\Lead;
 use Starkerxp\LeadBundle\Events;
 use Starkerxp\LeadBundle\Form\Type\LeadType;
 use Starkerxp\StructureBundle\Controller\StructureController;
@@ -135,10 +135,9 @@ class LeadController extends StructureController
             $form->submit($this->getRequestData($request));
             if ($form->isValid()) {
                 $lead = $form->getData();
-                $lead->setUuid($this->getUuid());
                 $manager->insert($lead);
 				$this->dispatch(Events::LEAD_CREATED, new GenericEvent($entite));
-                return new JsonResponse(["payload" => $this->translate("leadaction.entity.created", "lead")], 201);
+                return new JsonResponse(["payload" => $this->translate("lead.entity.created", "lead")], 201);
             }
         } catch (\Exception $e) {
             $manager->rollback();
@@ -146,78 +145,6 @@ class LeadController extends StructureController
         }
 
         return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
-    }
-
-	/**
-     * @ApiDoc(
-     *      resource=true,
-     *      description="Modifie un lead.",
-     *      section="starkerxp_lead.lead",
-	 *      requirements={
-     *          {
-     *              "name"="lead_id",
-     *              "dataType"="integer",
-     *              "requirement"="\d+",
-     *              "description"="Permet de modifier l'élément choisi."
-     *          }
-     *      },
-     *      views = { "default" }
-     * )
-     */
-    public function putAction(Request $request)
-    {
-        $manager = $this->get("starkerxp_lead.manager.lead");
-		if (!$entite = $manager->findOneBy(['id' => $request->get('lead_id')])) {
-			return new JsonResponse(["payload" => $this->translate("entity.not_found", "lead")], 404);
-		}
-        $manager->beginTransaction();
-        try {
-            $form = $this->createForm(LeadType::class, $entite, ['method' => 'PUT']);
-            $form->submit($this->getRequestData($request));
-            if ($form->isValid()) {
-                $entite = $form->getData();
-                $manager->update($lead);
-				$this->dispatch(Events::LEAD_UPDATED, new GenericEvent($entite));
-                return new JsonResponse(["payload" => $this->translate("leadaction.entity.updated", "lead")], 204);
-            }
-        } catch (\Exception $e) {
-            $manager->rollback();
-            return new JsonResponse(["payload" => $e->getMessage()], 400);
-        }
-        return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
-    }
-
-	/**
-     * @ApiDoc(
-     *      resource=true,
-     *      description="Supprime un lead.",
-     *      section="starkerxp_lead.lead",
-	 *      requirements={
-     *          {
-     *              "name"="lead_id",
-     *              "dataType"="integer",
-     *              "requirement"="\d+",
-     *              "description"="Permet de supprimer l'élément choisi."
-     *          }
-     *      },
-     *      views = { "default" }
-     * )
-     */
-    public function deleteAction(Request $request)
-    {
-        $manager = $this->get("starkerxp_lead.manager.lead");
-        if (!$entite = $manager->findOneBy(['id' => $request->get('lead_id')])) {
-			return new JsonResponse(["payload" => $this->translate("entity.not_found", "lead")], 404);
-		}
-        try {
-            $manager->delete($entite);
-        } catch (\Exception $e) {
-            $manager->rollback();
-            return new JsonResponse(["payload" => $e->getMessage()], 400);
-        }
-		$this->dispatch(Events::LEAD_DELETED, new GenericEvent($request->get('lead_id')));
-		
-        return new JsonResponse(["payload" => $this->translate("leadaction.entity.deleted", "lead")], 204);
     }
 
 } 
