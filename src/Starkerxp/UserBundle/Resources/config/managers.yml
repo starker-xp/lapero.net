@@ -1,0 +1,6 @@
+services:
+    starkerxp_user.manager.user:
+        class: Starkerxp\UserBundle\Manager\UserManager
+        arguments: ["@doctrine.orm.entity_manager", "Starkerxp\\UserBundle\\Entity\\User", "@security.password_encoder"]
+        tags:
+            - { name: starkerxp.manager.entity }

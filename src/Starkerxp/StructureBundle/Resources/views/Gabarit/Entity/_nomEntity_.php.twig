@@ -3,7 +3,7 @@
 namespace {{ namespaceEntity }}\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
+use Starkerxp\StructureBundle\Entity\UserEntity;
 
 /**
  * {{ nomEntity }}
@@ -14,7 +14,7 @@ use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
  * })
  * @ORM\Entity(repositoryClass="{{ namespaceEntity }}\Repository\{{ nomEntity }}Repository")
  */
-class {{ nomEntity }} extends UtilisateurEntity
+class {{ nomEntity }} extends UserEntity
 {
 
 }

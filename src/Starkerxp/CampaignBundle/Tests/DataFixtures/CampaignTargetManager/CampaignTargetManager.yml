@@ -1,0 +1,7 @@
+Starkerxp\CampaignBundle\Entity\CampaignCible:
+    cible_{1..10}:
+        created_at: <datetime()>
+        user: "@user_1"
+        uuid: <uuid()>
+        campaign: "@campaign_<current()>"
+

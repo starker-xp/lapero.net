@@ -1,0 +1,6 @@
+user.entity:
+    not_found: "La donnée demandée n'existe pas."
+    created: "La donnée a bien été créé."
+    updated: "La donnée a bien été modifié."
+    deleted: "La donnée a bien été supprimé."
+    not_updated_is_not_admin: "Un user ne peut supprimer le compte d'un autre user sauf s'il est 'Super Admin'."

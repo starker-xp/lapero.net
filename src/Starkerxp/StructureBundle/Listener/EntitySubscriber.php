@@ -9,7 +9,7 @@ use Doctrine\ORM\Event\OnFlushEventArgs;
 use Ramsey\Uuid\Uuid;
 use Starkerxp\StructureBundle\Entity\Entity;
 use Starkerxp\StructureBundle\Entity\TimestampEntity;
-use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
+use Starkerxp\StructureBundle\Entity\UserEntity;
 use Starkerxp\StructureBundle\Events;
 use Starkerxp\StructureBundle\Manager\EntityReadOnlyInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -23,16 +23,16 @@ class EntitySubscriber implements EventSubscriber
     /**
      * @var TokenStorage
      */
-    protected $utilisateur;
+    protected $user;
 
     /**
      * @var EventDispatcher
      */
     protected $eventDispatcher;
 
-    public function __construct($utilisateur, $eventDispatcher)
+    public function __construct($user, $eventDispatcher)
     {
-        $this->utilisateur = $utilisateur;
+        $this->user = $user;
         $this->eventDispatcher = $eventDispatcher;
     }
 
@@ -55,18 +55,18 @@ class EntitySubscriber implements EventSubscriber
             $uuid = Uuid::uuid4();
             $entity->setUuid($uuid);
         }
-        if (!$entity instanceof UtilisateurEntity) {
+        if (!$entity instanceof UserEntity) {
             return false;
         }
-        if (empty($entity->getUtilisateur()) && $utilisateur = $this->getUtilisateur()) {
-            $entity->setUtilisateur($utilisateur);
+        if (empty($entity->getUser()) && $user = $this->getUser()) {
+            $entity->setUser($user);
         }
         return true;
     }
 
-    protected function getUtilisateur()
+    protected function getUser()
     {
-        if (!$token = $this->utilisateur->getToken()) {
+        if (!$token = $this->user->getToken()) {
             return null;
         }
 
@@ -90,11 +90,11 @@ class EntitySubscriber implements EventSubscriber
                 $uuid = Uuid::uuid4();
                 $entity->setUuid($uuid);
             }
-            if (!$entity instanceof UtilisateurEntity) {
+            if (!$entity instanceof UserEntity) {
                 continue;
             }
-            if (empty($entity->getUtilisateur()) && $utilisateur = $this->getUtilisateur()) {
-                $entity->setUtilisateur($utilisateur);
+            if (empty($entity->getUser()) && $user = $this->getUser()) {
+                $entity->setUser($user);
             }
         }
     }

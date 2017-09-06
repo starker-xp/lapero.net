@@ -3,7 +3,7 @@
 namespace Starkerxp\LeadBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
+use Starkerxp\StructureBundle\Entity\UserEntity;
 
 /**
  * Lead
@@ -15,7 +15,7 @@ use Starkerxp\StructureBundle\Entity\UtilisateurEntity;
  * })
  * @ORM\Entity(repositoryClass="Starkerxp\LeadBundle\Repository\FormRepository")
  */
-class Form extends UtilisateurEntity
+class Form extends UserEntity
 {
     /**
      * @var string
@@ -25,10 +25,43 @@ class Form extends UtilisateurEntity
     protected $name;
 
     /**
-     * @var string
+     * @var array
      *
      * @ORM\Column(name="configuration", type="json_array", nullable=false)
      */
-    protected $provenance;
+    protected $configuration;
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return array
+     */
+    public function getConfiguration()
+    {
+        return $this->configuration;
+    }
+
+    /**
+     * @param array $configuration
+     */
+    public function setConfiguration($configuration)
+    {
+        $this->configuration = $configuration;
+    }
+
 
 }

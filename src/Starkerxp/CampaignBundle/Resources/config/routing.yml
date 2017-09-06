@@ -1,0 +1,115 @@
+starkerxp_campaign.template.cget:
+    path: /templates
+    defaults:
+        _controller: 'StarkerxpCampaignBundle:Template:cget'
+    methods:
+        - GET
+starkerxp_campaign.template.get:
+    path: '/templates/{template_id}'
+    defaults:
+        _controller: 'StarkerxpCampaignBundle:Template:get'
+    methods:
+        - GET
+    requirements:
+        template_id: \d+
+starkerxp_campaign.template.post:
+    path: /templates
+    defaults:
+        _controller: 'StarkerxpCampaignBundle:Template:post'
+    methods:
+        - POST
+starkerxp_campaign.template.put:
+    path: '/templates/{template_id}'
+    defaults:
+        _controller: 'StarkerxpCampaignBundle:Template:put'
+    methods:
+        - PUT
+    requirements:
+        template_id: \d+
+starkerxp_campaign.template.delete:
+    path: '/templates/{template_id}'
+    defaults:
+        _controller: 'StarkerxpCampaignBundle:Template:delete'
+    methods:
+        - DELETE
+    requirements:
+        template_id: \d+
+starkerxp_campaign.campaign.cget:
+    path: /campaigns
+    defaults:
+        _controller: 'StarkerxpCampaignBundle:Campaign:cget'
+    methods:
+        - GET
+starkerxp_campaign.campaign.get:
+    path: '/campaigns/{campaign_id}'
+    defaults:
+        _controller: 'StarkerxpCampaignBundle:Campaign:get'
+    methods:
+        - GET
+    requirements:
+        campaign_id: \d+
+starkerxp_campaign.campaign.post:
+    path: '/campaigns'
+    defaults:
+        _controller: 'StarkerxpCampaignBundle:Campaign:post'
+    methods:
+        - POST
+starkerxp_campaign.campaign.put:
+    path: '/campaigns/{campaign_id}'
+    defaults:
+        _controller: 'StarkerxpCampaignBundle:Campaign:put'
+    methods:
+        - PUT
+    requirements:
+        campaign_id: \d+
+starkerxp_campaign.campaign.delete:
+    path: '/campaigns/{campaign_id}'
+    defaults:
+        _controller: 'StarkerxpCampaignBundle:Campaign:delete'
+    methods:
+        - DELETE
+    requirements:
+        campaign_id: \d+
+starkerxp_campaign.event.cget:
+    path: '/campaigns/{campaign_id}/events'
+    defaults:
+        _controller: 'StarkerxpCampaignBundle:Event:cget'
+    methods:
+        - GET
+    requirements:
+        campaign_id: \d+
+starkerxp_campaign.event.get:
+    path: '/campaigns/{campaign_id}/events/{id}'
+    defaults:
+        _controller: 'StarkerxpCampaignBundle:Event:get'
+    methods:
+        - GET
+    requirements:
+        campaign_id: \d+
+        id: \d+
+starkerxp_campaign.event.post:
+    path: '/campaigns/{campaign_id}/events'
+    defaults:
+        _controller: 'StarkerxpCampaignBundle:Event:post'
+    methods:
+        - POST
+    requirements:
+        campaign_id: \d+
+starkerxp_campaign.event.put:
+    path: '/campaigns/{campaign_id}/events/{id}'
+    defaults:
+        _controller: 'StarkerxpCampaignBundle:Event:put'
+    methods:
+        - PUT
+    requirements:
+        campaign_id: \d+
+        id: \d+
+starkerxp_campaign.event.delete:
+    path: '/campaigns/{campaign_id}/events/{id}'
+    defaults:
+        _controller: 'StarkerxpCampaignBundle:Event:delete'
+    methods:
+        - DELETE
+    requirements:
+        campaign_id: \d+
+        id: \d+

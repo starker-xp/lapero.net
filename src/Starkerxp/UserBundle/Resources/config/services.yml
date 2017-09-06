@@ -1,0 +1,4 @@
+services:
+#    starkerxp_user.example:
+#        class: Starkerxp\UserBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

@@ -1,0 +1,10 @@
+services:
+    starkerxp_campaign.api.sendwithus:
+        class: sendwithus\API
+        arguments: ["test_bef8120067a4969ec58f24f7ebbf4e885dce806a"]
+
+    starkerxp_campaign.form.event_type:
+        class: Starkerxp\CampaignBundle\Form\Type\EventType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type }

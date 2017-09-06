@@ -1,0 +1,31 @@
+services:
+#    starkerxp_campaign.example:
+#        class: Starkerxp\CampaignBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
+    starkerxp_campaign.render.buzzexpert:
+        class: Starkerxp\CampaignBundle\Render\BuzzExpertRender
+        tags:
+          - { name: starkerxp_campaign.render }
+
+    starkerxp_campaign.render.twig:
+        class: Starkerxp\CampaignBundle\Render\TwigRender
+        arguments: ["@twig"]
+        tags:
+          - { name: starkerxp_campaign.render }
+
+    starkerxp_campaign.render.octosend_html:
+        class: Starkerxp\CampaignBundle\Render\OctosendHtmlRender
+        tags:
+          - { name: starkerxp_campaign.render }
+
+    starkerxp_campaign.render.octosend_txt:
+        class: Starkerxp\CampaignBundle\Render\OctosendTxtRender
+        arguments: ["@starkerxp_campaign.render.html_to_txt"]
+        tags:
+          - { name: starkerxp_campaign.render }
+
+    starkerxp_campaign.render.html_to_txt:
+        class: Starkerxp\CampaignBundle\Render\HtmlToTxtRender
+        arguments: ["@exercise_html_purifier.default"]
+        tags:
+          - { name: starkerxp_campaign.render }

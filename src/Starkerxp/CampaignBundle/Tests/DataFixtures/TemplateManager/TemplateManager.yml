@@ -1,0 +1,17 @@
+Starkerxp\CampaignBundle\Entity\Template:
+    template_{1..5}:
+        name: <name()>
+        type: "email"
+        object: "L'avenir sera radieux {{prenom |capitalize}}"
+        message: "Aujourd'hui une offre exceptionnelle vous attends."
+        created_at: <dateTimeBetween("2016-08-05 12:12:12", "2016-08-05 12:12:12")>
+        user: "@user_1"
+        uuid: <uuid()>
+    template_{5..10}:
+        name: <name()>
+        type: "sms"
+        object: "L'avenir sera radieux {{prenom |capitalize}}"
+        message: "Aujourd'hui une offre exceptionnelle vous attends."
+        created_at: <dateTimeBetween("2016-08-05 12:12:12", "2016-08-05 12:12:12")>
+        user: "@user_1"
+        uuid: <uuid()>

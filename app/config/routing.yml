@@ -9,11 +9,11 @@ NelmioApiDocBundle:
     prefix:   /doc
 
 starkerxp_utilisateur:
-    resource: "@StarkerxpUtilisateurBundle/Resources/config/routing.yml"
+    resource: "@StarkerxpUserBundle/Resources/config/routing.yml"
     prefix:   /api/
 
 starkerxp_campagne:
-    resource: "@StarkerxpCampagneBundle/Resources/config/routing.yml"
+    resource: "@StarkerxpCampaignBundle/Resources/config/routing.yml"
     prefix:   /api/
 
 starkerxp_lead:

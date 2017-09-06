@@ -1,7 +1,0 @@
-Starkerxp\CampagneBundle\Entity\Event:
-    event_{1..10}:
-        created_at: <datetime()>
-        utilisateur: "@utilisateur_1"
-        campagne: "@campagne_1"
-        template: "@template_1"
-        uuid: <uuid()>

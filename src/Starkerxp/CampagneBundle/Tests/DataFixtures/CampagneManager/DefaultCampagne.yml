@@ -1,8 +1,0 @@
-Starkerxp\CampagneBundle\Entity\Campagne:
-    campagne_1:
-        name: <name()>
-        status: draft
-        deleted: 0
-        created_at: <dateTimeBetween("2016-08-05 12:12:12", "2016-08-05 12:12:12")>
-        utilisateur: "@utilisateur_1"
-        uuid: <uuid()>

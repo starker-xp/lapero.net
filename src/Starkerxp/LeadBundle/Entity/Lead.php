@@ -3,7 +3,7 @@
 namespace Starkerxp\LeadBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Starkerxp\StructureBundle\Entity\UtilisateurArchiveEntity;
+use Starkerxp\StructureBundle\Entity\UserArchiveEntity;
 use Starkerxp\StructureBundle\Manager\EntityReadOnlyInterface;
 
 /**
@@ -15,21 +15,21 @@ use Starkerxp\StructureBundle\Manager\EntityReadOnlyInterface;
  * })
  * @ORM\Entity(repositoryClass="Starkerxp\LeadBundle\Repository\LeadRepository")
  */
-class Lead extends UtilisateurArchiveEntity implements EntityReadOnlyInterface
+class Lead extends UserArchiveEntity implements EntityReadOnlyInterface
 {
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=50, nullable=false)
+     * @ORM\Column(name="product", type="string", length=255, nullable=false)
      */
-    protected $type;
+    protected $product;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="provenance", type="string", length=50, nullable=false)
+     * @ORM\Column(name="origin", type="string", length=255, nullable=false)
      */
-    protected $provenance;
+    protected $origin;
 
     /**
      * @var \Datetime
@@ -41,7 +41,7 @@ class Lead extends UtilisateurArchiveEntity implements EntityReadOnlyInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="adresse_ip", type="string", length=255, nullable=true)
+     * @ORM\Column(name="ip_adress", type="string", length=255, nullable=true)
      */
-    protected $adresseIp;
+    protected $ipAdress;
 }

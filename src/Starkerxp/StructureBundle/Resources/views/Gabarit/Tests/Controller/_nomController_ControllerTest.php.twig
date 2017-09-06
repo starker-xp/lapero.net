@@ -15,7 +15,7 @@ class {{nomController}}ControllerTest extends WebTest
     public function testPostValide()
     {
         $this->loadFixtureFiles([
-            '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
         ]);
         $data = [
             //'nom'     => "Mon nom", //exemple
@@ -41,7 +41,7 @@ class {{nomController}}ControllerTest extends WebTest
     public function testPostInvalide()
     {
         $this->loadFixtureFiles([
-            '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
         ]);
 		$url = $this->generateUrl(
             '{{ nomServiceController }}.{{ nomControllerCamelize|lower }}.post',
@@ -64,7 +64,7 @@ class {{nomController}}ControllerTest extends WebTest
     public function testPutValide()
     {
 		$this->loadFixtureFiles([
-            '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
 			'{{namespaceEntityBundle}}/Tests/DataFixtures/{{nomEntity}}Manager/Default{{ nomEntity }}.yml',
 		]);
         $manager = $this->getContainer()->get('{{nomServiceEntity}}.manager.{{nomEntity|lower}}');
@@ -100,7 +100,7 @@ class {{nomController}}ControllerTest extends WebTest
     public function testPutInvalide()
     {
 		$this->loadFixtureFiles([
-            '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
 			'{{namespaceEntityBundle}}/Tests/DataFixtures/{{nomEntity}}Manager/Default{{ nomEntity }}.yml',
 		]);
         $manager = $this->getContainer()->get('{{nomServiceEntity}}.manager.{{nomEntity|lower}}');
@@ -129,7 +129,7 @@ class {{nomController}}ControllerTest extends WebTest
     public function testPutSansResultat()
     {
 		$this->loadFixtureFiles([
-            '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
 		]);
         $data = [
             //'nom'     => "Mon nom", //exemple
@@ -157,7 +157,7 @@ class {{nomController}}ControllerTest extends WebTest
     public function testCGetValideAvecResultats()
     {
 		$this->loadFixtureFiles([
-            '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
 			'{{namespaceEntityBundle}}/Tests/DataFixtures/{{nomEntity}}Manager/{{ nomController }}Manager.yml',
 		]);
 		$url = $this->generateUrl(
@@ -185,7 +185,7 @@ class {{nomController}}ControllerTest extends WebTest
     public function testCGetValideSansResultat()
     {
 		$this->loadFixtureFiles([
-            '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
 		]);
 		$url = $this->generateUrl(
             '{{ nomServiceController }}.{{ nomControllerCamelize|lower }}.cget',
@@ -209,7 +209,7 @@ class {{nomController}}ControllerTest extends WebTest
     public function testCGetInvalide()
     {
 		$this->loadFixtureFiles([
-            '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
 		]);
 		$url = $this->generateUrl(
             '{{ nomServiceController }}.{{ nomControllerCamelize|lower }}.cget',
@@ -231,7 +231,7 @@ class {{nomController}}ControllerTest extends WebTest
     public function testGetValideAvecResultats()
     {
 		$this->loadFixtureFiles([
-            '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
 			'{{namespaceEntityBundle}}/Tests/DataFixtures/{{nomEntity}}Manager/{{nomController}}Manager.yml',
 		]);
         $manager = $this->getContainer()->get('{{nomServiceEntity}}.manager.{{nomEntity|lower}}');
@@ -260,7 +260,7 @@ class {{nomController}}ControllerTest extends WebTest
     public function testGetValideSansResultat()
     {
 		$this->loadFixtureFiles([
-            '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
 		]);
 		$url = $this->generateUrl(
             '{{ nomServiceController }}.{{ nomControllerCamelize|lower }}.get',
@@ -284,7 +284,7 @@ class {{nomController}}ControllerTest extends WebTest
     public function testGetInvalide()
     {
 		$this->loadFixtureFiles([
-            '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
 		]);
 		$url = $this->generateUrl(
             '{{ nomServiceController }}.{{ nomControllerCamelize|lower }}.get',
@@ -306,7 +306,7 @@ class {{nomController}}ControllerTest extends WebTest
     public function testDeleteValide()
     {
 		$this->loadFixtureFiles([
-            '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
 			'{{namespaceEntityBundle}}/Tests/DataFixtures/{{nomEntity}}Manager/Default{{nomEntity}}.yml',
 		]);
         $manager = $this->getContainer()->get('{{nomServiceEntity}}.manager.{{nomEntity|lower}}');
@@ -335,7 +335,7 @@ class {{nomController}}ControllerTest extends WebTest
     public function testDeleteSansResultat()
     {
 		$this->loadFixtureFiles([
-            '@StarkerxpUtilisateurBundle/Tests/DataFixtures/UtilisateurManager/DefaultUtilisateur.yml',
+            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
 		]);
 		$url = $this->generateUrl(
             '{{ nomServiceController }}.{{ nomControllerCamelize|lower }}.get',

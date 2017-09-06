@@ -16,7 +16,7 @@ class ManagerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        $definitionId = 'starkerxp_campagne.manager.entity';
+        $definitionId = 'starkerxp_structure.manager.entity';
         if (!($container->has($definitionId))) {
             return false;
         }
@@ -24,5 +24,7 @@ class ManagerPass implements CompilerPassInterface
         foreach (array_keys($container->findTaggedServiceIds('starkerxp.manager.entity')) as $id) {
             $definition->addMethodCall('addService', [new Reference($id)]);
         }
+
+        return true;
     }
 }

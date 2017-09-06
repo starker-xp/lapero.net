@@ -20,10 +20,10 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new Starkerxp\StructureBundle\StarkerxpStructureBundle(),
             new Starkerxp\RabbitmqBundle\StarkerxpRabbitmqBundle(),
-            new Starkerxp\CampagneBundle\StarkerxpCampagneBundle(),
+            new Starkerxp\CampaignBundle\StarkerxpCampaignBundle(),
             new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
-            new Starkerxp\UtilisateurBundle\StarkerxpUtilisateurBundle(),
+            new Starkerxp\UserBundle\StarkerxpUserBundle(),
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
             new Starkerxp\LeadBundle\StarkerxpLeadBundle(),
         ];

@@ -1,7 +1,0 @@
-Starkerxp\CampagneBundle\Entity\Event:
-    event_1:
-        created_at: <dateTimeBetween("2016-08-05 12:12:12", "2016-08-05 12:12:12")>
-        utilisateur: "@utilisateur_1"
-        campagne: "@campagne_1"
-        template: "@template_1"
-        uuid: <uuid()>
