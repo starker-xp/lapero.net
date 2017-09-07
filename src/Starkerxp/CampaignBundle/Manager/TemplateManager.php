@@ -18,9 +18,9 @@ class TemplateManager extends AbstractManager
     {
         $array = [
             "id"      => $object->getId(),
-            "nom"     => $object->getName(),
+            "name"     => $object->getName(),
             "type"    => $object->getType(),
-            "sujet"   => $object->getObject(),
+            "object"   => $object->getObject(),
             "message" => $object->getMessage(),
         ];
 

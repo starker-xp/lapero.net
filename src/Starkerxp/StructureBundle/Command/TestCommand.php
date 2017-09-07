@@ -24,9 +24,9 @@ class TestCommand extends AbstractCommand
         $r = $this->getContainer()->get('form.registry');
             $r = $r->getType("");
         dump($r);
-        exit;
+        //exit;
 
-        $form = $this->getContainer()->get('form.factory')->create(LeadType::class, null, ['formId' => 1]);
+        //$form = $this->getContainer()->get('form.factory')->create(LeadType::class, null, ['formId' => 1]);
 
     }
 

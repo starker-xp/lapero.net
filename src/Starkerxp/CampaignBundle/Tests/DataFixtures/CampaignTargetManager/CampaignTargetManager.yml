@@ -1,4 +1,4 @@
-Starkerxp\CampaignBundle\Entity\CampaignCible:
+Starkerxp\CampaignBundle\Entity\CampaignTarget:
     cible_{1..10}:
         created_at: <datetime()>
         user: "@user_1"

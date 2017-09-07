@@ -21,9 +21,9 @@ class User extends Entity implements JWTUserInterface, UserInterface
 {
 
     /**
-     * @var RoleUser
+     * @var UserRole
      *
-     * @ORM\OneToOne(targetEntity="RoleUser", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="UserRole", cascade={"persist"})
      * @ORM\JoinColumn(name="roles", referencedColumnName="id", nullable=true)
      */
     protected $roles;
@@ -73,7 +73,7 @@ class User extends Entity implements JWTUserInterface, UserInterface
 
     public function getRoles()
     {
-        /** @var \Starkerxp\UserBundle\Entity\RoleUser $roles */
+        /** @var \Starkerxp\UserBundle\Entity\UserRole $roles */
         if (empty($this->roles)) {
             return null;
         }
@@ -88,11 +88,11 @@ class User extends Entity implements JWTUserInterface, UserInterface
      */
     public function setRoles($roles)
     {
-        if($roles instanceof RoleUser || empty($this->roles) ){
-            $this->roles = new RoleUser($roles);
+        if($roles instanceof UserRole || empty($this->roles) ){
+            $this->roles = new UserRole($roles);
             return true;
         }
-        $this->roles->setRoles($roles);
+        $this->roles->setRole($roles);
 
         return true;
     }

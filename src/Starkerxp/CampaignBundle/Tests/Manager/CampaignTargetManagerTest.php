@@ -38,13 +38,13 @@ class CampaignTargetManagerTest extends WebTest
      * @group cible
      * @group manager
      */
-    public function testInsertNewCampaignCible()
+    public function testInsertNewCampaignTarget()
     {
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/CampaignManager/CampaignManager.yml',
-                '@StarkerxpCampaignBundle/Tests/DataFixtures/CampaignTargetManager/DefaultCampaignCible.yml',
+                '@StarkerxpCampaignBundle/Tests/DataFixtures/CampaignTargetManager/DefaultCampaignTarget.yml',
             ]
         );
         $campaigns = $this->getRepository("StarkerxpCampaignBundle:Campaign")->findBy([], ['id' => 'ASC']);
@@ -58,13 +58,13 @@ class CampaignTargetManagerTest extends WebTest
      * @group cible
      * @group manager
      */
-    public function testUpdateCampaignCible()
+    public function testUpdateCampaignTarget()
     {
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/CampaignManager/CampaignManager.yml',
-                '@StarkerxpCampaignBundle/Tests/DataFixtures/CampaignTargetManager/DefaultCampaignCible.yml',
+                '@StarkerxpCampaignBundle/Tests/DataFixtures/CampaignTargetManager/DefaultCampaignTarget.yml',
             ]
         );
         $criteria = ['createdAt' => new \DateTime("2016-08-05 12:12:12")];

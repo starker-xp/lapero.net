@@ -1,4 +1,5 @@
 <?php
+
 namespace Starkerxp\StructureBundle\Services;
 
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
@@ -30,11 +31,12 @@ class FormErrorsService
             $errors[$form->getName()][] = $error->getMessage();
         }
         foreach ($form as $child) {
-            if (!$child->isValid()) {
-                foreach ($child->getErrors() as $error) {
-                    $message = !empty($this->translator) ? $this->translator->trans($error->getMessage()) : $error->getMessage();
-                    $errors[$child->getName()][] = $message;
-                }
+            if ($child->isValid()) {
+                continue;
+            }
+            foreach ($child->getErrors() as $error) {
+                $message = !empty($this->translator) ? $this->translator->trans($error->getMessage()) : $error->getMessage();
+                $errors[$child->getName()][] = $message;
             }
         }
 

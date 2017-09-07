@@ -1,7 +1,7 @@
 Starkerxp\CampaignBundle\Entity\Template:
     template_1:
         uuid: "5e6e63e6-1d74-4c4c-b19a-2741ed330836"
-        nom: <name()>
+        name: <name()>
         type: "email"
         object: "L'avenir sera radieux {{prenom |capitalize}}"
         message: "Aujourd'hui une offre exceptionnelle vous attends."

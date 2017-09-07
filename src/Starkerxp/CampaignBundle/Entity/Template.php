@@ -68,12 +68,12 @@ class Template extends UserEntity
     /**
      * Set nom.
      *
-     * @param string $nom
+     * @param string $name
      *
      */
-    public function setName($nom)
+    public function setName($name)
     {
-        $this->name = $nom;
+        $this->name = $name;
     }
 
     /**

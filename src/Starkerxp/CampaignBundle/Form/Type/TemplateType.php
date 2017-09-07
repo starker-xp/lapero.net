@@ -24,7 +24,7 @@ class TemplateType extends AbstractType
                 ]
             )
             ->add(
-                'nom',
+                'name',
                 Type\TextType::class,
                 [
                     'constraints' => [
@@ -34,7 +34,7 @@ class TemplateType extends AbstractType
                 ]
             )
             ->add(
-                'sujet',
+                'object',
                 Type\TextType::class,
                 [
                     'constraints' => [

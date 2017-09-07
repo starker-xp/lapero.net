@@ -222,7 +222,7 @@ class EventControllerTest extends WebTest
         $body = json_decode($response->getContent(), true);
         $this->assertCount(10, $body);
         foreach ($body as $element) {
-            //$this->assertArrayHasKey("nom", $body); // Exemple
+            //$this->assertArrayHasKey("name", $body); // Exemple
         }
     }
 

@@ -15,5 +15,5 @@ services:
         tags: [{ name: starkerxp.manager.entity }]
     starkerxp_campaign.manager.cible:
         class: Starkerxp\CampaignBundle\Manager\CampaignTargetManager
-        arguments: ['@doctrine.orm.entity_manager', Starkerxp\CampaignBundle\Entity\CampaignCible]
+        arguments: ['@doctrine.orm.entity_manager', Starkerxp\CampaignBundle\Entity\CampaignTarget]
         tags: [{ name: starkerxp.manager.entity }]

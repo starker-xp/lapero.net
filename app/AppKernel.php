@@ -16,7 +16,6 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Sentry\SentryBundle\SentryBundle(),
             new AppBundle\AppBundle(),
             new Starkerxp\StructureBundle\StarkerxpStructureBundle(),
             new Starkerxp\RabbitmqBundle\StarkerxpRabbitmqBundle(),
@@ -28,6 +27,9 @@ class AppKernel extends Kernel
             new Starkerxp\LeadBundle\StarkerxpLeadBundle(),
         ];
 
+        if (in_array($this->getEnvironment(), ['prod'], true)) {
+            $bundles[] = new Sentry\SentryBundle\SentryBundle();
+        }
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
@@ -40,11 +42,6 @@ class AppKernel extends Kernel
         }
 
         return $bundles;
-    }
-
-    public function getRootDir()
-    {
-        return __DIR__;
     }
 
     public function getCacheDir()
@@ -60,6 +57,11 @@ class AppKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
+    }
+
+    public function getRootDir()
+    {
+        return __DIR__;
     }
 
 }

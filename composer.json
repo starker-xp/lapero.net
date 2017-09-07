@@ -40,7 +40,7 @@
   "require-dev": {
     "sensio/generator-bundle": "^3.0",
     "symfony/phpunit-bridge": "^3.3",
-    "raulfraile/ladybug-bundle": "~1.0",
+    "symfony/var-dumper": "^3.3",
     "phpunit/phpunit": "5.*",
     "phpmd/phpmd": "2.5.*",
     "sebastian/phpcpd": "2.0.*",

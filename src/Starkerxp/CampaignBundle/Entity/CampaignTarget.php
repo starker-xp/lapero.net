@@ -12,7 +12,7 @@ use Starkerxp\StructureBundle\Entity\UserEntity;
  *  @ORM\Index(columns={"created_at"}),
  *  @ORM\Index(columns={"updated_at"})
  * })
- * @ORM\Entity(repositoryClass="Starkerxp\CampaignBundle\Repository\CampaignCibleRepository")
+ * @ORM\Entity(repositoryClass="Starkerxp\CampaignBundle\Repository\CampaignTargetRepository")
  */
 class CampaignTarget extends UserEntity
 {

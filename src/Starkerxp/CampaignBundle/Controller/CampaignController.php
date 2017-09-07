@@ -205,6 +205,7 @@ class CampaignController extends StructureController
     public function deleteAction(Request $request)
     {
         $manager = $this->get("starkerxp_campaign.manager.campaign");
+
         if (!$entite = $manager->findOneBy(['id' => $request->get('campaign_id')])) {
             return new JsonResponse(["payload" => $this->translate("entity.not_found", "campaign")], 404);
         }

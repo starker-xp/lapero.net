@@ -59,7 +59,7 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
         resolve_target_entities:
-            Starkerxp\StructureBundle\Entity\UtilisateurInterface: Starkerxp\UtilisateurBundle\Entity\Utilisateur
+            Starkerxp\StructureBundle\Entity\UserInterface: Starkerxp\UserBundle\Entity\User
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -83,6 +83,3 @@ lexik_jwt_authentication:
     public_key_path:  '%jwt_public_key_path%'
     pass_phrase:      '%jwt_key_pass_phrase%'
     token_ttl:        '%jwt_token_ttl%'
-
-sentry:
-    dsn: "https://d455a3b3746d4024b4c3c1932200786f:453f14415f2140598f904e7aea740064@sentry.io/170901"
