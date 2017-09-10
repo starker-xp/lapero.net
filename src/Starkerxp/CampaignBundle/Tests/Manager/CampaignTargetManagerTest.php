@@ -4,7 +4,7 @@ namespace Starkerxp\CampaignBundle\Tests\Manager;
 
 use Starkerxp\CampaignBundle\Entity\CampaignTarget;
 use Starkerxp\CampaignBundle\Manager\CampaignTargetManager;
-use Starkerxp\StructureBundle\Tests\WebTest;
+use Starkerxp\StructureBundle\Test\WebTest;
 
 class CampaignTargetManagerTest extends WebTest
 {

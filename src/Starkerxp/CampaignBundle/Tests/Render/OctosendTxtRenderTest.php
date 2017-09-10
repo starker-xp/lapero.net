@@ -4,7 +4,7 @@ namespace Starkerxp\CampaignBundle\Tests\Render;
 
 use Starkerxp\CampaignBundle\Render\OctosendTxtRender;
 
-class OctosendTxtRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
+class OctosendTxtRenderTest extends \Starkerxp\StructureBundle\Test\WebTest
 {
     /** @var OctosendTxtRender */
     protected $renderService;

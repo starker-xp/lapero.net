@@ -1,6 +1,6 @@
 <?php
 
-namespace Starkerxp\StructureBundle\Tests;
+namespace Starkerxp\StructureBundle\Test;
 
 use Doctrine\ORM\EntityManager;
 use Liip\FunctionalTestBundle\Test\WebTestCase;

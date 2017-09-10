@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputArgument;
 
 class CreateUserCommand extends LockCommand
 {
-    public function traitement()
+    public function treatment()
     {
         $user = User::createFromPayload($this->input->getArgument("login"), ["roles" => ["ROLE_SUPER_ADMIN"]]);
         $user->setPlainPassword($this->input->getArgument("password"));

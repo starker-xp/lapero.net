@@ -4,7 +4,7 @@ namespace Starkerxp\CampaignBundle\Tests\Render;
 
 use Starkerxp\CampaignBundle\Render\TwigRender;
 
-class TwigRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
+class TwigRenderTest extends \Starkerxp\StructureBundle\Test\WebTest
 {
     /** @var TwigRender */
     protected $renderService;

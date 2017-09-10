@@ -26,9 +26,9 @@ abstract class ReceiverLockCommand extends LockCommand
      */
     abstract public function getNomChannel();
 
-    public function nomLocker()
+    public function lockerName()
     {
-        return parent::nomLocker().'_'.$this->input->getOption('numeroScript');
+        return parent::lockerName().'_'.$this->input->getOption('numeroScript');
     }
 
     public function traitement()
@@ -92,6 +92,5 @@ abstract class ReceiverLockCommand extends LockCommand
         $this->addOption('numeroScript', 'n', InputOption::VALUE_OPTIONAL, 'Numéro de script', 1);
         $this->addOption('timeout', 't', InputOption::VALUE_OPTIONAL, 'Timeout callback queue', 0);
     }
-
 
 }

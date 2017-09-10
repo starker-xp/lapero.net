@@ -5,7 +5,7 @@ namespace Starkerxp\CampaignBundle\Tests\Render;
 
 use Starkerxp\CampaignBundle\Render\HtmlToTxtRender;
 
-class HtmlToTxtRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
+class HtmlToTxtRenderTest extends \Starkerxp\StructureBundle\Test\WebTest
 {
     /** @var HtmlToTxtRender */
     protected $renderService;

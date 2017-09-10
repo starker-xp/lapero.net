@@ -4,7 +4,7 @@ namespace Starkerxp\LeadBundle\Tests\Manager;
 
 use Starkerxp\LeadBundle\Entity\Lead;
 use Starkerxp\LeadBundle\Manager\LeadManager;
-use Starkerxp\StructureBundle\Tests\WebTest;
+use Starkerxp\StructureBundle\Test\WebTest;
 
 class LeadManagerTest extends WebTest
 {

@@ -34,4 +34,20 @@ class LeadManager extends AbstractManager
     {
         throw new UpdateObjectNotAllowedException();
     }
+
+    public function toArray(Lead $object, $fields = [])
+    {
+        $array = [
+            "id"     => $object->getId(),
+            "date_event"   => $object->getDateEvent(),
+            "origin" => $object->getOrigin(),
+            "product" => $object->getProduct(),
+            "external_reference" => $object->getExternalReference(),
+            "pixel" => $object->getPixel(),
+            "ip_address" => $object->getIpAddress(),
+            "serialisation" => $object->getSerialisation(),
+        ];
+
+        return $this->exportFields($array, $fields);
+    }
 }

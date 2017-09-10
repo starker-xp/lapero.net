@@ -2,7 +2,7 @@
 
 namespace Starkerxp\CampaignBundle\Tests\Controller;
 
-use Starkerxp\StructureBundle\Tests\WebTest;
+use Starkerxp\StructureBundle\Test\WebTest;
 
 class CampaignControllerTest extends WebTest
 {

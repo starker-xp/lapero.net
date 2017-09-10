@@ -4,7 +4,7 @@ namespace Starkerxp\CampaignBundle\Tests\Render;
 
 use Starkerxp\CampaignBundle\Render\BuzzExpertRender;
 
-class BuzzExpertRenderTest extends \Starkerxp\StructureBundle\Tests\WebTest
+class BuzzExpertRenderTest extends \Starkerxp\StructureBundle\Test\WebTest
 {
     /** @var BuzzExpertRender */
     protected $renderService;

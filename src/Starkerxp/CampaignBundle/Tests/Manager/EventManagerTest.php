@@ -4,7 +4,7 @@ namespace Starkerxp\CampaignBundle\Tests\Manager;
 
 use Starkerxp\CampaignBundle\Entity\Event;
 use Starkerxp\CampaignBundle\Manager\EventManager;
-use Starkerxp\StructureBundle\Tests\WebTest;
+use Starkerxp\StructureBundle\Test\WebTest;
 
 class EventManagerTest extends WebTest
 {

@@ -26,11 +26,3 @@ starkerxp_lead.lead.put:
         - PUT
     requirements:
         lead_id: \d+
-starkerxp_lead.lead.delete:
-    path: '/leads/{lead_id}'
-    defaults:
-        _controller: 'StarkerxpLeadBundle:Lead:delete'
-    methods:
-        - DELETE
-    requirements:
-        lead_id: \d+

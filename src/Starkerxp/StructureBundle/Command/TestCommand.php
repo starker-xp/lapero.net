@@ -12,10 +12,10 @@ use Starkerxp\LeadBundle\Form\Type\LeadType;
 
 //I'm includng the yml dumper. Then :
 
-class TestCommand extends AbstractCommand
+class TestCommand extends LockCommand
 {
 
-    public function traitement()
+    public function treatment()
     {
 
 

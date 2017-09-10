@@ -11,6 +11,6 @@ namespace Starkerxp\StructureBundle\Entity;
 
 interface ArchiveInterface
 {
-    public function getIsArchive();
+    public function isArchive();
     public function getCreatedAt();
 }

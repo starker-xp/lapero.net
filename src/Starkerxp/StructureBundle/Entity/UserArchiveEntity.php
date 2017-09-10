@@ -15,15 +15,15 @@ abstract class UserArchiveEntity extends UserEntity implements ArchiveInterface
      *
      * @ORM\Column(name="is_archive", type="boolean", nullable=true, options={"default":0})
      */
-    protected $isArchive = false;
+    protected $archive = false;
     
-    public function getIsArchive()
+    public function isArchive()
     {
-        return $this->isArchive;
+        return $this->archive;
     }
 
-    public function setIsArchive($isArchive)
+    public function setArchive($archive)
     {
-        $this->isArchive = $isArchive;
+        $this->archive = $archive;
     }
 }

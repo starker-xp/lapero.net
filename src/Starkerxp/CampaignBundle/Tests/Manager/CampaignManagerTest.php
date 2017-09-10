@@ -5,7 +5,7 @@ namespace Starkerxp\CampaignBundle\Tests\Manager;
 use Starkerxp\CampaignBundle\Entity\Campaign;
 use Starkerxp\CampaignBundle\Manager\CampaignManager;
 
-class CampaignManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
+class CampaignManagerTest extends \Starkerxp\StructureBundle\Test\WebTest
 {
     /** @var CampaignManager */
     protected $manager;

@@ -5,7 +5,7 @@ namespace Starkerxp\CampaignBundle\Tests\Manager;
 use Starkerxp\CampaignBundle\Entity\Template;
 use Starkerxp\CampaignBundle\Manager\TemplateManager;
 
-class TemplateManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
+class TemplateManagerTest extends \Starkerxp\StructureBundle\Test\WebTest
 {
     /** @var TemplateManager */
     protected $manager;

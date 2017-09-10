@@ -2,7 +2,8 @@
 
 namespace Starkerxp\LeadBundle\Tests\Controller;
 
-use Starkerxp\StructureBundle\Tests\WebTest;
+use Starkerxp\LeadBundle\Entity\Lead;
+use Starkerxp\StructureBundle\Test\WebTest;
 
 class LeadControllerTest extends WebTest
 {
@@ -28,7 +29,7 @@ class LeadControllerTest extends WebTest
         $client->request('POST', $url, $data);
         $response = $client->getResponse();
         $this->assertEquals(201, $response->getStatusCode());
-        $manager = $this->getContainer()->get('starkerxp_lead.manager.leadaction');
+        $manager = $this->getContainer()->get('starkerxp_lead.manager.lead');
         $LeadActions = $manager->findAll();
         $this->assertCount(1, $LeadActions);
     }
@@ -65,9 +66,9 @@ class LeadControllerTest extends WebTest
     {
 		$this->loadFixtureFiles([
             '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
-			'@StarkerxpLeadBundle/Tests/DataFixtures/LeadActionManager/DefaultLeadAction.yml',
+			'@StarkerxpLeadBundle/Tests/DataFixtures/LeadManager/DefaultLead.yml',
 		]);
-        $manager = $this->getContainer()->get('starkerxp_lead.manager.leadaction');
+        $manager = $this->getContainer()->get('starkerxp_lead.manager.lead');
         $listeLeads = $manager->getRepository()->findAll();
         $this->assertCount(1, $listeLeads);
         $LeadActionDepart = $manager->toArray($listeLeads[0], [/*'nom'*/]);// Exemple
@@ -77,7 +78,7 @@ class LeadControllerTest extends WebTest
 		$url = $this->generateUrl(
             'starkerxp_lead.lead.put',
             [
-				"id"    => $listeLeads[0]->getId(),
+				"lead_id"    => $listeLeads[0]->getId(),
 			]
         );
         $client = $this->getAuthClient();
@@ -101,15 +102,15 @@ class LeadControllerTest extends WebTest
     {
 		$this->loadFixtureFiles([
             '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
-			'@StarkerxpLeadBundle/Tests/DataFixtures/LeadActionManager/DefaultLeadAction.yml',
+			'@StarkerxpLeadBundle/Tests/DataFixtures/LeadManager/DefaultLead.yml',
 		]);
-        $manager = $this->getContainer()->get('starkerxp_lead.manager.leadaction');
+        $manager = $this->getContainer()->get('starkerxp_lead.manager.lead');
         $listeLeads = $manager->getRepository()->findAll();
         $this->assertCount(1, $listeLeads);
 		$url = $this->generateUrl(
             'starkerxp_lead.lead.put',
             [
-				"id"    => $listeLeads[0]->getId(),
+				"lead_id"    => $listeLeads[0]->getId(),
 			]
         );
         $client = $this->getAuthClient();
@@ -137,7 +138,7 @@ class LeadControllerTest extends WebTest
 		$url = $this->generateUrl(
             'starkerxp_lead.lead.put',
             [
-				"id"    => 404,
+				"lead_id"    => 404,
 			]
         );
         $client = $this->getAuthClient();
@@ -158,7 +159,7 @@ class LeadControllerTest extends WebTest
     {
 		$this->loadFixtureFiles([
             '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
-			'@StarkerxpLeadBundle/Tests/DataFixtures/LeadActionManager/LeadManager.yml',
+			'@StarkerxpLeadBundle/Tests/DataFixtures/LeadManager/LeadManager.yml',
 		]);
 		$url = $this->generateUrl(
             'starkerxp_lead.lead.cget',
@@ -232,15 +233,16 @@ class LeadControllerTest extends WebTest
     {
 		$this->loadFixtureFiles([
             '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
-			'@StarkerxpLeadBundle/Tests/DataFixtures/LeadActionManager/LeadManager.yml',
+			'@StarkerxpLeadBundle/Tests/DataFixtures/LeadManager/LeadManager.yml',
 		]);
-        $manager = $this->getContainer()->get('starkerxp_lead.manager.leadaction');
+        $manager = $this->getContainer()->get('starkerxp_lead.manager.lead');
+        /** @var Lead[] $listeLeads */
         $listeLeads = $manager->getRepository()->findAll();
         $this->assertCount(10, $listeLeads);
 		$url = $this->generateUrl(
             'starkerxp_lead.lead.get',
             [
-				"id" => $listeLeads[0]->getId(),
+				"lead_id" => $listeLeads[0]->getId(),
 			]
         );
         $client = $this->getAuthClient();
@@ -248,7 +250,7 @@ class LeadControllerTest extends WebTest
         $response = $client->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
         $body = json_decode($response->getContent(), true);
-        $this->assertCount(5, $body);
+        $this->assertCount(8, $body);
         //$this->assertArrayHasKey("nom", $body); // Exemple
     }
 
@@ -265,7 +267,7 @@ class LeadControllerTest extends WebTest
 		$url = $this->generateUrl(
             'starkerxp_lead.lead.get',
             [
-				"id" => 404,
+				"lead_id" => 404,
 			]
         );
         $client = $this->getAuthClient();
@@ -289,7 +291,7 @@ class LeadControllerTest extends WebTest
 		$url = $this->generateUrl(
             'starkerxp_lead.lead.get',
             [
-				"id" => 500,
+				"lead_id" => 500,
 			]
         );
         $client = $this->getAuthClient();
@@ -298,56 +300,5 @@ class LeadControllerTest extends WebTest
         $this->assertEquals(400, $response->getStatusCode());
     }
 
-    /**
-     * @group lead
-     * @group delete
-     * @group controller
-     */
-    public function testDeleteValide()
-    {
-		$this->loadFixtureFiles([
-            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
-			'@StarkerxpLeadBundle/Tests/DataFixtures/LeadActionManager/DefaultLeadAction.yml',
-		]);
-        $manager = $this->getContainer()->get('starkerxp_lead.manager.leadaction');
-        $listeLeads = $manager->getRepository()->findAll();
-        $this->assertCount(1, $listeLeads);
-		$url = $this->generateUrl(
-            'starkerxp_lead.lead.delete',
-            [
-				"id" => $listeLeads[0]->getId(),
-			]
-        );
-        $client = $this->getAuthClient();
-        $client->request('DELETE', $url);
-        $response = $client->getResponse();
-        $this->assertEquals(204, $response->getStatusCode());
-        $manager->clear();
-        $LeadActions = $manager->findAll();
-        $this->assertCount(0, $LeadActions);
-    }
 
-    /**
-     * @group lead
-     * @group delete
-     * @group controller
-     */
-    public function testDeleteSansResultat()
-    {
-		$this->loadFixtureFiles([
-            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
-		]);
-		$url = $this->generateUrl(
-            'starkerxp_lead.lead.get',
-            [
-				"id" => 404,
-			]
-        );
-        $client = $this->getAuthClient();
-        $client->request('DELETE', $url, []);
-        $response = $client->getResponse();
-        $this->assertEquals(404, $response->getStatusCode());
-        $body = json_decode($response->getContent(), true);
-        $this->assertNotEmpty($body);
-    }
 }

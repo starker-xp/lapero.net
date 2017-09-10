@@ -8,91 +8,90 @@ use Symfony\Component\Yaml\Yaml;
 /**
  * Class GenererDataTestCommand
  */
-class GenererDataTestCommand extends AbstractCommand
+class GenererDataTestCommand extends LockCommand
 {
-    public function nomBaseDeDonnee()
-    {
-        return $this->getContainer()->getParameter("database_name");
-    }
 
-    public function traitement()
+    /**
+     * @return bool
+     */
+    public function treatment()
     {
-        if ($this->getContainer()->get('kernel')->getEnvironment() == 'prod') {
-            $this->output->writeln("<error>Cette commande ne peut être lancé en environnement de production</error>");
+        if (preg_match("#prod#", $this->getEnvironment())) {
+            $this->output->writeln("<error>Command disallow</error>");
 
             return false;
         }
-        $meta = $this->getEntityManager()->getMetadataFactory()->getAllMetadata();
+
+        $allMetadata = $this->getEntityManager()->getMetadataFactory()->getAllMetadata();
         // On récupère la liste des entites en fonction des nom de tables supposés.
         $namespaces = [];
-        foreach ($meta as $m) {
-            if ($m->isMappedSuperclass) {
+        foreach ($allMetadata as $metadata) {
+            if ($metadata->isMappedSuperclass) {
                 continue;
             }
-            if (count($m->subClasses)) {
-                $namespaces[$m->getName()] = [
-                    'nomTable' => $m->getTableName(),
+            if (count($metadata->subClasses)) {
+                $namespaces[$metadata->getName()] = [
+                    'tableName' => $metadata->getTableName(),
                 ];
                 continue;
             }
-            $listeDesColonnes = array_flip($m->columnNames);
-            $listeDesChamps = [];
-            foreach ($listeDesColonnes as $column => $field) {
-                $listeDesChamps[$column] = [
+            $columns = array_flip($metadata->columnNames);
+            $fields = [];
+            foreach ($columns as $column => $field) {
+                $fields[$column] = [
                     'field' => $field,
-                    'type'  => $m->getFieldMapping($field)['type'],
+                    'type' => $metadata->getFieldMapping($field)['type'],
                 ];
             }
-            $mapping = $m->getAssociationMappings();
-            foreach ($mapping as $clefJointure => $detail) {
+            $mapping = $metadata->getAssociationMappings();
+            foreach ($mapping as $detail) {
                 if (!array_key_exists("sourceToTargetKeyColumns", $detail)) {
                     continue;
                 }
                 $column = array_keys($detail['sourceToTargetKeyColumns'])[0];
-                $listeDesChamps[$column] = [
-                    'field'                    => $detail['fieldName'],
-                    'type'                     => 'integer',
+                $fields[$column] = [
+                    'field' => $detail['fieldName'],
+                    'type' => 'integer',
                     'sourceToTargetKeyColumns' => $detail['sourceToTargetKeyColumns'][$column],
-                    'targetEntity'             => $detail['targetEntity'],
+                    'targetEntity' => $detail['targetEntity'],
                 ];
             }
-            $namespaces[$m->getName()] = [
-                'nomTable'            => $m->getTableName(),
-                'listeDesChamps'      => $listeDesChamps,
-                'discriminatorValue'  => $m->discriminatorValue,
-                'discriminatorColumn' => !empty($m->discriminatorValue) ? $m->discriminatorColumn['name'] : null,
+            $namespaces[$metadata->getName()] = [
+                'tableName' => $metadata->getTableName(),
+                'fields' => $fields,
+                'discriminatorValue' => $metadata->discriminatorValue,
+                'discriminatorColumn' => !empty($metadata->discriminatorValue) ? $metadata->discriminatorColumn['name'] : null,
             ];
         }
         ksort($namespaces);
         $contenu = "";
         foreach ($namespaces as $namespace => $data) {
-            if (empty($data['listeDesChamps'])) {
+            if (empty($data['fields'])) {
                 continue;
             }
             $export = [];
-            $listeDesChamps = $data['listeDesChamps'];
-            $nomTable = $data['nomTable'];
             $where = (!empty($data['discriminatorValue']) ? $data['discriminatorColumn']."='".$data['discriminatorValue']."'" : "1=1");
-            $query = "SELECT ".implode(",", array_keys($listeDesChamps))." FROM ".$nomTable." WHERE ".$where;
-            $resultats = $this->getEntityManager()->getConnection()->fetchAll($query);
-            if (empty($resultats)) {
+            $query = "SELECT ".implode(",", array_keys($data['fields']))." FROM ".$data['tableName']." WHERE ".$where;
+            if (!$resultats = $this->getConnection()->fetchAll($query)) {
                 continue;
+
             }
+
             foreach ($resultats as $key => $row) {
                 $dataExport = [];
                 foreach ($row as $element => $value) {
                     if ($element == 'id') {
                         continue;
                     }
-                    $field = $listeDesChamps[$element]['field'];
-                    if (!empty($listeDesChamps[$element]['targetEntity'])) {
-                        $value = empty($value) ? null : strtolower("@".$namespaces[$listeDesChamps[$element]['targetEntity']]['nomTable'])."_".$value;
-                        $dataExport[$listeDesChamps[$element]['field']] = $value;
+                    $field = $data['fields'][$element]['field'];
+                    if (!empty($data['fields'][$element]['targetEntity'])) {
+                        $value = empty($value) ? null : strtolower("@".$namespaces[$data['fields'][$element]['targetEntity']]['tableName'])."_".$value;
+                        $dataExport[$data['fields'][$element]['field']] = $value;
                         continue;
                     }
-                    $dataExport[$field] = $this->formatValue($listeDesChamps[$element]['type'], $value);
+                    $dataExport[$field] = $this->formatValue($data['fields'][$element]['type'], $value);
                 }
-                $export[strtolower($nomTable).'_'.$row['id']] = $dataExport;
+                $export[strtolower($data['tableName']).'_'.$row['id']] = $dataExport;
             }
             $contenu .= Yaml::dump([$namespace => $export,], 2, 4)."\n";
         }
@@ -118,11 +117,8 @@ class GenererDataTestCommand extends AbstractCommand
     {
         parent::configure();
         $this->setName('starkerxp:dump-database')
-            ->setDescription("Exporte une base de données de 'dev' en fixtures yml.")
-            ->setHelp(
-                "Cette commande est là pour réaliser un fichier yml destiné aux tests fonctionnels via phpunit couplé avec nelmio/alice.
-On peut donc aisément recréer l'environnement souhaité avant le lancement des tests unitaires.
-Attention !!! Cette commande n'est pas destiné à fonctionner sur un gros volume de données."
-            );
+            ->setDescription("Extract development database to yaml fixtures.");
     }
+
+
 }

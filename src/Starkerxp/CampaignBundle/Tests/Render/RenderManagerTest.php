@@ -5,7 +5,7 @@ namespace Starkerxp\CampaignBundle\Tests\Render;
 
 use Starkerxp\CampaignBundle\Render\RenderManager;
 
-class RenderManagerTest extends \Starkerxp\StructureBundle\Tests\WebTest
+class RenderManagerTest extends \Starkerxp\StructureBundle\Test\WebTest
 {
 
     /** @var  RenderManager */

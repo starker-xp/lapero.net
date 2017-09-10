@@ -21,7 +21,7 @@ abstract class AbstractImportCommand extends LockCommand
     protected $nombreElementsDejaEnvoye = 0;
     protected $nombreDeJourATraiter = 0;
 
-    public function nomLocker()
+    public function lockerName()
     {
         $modeSelection = $this->input->getOption("mode");
         $nomLocker = !in_array($modeSelection, ['trigger', 'date']) ? "" : $modeSelection;

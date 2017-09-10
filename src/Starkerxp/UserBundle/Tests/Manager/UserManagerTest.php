@@ -2,7 +2,7 @@
 
 namespace Starkerxp\UserBundle\Tests\Manager;
 
-use Starkerxp\StructureBundle\Tests\WebTest;
+use Starkerxp\StructureBundle\Test\WebTest;
 use Starkerxp\UserBundle\Entity\User;
 use Starkerxp\UserBundle\Manager\UserManager;
 

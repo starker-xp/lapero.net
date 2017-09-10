@@ -2,4 +2,7 @@ Starkerxp\LeadBundle\Entity\Lead:
     lead_1:
         created_at: <dateTimeBetween("2016-08-05 12:12:12", "2016-08-05 12:12:12")>
         user: "@user_1"
-        uid: <uuid()>
+        uuid: <uuid()>
+        origin: "validatemy.com"
+        product: "form"
+        dateEvent: <dateTimeBetween("2016-08-05 12:12:08", "2016-08-05 12:12:08")>
