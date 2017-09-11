@@ -16,7 +16,7 @@ class TemplateType extends AbstractType
                 'type',
                 Type\ChoiceType::class,
                 [
-                    "choices"     => [
+                    "choices" => [
                         "email",
                         "sms",
                         "courrier",
@@ -52,8 +52,7 @@ class TemplateType extends AbstractType
                         new Constraints\Length(['min' => 10]),
                     ],
                 ]
-            )
-            ;
+            );
     }
 
 }

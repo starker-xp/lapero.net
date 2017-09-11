@@ -31,13 +31,13 @@ class EventType extends AbstractType
             'campaign',
             EntityType::class,
             [
-                'class'         => Campaign::class,
-                'multiple'      => false,
-                'required'      => false,
+                'class' => Campaign::class,
+                'multiple' => false,
+                'required' => false,
                 'query_builder' => function (CampaignRepository $repository) {
                     return $repository->getQueryListe();
                 },
-                'constraints'   => [
+                'constraints' => [
                     new Constraints\NotBlank(),
                 ],
             ]
@@ -48,13 +48,13 @@ class EventType extends AbstractType
             'template',
             EntityType::class,
             [
-                'class'         => Template::class,
-                'multiple'      => false,
-                'required'      => false,
+                'class' => Template::class,
+                'multiple' => false,
+                'required' => false,
                 'query_builder' => function (TemplateRepository $repository) {
                     return $repository->getQueryListe();
                 },
-                'constraints'   => [
+                'constraints' => [
                     new Constraints\NotBlank(),
                 ],
             ]

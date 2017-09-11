@@ -6,7 +6,6 @@ use Starkerxp\LeadBundle\Entity\Lead;
 use Starkerxp\StructureBundle\Entity\Entity;
 use Starkerxp\StructureBundle\Manager\AbstractManager;
 use Starkerxp\StructureBundle\Manager\Exception\DeleteObjectNotAllowedException;
-use Starkerxp\StructureBundle\Manager\Exception\UpdateObjectNotAllowedException;
 
 class LeadManager extends AbstractManager
 {
@@ -25,21 +24,11 @@ class LeadManager extends AbstractManager
         throw new DeleteObjectNotAllowedException();
     }
 
-    /**
-     * @param Entity $object
-     * @return bool|Entity|void
-     * @throws UpdateObjectNotAllowedException
-     */
-    public function update(Entity $object)
-    {
-        throw new UpdateObjectNotAllowedException();
-    }
-
     public function toArray(Lead $object, $fields = [])
     {
         $array = [
-            "id"     => $object->getId(),
-            "date_event"   => $object->getDateEvent(),
+            "id" => $object->getId(),
+            "date_event" => $object->getDateEvent(),
             "origin" => $object->getOrigin(),
             "product" => $object->getProduct(),
             "external_reference" => $object->getExternalReference(),

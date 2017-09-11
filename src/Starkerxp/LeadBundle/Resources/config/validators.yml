@@ -1,0 +1,21 @@
+services:
+#    starkerxp_lead.example:
+#        class: Starkerxp\LeadBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    starkerxp_lead.form.form_type:
+        class: Starkerxp\LeadBundle\Form\Type\FormType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type }
+    starkerxp_lead.validator.lead_exist:
+        class: Starkerxp\LeadBundle\Validator\LeadExistValidator
+        arguments:
+            - "@=service('doctrine').getRepository('StarkerxpLeadBundle:Lead')"
+        tags:
+            - { name: validator.constraint_validator }
+    starkerxp_lead.validator.lead_not_exist:
+        class: Starkerxp\LeadBundle\Validator\LeadNotExistValidator
+        arguments:
+            - "@=service('doctrine').getRepository('StarkerxpLeadBundle:Lead')"
+        tags:
+            - { name: validator.constraint_validator }

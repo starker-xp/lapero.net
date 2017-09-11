@@ -14,11 +14,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class LeadController extends StructureController
 {
-	/**
+    /**
      * @ApiDoc(
      *      resource=true,
      *      description="Liste les leads.",
-     *      section="starkerxp_lead.lead",
+     *      section="Lead",
      *      parameters={
      *          {
      *              "name"="offset",
@@ -51,7 +51,7 @@ class LeadController extends StructureController
      *      },
      *      views = { "default" }
      * )
-     * 
+     *
      */
     public function cgetAction(Request $request)
     {
@@ -72,21 +72,22 @@ class LeadController extends StructureController
             },
             $resultSets
         );
+
         return new JsonResponse($retour);
     }
 
-	
-	/**
+
+    /**
      * @ApiDoc(
      *      resource=true,
      *      description="Affiche un lead.",
-     *      section="starkerxp_lead.lead",
-	 *      requirements={
+     *      section="Lead",
+     *      requirements={
      *          {
      *              "name"="lead_id",
      *              "dataType"="integer",
      *              "requirement"="\d+",
-     *              "description"="Permet d'afficher l'élément choisis"
+     *              "description"="Show an element"
      *          }
      *      },
      *      parameters={
@@ -106,23 +107,24 @@ class LeadController extends StructureController
         $manager = $this->get("starkerxp_lead.manager.lead");
         try {
             $options = $this->resolveParams()->resolve($request->query->all());
-			if (!$entite = $manager->findOneBy(['id' => $request->get('lead_id')])) {
+            /** @var Lead $entite */
+            if (!$entite = $manager->findOneBy(['id' => $request->get('lead_id')])) {
                 return new JsonResponse(["payload" => $this->translate("entity.not_found", "lead")], 404);
             }
         } catch (\Exception $e) {
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
-        
+
         $retour = $manager->toArray($entite, $this->getFields($options['fields']));
 
         return new JsonResponse($retour);
     }
 
-	/**
+    /**
      * @ApiDoc(
      *      resource=true,
      *      description="Ajoute un lead.",
-     *      section="starkerxp_lead.lead",
+     *      section="Lead",
      *      views = { "default" }
      * )
      */
@@ -136,15 +138,58 @@ class LeadController extends StructureController
             if ($form->isValid()) {
                 $lead = $form->getData();
                 $manager->insert($lead);
-				$this->dispatch(Events::LEAD_CREATED, new GenericEvent($entite));
-                return new JsonResponse(["payload" => $this->translate("lead.entity.created", "lead")], 201);
+                $this->dispatch(Events::LEAD_CREATED, new GenericEvent($entite));
+
+                return new JsonResponse(["payload" => $this->translate("entity.created", "lead")], 201);
             }
         } catch (\Exception $e) {
             $manager->rollback();
+
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
 
         return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
     }
 
+    /**
+     * @ApiDoc(
+     *      resource=true,
+     *      description="Edit lead.",
+     *      section="Lead",
+     *      requirements={
+     *          {
+     *              "name"="lead_id",
+     *              "dataType"="integer",
+     *              "requirement"="\d+",
+     *              "description"="Edit an element."
+     *          }
+     *      },
+     *      views = { "default" }
+     * )
+     */
+    public function putAction(Request $request)
+    {
+        $manager = $this->get("starkerxp_lead.manager.lead");
+        if (!$entite = $manager->findOneBy(['id' => $request->get('lead_id')])) {
+            return new JsonResponse(["payload" => $this->translate("entity.not_found", "lead")], 404);
+        }
+        $manager->beginTransaction();
+        try {
+            $form = $this->createForm(LeadType::class, $entite, ['method' => 'PUT']);
+            $form->submit($this->getRequestData($request));
+            if ($form->isValid()) {
+                $entite = $form->getData();
+                $manager->update($entite);
+                $this->dispatch(Events::LEAD_UPDATED, new GenericEvent($entite));
+
+                return new JsonResponse(["payload" => $this->translate("entity.updated", "campaign")], 204);
+            }
+        } catch (\Exception $e) {
+            $manager->rollback();
+
+            return new JsonResponse(["payload" => $e->getMessage()], 400);
+        }
+
+        return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
+    }
 } 

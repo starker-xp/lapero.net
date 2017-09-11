@@ -108,11 +108,11 @@ abstract class AbstractGenerator extends Generator
 
         $clef = ucfirst(strtolower($clef));
         $parameters = [
-            'nom'.$clef                => $libelle,
-            'nom'.$clef.'Camelize'     => preg_replace('#\B([A-Z])#', '_\1', $libelle),
-            'namespace'.$clef          => $bundle->getNamespace(),
+            'nom'.$clef => $libelle,
+            'nom'.$clef.'Camelize' => preg_replace('#\B([A-Z])#', '_\1', $libelle),
+            'namespace'.$clef => $bundle->getNamespace(),
             'namespace'.$clef.'Bundle' => '@'.$bundle->getName(),
-            'namespace'.$clef.'FQC'    => str_replace('\\', '\\\\', $bundle->getNamespace()),
+            'namespace'.$clef.'FQC' => str_replace('\\', '\\\\', $bundle->getNamespace()),
         ];
         $parameters['nomService'.$clef] = strtolower(
             str_replace(['_Bundle', '@'], '', preg_replace('#\B([A-Z])#', '_\1', $parameters['namespace'.$clef.'Bundle']))

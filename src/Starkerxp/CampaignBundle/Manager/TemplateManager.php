@@ -17,10 +17,10 @@ class TemplateManager extends AbstractManager
     public function toArray(Template $object, $fields = [])
     {
         $array = [
-            "id"      => $object->getId(),
-            "name"     => $object->getName(),
-            "type"    => $object->getType(),
-            "object"   => $object->getObject(),
+            "id" => $object->getId(),
+            "name" => $object->getName(),
+            "type" => $object->getType(),
+            "object" => $object->getObject(),
             "message" => $object->getMessage(),
         ];
 

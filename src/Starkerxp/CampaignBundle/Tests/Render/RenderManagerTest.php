@@ -22,12 +22,12 @@ class RenderManagerTest extends \Starkerxp\StructureBundle\Test\WebTest
     public function dataProvider()
     {
         $export = [
-            'lien mirroir'        => [
+            'lien mirroir' => [
                 '[{@mirror}]',
                 [],
                 '',
             ],
-            'pixel'               => [
+            'pixel' => [
                 '[{@pixel}]',
                 [],
                 '',
@@ -37,7 +37,7 @@ class RenderManagerTest extends \Starkerxp\StructureBundle\Test\WebTest
                 [],
                 "Mon lien (http://google.fr)",
             ],
-            'lien clickable'      => [
+            'lien clickable' => [
                 '<a data-id="click" target="__blank" href="http://google.fr" style="color:black;">Mon lien</a>',
                 [],
                 "Mon lien (http://google.fr)",

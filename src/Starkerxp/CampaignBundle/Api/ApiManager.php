@@ -29,8 +29,10 @@ class ApiManager extends AbstractApi
         if ($apiService = $this->getSupport()) {
             $apiService->envoyer($destinataire, $content, $options);
         }
+
         return true;
     }
+
     /**
      * @return bool|mixed
      */
@@ -46,8 +48,10 @@ class ApiManager extends AbstractApi
                 return $service;
             }
         }
+
         return false;
     }
+
     /**
      * @param ApiInterface $service
      *
@@ -56,8 +60,10 @@ class ApiManager extends AbstractApi
     public function addApiService(ApiInterface $service)
     {
         $this->apiService[] = $service;
+
         return $this;
     }
+
     /**
      * @return array
      */

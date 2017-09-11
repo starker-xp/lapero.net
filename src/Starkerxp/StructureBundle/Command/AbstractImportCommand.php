@@ -130,6 +130,7 @@ abstract class AbstractImportCommand extends LockCommand
                 } else {
                     $this->output->writeln("<error>Une erreur est survenue</error>");
                     $this->output->writeln($retour);
+
                     return false;
                 }
             }
@@ -217,9 +218,9 @@ abstract class AbstractImportCommand extends LockCommand
     {
         $export = [
             "idExterne" => $idExterne,
-            "type"      => $type,
-            "origine"   => $origine,
-            "data"      => json_encode($data),
+            "type" => $type,
+            "origine" => $origine,
+            "data" => json_encode($data),
         ];
 
         return $export;

@@ -8,8 +8,8 @@ use Starkerxp\StructureBundle\Manager\AbstractManager;
 
 class CampaignTargetManager extends AbstractManager
 {
-	
-	public function getSupport(Entity $object)
+
+    public function getSupport(Entity $object)
     {
         return $object instanceof CampaignTarget;
     }

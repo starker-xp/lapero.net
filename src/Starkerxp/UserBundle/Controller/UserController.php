@@ -84,7 +84,7 @@ class UserController extends StructureController
      *              "name"="user_id",
      *              "dataType"="integer",
      *              "requirement"="\d+",
-     *              "description"="Permet d'afficher l'élément choisis"
+     *              "description"="Show an element"
      *          }
      *      },
      *      parameters={
@@ -170,7 +170,7 @@ class UserController extends StructureController
      *              "name"="user_id",
      *              "dataType"="integer",
      *              "requirement"="\d+",
-     *              "description"="Permet de modifier l'élément choisi."
+     *              "description"="Edit an element."
      *          }
      *      },
      *      views = { "default" }
@@ -184,7 +184,7 @@ class UserController extends StructureController
             return new JsonResponse(["payload" => $this->translate("user.entity.not_found", "user")], 404);
         }
         // Un user ne peut modifier un autre user sauf si ce dernier est un super admin.
-        if($this->getUser()->getId() !=  $user->getId() && !$this->isGranted("ROLE_SUPER_ADMIN")){
+        if ($this->getUser()->getId() != $user->getId() && !$this->isGranted("ROLE_SUPER_ADMIN")) {
             return new JsonResponse(["payload" => $this->translate("user.entity.not_updated_is_not_admin", "user")], 400);
         }
         $manager->beginTransaction();
@@ -209,14 +209,14 @@ class UserController extends StructureController
     /**
      * @ApiDoc(
      *      resource=true,
-     *      description="Supprime un user.",
+     *      description="Delete a user.",
      *      section="User",
      *      requirements={
      *          {
      *              "name"="user_id",
      *              "dataType"="integer",
      *              "requirement"="\d+",
-     *              "description"="Permet de supprimer l'élément choisi."
+     *              "description"="Delete an element."
      *          }
      *      },
      *      views = { "default" }
@@ -230,6 +230,7 @@ class UserController extends StructureController
         if (!$user instanceof User) {
             return new JsonResponse(["payload" => $this->translate("user.entity.not_found", "user")], 404);
         }
+
         return new JsonResponse(["payload" => $this->translate("user.entity.deleted", "user")], 204);
     }
 

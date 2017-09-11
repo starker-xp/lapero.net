@@ -86,7 +86,7 @@ class {{ nomController }}Controller extends StructureController
      *              "name"="{{ nomController|lower }}_id",
      *              "dataType"="integer",
      *              "requirement"="\d+",
-     *              "description"="Permet d'afficher l'élément choisis"
+     *              "description"="Show an element"
      *          }
      *      },
      *      parameters={
@@ -106,6 +106,7 @@ class {{ nomController }}Controller extends StructureController
         $manager = $this->get("{{nomServiceEntity}}.manager.{{ nomController|lower }}");
         try {
             $options = $this->resolveParams()->resolve($request->query->all());
+			/** @var {{nomEntity}} $entite */
 			if (!$entite = $manager->findOneBy(['id' => $request->get('{{ nomController|lower }}_id')])) {
                 return new JsonResponse(["payload" => $this->translate("entity.not_found", "{{ nomController|lower }}")], 404);
             }
@@ -137,10 +138,11 @@ class {{ nomController }}Controller extends StructureController
                 ${{ nomController|lower }} = $form->getData();
                 $manager->insert(${{ nomController|lower }});
 				$this->dispatch(Events::{{ nomController|upper }}_CREATED, new GenericEvent($entite));
-                return new JsonResponse(["payload" => $this->translate("{{ nomEntity|lower }}.entity.created", "{{ nomController|lower }}")], 201);
+                return new JsonResponse(["payload" => $this->translate("entity.created", "{{ nomController|lower }}")], 201);
             }
         } catch (\Exception $e) {
             $manager->rollback();
+			
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
 
@@ -157,7 +159,7 @@ class {{ nomController }}Controller extends StructureController
      *              "name"="{{ nomController|lower }}_id",
      *              "dataType"="integer",
      *              "requirement"="\d+",
-     *              "description"="Permet de modifier l'élément choisi."
+     *              "description"="Edit an element."
      *          }
      *      },
      *      views = { "default" }
@@ -177,7 +179,7 @@ class {{ nomController }}Controller extends StructureController
                 $entite = $form->getData();
                 $manager->update(${{ nomController|lower }});
 				$this->dispatch(Events::{{ nomController|upper }}_UPDATED, new GenericEvent($entite));
-                return new JsonResponse(["payload" => $this->translate("{{ nomEntity|lower }}.entity.updated", "{{ nomController|lower }}")], 204);
+                return new JsonResponse(["payload" => $this->translate("entity.updated", "{{ nomController|lower }}")], 204);
             }
         } catch (\Exception $e) {
             $manager->rollback();
@@ -189,14 +191,14 @@ class {{ nomController }}Controller extends StructureController
 	/**
      * @ApiDoc(
      *      resource=true,
-     *      description="Supprime un {{ nomController|lower }}.",
+     *      description="Delete a {{ nomController|lower }}.",
      *      section="{{ nomServiceController}}.{{ nomController|lower}}",
 	 *      requirements={
      *          {
      *              "name"="{{ nomController|lower }}_id",
      *              "dataType"="integer",
      *              "requirement"="\d+",
-     *              "description"="Permet de supprimer l'élément choisi."
+     *              "description"="Delete an element."
      *          }
      *      },
      *      views = { "default" }
@@ -216,7 +218,7 @@ class {{ nomController }}Controller extends StructureController
         }
 		$this->dispatch(Events::{{ nomController|upper }}_DELETED, new GenericEvent($request->get('{{ nomController|lower }}_id')));
 		
-        return new JsonResponse(["payload" => $this->translate("{{ nomEntity|lower }}.entity.deleted", "{{ nomController|lower }}")], 204);
+        return new JsonResponse(["payload" => $this->translate("entity.deleted", "{{ nomController|lower }}")], 204);
     }
 
 } 

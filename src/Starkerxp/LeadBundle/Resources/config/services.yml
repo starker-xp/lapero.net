@@ -2,8 +2,8 @@ services:
 #    starkerxp_lead.example:
 #        class: Starkerxp\LeadBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
-    starkerxp_lead.form.lead_type:
-        class: Starkerxp\LeadBundle\Form\Type\LeadType
+    starkerxp_lead.form.form_type:
+        class: Starkerxp\LeadBundle\Form\Type\FormType
         arguments: ['@doctrine.orm.entity_manager']
         tags:
             - { name: form.type }

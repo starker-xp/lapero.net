@@ -107,7 +107,7 @@ abstract class AbstractManager implements ManagerInterface
      *                              during the search.
      * @param int|null $lockVersion The lock version.
      *
-     * @return object|null The entity instance or NULL if the entity can not be found.
+     * @return Entity|object|null The entity instance or NULL if the entity can not be found.
      */
     public function find($id, $lockMode = null, $lockVersion = null)
     {
@@ -135,7 +135,7 @@ abstract class AbstractManager implements ManagerInterface
      * @param int|null $limit
      * @param int|null $offset
      *
-     * @return array The objects.
+     * @return Entity[] The objects.
      */
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {

@@ -56,8 +56,8 @@ abstract class ReceiverLockCommand extends LockCommand
                 true,
                 true,
                 [
-                    'x-message-ttl'          => ['I', $this->getDelaiTemporisation() * 1000],   // delay in seconds to milliseconds
-                    "x-expires"              => ["I", $this->getDelaiTemporisation() * 1000 + 1000],
+                    'x-message-ttl' => ['I', $this->getDelaiTemporisation() * 1000],   // delay in seconds to milliseconds
+                    "x-expires" => ["I", $this->getDelaiTemporisation() * 1000 + 1000],
                     'x-dead-letter-exchange' => ['S', 'exchange_'.$nomChannel] // after message expiration in delay queue, move message to the right.now.queue
                 ]
             );

@@ -88,8 +88,9 @@ class User extends Entity implements JWTUserInterface, UserInterface
      */
     public function setRoles($roles)
     {
-        if($roles instanceof UserRole || empty($this->roles) ){
+        if ($roles instanceof UserRole || empty($this->roles)) {
             $this->roles = new UserRole($roles);
+
             return true;
         }
         $this->roles->setRole($roles);

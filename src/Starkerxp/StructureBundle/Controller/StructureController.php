@@ -96,9 +96,9 @@ class StructureController extends Controller
         $resolver->setDefaults(
             [
                 'offset' => 0,
-                'limit'  => 15,
+                'limit' => 15,
                 'fields' => "*",
-                'sort'   => "",
+                'sort' => "",
                 //'filter' => "",
             ]
         );

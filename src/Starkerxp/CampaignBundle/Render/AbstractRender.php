@@ -17,16 +17,16 @@ abstract class AbstractRender implements RenderInterface
         return $this->contenu;
     }
 
-    public function getData()
-    {
-        return $this->data;
-    }
-
     public function setContenu($contenu)
     {
         $this->contenu = $contenu;
 
         return $this;
+    }
+
+    public function getData()
+    {
+        return $this->data;
     }
 
     public function setData(array $data)

@@ -18,12 +18,12 @@ class OctosendHtmlRenderTest extends \Starkerxp\StructureBundle\Test\WebTest
     public function dataProvider()
     {
         $export = [
-            'lien mirroir'        => [
+            'lien mirroir' => [
                 '[{@mirror}]',
                 [],
                 '{{mirror}}',
             ],
-            'pixel'               => [
+            'pixel' => [
                 '[{@pixel}]',
                 [],
                 '{{pixel}}',
@@ -33,7 +33,7 @@ class OctosendHtmlRenderTest extends \Starkerxp\StructureBundle\Test\WebTest
                 [],
                 "<a href='{{unsubscribe:http://google.fr}}' style='color:black;' title='Désinscription'>Mon lien</a>",
             ],
-            'lien clickable'      => [
+            'lien clickable' => [
                 '<a data-id="click" target="__blank" href="http://google.fr" style="color:black;">Mon lien</a>',
                 [],
                 "<a href='{{click:http://google.fr}}' style='color:black;'>Mon lien</a>",

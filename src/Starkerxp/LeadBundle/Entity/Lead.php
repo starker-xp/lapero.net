@@ -28,10 +28,9 @@ class Lead extends UserArchiveEntity
     protected $origin;
 
     /**
-     * Optionnal for reimport or update
      * @var string
      *
-     * @ORM\Column(name="external_reference", type="string", length=255, nullable=true)
+     * @ORM\Column(name="external_reference", type="string", length=255, nullable=false)
      */
     protected $externalReference;
 
@@ -65,6 +64,7 @@ class Lead extends UserArchiveEntity
 
     /**
      * Permit to stock other datas.
+     * @var LeadSerialisation
      * @ORM\ManyToOne(targetEntity="LeadSerialisation", cascade="persist")
      * @ORM\JoinColumn(name="serialisation_id", referencedColumnName="id")
      */
@@ -93,6 +93,16 @@ class Lead extends UserArchiveEntity
      */
 
     /**
+     * Get origin
+     *
+     * @return string
+     */
+    public function getOrigin()
+    {
+        return $this->origin;
+    }
+
+    /**
      * Set origin
      *
      * @param string $origin
@@ -107,13 +117,13 @@ class Lead extends UserArchiveEntity
     }
 
     /**
-     * Get origin
+     * Get externalReference
      *
      * @return string
      */
-    public function getOrigin()
+    public function getExternalReference()
     {
-        return $this->origin;
+        return $this->externalReference;
     }
 
     /**
@@ -131,13 +141,13 @@ class Lead extends UserArchiveEntity
     }
 
     /**
-     * Get externalReference
+     * Get product
      *
      * @return string
      */
-    public function getExternalReference()
+    public function getProduct()
     {
-        return $this->externalReference;
+        return $this->product;
     }
 
     /**
@@ -155,13 +165,13 @@ class Lead extends UserArchiveEntity
     }
 
     /**
-     * Get product
+     * Get dateEvent
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getProduct()
+    public function getDateEvent()
     {
-        return $this->product;
+        return $this->dateEvent;
     }
 
     /**
@@ -179,13 +189,13 @@ class Lead extends UserArchiveEntity
     }
 
     /**
-     * Get dateEvent
+     * Get ipAddress
      *
-     * @return \DateTime
+     * @return string
      */
-    public function getDateEvent()
+    public function getIpAddress()
     {
-        return $this->dateEvent;
+        return $this->ipAddress;
     }
 
     /**
@@ -203,13 +213,13 @@ class Lead extends UserArchiveEntity
     }
 
     /**
-     * Get ipAddress
+     * Get pixel
      *
-     * @return string
+     * @return boolean
      */
-    public function getIpAddress()
+    public function getPixel()
     {
-        return $this->ipAddress;
+        return $this->pixel;
     }
 
     /**
@@ -227,16 +237,6 @@ class Lead extends UserArchiveEntity
     }
 
     /**
-     * Get pixel
-     *
-     * @return boolean
-     */
-    public function getPixel()
-    {
-        return $this->pixel;
-    }
-
-    /**
      * Get archive
      *
      * @return boolean
@@ -244,6 +244,20 @@ class Lead extends UserArchiveEntity
     public function getArchive()
     {
         return $this->archive;
+    }
+
+    /**
+     * Get serialisation
+     *
+     * @return array|LeadSerialisation
+     */
+    public function getSerialisation()
+    {
+        if (empty($this->serialisation)) {
+            return [];
+        }
+
+        return $this->serialisation->getSerialisation();
     }
 
     /**
@@ -258,18 +272,5 @@ class Lead extends UserArchiveEntity
         $this->serialisation = $serialisation;
 
         return $this;
-    }
-
-    /**
-     * Get serialisation
-     *
-     * @return array|LeadSerialisation
-     */
-    public function getSerialisation()
-    {
-        if(empty($this->serialisation)){
-            return [];
-        }
-        return $this->serialisation->getSerialisation();
     }
 }

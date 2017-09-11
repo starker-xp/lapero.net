@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class EventController extends StructureController
 {
-	/**
+    /**
      * @ApiDoc(
      *      resource=true,
      *      description="Show events list.",
@@ -69,27 +69,28 @@ class EventController extends StructureController
             },
             $resultSets
         );
+
         return new JsonResponse($retour);
     }
 
-	
-	/**
+
+    /**
      * @ApiDoc(
      *      resource=true,
      *      description="Show event.",
      *      section="Campaign",
-	 *      requirements={
+     *      requirements={
      *          {
      *              "name"="campaign_id",
      *              "dataType"="integer",
      *              "requirement"="\d+",
-     *              "description"="Permet d'afficher l'élément choisis"
+     *              "description"="Show an element"
      *          },
      *          {
      *              "name"="event_id",
      *              "dataType"="integer",
      *              "requirement"="\d+",
-     *              "description"="Permet d'afficher l'élément choisis"
+     *              "description"="Show an element"
      *          }
      *      },
      *      parameters={
@@ -114,14 +115,14 @@ class EventController extends StructureController
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
         if (!$event instanceof Event) {
-            return new JsonResponse(["payload" => $this->translate("event.entity.not_found", "event")], 404);
+            return new JsonResponse(["payload" => $this->translate("entity.not_found", "event")], 404);
         }
         $retour = $manager->toArray($event, $this->getFields($options['fields']));
 
         return new JsonResponse($retour);
     }
 
-	/**
+    /**
      * @ApiDoc(
      *      resource=true,
      *      description="Ajoute un event.",
@@ -140,22 +141,24 @@ class EventController extends StructureController
                 $event = $form->getData();
                 $event->setUuid($this->getUuid());
                 $manager->insert($event);
-                return new JsonResponse(["payload" => $this->translate("event.entity.created", "event")], 201);
+
+                return new JsonResponse(["payload" => $this->translate("entity.created", "event")], 201);
             }
         } catch (\Exception $e) {
             $manager->rollback();
+
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
 
         return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
     }
 
-	/**
+    /**
      * @ApiDoc(
      *      resource=true,
      *      description="Edit event.",
      *      section="Campaign",
-	 *      requirements={
+     *      requirements={
      *          {
      *              "name"="campaign_id",
      *              "dataType"="integer",
@@ -166,7 +169,7 @@ class EventController extends StructureController
      *              "name"="event_id",
      *              "dataType"="integer",
      *              "requirement"="\d+",
-     *              "description"="Permet de modifier l'élément choisis"
+     *              "description"="edit an elements"
      *          }
      *      },
      *      views = { "default" }
@@ -177,7 +180,7 @@ class EventController extends StructureController
         $manager = $this->get("starkerxp_campaign.manager.event");
         $event = $manager->find($request->get('id'));
         if (!$event instanceof Event) {
-            return new JsonResponse(["payload" => $this->translate("event.entity.not_found", "event")], 404);
+            return new JsonResponse(["payload" => $this->translate("entity.not_found", "event")], 404);
         }
         $manager->beginTransaction();
         try {
@@ -186,21 +189,24 @@ class EventController extends StructureController
             if ($form->isValid()) {
                 $event = $form->getData();
                 $manager->update($event);
-                return new JsonResponse(["payload" => $this->translate("event.entity.updated", "event")], 204);
+
+                return new JsonResponse(["payload" => $this->translate("entity.updated", "event")], 204);
             }
         } catch (\Exception $e) {
             $manager->rollback();
+
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
+
         return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
     }
 
-	/**
+    /**
      * @ApiDoc(
      *      resource=true,
      *      description="Delete event.",
      *      section="Campaign",
-	 *      requirements={
+     *      requirements={
      *          {
      *              "name"="campaign_id",
      *              "dataType"="integer",
@@ -211,7 +217,7 @@ class EventController extends StructureController
      *              "name"="event_id",
      *              "dataType"="integer",
      *              "requirement"="\d+",
-     *              "description"="Permet de supprimer l'élément choisis"
+     *              "description"="Delete an elements"
      *          }
      *      },
      *      views = { "default" }
@@ -222,15 +228,17 @@ class EventController extends StructureController
         $manager = $this->get("starkerxp_campaign.manager.event");
         $event = $manager->find($request->get('id'));
         if (!$event instanceof Event) {
-            return new JsonResponse(["payload" => $this->translate("event.entity.not_found", "event")], 404);
+            return new JsonResponse(["payload" => $this->translate("entity.not_found", "event")], 404);
         }
         try {
             $manager->delete($event);
         } catch (\Exception $e) {
             $manager->rollback();
+
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
-        return new JsonResponse(["payload" => $this->translate("event.entity.deleted", "event")], 204);
+
+        return new JsonResponse(["payload" => $this->translate("entity.deleted", "event")], 204);
     }
 
 } 

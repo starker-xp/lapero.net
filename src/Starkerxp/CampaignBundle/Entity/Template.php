@@ -54,6 +54,13 @@ class Template extends UserEntity
      */
     protected $events;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get nom.
@@ -137,14 +144,6 @@ class Template extends UserEntity
     public function setMessage($message)
     {
         $this->message = $message;
-    }
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->events = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

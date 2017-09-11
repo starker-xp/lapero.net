@@ -42,6 +42,14 @@ abstract class LockCommand extends ContainerAwareCommand
     /**
      * @return string
      */
+    protected function getEnvironment()
+    {
+        return $this->getContainer()->get("kernel")->getEnvironment();
+    }
+
+    /**
+     * @return string
+     */
     public function lockerName()
     {
         return $this->getName();
@@ -74,13 +82,6 @@ abstract class LockCommand extends ContainerAwareCommand
     protected function getConnection()
     {
         return $this->getEntityManager()->getConnection();
-    }
-
-    /**
-     * @return string
-     */
-    protected function getEnvironment(){
-        return $this->getContainer()->get("kernel")->getEnvironment();
     }
 
 }

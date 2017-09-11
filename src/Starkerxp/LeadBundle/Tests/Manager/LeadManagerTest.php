@@ -24,7 +24,12 @@ class LeadManagerTest extends WebTest
      */
     public function testFindAll()
     {
-        $this->loadFixtureFiles(['@StarkerxpLeadBundle/Tests/DataFixtures/LeadManager/LeadManager.yml',]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+                '@StarkerxpLeadBundle/Tests/DataFixtures/LeadManager/LeadManager.yml',
+            ]
+        );
         $this->assertCount(10, $this->manager->findAll());
     }
 
@@ -34,8 +39,16 @@ class LeadManagerTest extends WebTest
      */
     public function testInsertNewLead()
     {
-        $this->loadFixtureFiles(['@StarkerxpLeadBundle/Tests/DataFixtures/LeadManager/DefaultLead.yml',]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+                '@StarkerxpLeadBundle/Tests/DataFixtures/LeadManager/DefaultLead.yml',
+            ]
+        );
         $lead = new Lead();
+        $lead->setOrigin("validatemy.com");
+        $lead->setProduct("form");
+        $lead->setDateEvent(new \DateTime("2016-05-06 00:56:45"));
         $this->manager->insert($lead);
         $this->assertCount(2, $this->manager->findAll());
     }
@@ -46,12 +59,17 @@ class LeadManagerTest extends WebTest
      */
     public function testUpdateLead()
     {
-        $this->loadFixtureFiles(['@StarkerxpLeadBundle/Tests/DataFixtures/LeadManager/DefaultLead.yml',]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+                '@StarkerxpLeadBundle/Tests/DataFixtures/LeadManager/DefaultLead.yml',
+            ]
+        );
         $criteria = ['createdAt' => new \DateTime("2016-08-05 12:12:12")];
         $lead = $this->manager->findOneBy($criteria);
         $this->manager->update($lead);
         $leadPostUpdate = $this->manager->findOneBy($criteria);
-        $this->assertEquals(1, $leadPostUpdate->getIsError());
+        $this->assertEquals("validatemy.com", $leadPostUpdate->getOrigin());
         $this->assertNotEmpty($leadPostUpdate->getUpdatedAt());
     }
 

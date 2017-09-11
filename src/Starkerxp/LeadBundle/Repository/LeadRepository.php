@@ -13,5 +13,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class LeadRepository extends EntityRepository
 {
+    public function leadExist($origin, $externalReference)
+    {
+        $qb = $this->createQueryBuilder('l')
+            ->andWhere('l.origin= :origin')
+            ->andWhere('l.externalReference= :externalReference')
+            ->setParameter('origin', $origin)
+            ->setParameter('externalReference', $externalReference)
+            ->getQuery();
+        $result = $qb->execute();
+
+        return !empty($result);
+    }
 
 }

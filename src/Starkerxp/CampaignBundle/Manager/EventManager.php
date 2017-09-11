@@ -17,10 +17,11 @@ class EventManager extends AbstractManager
     public function toArray(Event $object, $fields = [])
     {
         $array = [
-            "id"       => $object->getId(),
+            "id" => $object->getId(),
             "campaign_id" => $object->getCampaign()->getId(),
             "template_id" => $object->getTemplate()->getId(),
         ];
+
         return $this->exportFields($array, $fields);
     }
 }

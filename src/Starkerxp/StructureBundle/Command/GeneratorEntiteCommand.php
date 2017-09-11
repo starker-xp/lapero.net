@@ -21,5 +21,5 @@ class GeneratorEntiteCommand extends ContainerAwareCommand
         $generator = $this->getContainer()->get("starkerxp_structure.generator.entite_generator");
         $generator->generate($input->getArgument('entite'));
     }
-    
+
 }

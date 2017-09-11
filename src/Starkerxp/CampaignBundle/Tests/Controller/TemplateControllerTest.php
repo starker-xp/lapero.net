@@ -17,10 +17,10 @@ class TemplateControllerTest extends WebTest
         $this->loadFixtureFiles(['@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml']);
 
         $data = [
-            'name'     => "Mon nom",
-            'object'   => "Mon sujet",
+            'name' => "Mon nom",
+            'object' => "Mon sujet",
             'message' => "Mon message",
-            'type'    => "email",
+            'type' => "email",
         ];
         $client = $this->getAuthClient();
         $client->request('POST', '/api/templates', $data);
@@ -58,19 +58,21 @@ class TemplateControllerTest extends WebTest
      */
     public function testPutValide()
     {
-        $this->loadFixtureFiles([
-            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
-            '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/DefaultTemplate.yml'
-        ]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+                '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/DefaultTemplate.yml',
+            ]
+        );
         $manager = $this->getContainer()->get('starkerxp_campaign.manager.template');
         $listeTemplates = $manager->getRepository()->findAll();
         $this->assertCount(1, $listeTemplates);
         $templateDepart = $manager->toArray($listeTemplates[0], ['name', 'object', 'message']);
         $data = [
-            'name'     => "Mon nom",
-            'object'   => "Mon sujet",
+            'name' => "Mon nom",
+            'object' => "Mon sujet",
             'message' => "Mon message",
-            'type'    => "email",
+            'type' => "email",
         ];
         $client = $this->getAuthClient();
         $client->request('PUT', '/api/templates/'.$listeTemplates[0]->getId(), $data);
@@ -91,10 +93,12 @@ class TemplateControllerTest extends WebTest
      */
     public function testPutInvalide()
     {
-        $this->loadFixtureFiles([
-            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
-            '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/DefaultTemplate.yml'
-        ]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+                '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/DefaultTemplate.yml',
+            ]
+        );
         $manager = $this->getContainer()->get('starkerxp_campaign.manager.template');
         $listeTemplates = $manager->getRepository()->findAll();
         $this->assertCount(1, $listeTemplates);
@@ -116,14 +120,16 @@ class TemplateControllerTest extends WebTest
      */
     public function testPutSansResultat()
     {
-        $this->loadFixtureFiles([
-            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
-        ]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+            ]
+        );
         $data = [
-            'name'     => "Mon nom",
-            'object'   => "Mon sujet",
+            'name' => "Mon nom",
+            'object' => "Mon sujet",
             'message' => "Mon message",
-            'type'    => "email",
+            'type' => "email",
         ];
         $client = $this->getAuthClient();
         $client->request('PUT', '/api/templates/404', $data);
@@ -141,10 +147,12 @@ class TemplateControllerTest extends WebTest
      */
     public function testCGetValideAvecResultats()
     {
-        $this->loadFixtureFiles([
-            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
-            '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/TemplateManager.yml'
-        ]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+                '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/TemplateManager.yml',
+            ]
+        );
         $client = $this->getAuthClient();
         $client->request('GET', '/api/templates', []);
         $response = $client->getResponse();
@@ -167,9 +175,11 @@ class TemplateControllerTest extends WebTest
      */
     public function testCGetValideSansResultat()
     {
-        $this->loadFixtureFiles([
-            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
-        ]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+            ]
+        );
         $client = $this->getAuthClient();
         $client->request('GET', '/api/templates', []);
         $response = $client->getResponse();
@@ -185,9 +195,11 @@ class TemplateControllerTest extends WebTest
      */
     public function testCGetInvalide()
     {
-        $this->loadFixtureFiles([
-            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
-        ]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+            ]
+        );
         $client = $this->getAuthClient();
         $client->request('GET', '/api/templates', ["filter_erreur" => "+h"]);
         $response = $client->getResponse();
@@ -201,10 +213,12 @@ class TemplateControllerTest extends WebTest
      */
     public function testGetValideAvecResultats()
     {
-        $this->loadFixtureFiles([
-            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
-            '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/TemplateManager.yml'
-        ]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+                '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/TemplateManager.yml',
+            ]
+        );
         $manager = $this->getContainer()->get('starkerxp_campaign.manager.template');
         $listeTemplates = $manager->getRepository()->findAll();
         $this->assertCount(10, $listeTemplates);
@@ -228,9 +242,11 @@ class TemplateControllerTest extends WebTest
      */
     public function testGetValideSansResultat()
     {
-        $this->loadFixtureFiles([
-            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
-        ]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+            ]
+        );
         $client = $this->getAuthClient();
         $client->request('GET', '/api/templates/404', []);
         $response = $client->getResponse();
@@ -246,9 +262,11 @@ class TemplateControllerTest extends WebTest
      */
     public function testGetInvalide()
     {
-        $this->loadFixtureFiles([
-            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
-        ]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+            ]
+        );
         $client = $this->getAuthClient();
         $client->request('GET', '/api/templates/500', ["filter_erreur" => "+h"]);
         $response = $client->getResponse();
@@ -262,10 +280,12 @@ class TemplateControllerTest extends WebTest
      */
     public function testDeleteValide()
     {
-        $this->loadFixtureFiles([
-            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
-            '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/DefaultTemplate.yml'
-        ]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+                '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/DefaultTemplate.yml',
+            ]
+        );
         $manager = $this->getContainer()->get('starkerxp_campaign.manager.template');
         $listeTemplates = $manager->getRepository()->findAll();
         $this->assertCount(1, $listeTemplates);
@@ -285,9 +305,11 @@ class TemplateControllerTest extends WebTest
      */
     public function testDeleteSansResultat()
     {
-        $this->loadFixtureFiles([
-            '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
-        ]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+            ]
+        );
         $client = $this->getAuthClient();
         $client->request('DELETE', '/api/templates/404', []);
         $response = $client->getResponse();

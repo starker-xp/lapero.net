@@ -26,7 +26,7 @@ class EntityToIdObjectTransformer implements DataTransformerInterface
 
     /**
      * @param ObjectManager $om
-     * @param string        $entityName
+     * @param string $entityName
      */
     public function __construct(ObjectManager $om, $entityName)
     {
@@ -68,10 +68,13 @@ class EntityToIdObjectTransformer implements DataTransformerInterface
             ->findOneBy([$identifier => $idObject]);
 
         if (null === $object) {
-            throw new TransformationFailedException(sprintf(
-                'An object with identifier key "%s" and value "%s" does not exist!',
-                $identifier, $idObject
-            ));
+            throw new TransformationFailedException(
+                sprintf(
+                    'An object with identifier key "%s" and value "%s" does not exist!',
+                    $identifier,
+                    $idObject
+                )
+            );
         }
 
         return $object;

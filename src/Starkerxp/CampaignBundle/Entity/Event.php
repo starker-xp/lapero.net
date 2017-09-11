@@ -57,6 +57,16 @@ class Event extends UserEntity
     }
 
     /**
+     * Get template
+     *
+     * @return \Starkerxp\CampaignBundle\Entity\Template
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+
+    /**
      * Set template
      *
      * @param \Starkerxp\CampaignBundle\Entity\Template $template
@@ -68,15 +78,5 @@ class Event extends UserEntity
         $this->template = $template;
 
         return $this;
-    }
-
-    /**
-     * Get template
-     *
-     * @return \Starkerxp\CampaignBundle\Entity\Template
-     */
-    public function getTemplate()
-    {
-        return $this->template;
     }
 }

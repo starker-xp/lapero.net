@@ -16,8 +16,8 @@ class CampaignManager extends AbstractManager
     public function toArray(Campaign $object, $fields = [])
     {
         $array = [
-            "id"     => $object->getId(),
-            "name"   => $object->getName(),
+            "id" => $object->getId(),
+            "name" => $object->getName(),
             "status" => $object->getStatus(),
         ];
 

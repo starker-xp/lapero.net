@@ -61,6 +61,16 @@ class CampaignTarget extends UserEntity
     protected $manuallyAdded = false;
 
     /**
+     * Get dateLastExited
+     *
+     * @return \DateTime
+     */
+    public function getDateLastExited()
+    {
+        return $this->dateLastExited;
+    }
+
+    /**
      * Set dateLastExited
      *
      * @param \DateTime $dateLastExited
@@ -75,13 +85,13 @@ class CampaignTarget extends UserEntity
     }
 
     /**
-     * Get dateLastExited
+     * Get manuallyRemoved
      *
-     * @return \DateTime
+     * @return boolean
      */
-    public function getDateLastExited()
+    public function getManuallyRemoved()
     {
-        return $this->dateLastExited;
+        return $this->manuallyRemoved;
     }
 
     /**
@@ -99,13 +109,13 @@ class CampaignTarget extends UserEntity
     }
 
     /**
-     * Get manuallyRemoved
+     * Get manuallyAdded
      *
      * @return boolean
      */
-    public function getManuallyRemoved()
+    public function getManuallyAdded()
     {
-        return $this->manuallyRemoved;
+        return $this->manuallyAdded;
     }
 
     /**
@@ -123,13 +133,13 @@ class CampaignTarget extends UserEntity
     }
 
     /**
-     * Get manuallyAdded
+     * Get campaign
      *
-     * @return boolean
+     * @return \Starkerxp\CampaignBundle\Entity\Campaign
      */
-    public function getManuallyAdded()
+    public function getCampaign()
     {
-        return $this->manuallyAdded;
+        return $this->campaign;
     }
 
     /**
@@ -144,15 +154,5 @@ class CampaignTarget extends UserEntity
         $this->campaign = $campaign;
 
         return $this;
-    }
-
-    /**
-     * Get campaign
-     *
-     * @return \Starkerxp\CampaignBundle\Entity\Campaign
-     */
-    public function getCampaign()
-    {
-        return $this->campaign;
     }
 }

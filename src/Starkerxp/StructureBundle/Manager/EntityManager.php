@@ -26,29 +26,6 @@ class EntityManager implements ManagerInterface
         return false;
     }
 
-    public function update(Entity $object)
-    {
-        if ($managerService = $this->getSupport($object)) {
-            $managerService->update($object);
-
-            return $object;
-        }
-
-        return false;
-    }
-
-
-    public function delete(Entity $object)
-    {
-        if ($managerService = $this->getSupport($object)) {
-            $managerService->delete($object);
-
-            return $object;
-        }
-
-        return false;
-    }
-
     /**
      * @param Entity $object
      *
@@ -60,6 +37,28 @@ class EntityManager implements ManagerInterface
             if ($service instanceof ManagerInterface && $service->getSupport($object)) {
                 return $service;
             }
+        }
+
+        return false;
+    }
+
+    public function update(Entity $object)
+    {
+        if ($managerService = $this->getSupport($object)) {
+            $managerService->update($object);
+
+            return $object;
+        }
+
+        return false;
+    }
+
+    public function delete(Entity $object)
+    {
+        if ($managerService = $this->getSupport($object)) {
+            $managerService->delete($object);
+
+            return $object;
         }
 
         return false;
@@ -88,6 +87,20 @@ class EntityManager implements ManagerInterface
     /**
      * @param Entity $object
      *
+     * @return bool|EntityRepository
+     */
+    public function getRepository(Entity $object)
+    {
+        if (!$manager = $this->getManager($object)) {
+            return false;
+        }
+
+        return $manager->getRepository();
+    }
+
+    /**
+     * @param Entity $object
+     *
      * @return bool|AbstractManager
      */
     public function getManager(Entity $object)
@@ -95,17 +108,5 @@ class EntityManager implements ManagerInterface
         $managerService = $this->getSupport($object);
 
         return $managerService;
-    }
-
-    /**
-     * @param Entity $object
-     *
-     * @return bool|EntityRepository
-     */
-    public function getRepository(Entity $object){
-        if(!$manager = $this->getManager( $object)){
-            return false;
-        }
-        return $manager->getRepository();
     }
 }

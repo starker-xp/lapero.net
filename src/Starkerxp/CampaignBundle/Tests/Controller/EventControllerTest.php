@@ -113,7 +113,7 @@ class EventControllerTest extends WebTest
             'starkerxp_campaign.event.put',
             [
                 "campaign_id" => $this->getCampaignId(),
-                "id"          => $listeEvents[0]->getId(),
+                "id" => $listeEvents[0]->getId(),
             ]
         );
         $client = $this->getAuthClient();
@@ -150,7 +150,7 @@ class EventControllerTest extends WebTest
             'starkerxp_campaign.event.put',
             [
                 "campaign_id" => $this->getCampaignId(),
-                "id"          => $listeEvents[0]->getId(),
+                "id" => $listeEvents[0]->getId(),
             ]
         );
         $client = $this->getAuthClient();
@@ -183,7 +183,7 @@ class EventControllerTest extends WebTest
             'starkerxp_campaign.event.put',
             [
                 "campaign_id" => $this->getCampaignId(),
-                "id"          => 404,
+                "id" => 404,
             ]
         );
         $client = $this->getAuthClient();
@@ -302,7 +302,7 @@ class EventControllerTest extends WebTest
             'starkerxp_campaign.event.get',
             [
                 "campaign_id" => $this->getCampaignId(),
-                "id"          => $listeEvents[0]->getId(),
+                "id" => $listeEvents[0]->getId(),
             ]
         );
         $client = $this->getAuthClient();
@@ -333,7 +333,7 @@ class EventControllerTest extends WebTest
             'starkerxp_campaign.event.get',
             [
                 "campaign_id" => $this->getCampaignId(),
-                "id"          => 404,
+                "id" => 404,
             ]
         );
         $client = $this->getAuthClient();
@@ -362,7 +362,7 @@ class EventControllerTest extends WebTest
             'starkerxp_campaign.event.get',
             [
                 "campaign_id" => $this->getCampaignId(),
-                "id"          => 500,
+                "id" => 500,
             ]
         );
         $client = $this->getAuthClient();
@@ -394,7 +394,7 @@ class EventControllerTest extends WebTest
             'starkerxp_campaign.event.delete',
             [
                 "campaign_id" => $this->getCampaignId(),
-                "id"          => $listeEvents[0]->getId(),
+                "id" => $listeEvents[0]->getId(),
             ]
         );
         $client = $this->getAuthClient();
@@ -424,7 +424,7 @@ class EventControllerTest extends WebTest
             'starkerxp_campaign.event.delete',
             [
                 "campaign_id" => $this->getCampaignId(),
-                "id"          => 404,
+                "id" => 404,
             ]
         );
         $client = $this->getAuthClient();

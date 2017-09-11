@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CampaignController extends StructureController
 {
-	/**
+    /**
      * @ApiDoc(
      *      resource=true,
      *      description="Show campaigns list.",
@@ -82,7 +82,7 @@ class CampaignController extends StructureController
      *              "name"="campaign_id",
      *              "dataType"="integer",
      *              "requirement"="\d+",
-     *              "description"="Permet d'afficher l'élément choisis"
+     *              "description"="Show an element"
      *          }
      *      },
      *      parameters={
@@ -154,7 +154,7 @@ class CampaignController extends StructureController
      *              "name"="campaign_id",
      *              "dataType"="integer",
      *              "requirement"="\d+",
-     *              "description"="Permet de modifier l'élément choisi."
+     *              "description"="Edit an element."
      *          }
      *      },
      *      views = { "default" }
@@ -196,7 +196,7 @@ class CampaignController extends StructureController
      *              "name"="campaign_id",
      *              "dataType"="integer",
      *              "requirement"="\d+",
-     *              "description"="Permet de supprimer l'élément choisi."
+     *              "description"="Delete an element."
      *          }
      *      },
      *      views = { "default" }

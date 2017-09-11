@@ -14,6 +14,7 @@ abstract class WebTest extends WebTestCase
 {
     protected $identifiant = "test@yopmail.com";
     protected $motDePasse = "motMotDePasse";
+    protected $idGeneratorTypes = [];
 
     /**
      * Erase all database data.
@@ -22,6 +23,34 @@ abstract class WebTest extends WebTestCase
     {
         parent::setUp();
         $this->loadFixtureFiles([]);
+    }
+
+    public function loadFixtureFiles(array $paths = [], $append = false, $omName = null, $registryName = 'doctrine', $purgeMode = null)
+    {
+        $retour = parent::loadFixtureFiles($paths, $append, $omName, $registryName, $purgeMode);
+        $this->recoverIdGenerators();
+        $this->getEntityManager()->clear();
+
+        return $retour;
+    }
+
+    protected function recoverIdGenerators($name = null)
+    {
+        foreach ($this->idGeneratorTypes as $entityClass => $idGeneratorType) {
+            $metadata = $this->getEntityManager($name)->getClassMetadata($entityClass);
+            $metadata->setIdGeneratorType($idGeneratorType);
+        }
+    }
+
+    /**
+     * @param string|null $name
+     * @return EntityManager
+     */
+    public function getEntityManager($name = null)
+    {
+        $entityManager = $this->getContainer()->get('doctrine')->getManager($name);
+
+        return $entityManager;
     }
 
     public function tearDown()
@@ -38,7 +67,7 @@ abstract class WebTest extends WebTestCase
             '/api/login_check',
             [
                 'identifiant' => $this->identifiant,
-                'motDePasse'  => $this->motDePasse,
+                'motDePasse' => $this->motDePasse,
             ]
         );
         $dataHeader = json_decode($client->getResponse()->getContent(), true);
@@ -47,22 +76,6 @@ abstract class WebTest extends WebTestCase
         $client->setServerParameter('HTTP_Authorization', sprintf('Bearer %s', $dataHeader['token']));
 
         return $client;
-    }
-
-    /**
-     * Generates a URL from the given parameters.
-     *
-     * @param string $route The name of the route
-     * @param mixed $parameters An array of parameters
-     * @param int $referenceType The type of reference (one of the constants in UrlGeneratorInterface)
-     *
-     * @return string The generated URL
-     *
-     * @see UrlGeneratorInterface
-     */
-    protected function generateUrl($route, $parameters = [], $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
-    {
-        return $this->getContainer()->get('router')->generate($route, $parameters, $referenceType);
     }
 
     /**
@@ -75,17 +88,6 @@ abstract class WebTest extends WebTestCase
     }
 
     /**
-     * @param string|null $name
-     * @return EntityManager
-     */
-    public function getEntityManager($name = null)
-    {
-        $entityManager = $this->getContainer()->get('doctrine')->getManager($name);
-
-        return $entityManager;
-    }
-
-    /**
      * @param $entiteCQFD
      * @param string|null $name
      * @return \Doctrine\Common\Persistence\ObjectRepository
@@ -95,35 +97,6 @@ abstract class WebTest extends WebTestCase
         $repository = $this->getEntityManager($name)->getRepository($entiteCQFD);
 
         return $repository;
-    }
-
-    protected $idGeneratorTypes = [];
-
-    protected function allowFixedIdsFor(array $entityClasses, $name = null)
-    {
-        foreach ($entityClasses as $entityClass) {
-            $metadata = $this->getEntityManager($name)->getClassMetadata($entityClass);
-            $this->idGeneratorTypes[$entityClass] = $metadata->generatorType;
-            $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
-            $metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
-        }
-    }
-
-    protected function recoverIdGenerators($name = null)
-    {
-        foreach ($this->idGeneratorTypes as $entityClass => $idGeneratorType) {
-            $metadata = $this->getEntityManager($name)->getClassMetadata($entityClass);
-            $metadata->setIdGeneratorType($idGeneratorType);
-        }
-    }
-
-    public function loadFixtureFiles(array $paths = [], $append = false, $omName = null, $registryName = 'doctrine', $purgeMode = null)
-    {
-        $retour = parent::loadFixtureFiles($paths, $append, $omName, $registryName, $purgeMode);
-        $this->recoverIdGenerators();
-        $this->getEntityManager()->clear();
-
-        return $retour;
     }
 
     public function executerCommande($command = [])
@@ -153,6 +126,32 @@ abstract class WebTest extends WebTestCase
         $method->setAccessible(true);
 
         return $method->invokeArgs($object, $parameters);
+    }
+
+    /**
+     * Generates a URL from the given parameters.
+     *
+     * @param string $route The name of the route
+     * @param mixed $parameters An array of parameters
+     * @param int $referenceType The type of reference (one of the constants in UrlGeneratorInterface)
+     *
+     * @return string The generated URL
+     *
+     * @see UrlGeneratorInterface
+     */
+    protected function generateUrl($route, $parameters = [], $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
+    {
+        return $this->getContainer()->get('router')->generate($route, $parameters, $referenceType);
+    }
+
+    protected function allowFixedIdsFor(array $entityClasses, $name = null)
+    {
+        foreach ($entityClasses as $entityClass) {
+            $metadata = $this->getEntityManager($name)->getClassMetadata($entityClass);
+            $this->idGeneratorTypes[$entityClass] = $metadata->generatorType;
+            $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+            $metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
+        }
     }
 
 }

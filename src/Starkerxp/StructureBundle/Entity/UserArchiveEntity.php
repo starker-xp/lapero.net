@@ -16,7 +16,7 @@ abstract class UserArchiveEntity extends UserEntity implements ArchiveInterface
      * @ORM\Column(name="is_archive", type="boolean", nullable=true, options={"default":0})
      */
     protected $archive = false;
-    
+
     public function isArchive()
     {
         return $this->archive;
