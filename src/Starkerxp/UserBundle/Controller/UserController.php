@@ -3,12 +3,12 @@
 namespace Starkerxp\UserBundle\Controller;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Starkerxp\StructureBundle\Controller\StructureController;
 use Starkerxp\UserBundle\Entity\User;
 use Starkerxp\UserBundle\Form\Type\UserType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class UserController extends StructureController
 {
@@ -234,4 +234,4 @@ class UserController extends StructureController
         return new JsonResponse(["payload" => $this->translate("user.entity.deleted", "user")], 204);
     }
 
-} 
+}

@@ -1,6 +1,6 @@
 <?php
 
-namespace Starkerxp\LeadBundle\Validator;
+namespace Starkerxp\LeadBundle\Constraints;
 
 use Starkerxp\LeadBundle\Entity\Lead;
 use Starkerxp\LeadBundle\Repository\LeadRepository;
@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 /**
  * @Annotation
  */
-class LeadNotExistValidator extends ConstraintValidator
+class LeadExistValidator extends ConstraintValidator
 {
     /**
      * @var LeadRepository
@@ -29,12 +29,13 @@ class LeadNotExistValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint)
     {
-        if (!$constraint instanceof LeadNotExist) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\LeadNotExist');
+        if (!$constraint instanceof LeadExist) {
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\LeadExist');
         }
+
         /** @var Lead $lead */
         $lead = $this->context->getRoot()->getData();
-        if (!$this->repositoryLead->leadExist($lead->getOrigin(), $lead->getExternalReference())) {
+        if ($this->repositoryLead->leadExist($lead->getOrigin(), $lead->getExternalReference())) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ origin }}', $lead->getOrigin())
                 ->setParameter('{{ external_reference }}', $lead->getExternalReference())

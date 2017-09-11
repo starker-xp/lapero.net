@@ -3,7 +3,6 @@
 namespace Starkerxp\UserBundle\Form\Type;
 
 use Starkerxp\StructureBundle\Form\Type\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints;
 

@@ -14,7 +14,7 @@ class BuzzExpertRender extends AbstractRender
     public function remplacerLesCaracteresSpeciaux($contenu)
     {
         // Gestion des accents.
-        $findAccent = array(
+        $findAccent = [
             'Â',
             'â',
             'Á',
@@ -61,8 +61,8 @@ class BuzzExpertRender extends AbstractRender
             'ū',
             'Ӱ',
             'ӱ',
-        );
-        $replaceAccent = array(
+        ];
+        $replaceAccent = [
             'A',
             'a',
             'A',
@@ -109,11 +109,11 @@ class BuzzExpertRender extends AbstractRender
             'u',
             'Y',
             'y',
-        );
+        ];
         $contenu = str_replace($findAccent, $replaceAccent, $contenu);
         // Gestion des autres caractères.
-        $find = array('€', '‘', '$', '£', '`', '"', '#');
-        $replace = array('E', '', 'USD', 'GBP', '', ' ', '');
+        $find = ['€', '‘', '$', '£', '`', '"', '#'];
+        $replace = ['E', '', 'USD', 'GBP', '', ' ', ''];
         $contenu = str_replace($find, $replace, $contenu);
         $contenu = str_replace(['  ', '   '], ' ', $contenu);
         $out = [];

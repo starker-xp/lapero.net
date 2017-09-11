@@ -2,7 +2,8 @@
 
 namespace Starkerxp\LeadBundle\Form\Type;
 
-use Starkerxp\LeadBundle\Validator\LeadExist;
+use Starkerxp\LeadBundle\Constraints\LeadExist;
+use Starkerxp\LeadBundle\Constraints\LeadNotExist;
 use Starkerxp\StructureBundle\Form\Type\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,7 +31,7 @@ class LeadType extends AbstractType
                     'constraints' => [
                         new Constraints\NotBlank(),
                         new Constraints\Length(['min' => 1]),
-                        new LeadExist(),
+                        $options['method'] == "PUT" ? new LeadNotExist() : new LeadExist(),
                     ],
                 ]
             )

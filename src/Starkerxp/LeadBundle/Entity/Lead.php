@@ -4,7 +4,6 @@ namespace Starkerxp\LeadBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Starkerxp\StructureBundle\Entity\UserArchiveEntity;
-use Starkerxp\StructureBundle\Manager\EntityReadOnlyInterface;
 
 /**
  * Lead

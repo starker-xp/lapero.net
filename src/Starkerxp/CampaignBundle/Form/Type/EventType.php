@@ -7,9 +7,9 @@ use Starkerxp\CampaignBundle\Entity\Campaign;
 use Starkerxp\CampaignBundle\Entity\Template;
 use Starkerxp\CampaignBundle\Repository\CampaignRepository;
 use Starkerxp\CampaignBundle\Repository\TemplateRepository;
+use Starkerxp\StructureBundle\Form\Type\AbstractType;
 use Starkerxp\StructureBundle\Services\EntityToIdObjectTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Starkerxp\StructureBundle\Form\Type\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints;
 

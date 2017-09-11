@@ -4,10 +4,9 @@ namespace Starkerxp\StructureBundle\Test;
 
 use Doctrine\ORM\EntityManager;
 use Liip\FunctionalTestBundle\Test\WebTestCase;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 abstract class WebTest extends WebTestCase

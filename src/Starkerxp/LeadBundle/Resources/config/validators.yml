@@ -8,13 +8,13 @@ services:
         tags:
             - { name: form.type }
     starkerxp_lead.validator.lead_exist:
-        class: Starkerxp\LeadBundle\Validator\LeadExistValidator
+        class: Starkerxp\LeadBundle\Constraints\LeadExistValidator
         arguments:
             - "@=service('doctrine').getRepository('StarkerxpLeadBundle:Lead')"
         tags:
             - { name: validator.constraint_validator }
     starkerxp_lead.validator.lead_not_exist:
-        class: Starkerxp\LeadBundle\Validator\LeadNotExistValidator
+        class: Starkerxp\LeadBundle\Constraints\LeadNotExistValidator
         arguments:
             - "@=service('doctrine').getRepository('StarkerxpLeadBundle:Lead')"
         tags:

@@ -1,6 +1,6 @@
 <?php
 
-namespace Starkerxp\LeadBundle\Validator;
+namespace Starkerxp\LeadBundle\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
