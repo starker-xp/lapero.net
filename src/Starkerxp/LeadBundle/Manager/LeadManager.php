@@ -28,7 +28,7 @@ class LeadManager extends AbstractManager
     {
         $array = [
             "id" => $object->getId(),
-            "date_event" => $object->getDateEvent(),
+            "date_event" => $object->getDateEvent()->format("Y-m-d H:i:s"),
             "origin" => $object->getOrigin(),
             "product" => $object->getProduct(),
             "external_reference" => $object->getExternalReference(),

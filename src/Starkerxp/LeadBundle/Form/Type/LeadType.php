@@ -31,7 +31,7 @@ class LeadType extends AbstractType
                     'constraints' => [
                         new Constraints\NotBlank(),
                         new Constraints\Length(['min' => 1]),
-                        $options['method'] == "PUT" ? new LeadNotExist() : new LeadExist(),
+                        $options['method'] === "PUT" ? new LeadNotExist() : new LeadExist(),
                     ],
                 ]
             )
@@ -47,11 +47,10 @@ class LeadType extends AbstractType
             )
             ->add(
                 'date_event',
-                Type\TextType::class,
+                Type\DateTimeType::class,
                 [
-                    'constraints' => [
-                        new Constraints\DateTime(),
-                    ],
+                    'widget' => 'single_text',
+                    'format' => 'yyyy-MM-dd HH:mm:ss',
                 ]
             )
             ->add(

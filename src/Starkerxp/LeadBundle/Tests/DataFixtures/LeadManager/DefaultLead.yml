@@ -6,3 +6,4 @@ Starkerxp\LeadBundle\Entity\Lead:
         origin: "validatemy.com"
         product: "form"
         dateEvent: <dateTimeBetween("2016-08-05 12:12:08", "2016-08-05 12:12:08")>
+        externalReference: 1

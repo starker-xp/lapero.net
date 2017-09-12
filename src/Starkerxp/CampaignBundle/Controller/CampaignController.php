@@ -169,7 +169,7 @@ class CampaignController extends StructureController
         $manager->beginTransaction();
         try {
             $form = $this->createForm(CampaignType::class, $entite, ['method' => 'PUT']);
-            $form->submit($this->getRequestData($request));
+            $form->submit($this->getRequestData($request), false);
             if ($form->isValid()) {
                 $entite = $form->getData();
                 $manager->update($entite);
@@ -221,4 +221,4 @@ class CampaignController extends StructureController
         return new JsonResponse(["payload" => $this->translate("entity.deleted", "campaign")], 204);
     }
 
-} 
+}

@@ -176,7 +176,7 @@ class LeadController extends StructureController
         $manager->beginTransaction();
         try {
             $form = $this->createForm(LeadType::class, $entite, ['method' => 'PUT']);
-            $form->submit($this->getRequestData($request));
+            $form->submit($this->getRequestData($request), false);
             if ($form->isValid()) {
                 $entite = $form->getData();
                 $manager->update($entite);
@@ -192,4 +192,4 @@ class LeadController extends StructureController
 
         return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
     }
-} 
+}

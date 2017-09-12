@@ -185,7 +185,7 @@ class EventController extends StructureController
         $manager->beginTransaction();
         try {
             $form = $this->createForm(EventType::class, $event, ['method' => 'PUT']);
-            $form->submit($this->getRequestData($request));
+            $form->submit($this->getRequestData($request), false);
             if ($form->isValid()) {
                 $event = $form->getData();
                 $manager->update($event);
@@ -241,4 +241,4 @@ class EventController extends StructureController
         return new JsonResponse(["payload" => $this->translate("entity.deleted", "event")], 204);
     }
 
-} 
+}

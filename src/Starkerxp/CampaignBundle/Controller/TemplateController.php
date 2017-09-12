@@ -176,7 +176,7 @@ class TemplateController extends StructureController
         $manager->beginTransaction();
         try {
             $form = $this->createForm(TemplateType::class, $entite, ['method' => 'PUT']);
-            $form->submit($this->getRequestData($request));
+            $form->submit($this->getRequestData($request), false);
             if ($form->isValid()) {
                 $entite = $form->getData();
                 $manager->update($entite);
@@ -227,4 +227,4 @@ class TemplateController extends StructureController
         return new JsonResponse(["payload" => $this->translate("entity.deleted", "template")], 204);
     }
 
-} 
+}

@@ -24,7 +24,7 @@ class LeadControllerTest extends WebTest
             'origin' => "validatemy.com",
             'external_reference' => '12',
             'product' => "form",
-            'date_event' => new \DateTime("2017-08-05 00:00:00"),
+            'date_event' => "2017-08-05 00:00:00",
         ];
         $url = $this->generateUrl(
             'starkerxp_lead.lead.post',
@@ -35,8 +35,8 @@ class LeadControllerTest extends WebTest
         $response = $client->getResponse();
         $this->assertEquals(201, $response->getStatusCode());
         $manager = $this->getContainer()->get('starkerxp_lead.manager.lead');
-        $LeadActions = $manager->findAll();
-        $this->assertCount(1, $LeadActions);
+        $leads = $manager->findAll();
+        $this->assertCount(1, $leads);
     }
 
     /**
@@ -80,9 +80,10 @@ class LeadControllerTest extends WebTest
         $manager = $this->getContainer()->get('starkerxp_lead.manager.lead');
         $listeLeads = $manager->getRepository()->findAll();
         $this->assertCount(1, $listeLeads);
-        $LeadActionDepart = $manager->toArray($listeLeads[0], [/*'nom'*/]);// Exemple
+        $leadDepart = $manager->toArray($listeLeads[0], ['product', 'date_event']);
         $data = [
-            //'nom'     => "Mon nom", //exemple
+            'product' => "form2",
+            'date_event' => "2017-08-05 12:00:00",
         ];
         $url = $this->generateUrl(
             'starkerxp_lead.lead.put',
@@ -95,11 +96,11 @@ class LeadControllerTest extends WebTest
         $response = $client->getResponse();
         $this->assertEquals(204, $response->getStatusCode());
         $manager->clear();
-        $LeadActions = $manager->findAll();
-        $this->assertCount(1, $LeadActions);
-        $LeadActionFinal = $manager->toArray($LeadActions[0], [/*'nom'*/]);// Exemple
-        $this->assertNotEquals($LeadActionDepart, $LeadActionFinal);
-        $this->assertEquals($data, $LeadActionFinal);
+        $leads = $manager->findAll();
+        $this->assertCount(1, $leads);
+        $leadFinal = $manager->toArray($leads[0], ['product', 'date_event']);
+        $this->assertNotEquals($leadDepart, $leadFinal);
+        $this->assertEquals($data, $leadFinal);
     }
 
     /**
@@ -124,8 +125,11 @@ class LeadControllerTest extends WebTest
                 "lead_id" => $listeLeads[0]->getId(),
             ]
         );
+        $data = [
+            "external_reference" => null,
+        ];
         $client = $this->getAuthClient();
-        $client->request('PUT', $url, []);
+        $client->request('PUT', $url, $data);
         $response = $client->getResponse();
         $this->assertEquals(400, $response->getStatusCode());
         $body = json_decode($response->getContent(), true)['payload'];
