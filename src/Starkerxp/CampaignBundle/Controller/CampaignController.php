@@ -102,6 +102,7 @@ class CampaignController extends StructureController
         $manager = $this->get("starkerxp_campaign.manager.campaign");
         try {
             $options = $this->resolveParams()->resolve($request->query->all());
+            /** @var Campaign $entite */
             if (!$entite = $manager->findOneBy(['id' => $request->get('campaign_id')])) {
                 return new JsonResponse(["payload" => $this->translate("entity.not_found", "campaign")], 404);
             }

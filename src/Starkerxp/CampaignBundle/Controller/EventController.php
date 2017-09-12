@@ -4,8 +4,10 @@ namespace Starkerxp\CampaignBundle\Controller;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Starkerxp\CampaignBundle\Entity\Event;
+use Starkerxp\CampaignBundle\Events;
 use Starkerxp\CampaignBundle\Form\Type\EventType;
 use Starkerxp\StructureBundle\Controller\StructureController;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -110,14 +112,14 @@ class EventController extends StructureController
         $manager = $this->get("starkerxp_campaign.manager.event");
         try {
             $options = $this->resolveParams()->resolve($request->query->all());
-            $event = $manager->findOneBy(['id' => $request->get('id')]);
+            /** @var Event $entite */
+            if (!$entite = $manager->findOneBy(['id' => $request->get('event_id')])) {
+                return new JsonResponse(["payload" => $this->translate("entity.not_found", "event")], 404);
+            }
         } catch (\Exception $e) {
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
-        if (!$event instanceof Event) {
-            return new JsonResponse(["payload" => $this->translate("entity.not_found", "event")], 404);
-        }
-        $retour = $manager->toArray($event, $this->getFields($options['fields']));
+        $retour = $manager->toArray($entite, $this->getFields($options['fields']));
 
         return new JsonResponse($retour);
     }
@@ -139,8 +141,8 @@ class EventController extends StructureController
             $form->submit($this->getRequestData($request));
             if ($form->isValid()) {
                 $event = $form->getData();
-                $event->setUuid($this->getUuid());
                 $manager->insert($event);
+                $this->dispatch(Events::EVENT_CREATED, new GenericEvent($event));
 
                 return new JsonResponse(["payload" => $this->translate("entity.created", "event")], 201);
             }
@@ -178,17 +180,17 @@ class EventController extends StructureController
     public function putAction(Request $request)
     {
         $manager = $this->get("starkerxp_campaign.manager.event");
-        $event = $manager->find($request->get('id'));
-        if (!$event instanceof Event) {
+        if (!$entite = $manager->findOneBy(['id' => $request->get('event_id')])) {
             return new JsonResponse(["payload" => $this->translate("entity.not_found", "event")], 404);
         }
         $manager->beginTransaction();
         try {
-            $form = $this->createForm(EventType::class, $event, ['method' => 'PUT']);
+            $form = $this->createForm(EventType::class, $entite, ['method' => 'PUT']);
             $form->submit($this->getRequestData($request), false);
             if ($form->isValid()) {
-                $event = $form->getData();
-                $manager->update($event);
+                $entite = $form->getData();
+                $manager->update($entite);
+                $this->dispatch(Events::EVENT_UPDATED, new GenericEvent($entite));
 
                 return new JsonResponse(["payload" => $this->translate("entity.updated", "event")], 204);
             }
@@ -226,17 +228,18 @@ class EventController extends StructureController
     public function deleteAction(Request $request)
     {
         $manager = $this->get("starkerxp_campaign.manager.event");
-        $event = $manager->find($request->get('id'));
-        if (!$event instanceof Event) {
+        if (!$entite = $manager->findOneBy(['id' => $request->get('event_id')])) {
             return new JsonResponse(["payload" => $this->translate("entity.not_found", "event")], 404);
         }
+
         try {
-            $manager->delete($event);
+            $manager->delete($entite);
         } catch (\Exception $e) {
             $manager->rollback();
 
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
+        $this->dispatch(Events::EVENT_DELETED, new GenericEvent($request->get('event_id')));
 
         return new JsonResponse(["payload" => $this->translate("entity.deleted", "event")], 204);
     }

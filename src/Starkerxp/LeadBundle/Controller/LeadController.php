@@ -138,7 +138,7 @@ class LeadController extends StructureController
             if ($form->isValid()) {
                 $lead = $form->getData();
                 $manager->insert($lead);
-                $this->dispatch(Events::LEAD_CREATED, new GenericEvent($entite));
+                $this->dispatch(Events::LEAD_CREATED, new GenericEvent($lead));
 
                 return new JsonResponse(["payload" => $this->translate("entity.created", "lead")], 201);
             }
