@@ -3,7 +3,7 @@
 namespace Starkerxp\LeadBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Starkerxp\StructureBundle\Entity\UserArchiveEntity;
+use Starkerxp\StructureBundle\Entity\AbstractUser;
 
 /**
  * Lead
@@ -12,13 +12,17 @@ use Starkerxp\StructureBundle\Entity\UserArchiveEntity;
  *  @ORM\Index(columns={"origin", "external_reference"}),
  *  @ORM\Index(columns={"external_reference"}),
  *  @ORM\Index(columns={"uuid"}),
+ *  @ORM\Index(columns={"product"}),
+ *  @ORM\Index(columns={"date_event"}),
  *  @ORM\Index(columns={"created_at"}),
  *  @ORM\Index(columns={"updated_at"})
  * })
  * @ORM\Entity(repositoryClass="Starkerxp\LeadBundle\Repository\LeadRepository")
  */
-class Lead extends UserArchiveEntity
+class Lead extends AbstractUser
 {
+    use \Starkerxp\StructureBundle\Entity\ArchiveTrait;
+
     /**
      * @var string
      *
@@ -29,7 +33,7 @@ class Lead extends UserArchiveEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="external_reference", type="string", length=255, nullable=false)
+     * @ORM\Column(name="external_reference", type="string", length=255, nullable=true)
      */
     protected $externalReference;
 
@@ -216,7 +220,7 @@ class Lead extends UserArchiveEntity
      *
      * @return boolean
      */
-    public function getPixel()
+    public function isPixel()
     {
         return $this->pixel;
     }
@@ -240,7 +244,7 @@ class Lead extends UserArchiveEntity
      *
      * @return boolean
      */
-    public function getArchive()
+    public function isArchive()
     {
         return $this->archive;
     }

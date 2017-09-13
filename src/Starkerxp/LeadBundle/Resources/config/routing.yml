@@ -26,3 +26,9 @@ starkerxp_lead.lead.put:
         - PUT
     requirements:
         lead_id: \d+
+starkerxp_lead.lead.put_without_id:
+    path: '/leads'
+    defaults:
+        _controller: 'StarkerxpLeadBundle:Lead:putWithoutId'
+    methods:
+        - PUT

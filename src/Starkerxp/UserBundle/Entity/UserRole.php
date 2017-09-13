@@ -3,7 +3,7 @@
 namespace Starkerxp\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Starkerxp\StructureBundle\Entity\Entity;
+use Starkerxp\StructureBundle\Entity\TimestampInterface;
 
 /**
  * RoleUser
@@ -14,8 +14,10 @@ use Starkerxp\StructureBundle\Entity\Entity;
  * })
  * @ORM\Entity()
  */
-class UserRole extends Entity
+class UserRole implements TimestampInterface
 {
+    use \Starkerxp\StructureBundle\Entity\IdTrait;
+    use \Starkerxp\StructureBundle\Entity\TimestampTrait;
 
     /**
      * @var array

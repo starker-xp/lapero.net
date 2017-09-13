@@ -3,13 +3,13 @@
 namespace Starkerxp\CampaignBundle\Manager;
 
 use Starkerxp\CampaignBundle\Entity\Template;
-use Starkerxp\StructureBundle\Entity\Entity;
+use Starkerxp\StructureBundle\Entity\AbstractEntity;
 use Starkerxp\StructureBundle\Manager\AbstractManager;
 
 class TemplateManager extends AbstractManager
 {
 
-    public function getSupport(Entity $object)
+    public function getSupport(AbstractEntity $object)
     {
         return is_object($object) && $object instanceof Template;
     }

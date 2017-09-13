@@ -192,4 +192,29 @@ class LeadController extends StructureController
 
         return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
     }
+
+    /**
+     * @ApiDoc(
+     *      resource=true,
+     *      description="Edit lead.",
+     *      section="Lead",
+     *      views = { "default" }
+     * )
+     */
+    public function putWithoutIdAction(Request $request)
+    {
+        $data = $this->getRequestData($request);
+        $manager = $this->get("starkerxp_lead.manager.lead");
+        if (!$entite = $manager->findOneBy(['origin' => $data['origin'], 'externalReference' => $data['external_reference']])) {
+            return new JsonResponse(["payload" => $this->translate("entity.not_found", "lead")], 404);
+        }
+        $response = $this->forward(
+            'StarkerxpLeadBundle:Lead:put',
+            [
+                'lead_id' => $entite->getId(),
+            ]
+        );
+
+        return $response;
+    }
 }

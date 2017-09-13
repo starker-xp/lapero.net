@@ -23,10 +23,10 @@ class CreateUserCommand extends LockCommand
 
     protected function configure()
     {
-        $this->setName('starkerxp:user:creer')
-            ->addArgument('login', InputArgument::REQUIRED, "L'identifiant.")
-            ->addArgument('password', InputArgument::REQUIRED, "Le mot de passe.")
-            ->setDescription("Ajoute un nouvel user à la base de données");
+        $this->setName('starkerxp:user:create')
+            ->addArgument('login', InputArgument::REQUIRED, "Login")
+            ->addArgument('password', InputArgument::REQUIRED, "Password")
+            ->setDescription("Add administrator to database.");
     }
 
 }

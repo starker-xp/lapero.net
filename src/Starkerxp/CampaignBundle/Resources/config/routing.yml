@@ -79,14 +79,14 @@ starkerxp_campaign.event.cget:
     requirements:
         campaign_id: \d+
 starkerxp_campaign.event.get:
-    path: '/campaigns/{campaign_id}/events/{id}'
+    path: '/campaigns/{campaign_id}/events/{event_id}'
     defaults:
         _controller: 'StarkerxpCampaignBundle:Event:get'
     methods:
         - GET
     requirements:
         campaign_id: \d+
-        id: \d+
+        event_id: \d+
 starkerxp_campaign.event.post:
     path: '/campaigns/{campaign_id}/events'
     defaults:
@@ -96,20 +96,20 @@ starkerxp_campaign.event.post:
     requirements:
         campaign_id: \d+
 starkerxp_campaign.event.put:
-    path: '/campaigns/{campaign_id}/events/{id}'
+    path: '/campaigns/{campaign_id}/events/{event_id}'
     defaults:
         _controller: 'StarkerxpCampaignBundle:Event:put'
     methods:
         - PUT
     requirements:
         campaign_id: \d+
-        id: \d+
+        event_id: \d+
 starkerxp_campaign.event.delete:
-    path: '/campaigns/{campaign_id}/events/{id}'
+    path: '/campaigns/{campaign_id}/events/{event_id}'
     defaults:
         _controller: 'StarkerxpCampaignBundle:Event:delete'
     methods:
         - DELETE
     requirements:
         campaign_id: \d+
-        id: \d+
+        event_id: \d+

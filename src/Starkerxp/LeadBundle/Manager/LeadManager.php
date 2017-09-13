@@ -3,23 +3,23 @@
 namespace Starkerxp\LeadBundle\Manager;
 
 use Starkerxp\LeadBundle\Entity\Lead;
-use Starkerxp\StructureBundle\Entity\Entity;
+use Starkerxp\StructureBundle\Entity\AbstractEntity;
 use Starkerxp\StructureBundle\Manager\AbstractManager;
 use Starkerxp\StructureBundle\Manager\Exception\DeleteObjectNotAllowedException;
 
 class LeadManager extends AbstractManager
 {
 
-    public function getSupport(Entity $object)
+    public function getSupport(AbstractEntity $object)
     {
         return $object instanceof Lead;
     }
 
     /**
-     * @param Entity $object
+     * @param AbstractEntity $object
      * @throws DeleteObjectNotAllowedException
      */
-    public function delete(Entity $object)
+    public function delete(AbstractEntity $object)
     {
         throw new DeleteObjectNotAllowedException();
     }
@@ -32,7 +32,7 @@ class LeadManager extends AbstractManager
             "origin" => $object->getOrigin(),
             "product" => $object->getProduct(),
             "external_reference" => $object->getExternalReference(),
-            "pixel" => $object->getPixel(),
+            "pixel" => $object->isPixel(),
             "ip_address" => $object->getIpAddress(),
             "serialisation" => $object->getSerialisation(),
         ];

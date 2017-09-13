@@ -18,6 +18,7 @@ class LeadControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
             ]
         );
         $data = [
@@ -49,6 +50,7 @@ class LeadControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
             ]
         );
         $url = $this->generateUrl(
@@ -74,6 +76,7 @@ class LeadControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpLeadBundle/Tests/DataFixtures/LeadManager/DefaultLead.yml',
             ]
         );
@@ -113,6 +116,7 @@ class LeadControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpLeadBundle/Tests/DataFixtures/LeadManager/DefaultLead.yml',
             ]
         );
@@ -147,6 +151,7 @@ class LeadControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
             ]
         );
         $data = [
@@ -177,6 +182,7 @@ class LeadControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpLeadBundle/Tests/DataFixtures/LeadManager/LeadManager.yml',
             ]
         );
@@ -207,6 +213,7 @@ class LeadControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
             ]
         );
         $url = $this->generateUrl(
@@ -233,6 +240,7 @@ class LeadControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
             ]
         );
         $url = $this->generateUrl(
@@ -257,6 +265,7 @@ class LeadControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpLeadBundle/Tests/DataFixtures/LeadManager/LeadManager.yml',
             ]
         );
@@ -289,6 +298,7 @@ class LeadControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
             ]
         );
         $url = $this->generateUrl(
@@ -315,6 +325,7 @@ class LeadControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
             ]
         );
         $url = $this->generateUrl(

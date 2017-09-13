@@ -14,7 +14,11 @@ class CampaignControllerTest extends WebTest
      */
     public function testPostValide()
     {
-        $this->loadFixtureFiles(['@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+            ]
+        );
         $data = [
             'name' => "Ma première campaign",
         ];
@@ -37,7 +41,12 @@ class CampaignControllerTest extends WebTest
      */
     public function testPostInvalide()
     {
-        $this->loadFixtureFiles(['@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',]);
+        $this->loadFixtureFiles(
+            [
+                '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
+            ]
+        );
         $client = $this->getAuthClient();
         $client->request('POST', '/api/campaigns', []);
         $response = $client->getResponse();
@@ -55,6 +64,7 @@ class CampaignControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/CampaignManager/DefaultCampaign.yml',
             ]
         );
@@ -94,11 +104,14 @@ class CampaignControllerTest extends WebTest
         $listeCampaigns = $manager->getRepository()->findAll();
         $this->assertCount(1, $listeCampaigns);
         $client = $this->getAuthClient();
-        $client->request('PUT', '/api/campaigns/'.$listeCampaigns[0]->getId(), []);
+        $data = [
+            'name' => "M",
+        ];
+        $client->request('PUT', '/api/campaigns/'.$listeCampaigns[0]->getId(), $data);
         $response = $client->getResponse();
         $this->assertEquals(400, $response->getStatusCode());
         $body = json_decode($response->getContent(), true)['payload'];
-        //$this->assertArrayHasKey("nom", $body); // Exemple
+        $this->assertArrayHasKey("name", $body);
 
     }
 
@@ -112,6 +125,7 @@ class CampaignControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
             ]
         );
         $data = [
@@ -136,6 +150,7 @@ class CampaignControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/CampaignManager/CampaignManager.yml',
             ]
         );
@@ -160,6 +175,7 @@ class CampaignControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
             ]
         );
         $client = $this->getAuthClient();
@@ -180,6 +196,7 @@ class CampaignControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
             ]
         );
         $client = $this->getAuthClient();
@@ -198,6 +215,7 @@ class CampaignControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/CampaignManager/CampaignManager.yml',
             ]
         );
@@ -225,6 +243,7 @@ class CampaignControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
             ]
         );
         $client = $this->getAuthClient();
@@ -245,6 +264,7 @@ class CampaignControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
             ]
         );
         $client = $this->getAuthClient();
@@ -263,6 +283,7 @@ class CampaignControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/CampaignManager/DefaultCampaign.yml',
             ]
         );
@@ -288,6 +309,7 @@ class CampaignControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
             ]
         );
         $client = $this->getAuthClient();

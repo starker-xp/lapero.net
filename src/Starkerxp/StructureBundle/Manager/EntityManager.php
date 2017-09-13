@@ -3,7 +3,7 @@
 namespace Starkerxp\StructureBundle\Manager;
 
 use Doctrine\ORM\EntityRepository;
-use Starkerxp\StructureBundle\Entity\Entity;
+use Starkerxp\StructureBundle\Entity\AbstractEntity;
 
 class EntityManager implements ManagerInterface
 {
@@ -15,7 +15,7 @@ class EntityManager implements ManagerInterface
     /**
      * @return mixed
      */
-    public function insert(Entity $object)
+    public function insert(AbstractEntity $object)
     {
         if ($managerService = $this->getSupport($object)) {
             $managerService->insert($object);
@@ -27,11 +27,11 @@ class EntityManager implements ManagerInterface
     }
 
     /**
-     * @param Entity $object
+     * @param AbstractEntity $object
      *
      * @return bool|ManagerInterface
      */
-    public function getSupport(Entity $object)
+    public function getSupport(AbstractEntity $object)
     {
         foreach ($this->arrayService as $service) {
             if ($service instanceof ManagerInterface && $service->getSupport($object)) {
@@ -42,7 +42,7 @@ class EntityManager implements ManagerInterface
         return false;
     }
 
-    public function update(Entity $object)
+    public function update(AbstractEntity $object)
     {
         if ($managerService = $this->getSupport($object)) {
             $managerService->update($object);
@@ -53,7 +53,7 @@ class EntityManager implements ManagerInterface
         return false;
     }
 
-    public function delete(Entity $object)
+    public function delete(AbstractEntity $object)
     {
         if ($managerService = $this->getSupport($object)) {
             $managerService->delete($object);
@@ -85,11 +85,11 @@ class EntityManager implements ManagerInterface
     }
 
     /**
-     * @param Entity $object
+     * @param AbstractEntity $object
      *
      * @return bool|EntityRepository
      */
-    public function getRepository(Entity $object)
+    public function getRepository(AbstractEntity $object)
     {
         if (!$manager = $this->getManager($object)) {
             return false;
@@ -99,11 +99,11 @@ class EntityManager implements ManagerInterface
     }
 
     /**
-     * @param Entity $object
+     * @param AbstractEntity $object
      *
      * @return bool|AbstractManager
      */
-    public function getManager(Entity $object)
+    public function getManager(AbstractEntity $object)
     {
         $managerService = $this->getSupport($object);
 

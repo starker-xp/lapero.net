@@ -3,7 +3,7 @@
 namespace Starkerxp\UserBundle\Manager;
 
 use Doctrine\ORM\EntityManager;
-use Starkerxp\StructureBundle\Entity\Entity;
+use Starkerxp\StructureBundle\Entity\AbstractEntity;
 use Starkerxp\StructureBundle\Manager\AbstractManager;
 use Starkerxp\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
@@ -21,7 +21,7 @@ class UserManager extends AbstractManager
         $this->serviceEncoder = $serviceEncoder;
     }
 
-    public function getSupport(Entity $object)
+    public function getSupport(AbstractEntity $object)
     {
         return $object instanceof User;
     }

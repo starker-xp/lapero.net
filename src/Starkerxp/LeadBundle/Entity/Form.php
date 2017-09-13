@@ -3,19 +3,20 @@
 namespace Starkerxp\LeadBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Starkerxp\StructureBundle\Entity\UserEntity;
+use Starkerxp\StructureBundle\Entity\AbstractUser;
 
 /**
  * Lead
  *
  * @ORM\Table(name="form", indexes={
  *  @ORM\Index(columns={"name"}),
+ *  @ORM\Index(columns={"uuid"}),
  *  @ORM\Index(columns={"created_at"}),
  *  @ORM\Index(columns={"updated_at"})
  * })
  * @ORM\Entity(repositoryClass="Starkerxp\LeadBundle\Repository\FormRepository")
  */
-class Form extends UserEntity
+class Form extends AbstractUser
 {
     /**
      * @var string

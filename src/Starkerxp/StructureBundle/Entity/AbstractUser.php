@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\MappedSuperclass
  */
-abstract class UserEntity extends Entity
+abstract class AbstractUser extends AbstractEntity
 {
 
     /**

@@ -174,10 +174,10 @@ class {{ nomController }}Controller extends StructureController
         $manager->beginTransaction();
         try {
             $form = $this->createForm({{ nomController }}Type::class, $entite, ['method' => 'PUT']);
-            $form->submit($this->getRequestData($request));
+            $form->submit($this->getRequestData($request), false);
             if ($form->isValid()) {
                 $entite = $form->getData();
-                $manager->update(${{ nomController|lower }});
+                $manager->update($entite);
 				$this->dispatch(Events::{{ nomController|upper }}_UPDATED, new GenericEvent($entite));
                 return new JsonResponse(["payload" => $this->translate("entity.updated", "{{ nomController|lower }}")], 204);
             }

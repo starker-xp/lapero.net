@@ -5,7 +5,7 @@ namespace Starkerxp\StructureBundle\Manager;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Starkerxp\StructureBundle\Entity\Entity;
+use Starkerxp\StructureBundle\Entity\AbstractEntity;
 use Starkerxp\StructureBundle\Manager\Exception\ObjectClassNotAllowedException;
 
 abstract class AbstractManager implements ManagerInterface
@@ -29,13 +29,13 @@ abstract class AbstractManager implements ManagerInterface
     }
 
     /**
-     * @param Entity $object
+     * @param AbstractEntity $object
      *
-     * @return Entity|boolean
+     * @return AbstractEntity|boolean
      *
      * @throws ObjectClassNotAllowedException
      */
-    public function insert(Entity $object)
+    public function insert(AbstractEntity $object)
     {
         if (!$this->getSupport($object)) {
             throw new ObjectClassNotAllowedException();
@@ -62,13 +62,13 @@ abstract class AbstractManager implements ManagerInterface
     }
 
     /**
-     * @param Entity $object
+     * @param AbstractEntity $object
      *
-     * @return Entity|boolean
+     * @return AbstractEntity|boolean
      *
      * @throws ObjectClassNotAllowedException
      */
-    public function update(Entity $object)
+    public function update(AbstractEntity $object)
     {
         if (!$this->getSupport($object)) {
             throw new ObjectClassNotAllowedException();
@@ -86,7 +86,7 @@ abstract class AbstractManager implements ManagerInterface
      * @param Entity $object
      * @throws ObjectClassNotAllowedException
      */
-    public function delete(Entity $object)
+    public function delete(AbstractEntity $object)
     {
         if (!$this->getSupport($object)) {
             throw new ObjectClassNotAllowedException();

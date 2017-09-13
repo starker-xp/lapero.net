@@ -2,16 +2,16 @@
 
 namespace Starkerxp\StructureBundle\Manager;
 
-use Starkerxp\StructureBundle\Entity\Entity;
+use Starkerxp\StructureBundle\Entity\AbstractEntity;
 
 interface ManagerInterface
 {
-    public function insert(Entity $object);
+    public function insert(AbstractEntity $object);
 
-    public function update(Entity $object);
+    public function update(AbstractEntity $object);
 
-    public function delete(Entity $object);
+    public function delete(AbstractEntity $object);
 
-    public function getSupport(Entity $object);
+    public function getSupport(AbstractEntity $object);
 
 }

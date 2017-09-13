@@ -3,12 +3,13 @@
 namespace Starkerxp\CampaignBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Starkerxp\StructureBundle\Entity\UserEntity;
+use Starkerxp\StructureBundle\Entity\AbstractUser;
 
 /**
  * Campaign.
  *
  * @ORM\Table(name="campaign", indexes={
+ *  @ORM\Index(columns={"uuid"}),
  *  @ORM\Index(columns={"created_at"}),
  *  @ORM\Index(columns={"updated_at"}),
  *  @ORM\Index(columns={"name"}),
@@ -17,7 +18,7 @@ use Starkerxp\StructureBundle\Entity\UserEntity;
  * })
  * @ORM\Entity(repositoryClass="Starkerxp\CampaignBundle\Repository\CampaignRepository")
  */
-class Campaign extends UserEntity
+class Campaign extends AbstractUser
 {
     const DRAFT = 'draft';
     const PENDING = 'pending';

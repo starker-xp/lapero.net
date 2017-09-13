@@ -6,7 +6,9 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Starkerxp\StructureBundle\Controller\StructureController;
 use Starkerxp\UserBundle\Entity\User;
+use Starkerxp\UserBundle\Events;
 use Starkerxp\UserBundle\Form\Type\UserType;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -104,14 +106,14 @@ class UserController extends StructureController
         $manager = $this->get("starkerxp_user.manager.user");
         try {
             $options = $this->resolveParams()->resolve($request->query->all());
-            $user = $manager->findOneBy(['id' => $request->get('user_id')]);
+            /** @var User $entite */
+            if (!$entite = $manager->findOneBy(['id' => $request->get('user_id')])) {
+                return new JsonResponse(["payload" => $this->translate("entity.not_found", "user")], 404);
+            }
         } catch (\Exception $e) {
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
-        if (!$user instanceof User) {
-            return new JsonResponse(["payload" => $this->translate("user.entity.not_found", "user")], 404);
-        }
-        $retour = $manager->toArray($user, $this->getFields($options['fields']));
+        $retour = $manager->toArray($entite, $this->getFields($options['fields']));
 
         return new JsonResponse($retour);
     }
@@ -146,10 +148,10 @@ class UserController extends StructureController
             $form->submit($this->getRequestData($request));
             if ($form->isValid()) {
                 $user = $form->getData();
-                $user->setUuid($this->getUuid());
                 $manager->insert($user);
+                $this->dispatch(Events::USER_CREATED, new GenericEvent($user));
 
-                return new JsonResponse(["payload" => $this->translate("user.entity.created", "user")], 201);
+                return new JsonResponse(["payload" => $this->translate("entity.created", "user")], 201);
             }
         } catch (\Exception $e) {
             $manager->rollback();
@@ -178,33 +180,34 @@ class UserController extends StructureController
      */
     public function putAction(Request $request)
     {
-        $manager = $this->get("starkerxp_user.manager.user");
-        $user = $manager->find($request->get('user_id'));
-        if (!$user instanceof User) {
-            return new JsonResponse(["payload" => $this->translate("user.entity.not_found", "user")], 404);
+        $manager = $this->get("starkerxp_user.manager.company");
+        if (!$entite = $manager->findOneBy(['id' => $request->get('user_id')])) {
+            return new JsonResponse(["payload" => $this->translate("entity.not_found", "user")], 404);
         }
         // Un user ne peut modifier un autre user sauf si ce dernier est un super admin.
-        if ($this->getUser()->getId() != $user->getId() && !$this->isGranted("ROLE_SUPER_ADMIN")) {
-            return new JsonResponse(["payload" => $this->translate("user.entity.not_updated_is_not_admin", "user")], 400);
+        if ($this->getUser()->getId() != $entite->getId() && !$this->isGranted("ROLE_SUPER_ADMIN")) {
+            return new JsonResponse(["payload" => $this->translate("entity.not_updated_is_not_admin", "user")], 400);
         }
+
         $manager->beginTransaction();
         try {
-            $form = $this->createForm(UserType::class, $user, ['method' => 'PUT']);
-            $form->submit($this->getRequestData($request));
+            $form = $this->createForm(UserType::class, $entite, ['method' => 'PUT']);
+            $form->submit($this->getRequestData($request), false);
             if ($form->isValid()) {
-                $user = $form->getData();
-                $manager->update($user);
-
-                return new JsonResponse(["payload" => $this->translate("user.entity.updated", "user")], 204);
+                $entite = $form->getData();
+                $manager->update($entite);
+                $this->dispatch(Events::USER_UPDATED, new GenericEvent($entite));
+                return new JsonResponse(["payload" => $this->translate("entity.updated", "user")], 204);
             }
         } catch (\Exception $e) {
             $manager->rollback();
-
             return new JsonResponse(["payload" => $e->getMessage()], 400);
         }
-
         return new JsonResponse(["payload" => $this->getFormErrors($form)], 400);
     }
+
+
+
 
     /**
      * @ApiDoc(
@@ -226,12 +229,19 @@ class UserController extends StructureController
     public function deleteAction(Request $request)
     {
         $manager = $this->get("starkerxp_user.manager.user");
-        $user = $manager->find($request->get('user_id'));
-        if (!$user instanceof User) {
-            return new JsonResponse(["payload" => $this->translate("user.entity.not_found", "user")], 404);
+        if (!$entite = $manager->findOneBy(['id' => $request->get('user_id')])) {
+            return new JsonResponse(["payload" => $this->translate("entity.not_found", "user")], 404);
         }
+        try {
+            $manager->delete($entite);
+        } catch (\Exception $e) {
+            $manager->rollback();
 
-        return new JsonResponse(["payload" => $this->translate("user.entity.deleted", "user")], 204);
+            return new JsonResponse(["payload" => $e->getMessage()], 400);
+        }
+        $this->dispatch(Events::COMPANY_DELETED, new GenericEvent($request->get('user_id')));
+
+        return new JsonResponse(["payload" => $this->translate("entity.deleted", "user")], 204);
     }
 
 }

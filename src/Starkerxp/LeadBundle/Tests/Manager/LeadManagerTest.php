@@ -27,6 +27,7 @@ class LeadManagerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpLeadBundle/Tests/DataFixtures/LeadManager/LeadManager.yml',
             ]
         );
@@ -42,6 +43,7 @@ class LeadManagerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpLeadBundle/Tests/DataFixtures/LeadManager/DefaultLead.yml',
             ]
         );
@@ -62,6 +64,7 @@ class LeadManagerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpLeadBundle/Tests/DataFixtures/LeadManager/DefaultLead.yml',
             ]
         );

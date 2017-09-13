@@ -5,7 +5,7 @@ namespace Starkerxp\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\User\JWTUserInterface;
 use Ramsey\Uuid\Uuid;
-use Starkerxp\StructureBundle\Entity\Entity;
+use Starkerxp\StructureBundle\Entity\AbstractEntity;
 use Starkerxp\StructureBundle\Entity\UserInterface;
 
 /**
@@ -17,7 +17,7 @@ use Starkerxp\StructureBundle\Entity\UserInterface;
  * })
  * @ORM\Entity(repositoryClass="Starkerxp\UserBundle\Repository\UserRepository")
  */
-class User extends Entity implements JWTUserInterface, UserInterface
+class User extends AbstractEntity implements JWTUserInterface, UserInterface
 {
 
     /**

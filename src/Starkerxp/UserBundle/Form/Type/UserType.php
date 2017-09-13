@@ -10,6 +10,7 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        //@todo Gestion des rôles en fonctions de mon rôle actuel.
         /*
 		// A titre d'exemple.
 		$builder

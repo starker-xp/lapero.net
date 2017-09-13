@@ -62,8 +62,7 @@ class LeadType extends AbstractType
                     ],
                 ]
             )
-            ->add('pixel', Type\IntegerType::class);
-
+            ->add('pixel', Type\TextType::class);
     }
 
 }

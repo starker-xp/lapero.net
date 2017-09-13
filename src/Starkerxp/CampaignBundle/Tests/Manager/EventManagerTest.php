@@ -27,6 +27,7 @@ class EventManagerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/CampaignManager/DefaultCampaign.yml',
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/TemplateManager.yml',
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/EventManager/EventManager.yml',
@@ -44,6 +45,7 @@ class EventManagerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/CampaignManager/CampaignManager.yml',
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/TemplateManager.yml',
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/EventManager/DefaultEvent.yml',
@@ -67,6 +69,7 @@ class EventManagerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/CampaignManager/DefaultCampaign.yml',
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/TemplateManager.yml',
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/EventManager/DefaultEvent.yml',

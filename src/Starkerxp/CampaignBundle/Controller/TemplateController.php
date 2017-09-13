@@ -136,7 +136,6 @@ class TemplateController extends StructureController
             $form->submit($this->getRequestData($request));
             if ($form->isValid()) {
                 $template = $form->getData();
-                $template->setUuid($this->getUuid());
                 $manager->insert($template);
                 $this->dispatch(Events::TEMPLATE_CREATED, new GenericEvent($entite));
 

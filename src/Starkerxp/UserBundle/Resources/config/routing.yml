@@ -1,13 +1,13 @@
 starkerxp_user.user.cget:
     path: /users
     defaults:
-        _controller: "StarkerxpUserBundle:User:cget"
+        _controller: 'StarkerxpUserBundle:User:cget'
     methods:
         - GET
 starkerxp_user.user.get:
     path: '/users/{user_id}'
     defaults:
-        _controller: "StarkerxpUserBundle:User:get"
+        _controller: 'StarkerxpUserBundle:User:get'
     methods:
         - GET
     requirements:
@@ -15,13 +15,13 @@ starkerxp_user.user.get:
 starkerxp_user.user.post:
     path: /users
     defaults:
-        _controller: "StarkerxpUserBundle:User:post"
+        _controller: 'StarkerxpUserBundle:User:post'
     methods:
         - POST
 starkerxp_user.user.put:
     path: '/users/{user_id}'
     defaults:
-        _controller: "StarkerxpUserBundle:User:put"
+        _controller: 'StarkerxpUserBundle:User:put'
     methods:
         - PUT
     requirements:
@@ -29,7 +29,7 @@ starkerxp_user.user.put:
 starkerxp_user.user.delete:
     path: '/users/{user_id}'
     defaults:
-        _controller: "StarkerxpUserBundle:User:delete"
+        _controller: 'StarkerxpUserBundle:User:delete'
     methods:
         - DELETE
     requirements:

@@ -27,6 +27,7 @@ class CampaignTargetManagerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/CampaignManager/CampaignManager.yml',
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/CampaignTargetManager/CampaignTargetManager.yml',
             ]
@@ -43,6 +44,7 @@ class CampaignTargetManagerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/CampaignManager/CampaignManager.yml',
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/CampaignTargetManager/DefaultCampaignTarget.yml',
             ]
@@ -63,6 +65,7 @@ class CampaignTargetManagerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/CampaignManager/CampaignManager.yml',
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/CampaignTargetManager/DefaultCampaignTarget.yml',
             ]

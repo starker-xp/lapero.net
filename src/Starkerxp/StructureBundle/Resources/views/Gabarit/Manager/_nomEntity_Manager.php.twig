@@ -3,12 +3,12 @@
 namespace {{ namespaceEntity }}\Manager;
 
 use {{ namespaceEntity }}\Entity\{{ nomEntity }};
-use Starkerxp\StructureBundle\Entity\Entity;
+use Starkerxp\StructureBundle\Entity\AbstractEntity;
 use Starkerxp\StructureBundle\Manager\AbstractManager;
 
 class {{ nomEntity }}Manager extends AbstractManager
 {
-	
+
 	public function getSupport(Entity $object)
     {
         return $object instanceof {{ nomEntity }};

@@ -3,18 +3,19 @@
 namespace Starkerxp\CampaignBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Starkerxp\StructureBundle\Entity\UserEntity;
+use Starkerxp\StructureBundle\Entity\AbstractUser;
 
 /**
  * Event
  *
  * @ORM\Table(name="campaign_event", indexes={
+ *  @ORM\Index(columns={"uuid"}),
  *  @ORM\Index(columns={"created_at"}),
  *  @ORM\Index(columns={"updated_at"})
  * })
  * @ORM\Entity(repositoryClass="Starkerxp\CampaignBundle\Repository\EventRepository")
  */
-class Event extends UserEntity
+class Event extends AbstractUser
 {
 
     /**

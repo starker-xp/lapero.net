@@ -7,9 +7,9 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Ramsey\Uuid\Uuid;
-use Starkerxp\StructureBundle\Entity\Entity;
-use Starkerxp\StructureBundle\Entity\TimestampEntity;
-use Starkerxp\StructureBundle\Entity\UserEntity;
+use Starkerxp\StructureBundle\Entity\AbstractEntity;
+use Starkerxp\StructureBundle\Entity\TimestampInterface;
+use Starkerxp\StructureBundle\Entity\AbstractUser;
 use Starkerxp\StructureBundle\Events;
 use Starkerxp\StructureBundle\Manager\EntityReadOnlyInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -48,14 +48,14 @@ class EntitySubscriber implements EventSubscriber
     {
         $entity = $args->getEntity();
 
-        if ($entity instanceof TimestampEntity && empty($entity->getCreatedAt())) {
+        if (($entity instanceof TimestampInterface )&& empty($entity->getCreatedAt())) {
             $entity->setCreatedAt(new DateTime());
         }
-        if ($entity instanceof Entity && empty($entity->getUuid())) {
+        if ($entity instanceof AbstractEntity && empty($entity->getUuid())) {
             $uuid = Uuid::uuid4();
             $entity->setUuid($uuid);
         }
-        if (!$entity instanceof UserEntity) {
+        if (!$entity instanceof AbstractUser) {
             return false;
         }
         if (empty($entity->getUser()) && $user = $this->getUser()) {
@@ -84,14 +84,14 @@ class EntitySubscriber implements EventSubscriber
                 $this->eventDispatcher->dispatch(Events::ENTITY_READ_ONLY, new GenericEvent($entity));
                 continue;
             }
-            if ($entity instanceof TimestampEntity) {
+            if ($entity instanceof TimestampInterface) {
                 $entity->setUpdatedAt(new DateTime());
             }
-            if ($entity instanceof Entity && empty($entity->getUuid())) {
+            if ($entity instanceof AbstractEntity && empty($entity->getUuid())) {
                 $uuid = Uuid::uuid4();
                 $entity->setUuid($uuid);
             }
-            if (!$entity instanceof UserEntity) {
+            if (!$entity instanceof AbstractUser) {
                 continue;
             }
             if (empty($entity->getUser()) && $user = $this->getUser()) {

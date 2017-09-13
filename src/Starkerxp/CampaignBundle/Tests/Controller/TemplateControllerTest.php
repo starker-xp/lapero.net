@@ -61,6 +61,7 @@ class TemplateControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/DefaultTemplate.yml',
             ]
         );
@@ -103,14 +104,14 @@ class TemplateControllerTest extends WebTest
         $listeTemplates = $manager->getRepository()->findAll();
         $this->assertCount(1, $listeTemplates);
         $client = $this->getAuthClient();
-        $client->request('PUT', '/api/templates/'.$listeTemplates[0]->getId(), []);
+        $data = [
+            "type" => "test",
+        ];
+        $client->request('PUT', '/api/templates/'.$listeTemplates[0]->getId(), $data);
         $response = $client->getResponse();
         $this->assertEquals(400, $response->getStatusCode());
         $body = json_decode($response->getContent(), true)['payload'];
-        $this->assertArrayHasKey("name", $body);
-        $this->assertArrayHasKey("object", $body);
-        $this->assertArrayHasKey("message", $body);
-        $this->assertArrayNotHasKey("type", $body);
+        $this->assertArrayHasKey("type", $body);
     }
 
     /**
@@ -123,6 +124,7 @@ class TemplateControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
             ]
         );
         $data = [
@@ -150,6 +152,7 @@ class TemplateControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/TemplateManager.yml',
             ]
         );
@@ -178,6 +181,7 @@ class TemplateControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
             ]
         );
         $client = $this->getAuthClient();
@@ -198,6 +202,7 @@ class TemplateControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
             ]
         );
         $client = $this->getAuthClient();
@@ -216,6 +221,7 @@ class TemplateControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/TemplateManager.yml',
             ]
         );
@@ -245,6 +251,7 @@ class TemplateControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
             ]
         );
         $client = $this->getAuthClient();
@@ -265,6 +272,7 @@ class TemplateControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
             ]
         );
         $client = $this->getAuthClient();
@@ -283,6 +291,7 @@ class TemplateControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/DefaultTemplate.yml',
             ]
         );
@@ -308,6 +317,7 @@ class TemplateControllerTest extends WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
             ]
         );
         $client = $this->getAuthClient();

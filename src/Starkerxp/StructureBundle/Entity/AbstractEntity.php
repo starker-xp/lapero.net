@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\MappedSuperclass
  */
-abstract class Entity extends TimestampEntity
+abstract class AbstractEntity extends TimestampEntity
 {
 
     use \Starkerxp\StructureBundle\Entity\UuidTrait;

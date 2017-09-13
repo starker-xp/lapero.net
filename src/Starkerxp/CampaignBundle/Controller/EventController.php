@@ -137,8 +137,12 @@ class EventController extends StructureController
         $manager = $this->get("starkerxp_campaign.manager.event");
         try {
             $event = new Event();
+            if (!$campaign = $this->getEntityManager()->getRepository("StarkerxpCampaignBundle:Campaign")->find($request->get('campaign_id'))) {
+                return new JsonResponse(["payload" => $this->translate("entity.not_found", "campaign")], 404);
+            }
+            $event->setCampaign($campaign);
             $form = $this->createForm(EventType::class, $event, ['method' => 'POST']);
-            $form->submit($this->getRequestData($request));
+            $form->submit($this->getRequestData($request), false);
             if ($form->isValid()) {
                 $event = $form->getData();
                 $manager->insert($event);

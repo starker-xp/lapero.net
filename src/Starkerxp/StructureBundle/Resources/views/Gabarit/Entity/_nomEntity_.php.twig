@@ -3,18 +3,19 @@
 namespace {{ namespaceEntity }}\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Starkerxp\StructureBundle\Entity\UserEntity;
+use Starkerxp\StructureBundle\Entity\AbstractUser;
 
 /**
  * {{ nomEntity }}
  *
  * @ORM\Table(name="{{ nomEntity|lower }}", indexes={
+ *  @ORM\Index(columns={"uuid"}),
  *  @ORM\Index(columns={"created_at"}),
  *  @ORM\Index(columns={"updated_at"})
  * })
  * @ORM\Entity(repositoryClass="{{ namespaceEntity }}\Repository\{{ nomEntity }}Repository")
  */
-class {{ nomEntity }} extends UserEntity
+class {{ nomEntity }} extends AbstractUser
 {
 
 }

@@ -3,18 +3,19 @@
 namespace Starkerxp\CampaignBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Starkerxp\StructureBundle\Entity\UserEntity;
+use Starkerxp\StructureBundle\Entity\AbstractUser;
 
 /**
  * CampaignTarget
  *
  * @ORM\Table(name="campaign_target", indexes={
+ *  @ORM\Index(columns={"uuid"}),
  *  @ORM\Index(columns={"created_at"}),
  *  @ORM\Index(columns={"updated_at"})
  * })
  * @ORM\Entity(repositoryClass="Starkerxp\CampaignBundle\Repository\CampaignTargetRepository")
  */
-class CampaignTarget extends UserEntity
+class CampaignTarget extends AbstractUser
 {
     //@todo remplacer cible par une gestion avec de 'lead' et 'leadAction'
     /**
@@ -23,13 +24,6 @@ class CampaignTarget extends UserEntity
      * @ORM\Column(name="lead_id", type="integer", length=11, nullable=true)
      */
     protected $lead;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="lead_action_id", type="integer", length=11, nullable=true)
-     */
-    protected $leadAction;
 
     /**
      * @var Campaign

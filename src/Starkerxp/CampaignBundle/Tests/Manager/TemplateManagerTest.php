@@ -25,6 +25,7 @@ class TemplateManagerTest extends \Starkerxp\StructureBundle\Test\WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/TemplateManager.yml',
             ]
         );
@@ -40,6 +41,7 @@ class TemplateManagerTest extends \Starkerxp\StructureBundle\Test\WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/DefaultTemplate.yml',
             ]
         );
@@ -62,6 +64,7 @@ class TemplateManagerTest extends \Starkerxp\StructureBundle\Test\WebTest
         $this->loadFixtureFiles(
             [
                 '@StarkerxpUserBundle/Tests/DataFixtures/UserManager/DefaultUser.yml',
+
                 '@StarkerxpCampaignBundle/Tests/DataFixtures/TemplateManager/DefaultTemplate.yml',
             ]
         );
